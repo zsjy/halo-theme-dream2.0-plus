@@ -4609,6 +4609,42 @@ button.swiper-pagination-bullet {
         }
       }
     }
+
+    &-owner {
+      float: right;
+      display: flex;
+
+      & > .avatar {
+        height: 1.5em;
+        width: 1.5em;
+        border-radius: 50%;
+      }
+
+      & > .no-avatar {
+        height: 1.5em;
+        width: 1.5em;
+        background: var(--light-b);
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+
+        & > .avatar-info {
+          font-size: 0.8em;
+          color: var(--dark-c);
+        }
+      }
+
+      & > .name {
+        margin-left: 5px;
+        font-size: 1em;
+        color: var(--main);
+        max-width: 8em;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
   }
 
   &-comment {
