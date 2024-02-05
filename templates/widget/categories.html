@@ -12,7 +12,7 @@
     <div th:if="${isEmpty}" class="card-empty">暂无分类</div>
     <div th:unless="${isEmpty}" class="card-content">
         <ul class="menu-list">
-            <th:block th:fragment="categories (categories, noLimit)">
+            <th:block th:fragment="categories (categories)">
                 <li th:each="category,itemIndex : ${categories}" th:unless="${itemIndex.index >= num}">
                     <a class="level is-marginless" th:href="${category.status.permalink}">
                         <span class="level-item" th:text="${category.spec.displayName}"></span>

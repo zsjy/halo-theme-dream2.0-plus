@@ -928,6 +928,15 @@ spec:
               label:  开启
             - value: false
               label:  关闭
+        - $formkit: radio
+          name: enable_journals_owner
+          label: 瞬间页面-开启作者显示
+          value: false
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
         - $formkit: attachment
           name: journals_share_image
           label: 瞬间页面-瞬间分享背景图
