@@ -42,7 +42,7 @@ const postContext = {
       }
       // 生成行号
       let codes = $(this).text().split('\n') || []
-      let nums = codes.length - 1
+      let nums = codes.length
       let lineDigit = String(nums).length
       if (lineDigit === 1) lineDigit = 2
       let lis = ''
