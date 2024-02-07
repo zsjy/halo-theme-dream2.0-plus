@@ -89,7 +89,7 @@ const postContext = {
   /* 代码块高亮 */
   initHighlighting() {
     // 初始化代码块高亮工具
-    hljs.initHighlightingOnLoad()
+    hljs.highlightAll()
   },
   /**
      * 初始化分享
