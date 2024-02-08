@@ -45,7 +45,7 @@ const channels = {
   }
 }
 
-function defaultConfig() {
+function defaultConfig(sites) {
   return {
     url: location.href,
     origin: location.origin,
@@ -57,7 +57,7 @@ function defaultConfig() {
     // 图片或者图片所在的容器的选择器
     imageSelector: undefined,
     weiboKey: '',
-    sites: ['qq', 'qzone', 'wechat', 'weibo', 'douban', 'linkedin', 'facebook', 'twitter', 'google', 'link', 'poster']
+    sites: sites
   }
 }
 
@@ -143,7 +143,7 @@ function triggerPosterShare(config) {
  * @returns {*}
  */
 function buildConfig(options) {
-  const config = Object.assign(defaultConfig(), options)
+  const config = Object.assign(defaultConfig(DreamConfig.post_share_sites), options)
   if (!config.summary) {
     config.summary = config.description
   }

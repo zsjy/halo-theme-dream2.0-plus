@@ -70,6 +70,18 @@
     });'})]
     /** 主题配置 */
     const DreamConfig = {};
+    /** 配置分享方式 */
+    let post_share = []
+    for (let share of [[${theme.config.post.custom_post_share}]]) {
+      let type = share.realNode.type;
+      if (post_share.indexOf(type) === -1) {
+        post_share.push(type);
+      }
+    }
+    if (post_share.length === 0) {
+      post_share.push('link');
+    }
+    DreamConfig["post_share_sites"] = post_share;
     DreamConfig["theme_version"] = [[${theme.spec.version}]];
     DreamConfig["theme_base"] = "[(${#theme.assets('/')})]";
     [(${!#strings.isEmpty(theme.config.post.code_fold_line)?'DreamConfig["code_fold_line"] = "' + theme.config.post.code_fold_line + '";': ''})]
