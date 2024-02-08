@@ -494,6 +494,7 @@ spec:
               label:  默认关闭
         - $formkit: radio
           name: enable_post_share
+          id: enable_post_share
           label:  开启文章分享
           value: true
           help: '如果文章或页面元数据配置了enable_share项，则当前配置将被覆盖。'
@@ -502,6 +503,53 @@ spec:
               label:  默认开启
             - value: false
               label:  默认关闭
+        - $formkit: repeater
+          name: custom_post_share
+          if: $get(enable_post_share).value
+          max: 11
+          min: 1
+          label: 文章分享方式
+          help: 配置文章分享方式，若存在相同项则排序在最前的有效，若未配置则显示“复制链接”。
+          value:
+            - type: qq
+            - type: qzone
+            - type: wechat
+            - type: weibo
+            - type: douban
+            - type: linkedin
+            - type: facebook
+            - type: twitter
+            - type: google
+            - type: link
+            - type: poster
+          children:
+            - $formkit: select
+              name: type
+              label: 分享方式
+              value: "link"
+              options:
+                - value: 'qq'
+                  label: QQ
+                - value: 'qzone'
+                  label: QQ空间
+                - value: 'wechat'
+                  label: 微信
+                - value: 'weibo'
+                  label: 新浪微博
+                - value: 'douban'
+                  label: 豆瓣
+                - value: 'linkedin'
+                  label: Linkedin
+                - value: 'facebook'
+                  label: FaceBook
+                - value: 'twitter'
+                  label: Twitter
+                - value: 'google'
+                  label: Google
+                - value: 'link'
+                  label: 复制链接
+                - value: 'poster'
+                  label: 海报
         - $formkit: radio
           name: enable_post_donate
           label:  开启文章打赏
