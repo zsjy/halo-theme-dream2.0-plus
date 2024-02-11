@@ -66,11 +66,11 @@
             <div th:if="${pluginFinder.available('PluginSearchWidget')}" class="navbar-search">
                 <button onclick="javascript:SearchWidget.open();" class="submit" aria-label="搜索按钮" style="border-radius: 17px;"><i class="ri-search-line"></i></button>
             </div>
-            <a th:if="${theme.config.basic_style.console.pc_show_console}" class="navbar-console" href="/console" target="_blank"
-               th:title="${theme.config.basic_style.console.pc_console_title}">
-                <i th:class="${#strings.defaultString(theme.config.basic_style.console.pc_console_icon, 'ri-equalizer-line')}"></i>
-            </a>
             <i class="ri-search-line navbar-searchicon" onclick="javascript:SearchWidget.open();"></i>
+            <a th:if="${theme.config.basic_style.console.show_console}" class="navbar-console" href="/console" target="_blank"
+               th:title="${theme.config.basic_style.console.console_title}">
+                <i th:class="${#strings.defaultString(theme.config.basic_style.console.console_icon, 'ri-equalizer-line')}"></i>
+            </a>
         </div>
     </div>
 
