@@ -906,6 +906,23 @@ table td, table th {
       }
     }
 
+    .navbar-console {
+      float: right;
+      margin-left: 5px;
+      background: var(--theme);
+      border-radius: 50%;
+      height: 34px;
+      width: 34px;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+
+      & > i {
+        font-size: 18px;
+        color: #fff;
+      }
+    }
+
     &.solid {
       backdrop-filter: unset;
       box-shadow: unset;
@@ -3965,6 +3982,10 @@ button.swiper-pagination-bullet {
     .navbar-search {
       display: none;
     }
+
+    .navbar-console {
+      display: none;
+    }
   }
 }
 
@@ -4002,6 +4023,10 @@ button.swiper-pagination-bullet {
 
     .navbar-searchicon {
       margin-left: 0;
+    }
+
+    .navbar-console {
+      display: none;
     }
   }
 

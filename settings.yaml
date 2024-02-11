@@ -62,6 +62,32 @@ spec:
     - group: basic_style
       label: '基础样式'
       formSchema:
+        - $formkit: group
+          name: console
+          label: 控制台
+          help: 仅支持pc端显示
+          value:
+            pc_show_console: false
+            pc_console_icon: ri-equalizer-line
+            pc_console_title: 控制台
+          children:
+            - $formkit: radio
+              name: pc_show_console
+              id: pc_show_console
+              label: 显示控制台
+              options:
+                - label: 显示
+                  value: true
+                - label: 隐藏
+                  value: false
+            - $formkit: text
+              name: pc_console_icon
+              if: $get(pc_show_console).value
+              label: 控制台图标，留空显示默认图标
+            - $formkit: text
+              name: pc_console_title
+              if: $get(pc_show_console).value
+              label: 控制台鼠标悬停提示，留空不显示
         - $formkit: radio
           name: load_progress
           label: 加载进度条
