@@ -1146,7 +1146,8 @@ spec:
               label:  关闭
         - $formkit: radio
           name: effects_lantern_mode
-          label:  喜庆灯笼特效显示模式
+          id: effects_lantern_mode
+          label:  灯笼特效显示模式
           value: none
           options:
             - value: none
@@ -1157,6 +1158,20 @@ spec:
               label:  黑暗模式
             - value: all
               label:  全模式
+        - $formkit: group
+          name: effects_lantern
+          if: $get(effects_lantern_mode).value != 'none'
+          label: 灯笼特效文本定义
+          value:
+            effects_lantern_left: 喜
+            effects_lantern_right: 庆
+          children:
+            - $formkit: text
+              name: effects_lantern_left
+              label: 灯笼特效左侧灯笼文本，仅显示第一个字符，留空时只显示灯笼
+            - $formkit: text
+              name: effects_lantern_right
+              label: 灯笼特效右侧灯笼文本，仅显示第一个字符，留空时只显示灯笼
         - $formkit: radio
           name: effects_sakura_mode
           label:  樱花飘落特效显示模式

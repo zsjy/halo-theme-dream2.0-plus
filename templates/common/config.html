@@ -82,6 +82,18 @@
       post_share.push('link');
     }
     DreamConfig["post_share_sites"] = post_share;
+    /** 配置灯笼特效文本 */
+    let effects_lantern_left = [[${theme.config.enhance.effects_lantern.effects_lantern_left}]];
+    let effects_lantern_right = [[${theme.config.enhance.effects_lantern.effects_lantern_right}]];
+    if(effects_lantern_left.length > 1) {
+      effects_lantern_left = effects_lantern_left.charAt(0);
+    }
+    if(effects_lantern_right.length > 1) {
+      effects_lantern_right = effects_lantern_right.charAt(0);
+    }
+    DreamConfig["effects_lantern_left"] = effects_lantern_left;
+    DreamConfig["effects_lantern_right"] = effects_lantern_right;
+
     DreamConfig["theme_version"] = [[${theme.spec.version}]];
     DreamConfig["theme_base"] = "[(${#theme.assets('/')})]";
     [(${!#strings.isEmpty(theme.config.post.code_fold_line)?'DreamConfig["code_fold_line"] = "' + theme.config.post.code_fold_line + '";': ''})]
