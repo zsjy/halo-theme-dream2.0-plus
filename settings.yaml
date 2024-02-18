@@ -642,6 +642,8 @@ spec:
                   label:  文章标签模块
                 - value: 'tagcloud'
                   label:  文章标签云模块
+                - value: 'timelife'
+                  label:  人生倒计时
             - $formkit: select
               name: position
               label: 模块位置
