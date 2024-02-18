@@ -408,6 +408,23 @@ const commonContext = {
       websiteDate.innerHTML = `建站<span class="stand">${days}</span>天<span class="stand">${hours}</span>时<span class="stand">${minutes}</span>分<span class="stand">${seconds}</span>秒`
     }, 1000)
   },
+  /* 显示web版权 */
+  webCopyright() {
+    if (!DreamConfig.website_time) {
+      return
+    }
+    const webCopyright = document.getElementById('webCopyright')
+    const now = new Date()
+    let nowYear = now.getFullYear()
+    const grt = new Date(DreamConfig.website_time)
+    let getYear = grt.getFullYear()
+    if(nowYear === getYear) {
+      webCopyright.innerText = '© '+nowYear+' '+ DreamConfig.site_title
+      return
+    }
+
+    webCopyright.innerText = '© '+getYear + '-'+nowYear+' '+ DreamConfig.site_title
+  },
   /* 初始化评论区 */
   initComment() {
     if (!window.CommentWidget) {
@@ -455,7 +472,7 @@ const commonContext = {
 window.commonContext = commonContext
 
 !(function () {
-  const loads = ['initCarousel', 'sparkInput', 'websiteTime', 'initComment']
+  const loads = ['initCarousel', 'sparkInput', 'websiteTime', 'initComment', 'webCopyright']
   const omits = ['initEffects', 'loadMaintain', 'showThemeVersion']
 
   Object.keys(commonContext).forEach(
