@@ -21,6 +21,8 @@
 预览：[主题预览](https://github.com/nineya/halo-theme-dream/discussions/72)
 > 如果你有计划长期使用 `Dream` 主题，也来[这里](https://github.com/nineya/halo-theme-dream/discussions/72)留下你的博客链接吧。
 
+## 预览版，独立作者未同意合并的部分功能
+- https://www.sw0.top/docs/halo-theme-dream2.0
 
 
 ## 二、说明
