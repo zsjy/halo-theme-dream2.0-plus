@@ -282,10 +282,12 @@ const commonContext = {
   /* 离屏提示 */
   offscreenTip() {
     if (Utils.isMobile() || (!DreamConfig.document_hidden_title && !DreamConfig.document_visible_title)) return
-    const originTitle = document.title
+    // const originTitle = document.title
+    let originTitle = document.title
     let timer = null
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) {
+        originTitle = document.title
         DreamConfig.document_hidden_title && (document.title = DreamConfig.document_hidden_title)
         clearTimeout(timer)
       } else {
@@ -560,7 +562,7 @@ const commonContext = {
 window.commonContext = commonContext
 
 !(function () {
-  const loads = ['initCarousel', 'sparkInput', 'websiteTime', 'initComment', 'webCopyright', 'initTimeCount']
+  const loads = ['initCarousel', 'sparkInput', 'websiteTime', 'initComment']
   const omits = ['initEffects', 'loadMaintain', 'showThemeVersion']
 
   Object.keys(commonContext).forEach(

@@ -69,6 +69,16 @@ spec:
               value: false
             - label: 居中
               value: true
+        - $formkit: radio
+          name: footer_hide_theme_info
+          label: 页脚主题信息
+          value: false
+          help: 控制页脚主题信息“Powered by Halo & Dream”的显示或隐藏。
+          options:
+            - label: 显示
+              value: false
+            - label: 隐藏
+              value: true
     - group: basic_style
       label: '基础样式'
       formSchema:
