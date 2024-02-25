@@ -287,13 +287,17 @@ const commonContext = {
     let timer = null
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) {
-        originTitle = document.title
+        if(!DreamConfig.document_visible_title || document.title !== DreamConfig.document_visible_title) {
+          originTitle = document.title
+        }
         DreamConfig.document_hidden_title && (document.title = DreamConfig.document_hidden_title)
         clearTimeout(timer)
       } else {
         document.title = DreamConfig.document_visible_title || originTitle
         DreamConfig.document_visible_title && (timer = setTimeout(function () {
-          document.title = originTitle
+          if(document.title === DreamConfig.document_visible_title){
+            document.title = originTitle
+          }
         }, 2000))
       }
     })
