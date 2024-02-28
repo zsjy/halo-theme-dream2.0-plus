@@ -360,7 +360,12 @@ pre {
 }
 
 table td, table th {
-  vertical-align: top;
+  //vertical-align: top;
+  vertical-align: middle;
+
+  &>p {
+    margin: auto !important;
+  }
 }
 
 .container {
@@ -3606,13 +3611,6 @@ button.swiper-pagination-bullet {
     tbody {
       tr {
         transition: background 0.35s;
-
-        th {
-
-          p {
-            margin: 1em 0px;
-          }
-        }
 
         &:nth-child(2n) {
           background: var(--bg-j);
