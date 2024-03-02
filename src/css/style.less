@@ -3470,7 +3470,20 @@ button.swiper-pagination-bullet {
 
     & > :last-child {
       margin: 0 !important;
+
+      & > li:last-child {
+        margin-bottom: 0 !important;
+      }
     }
+
+    & > ol > li > p {
+      margin-bottom: 0px !important;
+    }
+
+    & > ul> li > p {
+      margin-bottom: 0px !important;
+    }
+
   }
 
   a:not([class]) {
@@ -3495,6 +3508,10 @@ button.swiper-pagination-bullet {
     li {
       line-height: 1.6em;
       margin-bottom: 4px;
+
+      &:last-child {
+        margin-bottom: 0 !important;
+      }
 
       &.task-list-item {
         list-style: none;
