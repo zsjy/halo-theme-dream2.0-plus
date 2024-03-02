@@ -3473,15 +3473,46 @@ button.swiper-pagination-bullet {
 
       & > li:last-child {
         margin-bottom: 0 !important;
+
+        & > p:last-child {
+          margin-bottom: 0 !important;
+        }
       }
     }
 
-    & > ol > li > p {
-      margin-bottom: 0px !important;
-    }
+    ol,
+    ul {
 
-    & > ul> li > p {
-      margin-bottom: 0px !important;
+      li {
+
+        ol, ul {
+          &:not(:last-child) {
+            margin-bottom: 4px !important;
+          }
+
+          &:last-child {
+            margin-bottom: 0px !important;
+          }
+        }
+
+        //&  ul {
+        //  &:not(:last-child) {
+        //    margin-bottom: 4px !important;
+        //  }
+        //
+        //  &:last-child {
+        //    margin-bottom: 0px !important;
+        //  }
+        //}
+
+        p:not(:last-child) {
+          margin-bottom: 4px !important;
+        }
+
+        p:last-child {
+          margin-bottom: 0px !important;
+        }
+      }
     }
 
   }
