@@ -46,11 +46,10 @@ spec:
           name: record_number_ps
           label: 公安部备案
           placeholder: 'X公网安备 XXXXXXXXXXXXXX号'
-        - $formkit: text
+        - $formkit: datetime-local
           name: website_time
           label: 建站时间
-          placeholder: 'YYYY/MM/dd HH:mm:ss'
-          help: '按YYYY/MM/dd HH:mm:ss格式输入时间进行倒计时，非时间格式则直接显示文本。'
+          help: '请选择建站时间，未选择时不显示。'
         - $formkit: attachment
           name: cloud_by_logo
           label: '云服务提供商 Logo'
@@ -1236,16 +1235,39 @@ spec:
               label:  黑暗模式
             - value: all
               label:  全模式
-        - $formkit: radio
-          name: enable_gray_mode
-          label:  灰色模式
-          value: false
+        - $formkit: group
+          name: gray_mode_group
+          label: 灰色模式
           help: '向英雄致敬，愿精神长存！'
-          options:
-            - value: true
-              label:  开启
-            - value: false
-              label:  关闭
+          value:
+            enable_gray_mode: false
+            gray_mode_start_time:
+            gray_mode_end_time:
+          children:
+            - $formkit: radio
+              name: enable_gray_mode
+              id: enable_gray_mode
+              label: 开启灰色模式
+              options:
+                - value: true
+                  label: 开启
+                - value: custom
+                  label: 自定义
+                - value: false
+                  label: 关闭
+            - $formkit: datetime-local
+              name: gray_mode_start_time
+              id: gray_mode_start_time
+              if: $get(enable_gray_mode).value === 'custom'
+              validation: required
+              help: 请选择开始时间，包含开始时间。
+              label: 灰色模式 - 开始时间
+            - $formkit: datetime-local
+              name: gray_mode_end_time
+              if: $get(enable_gray_mode).value === 'custom'
+              validation: required
+              help: 请选择结束时间，结束时间须大于开始时间，不包含结束时间。
+              label: 灰色模式 - 结束时间
         - $formkit: radio
           name: enable_busuanzi
           label:  开启 busuanzi 访客统计

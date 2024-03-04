@@ -385,8 +385,11 @@ const commonContext = {
       return
     }
     const websiteDate = document.getElementById('websiteDate')
-    if (!/^\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}$/.test(DreamConfig.website_time)) {
-      websiteDate.innerText = DreamConfig.website_time
+    // if (!/^\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}$/.test(DreamConfig.website_time)) {
+    //   websiteDate.innerText = DreamConfig.website_time
+    //   return
+    // }
+    if (DreamConfig.website_time === '') {
       return
     }
     const now = new Date()
@@ -518,6 +521,19 @@ const commonContext = {
 						</div>`
     })
     $('.aside-timelife').html(htmlStr)
+  },
+  /* 灰色模式 */
+  initGrayMode() {
+    if(DreamConfig.gray_mode === true) {
+      $('html').addClass('gray-mode')
+    } else if(DreamConfig.gray_mode === 'custom') {
+      var now = new Date().getTime()
+      var startTime = new Date(DreamConfig.gray_mode_start_time).getTime()
+      var endTime = new Date(DreamConfig.gray_mode_end_time).getTime()
+      if(now >= startTime && now <= endTime) {
+        $('html').addClass('gray-mode')
+      }
+    }
   },
   /* 初始化评论区 */
   initComment() {
