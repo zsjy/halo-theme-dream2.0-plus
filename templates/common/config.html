@@ -131,8 +131,12 @@
       if (isNight.toString() === 'true') {
         localStorage.setItem('night', 'true');
         document.documentElement.classList.add('night');
+        // 组件配色方案
+        document.documentElement.classList.add('color-scheme-dark');
       } else {
         localStorage.setItem('night', 'false');
+        // 组件配色方案
+        document.documentElement.classList.add('color-scheme-light');
       }
     })();
   </script>

@@ -72,8 +72,16 @@ const commonContext = {
     const applyNight = (isNightValue) => {
       if (isNightValue) {
         document.documentElement.classList.add('night')
+        // 组件配色方案
+        $('html').addClass('color-scheme-dark').removeClass('color-scheme-light')
+        // document.documentElement.classList.add('color-scheme-dark')
+        // document.documentElement.classList.remove('color-scheme-light')
       } else {
         document.documentElement.classList.remove('night')
+        // 组件配色方案
+        $('html').addClass('color-scheme-light').removeClass('color-scheme-dark')
+        // document.documentElement.classList.remove('color-scheme-dark')
+        // document.documentElement.classList.add('color-scheme-light')
       }
       $('.comment-section>div').each(function () {
         const shadowDom = this.shadowRoot.querySelectorAll('.halo-comment-widget')[0]
