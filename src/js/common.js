@@ -71,17 +71,11 @@ const commonContext = {
     let isNight = localStorage.getItem('night') || false
     const applyNight = (isNightValue) => {
       if (isNightValue) {
-        document.documentElement.classList.add('night')
-        // 组件配色方案
-        $('html').addClass('color-scheme-dark').removeClass('color-scheme-light')
-        // document.documentElement.classList.add('color-scheme-dark')
-        // document.documentElement.classList.remove('color-scheme-light')
+        // 配色方案
+        $('html').addClass('color-scheme-dark').removeClass('color-scheme-light').addClass('night')
       } else {
-        document.documentElement.classList.remove('night')
-        // 组件配色方案
-        $('html').addClass('color-scheme-light').removeClass('color-scheme-dark')
-        // document.documentElement.classList.remove('color-scheme-dark')
-        // document.documentElement.classList.add('color-scheme-light')
+        // 配色方案
+        $('html').addClass('color-scheme-light').removeClass('color-scheme-dark').removeClass('night')
       }
       $('.comment-section>div').each(function () {
         const shadowDom = this.shadowRoot.querySelectorAll('.halo-comment-widget')[0]
@@ -91,10 +85,14 @@ const commonContext = {
       localStorage.setItem('night', isNightValue)
       isNight = isNightValue
     }
+    //切换按钮
     $('#toggle-mode').on('click', () => applyNight(isNight.toString() !== 'true'))
+    //加载后首选的配色
     if (DreamConfig.default_theme === 'system') {
       window.matchMedia('(prefers-color-scheme: dark)')
         .addListener((event) => applyNight(event.matches))
+    } else {
+      applyNight(isNight.toString() === 'true')
     }
   },
   /* 导航条高亮 */
