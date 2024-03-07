@@ -77,11 +77,11 @@ const commonContext = {
         // 配色方案
         $('html').addClass('color-scheme-light').removeClass('color-scheme-dark').removeClass('night')
       }
-      $('.comment-section>div').each(function () {
-        const shadowDom = this.shadowRoot.querySelectorAll('.halo-comment-widget')[0]
-        $(shadowDom)[`${isNightValue ? 'add' : 'remove'}Class`]('dark')
-        $(shadowDom)[`${isNightValue ? 'remove' : 'add'}Class`]('light')
-      })
+      // $('.comment-section>div').each(function () {
+      //   const shadowDom = this.shadowRoot.querySelectorAll('.halo-comment-widget')[0]
+      //   $(shadowDom)[`${isNightValue ? 'add' : 'remove'}Class`]('dark')
+      //   $(shadowDom)[`${isNightValue ? 'remove' : 'add'}Class`]('light')
+      // })
       localStorage.setItem('night', isNightValue)
       isNight = isNightValue
     }
@@ -541,26 +541,26 @@ const commonContext = {
       }
     }
   },
-  /* 初始化评论区 */
-  initComment() {
-    if (!window.CommentWidget) {
-      return
-    }
-    $('.comment-section').each(function (index, item) {
-      let target = $(this).attr('data-target')
-      let id = $(this).attr('data-id')
-      CommentWidget.init(
-        `.comment-section[data-id='${id}'][data-target='${target}']`,
-        '/plugins/PluginCommentWidget/assets/static/style.css',
-        {
-          group: target === 'Moment' ? 'moment.halo.run' : 'content.halo.run',
-          kind: target,
-          name: id,
-          colorScheme: (localStorage.getItem('night') !== 'true' ? 'light' : 'dark')
-        }
-      )
-    })
-  },
+  // /* 初始化评论区 */
+  // initComment() {
+  //   if (!window.CommentWidget) {
+  //     return
+  //   }
+  //   $('.comment-section').each(function (index, item) {
+  //     let target = $(this).attr('data-target')
+  //     let id = $(this).attr('data-id')
+  //     CommentWidget.init(
+  //       `.comment-section[data-id='${id}'][data-target='${target}']`,
+  //       '/plugins/PluginCommentWidget/assets/static/style.css',
+  //       {
+  //         group: target === 'Moment' ? 'moment.halo.run' : 'content.halo.run',
+  //         kind: target,
+  //         name: id,
+  //         colorScheme: (localStorage.getItem('night') !== 'true' ? 'light' : 'dark')
+  //       }
+  //     )
+  //   })
+  // },
   /* 初始化特效，只需要初始化一次，移动端设备不初始化 */
   initEffects() {
     if (Utils.isMobile()) return
@@ -573,11 +573,11 @@ const commonContext = {
     DreamConfig.effects_universe_mode && Utils.cachedScript(`${DreamConfig.theme_base}/js/effects/universe.min.js?mew=${DreamConfig.theme_version}`)
     DreamConfig.effects_circle_magic_mode && Utils.cachedScript(`${DreamConfig.theme_base}/js/effects/circleMagic.min.js?mew=${DreamConfig.theme_version}`)
   },
-  /* 加载主动推送、统计脚本等参数 */
-  loadMaintain() {
-    DreamConfig.enable_baidu_push && Utils.baiduPush()
-    DreamConfig.enable_toutiao_push && Utils.toutiaoPush()
-  },
+  // /* 加载主动推送、统计脚本等参数 */
+  // loadMaintain() {
+  //   DreamConfig.enable_baidu_push && Utils.baiduPush()
+  //   DreamConfig.enable_toutiao_push && Utils.toutiaoPush()
+  // },
   /* 显示主题版本信息 */
   showThemeVersion() {
     window.logger(`%c页面加载耗时：${Math.round(performance.now())}ms | Theme By Dream ${DreamConfig.theme_version}`,
@@ -588,8 +588,8 @@ const commonContext = {
 window.commonContext = commonContext
 
 !(function () {
-  const loads = ['initCarousel', 'sparkInput', 'websiteTime', 'initComment']
-  const omits = ['initEffects', 'loadMaintain', 'showThemeVersion']
+  const loads = ['initCarousel', 'sparkInput', 'websiteTime']
+  const omits = ['initEffects', 'showThemeVersion']
 
   Object.keys(commonContext).forEach(
     (c) => !loads.includes(c) && !omits.includes(c) && commonContext[c]()

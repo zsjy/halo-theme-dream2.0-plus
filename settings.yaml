@@ -1280,24 +1280,24 @@ spec:
               label: 隐藏
             - value: false
               label:  关闭
-        - $formkit: radio
-          name: enable_baidu_push
-          label:  启用百度 URL 自动推送
-          value: false
-          options:
-            - value: true
-              label:  开启
-            - value: false
-              label:  关闭
-        - $formkit: radio
-          name: enable_toutiao_push
-          label:  启用头条搜索自动推送
-          value: false
-          options:
-            - value: true
-              label:  开启
-            - value: false
-              label:  关闭
+#        - $formkit: radio
+#          name: enable_baidu_push
+#          label:  启用百度 URL 自动推送
+#          value: false
+#          options:
+#            - value: true
+#              label:  开启
+#            - value: false
+#              label:  关闭
+#        - $formkit: radio
+#          name: enable_toutiao_push
+#          label:  启用头条搜索自动推送
+#          value: false
+#          options:
+#            - value: true
+#              label:  开启
+#            - value: false
+#              label:  关闭
         - $formkit: radio
           name: enable_debug
           label:  开启 DEBUG 日志

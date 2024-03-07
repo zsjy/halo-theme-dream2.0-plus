@@ -1,5 +1,5 @@
 <html lang="zh" xmlns:th="https://www.thymeleaf.org"
-      th:class="${theme.config.basic_style.theme_style}"
+      th:class="${theme.config.basic_style.theme_style + ' plugin-unified-plan'}"
       th:fragment="layout (title, canonical, content, isPost)">
 <th:block th:with="contributor = ${contributorFinder.getContributor(theme.config.basic_info.metadata_name)},
       enableComment = ${baseEnableComment == true && site.comment.enable && pluginFinder.available('PluginCommentWidget')}">
