@@ -21,6 +21,12 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+//todo 强制给评论插件增加z-index
+#comment-wrapper {
+  z-index: 9999;
+  position: relative;
+}
+
 .gray-mode {
   filter: grayscale(1) !important;
 }
@@ -4863,6 +4869,9 @@ button.swiper-pagination-bullet {
   &-comment {
     padding: 12px 0 2px 0;
     display: none;
+    //todo 强制给评论插件增加z-index
+    position: relative;
+    z-index: 9999;
   }
 }
 
