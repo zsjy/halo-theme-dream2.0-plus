@@ -45,7 +45,7 @@
           <span class="name">[[${moment.owner.displayName}]]</span>
         </div>
       </div>
-      <div class="journal-comment" th:if="${enableComment}">
+      <div class="journal-comment comment-wrapper-z-index" th:if="${enableComment}">
         <halo:comment
                 group="moment.halo.run"
                 kind="Moment"
