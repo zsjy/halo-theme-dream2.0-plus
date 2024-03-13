@@ -722,7 +722,7 @@ spec:
                 - value: 'upvote'
                   label:  点赞数量
                 - value: 'visit'
-                  label:  访问数量
+                  label:  阅读数量
         - $formkit: text
           name: profile_theme_button
           label: 侧边栏信息-主题按钮
@@ -1258,19 +1258,18 @@ spec:
             - $formkit: datetime-local
               name: gray_mode_start_time
               id: gray_mode_start_time
-              if: $get(enable_gray_mode).value === 'custom'
+              if: $get(enable_gray_mode).value == 'custom'
               validation: required
               help: 请选择开始时间，包含开始时间。
               label: 灰色模式 - 开始时间
             - $formkit: datetime-local
               name: gray_mode_end_time
-              if: $get(enable_gray_mode).value === 'custom'
+              if: $get(enable_gray_mode).value == 'custom'
               validation: required
               help: 请选择结束时间，结束时间须大于开始时间，不包含结束时间。
               label: 灰色模式 - 结束时间
         - $formkit: radio
           name: enable_busuanzi
-          id: enable_busuanzi
           label:  开启 busuanzi 访客统计
           value: true
           help: '隐藏时不显示统计信息，但依旧会请求 busuanzi 统计访客信息。'
@@ -1281,18 +1280,6 @@ spec:
               label: 隐藏
             - value: false
               label:  关闭
-        - $formkit: radio
-          name: busuanzi_pv_use_halo
-          if: $get(enable_busuanzi).value === true
-          label: busuanzi 的访问次数显示模式
-          value: busuanzi
-          options:
-            - value: halo
-              label: 使用Halo统计访问次数
-            - value: busuanzi
-              label: 使用busuanzi统计访问次数
-            - value: false
-              label: 不显示访问次数
 #        - $formkit: radio
 #          name: enable_baidu_push
 #          label:  启用百度 URL 自动推送
