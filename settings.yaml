@@ -1268,18 +1268,40 @@ spec:
               validation: required
               help: 请选择结束时间，结束时间须大于开始时间，不包含结束时间。
               label: 灰色模式 - 结束时间
-        - $formkit: radio
-          name: enable_busuanzi
-          label:  开启 busuanzi 访客统计
-          value: true
-          help: '隐藏时不显示统计信息，但依旧会请求 busuanzi 统计访客信息。'
-          options:
-            - value: true
-              label:  开启
-            - value: hide
-              label: 隐藏
-            - value: false
-              label:  关闭
+        - $formkit: group
+          name: busuanzi_group
+          label: busuanzi 访客统计
+          value:
+            enable_gray_mode: false
+            gray_mode_start_time:
+            gray_mode_end_time:
+          children:
+            - $formkit: radio
+              name: enable_busuanzi
+              id: enable_busuanzi
+              label: 开启 busuanzi
+              value: true
+              help: '隐藏时不显示统计信息，但依旧会请求 busuanzi 统计访客信息。'
+              options:
+                - value: true
+                  label: 开启
+                - value: hide
+                  label: 隐藏
+                - value: false
+                  label: 关闭
+            - $formkit: radio
+              name: busuanzi_pv_use_halo
+              if: $get(enable_busuanzi).value === true
+              label: busuanzi 的访问次数显示模式
+              help: '可以择优选择统计次数的显示。'
+              value: busuanzi
+              options:
+                - value: halo
+                  label: Halo统计
+                - value: busuanzi
+                  label: busuanzi统计
+                - value: false
+                  label: 不显示
 #        - $formkit: radio
 #          name: enable_baidu_push
 #          label:  启用百度 URL 自动推送
