@@ -87,7 +87,7 @@
                 <li class="item" th:each="itemData,sindex :${theme.config.sidebar.custom_stats}" th:switch="${itemData.type}">
                     <div th:case="visit">
                         <i class="ri-pie-chart-line"></i>
-                        <span>累计收获 <strong th:text="${stats.visit}"></strong> 次阅读</span>
+                        <span>累计收获 <strong th:text="${stats.visit}"></strong> 次访问</span>
                     </div>
                     <div th:case="upvote">
                         <i class="ri-thumb-up-line"></i>
