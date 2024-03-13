@@ -1270,6 +1270,7 @@ spec:
               label: 灰色模式 - 结束时间
         - $formkit: radio
           name: enable_busuanzi
+          id: enable_busuanzi
           label:  开启 busuanzi 访客统计
           value: true
           help: '隐藏时不显示统计信息，但依旧会请求 busuanzi 统计访客信息。'
@@ -1280,6 +1281,18 @@ spec:
               label: 隐藏
             - value: false
               label:  关闭
+        - $formkit: radio
+          name: busuanzi_pv_use_halo
+          if: $get(enable_busuanzi).value === true
+          label: busuanzi 的访问次数显示模式
+          value: busuanzi
+          options:
+            - value: halo
+              label: 使用Halo统计访问次数
+            - value: busuanzi
+              label: 使用busuanzi统计访问次数
+            - value: false
+              label: 不显示访问次数
 #        - $formkit: radio
 #          name: enable_baidu_push
 #          label:  启用百度 URL 自动推送
