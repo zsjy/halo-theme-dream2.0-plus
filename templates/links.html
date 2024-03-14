@@ -49,11 +49,12 @@
         </div>
         <div class="card card-content comment-wrapper-z-index" id="comment-wrapper" th:if="${enableComment}">
             <h3 class="comment-title">评论</h3>
-            <halo:comment
+            <comment-widget
                     group="content.halo.run"
                     kind="SinglePage"
+                    version="v1alpha1"
                     th:name="${theme.config.page_config.link_comment_id}"
-            />
+            ></comment-widget>
         </div>
     </th:block>
 </th:block>

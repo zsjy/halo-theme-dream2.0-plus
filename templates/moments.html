@@ -46,11 +46,12 @@
         </div>
       </div>
       <div class="journal-comment comment-wrapper-z-index" th:if="${enableComment}">
-        <halo:comment
+        <comment-widget
                 group="moment.halo.run"
                 kind="Moment"
+                version="v1alpha1"
                 th:name="${moment.metadata.name}"
-        />
+        ></comment-widget>
       </div>
     </div>
     <th:block th:replace="~{main/pagination :: pagination (${moments}, '/moments')}"/>
