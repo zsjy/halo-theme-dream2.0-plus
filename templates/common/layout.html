@@ -23,7 +23,7 @@
     <section class="section">
       <div th:class="${theme.config.basic_style.sidebar_column != 'all' ? 'container two-column' : 'container' }">
         <div class="columns">
-          <div class="column column-main">
+          <div class="column column-main pjax">
             <th:block th:replace="${content}"/>
           </div>
           <th:block
