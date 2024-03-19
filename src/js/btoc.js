@@ -191,7 +191,7 @@ window.tocPjax = function () {
   })
   observers.splice(0)
   Btoc.init({
-    tocList: ['h1', 'h2', 'h3', 'h4', 'h5'],
+    tocList: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
     contentElement: $('.main-content:not(.not-toc)')[0],
     tocElement: '.toc-content'
   })
