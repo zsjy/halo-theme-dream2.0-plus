@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
           this.aplayer = new APlayer(this.options)
           resolve()
         })
+          .catch((e) => {})
       }
 
       disconnectedCallback() {
