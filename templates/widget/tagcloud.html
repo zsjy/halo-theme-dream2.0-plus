@@ -4,14 +4,15 @@
      th:with="num = ${#strings.isEmpty(theme.config.sidebar.tags_num)? 32 : T(java.lang.Integer).parseInt(theme.config.sidebar.tags_num)},
       tags = ${tagFinder.list(1,num)},
       isEmpty = ${#lists.isEmpty(tags)},
-     enableTagsColor = ${theme.config.sidebar.enable_tag_color}">
+      enableTagsColor = ${theme.config.sidebar.enable_tagcloud_color},
+      showTagCloudStyle = ${theme.config.sidebar.show_tagcloud_style}">
 
     <div class="card-title">
         <i class="ri-cloud-line card-title-label"></i><span>标签云</span>
         <a th:if="${theme.config.sidebar.tagcloud_more}" class="card-more" th:href="@{/tags}">更多<i class="ri-arrow-right-double-line"></i></a>
     </div>
     <div th:if="${isEmpty}" class="card-empty">暂无标签</div>
-    <div th:unless="${isEmpty}" class="card-content">
+    <div th:unless="${isEmpty}" th:class="'card-content' + ${showTagCloudStyle ? ' tagcloud3d' : ''}">
         <a
           th:each="tag : ${tags}"
           th:href="@{${tag.status.permalink}}"

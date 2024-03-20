@@ -935,6 +935,16 @@ spec:
               label:  开启
             - value: false
               label:  关闭
+        - $formkit: radio
+          name: show_tagcloud_style
+          label: 侧边栏标签云-标签云显示风格
+          help: '若未添加侧边栏标签云，建议保持默认风格。'
+          value: false
+          options:
+            - value: false
+              label: 默认
+            - value: true
+              label: 3D
     - group: page_config
       label: '页面设置'
       formSchema:

@@ -442,7 +442,7 @@ const commonContext = {
   },
   /* 激活侧边栏人生倒计时 */
   initTimeCount() {
-    if (!$('.card.widget.timelife').length) {
+    if (!$('.timelife').length) {
       return
     }
     let timelife = [
@@ -572,6 +572,22 @@ const commonContext = {
     DreamConfig.effects_snowflake_mode && Utils.cachedScript(`${DreamConfig.theme_base}/js/effects/snowflake.min.js?mew=${DreamConfig.theme_version}`)
     DreamConfig.effects_universe_mode && Utils.cachedScript(`${DreamConfig.theme_base}/js/effects/universe.min.js?mew=${DreamConfig.theme_version}`)
     DreamConfig.effects_circle_magic_mode && Utils.cachedScript(`${DreamConfig.theme_base}/js/effects/circleMagic.min.js?mew=${DreamConfig.theme_version}`)
+  },
+  /*初始化标签云滚动样式*/
+  initTagCloud() {
+    if (!$('.tagcloud').length || !DreamConfig.show_tagcloud_style) {
+      return
+    }
+
+    tagcloud({
+      selector: '.tagcloud .card-content', //元素选择器
+      fontsize: 18, //基本字体大小, 单位px
+      radius: 75, //滚动半径, 单位px
+      mspeed: 'slow', //滚动最大速度, 取值: slow, normal(默认), fast
+      ispeed: 'slow', //滚动初速度, 取值: slow, normal(默认), fast
+      direction: 45, //初始滚动方向, 取值角度(顺时针360): 0对应top, 90对应left, 135对应right-bottom(默认)...
+      keep: false //鼠标移出组件后是否继续随鼠标滚动, 取值: false, true(默认) 对应 减速至初速度滚动, 随鼠标滚动
+    })
   },
   // /* 加载主动推送、统计脚本等参数 */
   // loadMaintain() {
