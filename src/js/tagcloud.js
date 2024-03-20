@@ -81,7 +81,7 @@ window.tagcloud = (function (win, doc) { // ns
     }
     self.up = setInterval(function () {
       self.update(self)
-    }, 25)
+    }, 30)
   }
 
   //实例
