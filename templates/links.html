@@ -34,7 +34,7 @@
                     <hr th:if="${theme.config.page_config.show_exchange_info || !#strings.isEmpty(theme.config.page_config.links_info)}"/>
                     <th:block th:if="${theme.config.page_config.show_exchange_info}"
                               th:with="bloggerAvatar= ${#strings.defaultString(theme.config.page_config.links_blogger_avatar, contributor.avatar)}">
-                        申请友链的方法：
+                        <p style="margin-bottom: 4px">申请友链的方法：</p>
                         <ul>
                             <li>名称：[[${site.title}]]</li>
                             <li>地址：<a th:href="${site.url}" target="_blank" th:text="${site.url}"></a></li>
