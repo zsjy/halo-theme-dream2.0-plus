@@ -12,7 +12,7 @@
         <a th:if="${theme.config.sidebar.tagcloud_more}" class="card-more" th:href="@{/tags}">更多<i class="ri-arrow-right-double-line"></i></a>
     </div>
     <div th:if="${isEmpty}" class="card-empty">暂无标签</div>
-    <div th:unless="${isEmpty}" th:class="'card-content' + ${showTagCloudStyle ? ' tagcloud3d' : ''}">
+    <div th:unless="${isEmpty}" class="card-content">
         <a
           th:each="tag : ${tags}"
           th:href="@{${tag.status.permalink}}"
