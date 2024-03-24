@@ -173,8 +173,6 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
   window.postPjax && window.postPjax(serialNumber)
   /* 刷新人生倒计时 */
   commonContext.initTimeCount()
-  /* 刷新建站时间及计时器 */
-  commonContext.websiteTime()
   /* 初始化轮播 */
   commonContext.initCarousel()
   window.DProgress && DProgress.done()
@@ -209,8 +207,6 @@ $(document).on('pjax:end', function (event, xhr, options) {
     commonContext.initCarousel()
     /* 刷新人生倒计时 */
     commonContext.initTimeCount()
-    /* 刷新建站时间及计时器 */
-    commonContext.websiteTime()
     window.DProgress && DProgress.done()
     // 应该是由于浏览器缓存失效，有时候浏览器前后退还是会执行pjax:beforeSend
     $('html').removeClass('pjax-loading')

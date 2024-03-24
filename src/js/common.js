@@ -391,10 +391,7 @@ const commonContext = {
     }
     const now = new Date()
     const grt = new Date(DreamConfig.website_time)
-    if(!websiteTimeTime) {
-      clearInterval(websiteTimeTime)
-    }
-    websiteTimeTime = setInterval(function () {
+    setInterval(function () {
       now.setTime(now.getTime() + 1000)
       let difference = parseInt((now - grt) / 1000)
       let seconds = difference % 60
@@ -575,7 +572,7 @@ const commonContext = {
 }
 
 window.commonContext = commonContext
-let websiteTimeTime, timeLifeHour = -1
+let timeLifeHour = -1
 
 !(function () {
   const loads = ['initCarousel', 'sparkInput', 'websiteTime']
