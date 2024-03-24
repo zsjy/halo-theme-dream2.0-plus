@@ -14,15 +14,16 @@
 
 本仓库为 `Halo 2.x` 主题仓库，如果你使用的是 `Halo 1.x` ，请前往：https://github.com/nineya/halo-theme-dream
 
+## Plus版，包含一些原仓库未合并的功能
+- https://www.sw0.top/docs/halo-theme-dream2.0
+- 最低要求：**Halo 2.6.0**
+
 ## 一、预览
 
 ![玖涯博客](https://cdn.jsdelivr.net/gh/nineya/halo-theme-dream2.0@master/preview.png)
 
 预览：[主题预览](https://github.com/nineya/halo-theme-dream/discussions/72)
 > 如果你有计划长期使用 `Dream` 主题，也来[这里](https://github.com/nineya/halo-theme-dream/discussions/72)留下你的博客链接吧。
-
-## 预览版，独立作者未同意合并的部分功能
-- https://www.sw0.top/docs/halo-theme-dream2.0
 
 
 ## 二、说明
@@ -44,7 +45,7 @@
 
 | 主题版本    | 适配Halo版本                | 测试用Halo版本 |
 | ----------- | --------------------------- | -------------- |
-| 1.x      | 2.0.0+ | 2.3.0      |
+| x.x      | 2.6.0+ | 2.13.1      |
 
 
 

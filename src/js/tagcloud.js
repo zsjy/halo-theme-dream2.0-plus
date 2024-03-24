@@ -76,6 +76,7 @@ window.tagcloud = (function (win, doc) { // ns
     self.box.style.overflow = 'hidden'
     self.box.style.margin = '0'
     self.box.style.padding = '0'
+    self.box.style.whiteSpace = 'nowrap'
     self.box.style.minHeight = (1.2 * self.size < 220 ? 220 : 1.2 * self.size) + 'px'
     self.box.style.minWidth = 'auto'
     for (var j2 = 0, len2 = self.items.length; j2 < len2; j2++) {

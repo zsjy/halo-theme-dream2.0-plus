@@ -125,7 +125,7 @@ task('js', () => {
 task('zip', () => {
   const target = ['./templates/**', './*.yaml', 'README.md', 'LICENSE']
   return src(target, {base: '.'})
-    .pipe(zip('halo-theme-dream2.0.zip'))
+    .pipe(zip('halo-theme-dream2.0-plus.zip'))
     .pipe(dest(distPath))
 })
 

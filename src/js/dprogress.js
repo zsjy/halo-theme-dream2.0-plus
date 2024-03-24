@@ -138,13 +138,17 @@
      * @returns {DProgress|*}
      */
   DProgress.done = function() {
-    DProgress.inc(0.3 + 0.5 * Math.random()).set(1)
+    try {
+      DProgress.inc(0.3 + 0.5 * Math.random()).set(1)
 
-    setTimeout(function() {
-      $('#dprogress').hide()
-      DProgress.status = undefined
-    }, Settings.speed)
-    return this
+      setTimeout(function() {
+        $('#dprogress').hide()
+        DProgress.status = undefined
+      }, Settings.speed)
+      return this
+    } catch (e) {
+      return this
+    }
   }
 
   /**

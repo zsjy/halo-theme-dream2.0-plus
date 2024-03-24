@@ -171,12 +171,12 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
   window.journalPjax && window.journalPjax(serialNumber)
   /* 初始化文章界面 */
   window.postPjax && window.postPjax(serialNumber)
-  // /* 初始化评论 */
-  // commonContext.initComment()
+  /* 刷新人生倒计时 */
+  commonContext.initTimeCount()
+  /* 刷新建站时间及计时器 */
+  commonContext.websiteTime()
   /* 初始化轮播 */
   commonContext.initCarousel()
-  // /* 加载主动推送或统计脚本 */
-  // commonContext.loadMaintain()
   window.DProgress && DProgress.done()
 })
 
@@ -207,6 +207,10 @@ $(document).on('pjax:end', function (event, xhr, options) {
     initPjax()
     /* 初始化轮播 */
     commonContext.initCarousel()
+    /* 刷新人生倒计时 */
+    commonContext.initTimeCount()
+    /* 刷新建站时间及计时器 */
+    commonContext.websiteTime()
     window.DProgress && DProgress.done()
     // 应该是由于浏览器缓存失效，有时候浏览器前后退还是会执行pjax:beforeSend
     $('html').removeClass('pjax-loading')

@@ -77,11 +77,6 @@ const commonContext = {
         // 配色方案
         $('html').addClass('color-scheme-light').removeClass('color-scheme-dark').removeClass('night')
       }
-      // $('.comment-section>div').each(function () {
-      //   const shadowDom = this.shadowRoot.querySelectorAll('.halo-comment-widget')[0]
-      //   $(shadowDom)[`${isNightValue ? 'add' : 'remove'}Class`]('dark')
-      //   $(shadowDom)[`${isNightValue ? 'remove' : 'add'}Class`]('light')
-      // })
       localStorage.setItem('night', isNightValue)
       isNight = isNightValue
     }
@@ -391,16 +386,15 @@ const commonContext = {
       return
     }
     const websiteDate = document.getElementById('websiteDate')
-    // if (!/^\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}$/.test(DreamConfig.website_time)) {
-    //   websiteDate.innerText = DreamConfig.website_time
-    //   return
-    // }
     if (DreamConfig.website_time === '') {
       return
     }
     const now = new Date()
     const grt = new Date(DreamConfig.website_time)
-    setInterval(function () {
+    if(!websiteTimeTime) {
+      clearInterval(websiteTimeTime)
+    }
+    websiteTimeTime = setInterval(function () {
       now.setTime(now.getTime() + 1000)
       let difference = parseInt((now - grt) / 1000)
       let seconds = difference % 60
@@ -445,6 +439,9 @@ const commonContext = {
     if (!$('.timelife').length) {
       return
     }
+    if(timeLifeHour === new Date().getHours()) {
+      return
+    }
     let timelife = [
       {
         title: '今日已经过去',
@@ -475,6 +472,7 @@ const commonContext = {
       let nowDate = +new Date()
       let todayStartDate = new Date(new Date().toLocaleDateString()).getTime()
       let todayPassHours = (nowDate - todayStartDate) / 1000 / 60 / 60
+      timeLifeHour = todayPassHours
       let todayPassHoursPercent = (todayPassHours / 24) * 100
       timelife[0].num = parseInt(todayPassHours)
       timelife[0].percent = parseInt(todayPassHoursPercent) + '%'
@@ -541,26 +539,6 @@ const commonContext = {
       }
     }
   },
-  // /* 初始化评论区 */
-  // initComment() {
-  //   if (!window.CommentWidget) {
-  //     return
-  //   }
-  //   $('.comment-section').each(function (index, item) {
-  //     let target = $(this).attr('data-target')
-  //     let id = $(this).attr('data-id')
-  //     CommentWidget.init(
-  //       `.comment-section[data-id='${id}'][data-target='${target}']`,
-  //       '/plugins/PluginCommentWidget/assets/static/style.css',
-  //       {
-  //         group: target === 'Moment' ? 'moment.halo.run' : 'content.halo.run',
-  //         kind: target,
-  //         name: id,
-  //         colorScheme: (localStorage.getItem('night') !== 'true' ? 'light' : 'dark')
-  //       }
-  //     )
-  //   })
-  // },
   /* 初始化特效，只需要初始化一次，移动端设备不初始化 */
   initEffects() {
     if (Utils.isMobile()) return
@@ -589,19 +567,15 @@ const commonContext = {
       keep: false //鼠标移出组件后是否继续随鼠标滚动, 取值: false, true(默认) 对应 减速至初速度滚动, 随鼠标滚动
     })
   },
-  // /* 加载主动推送、统计脚本等参数 */
-  // loadMaintain() {
-  //   DreamConfig.enable_baidu_push && Utils.baiduPush()
-  //   DreamConfig.enable_toutiao_push && Utils.toutiaoPush()
-  // },
   /* 显示主题版本信息 */
   showThemeVersion() {
-    window.logger(`%c页面加载耗时：${Math.round(performance.now())}ms | Theme By Dream ${DreamConfig.theme_version}`,
+    window.logger(`%c页面加载耗时：${Math.round(performance.now())}ms | Theme By Dream2 Plus ${DreamConfig.theme_version}`,
       'color:#fff; background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3); padding: 8px 15px; border-radius: 0 15px 0 15px')
   }
 }
 
 window.commonContext = commonContext
+let websiteTimeTime, timeLifeHour = -1
 
 !(function () {
   const loads = ['initCarousel', 'sparkInput', 'websiteTime']
