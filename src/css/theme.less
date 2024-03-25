@@ -115,157 +115,146 @@ html {
     }
   }
 
-  //todo 插件统一方案，使用此须在主题配置中设定变量，用来应对高亮和黑暗配色切换
-  &.plugin-unified-plan {
-    /*todo 搜索組件*/
-    //基础字体大小
-    --halo-search-widget-base-font-size: 1rem !important;
-    //基础元素的圆角
-    //--halo-search-widget-base-border-radius:  !important;
-    //基础字体族
-    --halo-search-widget-base-font-family: "Dream Font" !important;
-    //模态层颜色
-    //--halo-search-widget-color-modal-layer: var(--theme) !important;
-    //模态内容背景颜色
-    //--halo-search-widget-color-modal-content-bg: var(--theme) !important;
-    //表单输入背景颜色
-    //--halo-search-widget-color-form-input-bg:  !important;
-    //表单输入文字颜色
-    //--halo-search-widget-color-form-input:  !important;
-    //表单输入占位符颜色
-    //--halo-search-widget-color-form-input-placeholder:  !important;
-    //表单分隔线颜色
-    //--halo-search-widget-color-form-divider:  !important;
-    //无结果提示颜色
-    //--halo-search-widget-color-result-empty:  !important;
-    //结果项背景颜色
-    //--halo-search-widget-color-result-item-bg:  !important;
-    //结果项悬停背景颜色
-    //--halo-search-widget-color-result-item-hover-bg:  !important;
-    //结果项标题颜色
-    //--halo-search-widget-color-result-item-title:  !important;
-    //结果项内容颜色
-    //--halo-search-widget-color-result-item-content:  !important;
-    //命令键盘项颜色
-    //--halo-search-widget-color-command-kbd-item:  !important;
-    //命令键盘边框颜色
-    //--halo-search-widget-color-command-kbd-border:  !important;
+  /*插件配置*/
+  /*搜索組件*/
+  --halo-search-widget-base-font-size: 1rem !important;
+  //基础元素的圆角
+  //--halo-search-widget-base-border-radius:  !important;
+  //基础字体族
+  --halo-search-widget-base-font-family: "Dream Font" !important;
+  //模态层颜色
+  //--halo-search-widget-color-modal-layer: var(--theme) !important;
+  //模态内容背景颜色
+  //--halo-search-widget-color-modal-content-bg: var(--theme) !important;
+  //表单输入背景颜色
+  //--halo-search-widget-color-form-input-bg:  !important;
+  //表单输入文字颜色
+  //--halo-search-widget-color-form-input:  !important;
+  //表单输入占位符颜色
+  //--halo-search-widget-color-form-input-placeholder:  !important;
+  //表单分隔线颜色
+  //--halo-search-widget-color-form-divider:  !important;
+  //无结果提示颜色
+  //--halo-search-widget-color-result-empty:  !important;
+  //结果项背景颜色
+  //--halo-search-widget-color-result-item-bg:  !important;
+  //结果项悬停背景颜色
+  //--halo-search-widget-color-result-item-hover-bg:  !important;
+  //结果项标题颜色
+  //--halo-search-widget-color-result-item-title:  !important;
+  //结果项内容颜色
+  //--halo-search-widget-color-result-item-content:  !important;
+  //命令键盘项颜色
+  //--halo-search-widget-color-command-kbd-item:  !important;
+  //命令键盘边框颜色
+  //--halo-search-widget-color-command-kbd-border:  !important;
 
-    /*todo 评论组件*/
-    //基础文字颜色
-    --halo-comment-widget-base-color: var(--light-y) !important;
-    //基础元素的圆角
-    //--halo-comment-widget-base-border-radius:  !important;
-    ////基础字体大小
-    --halo-comment-widget-base-font-size: 1rem !important;
-    ////基础行高
-    //--halo-comment-widget-base-line-height:  !important;
-    ////基础字体族
-    --halo-comment-widget-base-font-family: "Dream Font" !important;
-    ////头像的圆角大小
-    //--halo-comment-widget-component-avatar-rounded:  !important;
-    ////头像大小
-    //--halo-comment-widget-component-avatar-size:  !important;
-    ////表单输入背景颜色
-    //--halo-comment-widget-component-form-input-bg-color:  !important;
-    ////表单输入文字颜色
-    //--halo-comment-widget-component-form-input-color:  !important;
-    ////表单输入边框颜色
-    //--halo-comment-widget-component-form-input-border-color:  !important;
-    ////表单输入焦点时边框颜色
-    --halo-comment-widget-component-form-input-border-color-focus: var(--theme) !important;
-    ////表单输入焦点时的阴影
-    //--halo-comment-widget-component-form-input-box-shadow-focus:  !important;
-    ////登录按钮背景颜色
-    //--halo-comment-widget-component-form-button-login-bg-color: var(--theme) !important;
-    ////登录按钮悬停背景颜色
-    //--halo-comment-widget-component-form-button-login-bg-color-hover: var(--theme) !important;
-    ////登录按钮边框颜色
-    --halo-comment-widget-component-form-button-login-border-color: var(--light-c) !important;
-    ////提交按钮背景颜色
-    --halo-comment-widget-component-form-button-submit-bg-color: var(--theme) !important;
-    ////提交按钮文字颜色
-    //--halo-comment-widget-component-form-button-submit-color: #f8f8f8 !important;
-    ////提交按钮边框颜色
-    --halo-comment-widget-component-form-button-submit-border-color: var(--theme) !important;
-    ////提交按钮悬停边框颜色
-    --halo-comment-widget-component-form-button-submit-border-color-hover: var(--theme) !important;
-    ////表情按钮颜色
-    //--halo-comment-widget-component-form-button-emoji-color: var(--theme) !important;
-    ////评论项操作悬停背景颜色
-    //--halo-comment-widget-component-comment-item-action-bg-color-hover:  !important;
-    ////评论项操作颜色
-    //--halo-comment-widget-component-comment-item-action-color:  !important;
-    ////评论项操作悬停颜色
-    //--halo-comment-widget-component-comment-item-action-color-hover:  !important;
-    ////分页按钮悬停背景颜色
-    //--halo-comment-widget-component-pagination-button-bg-color-hover:  !important;
-    ////分页按钮活动状态背景颜色
-    //--halo-comment-widget-component-pagination-button-bg-color-active:  !important;
-    ////分页按钮活动状态边框颜色
-    //--halo-comment-widget-component-pagination-button-border-color-active:  !important;
-    ////表情选择器颜色
-    //--halo-comment-widget-component-emoji-picker-rgb-color: var(--theme) !important;
-    ////表情选择器强调颜色
-    //--halo-comment-widget-component-emoji-picker-rgb-accent:  !important;
-    ////表情选择器背景颜色
-    //--halo-comment-widget-component-emoji-picker-rgb-background:  !important;
-    ////表情选择器输入颜色
-    //--halo-comment-widget-component-emoji-picker-rgb-input:  !important;
-    ////表情选择器边框颜色
-    //--halo-comment-widget-component-emoji-picker-color-border:  !important;
-    ////表情选择器悬停边框颜色
-    //--halo-comment-widget-component-emoji-picker-color-border-over:  !important;
+  /*评论组件：https://github.com/halo-dev/plugin-comment-widget*/
+  //基础文字颜色
+  --halo-comment-widget-base-color: var(--light-y) !important;
+  //基础元素的圆角
+  //--halo-comment-widget-base-border-radius:  !important;
+  ////基础字体大小
+  --halo-comment-widget-base-font-size: 1rem !important;
+  ////基础行高
+  //--halo-comment-widget-base-line-height:  !important;
+  ////基础字体族
+  --halo-comment-widget-base-font-family: "Dream Font" !important;
+  ////头像的圆角大小
+  //--halo-comment-widget-component-avatar-rounded:  !important;
+  ////头像大小
+  //--halo-comment-widget-component-avatar-size:  !important;
+  ////表单输入背景颜色
+  //--halo-comment-widget-component-form-input-bg-color:  !important;
+  ////表单输入文字颜色
+  //--halo-comment-widget-component-form-input-color:  !important;
+  ////表单输入边框颜色
+  //--halo-comment-widget-component-form-input-border-color:  !important;
+  ////表单输入焦点时边框颜色
+  --halo-comment-widget-component-form-input-border-color-focus: var(--theme) !important;
+  ////表单输入焦点时的阴影
+  //--halo-comment-widget-component-form-input-box-shadow-focus:  !important;
+  ////登录按钮背景颜色
+  //--halo-comment-widget-component-form-button-login-bg-color: var(--theme) !important;
+  ////登录按钮悬停背景颜色
+  //--halo-comment-widget-component-form-button-login-bg-color-hover: var(--theme) !important;
+  ////登录按钮边框颜色
+  --halo-comment-widget-component-form-button-login-border-color: var(--light-c) !important;
+  ////提交按钮背景颜色
+  --halo-comment-widget-component-form-button-submit-bg-color: var(--theme) !important;
+  ////提交按钮文字颜色
+  //--halo-comment-widget-component-form-button-submit-color: #f8f8f8 !important;
+  ////提交按钮边框颜色
+  --halo-comment-widget-component-form-button-submit-border-color: var(--theme) !important;
+  ////提交按钮悬停边框颜色
+  --halo-comment-widget-component-form-button-submit-border-color-hover: var(--theme) !important;
+  ////表情按钮颜色
+  //--halo-comment-widget-component-form-button-emoji-color: var(--theme) !important;
+  ////评论项操作悬停背景颜色
+  //--halo-comment-widget-component-comment-item-action-bg-color-hover:  !important;
+  ////评论项操作颜色
+  //--halo-comment-widget-component-comment-item-action-color:  !important;
+  ////评论项操作悬停颜色
+  //--halo-comment-widget-component-comment-item-action-color-hover:  !important;
+  ////分页按钮悬停背景颜色
+  //--halo-comment-widget-component-pagination-button-bg-color-hover:  !important;
+  ////分页按钮活动状态背景颜色
+  //--halo-comment-widget-component-pagination-button-bg-color-active:  !important;
+  ////分页按钮活动状态边框颜色
+  //--halo-comment-widget-component-pagination-button-border-color-active:  !important;
+  ////表情选择器颜色
+  //--halo-comment-widget-component-emoji-picker-rgb-color: var(--theme) !important;
+  ////表情选择器强调颜色
+  //--halo-comment-widget-component-emoji-picker-rgb-accent:  !important;
+  ////表情选择器背景颜色
+  //--halo-comment-widget-component-emoji-picker-rgb-background:  !important;
+  ////表情选择器输入颜色
+  //--halo-comment-widget-component-emoji-picker-rgb-input:  !important;
+  ////表情选择器边框颜色
+  //--halo-comment-widget-component-emoji-picker-color-border:  !important;
+  ////表情选择器悬停边框颜色
+  //--halo-comment-widget-component-emoji-picker-color-border-over:  !important;
 
-
-    /*todo 联系表单*/
-    //定义表单字体系列。
-    --halo-contact-form-font-family: "Dream Font" !important;
-    //定义表单字体大小。
-    --halo-contact-form-font-size: 1rem !important;
-    //定义表单行高。
-    //--halo-contact-form-line-height
-    //边框圆角。
-    //--halo-contact-form-border-radius
-    //提交按钮宽度。
-    --halo-contact-form-width-submit: 100% !important;
-    //主要颜色。
-    --halo-contact-form-color-primary: var(--theme) !important;
-    //标签颜色。
-    --halo-contact-form-color-label: var(--light-y) !important;
-    //输入框颜色。
-    --halo-contact-form-color-input: var(--light-y) !important;
-    //输入框选中时的背景色。
-    //--halo-contact-form-color-input-selection
-    //边框颜色。
-    //--halo-contact-form-color-border
-    //危险或错误提示颜色。
-    --halo-contact-form-color-danger: #ff5656 !important;
-    //帮助文本颜色。
-    //--halo-contact-form-color-help
-    //按钮颜色。
-    //--halo-contact-form-color-button: var(--theme) !important;
-    //按钮悬停颜色。
-    //--halo-contact-form-color-button-hover: var(--theme) !important;
-    //焦点环颜色。
-    //--halo-contact-form-focus-ring-color: var(--theme) !important;
-    //错误环颜色。
-    //--halo-contact-form-error-ring-color
-    //焦点时的错误环颜色。
-    //--halo-contact-form-error-ring-focus-color
-    //输入框背景色。
-    //--halo-contact-form-bg-input
-    //装饰器背景色。
-    //--halo-contact-form-bg-decorator
-    //自动模式下的模态框背景色。
-    //--halo-contact-form-auto-color-modal-bg
-  }
+  /*联系表单：https://app-docs.halo.run/docs/plugin-contact-form/development/custom-styles*/
+  //定义表单字体系列。
+  --halo-contact-form-font-family: "Dream Font" !important;
+  //定义表单字体大小。
+  --halo-contact-form-font-size: 1rem !important;
+  //定义表单行高。
+  //--halo-contact-form-line-height
+  //边框圆角。
+  //--halo-contact-form-border-radius
+  //提交按钮宽度。
+  --halo-contact-form-width-submit: 100% !important;
+  //主要颜色。
+  --halo-contact-form-color-primary: var(--theme) !important;
+  //标签颜色。
+  --halo-contact-form-color-label: var(--light-y) !important;
+  //输入框颜色。
+  --halo-contact-form-color-input: var(--light-y) !important;
+  //输入框选中时的背景色。
+  //--halo-contact-form-color-input-selection
+  //边框颜色。
+  //--halo-contact-form-color-border
+  //危险或错误提示颜色。
+  --halo-contact-form-color-danger: #ff5656 !important;
+  //帮助文本颜色。
+  //--halo-contact-form-color-help
+  //按钮颜色。
+  //--halo-contact-form-color-button: var(--theme) !important;
+  //按钮悬停颜色。
+  //--halo-contact-form-color-button-hover: var(--theme) !important;
+  //焦点环颜色。
+  //--halo-contact-form-focus-ring-color: var(--theme) !important;
+  //错误环颜色。
+  //--halo-contact-form-error-ring-color
+  //焦点时的错误环颜色。
+  //--halo-contact-form-error-ring-focus-color
+  //输入框背景色。
+  //--halo-contact-form-bg-input
+  //装饰器背景色。
+  //--halo-contact-form-bg-decorator
+  //自动模式下的模态框背景色。
+  //--halo-contact-form-auto-color-modal-bg
 
 }
-
-////組件高亮，todo 使用此方案时复制统一配色方案的相关内容后修改对应值
-//.color-scheme-light {
-//}
-////組件暗黑，todo 使用此方案时复制统一配色方案的相关内容后修改对应值
-//.color-scheme-dark {
-//}
