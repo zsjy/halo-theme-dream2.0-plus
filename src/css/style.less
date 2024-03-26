@@ -3323,6 +3323,74 @@ button.swiper-pagination-bullet {
       }
     }
   }
+
+  /*微信公众号*/
+  &.wechat {
+    /* 微信公众号翻转 */
+    .flip-wrapper {
+      position: relative;
+      width: 100%;
+      height: auto;
+      z-index: 1;
+      cursor: var(--cursor-default);
+
+      &.pointer{
+        cursor: var(--cursor-pointer);
+      }
+
+      &:hover .animation {
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+
+        .wechatBack {
+          display: block;
+        }
+
+        .wechatFace {
+          display: none;
+        }
+      }
+    }
+
+    .flip-content {
+      width: 100%;
+      height: auto;
+
+      &.animation {
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        transition: cubic-bezier(0, 0, 0, 1.29) 0.3s;
+      }
+    }
+
+    .wechatFace {
+      width: 100%;
+      height: auto;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      background-size: 100%;
+    }
+
+    .wechatBack {
+      display: none;
+      box-sizing: border-box;
+      background-size: 100%;
+
+      &.animation {
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+      }
+
+      &.show {
+        display: block;
+      }
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
 }
 
 .main-content {
