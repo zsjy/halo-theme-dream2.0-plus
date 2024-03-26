@@ -665,6 +665,8 @@ spec:
                   label:  文章标签云模块
                 - value: 'timelife'
                   label:  人生倒计时
+                - value: 'wechat'
+                  label:  微信公众号
             - $formkit: select
               name: position
               label: 模块位置
@@ -782,6 +784,27 @@ spec:
               label:  目录模块不显示时
             - value: index
               label:  仅首页
+        - $formkit: group
+          name: wechat
+          label: 微信公众号
+          help: 图片可以从公众号后台下载物料或者自制。
+          value:
+            wechat_url:
+            wechat_img_face:
+            wechat_img_back:
+          children:
+            - $formkit: attachment
+              name: wechat_url
+              label: 跳转链接
+              placeholder: '请输入网址/选择附件作为点击时的链接'
+            - $formkit: attachment
+              name: wechat_img_face
+              label: 公众号正面图
+              placeholder: '请输入/选择公众号正面图路径'
+            - $formkit: attachment
+              name: wechat_img_back
+              label: 公众号背面图
+              placeholder: '请输入/选择公众号背面图路径'
         - $formkit: attachment
           name: love_oneself_avatar
           label: 侧边栏恋爱墙-自己的头像
@@ -1324,24 +1347,6 @@ spec:
                   label: busuanzi统计
                 - value: false
                   label: 不显示
-#        - $formkit: radio
-#          name: enable_baidu_push
-#          label:  启用百度 URL 自动推送
-#          value: false
-#          options:
-#            - value: true
-#              label:  开启
-#            - value: false
-#              label:  关闭
-#        - $formkit: radio
-#          name: enable_toutiao_push
-#          label:  启用头条搜索自动推送
-#          value: false
-#          options:
-#            - value: true
-#              label:  开启
-#            - value: false
-#              label:  关闭
         - $formkit: radio
           name: enable_debug
           label:  开启 DEBUG 日志
