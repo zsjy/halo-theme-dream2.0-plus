@@ -43,12 +43,58 @@
           border-radius: 5px;
           overflow: hidden;
           display: flex;
+
+          li {
+            margin-right: 10px;
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+
+          img {
+            max-width: 200px;
+            max-height: 260px;
+            object-fit: cover;
+          }
         }
 
-        img {
-          max-width: 200px;
-          max-height: 260px;
-          object-fit: cover;
+        .qr-code {
+          border: 1px solid var(--theme);
+          border-radius: 10px;
+          width: 150px;
+          height: 150px;
+          position: relative;
+          overflow: hidden;
+
+          img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: block;
+            width: 100%;
+            height: 100%;
+            transform:translate(-50%,-50%);
+          }
+        }
+
+        .qr-type {
+          margin-top: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          svg {
+            width: 1.6rem;
+            height: 1.6rem;
+            margin-right: 5px;
+          }
+
+          span {
+            font-weight: bold;
+            font-size: 1.05rem;
+            color: var(--main);
+          }
         }
       }
 
@@ -222,6 +268,15 @@
 @media (max-width: 520px) {
   .admire .donate-list ol {
     flex-wrap: wrap;
+
+    li {
+      margin-bottom: 10px;
+      margin-right: 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
 
     img {
       width: 200px;

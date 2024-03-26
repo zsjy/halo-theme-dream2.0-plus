@@ -604,14 +604,26 @@ spec:
               label:  默认开启
             - value: false
               label:  默认关闭
-        - $formkit: attachment
-          name: donate_alipay
-          label: 支付宝捐赠二维码
-          placeholder: '请输入/选择图片路径'
+        - $formkit: radio
+          name: post_donate_style
+          label: 文章打赏样式
+          value: donate_style_poster
+          help: '支持海报样式和二维码样式。'
+          options:
+            - value: donate_style_poster
+              label: 海报
+            - value: donate_style_qr
+              label: 二维码
         - $formkit: attachment
           name: donate_wechat
           label: 微信捐赠二维码
           placeholder: '请输入/选择图片路径'
+          help: '请输入/选择微信捐赠海报样式/仅二维码的图片。'
+        - $formkit: attachment
+          name: donate_alipay
+          label: 支付宝捐赠二维码
+          placeholder: '请输入/选择图片路径'
+          help: '请输入/选择支付宝捐赠海报样式/仅二维码的图片。'
     - group: sidebar
       label: '侧边栏配置'
       formSchema:
