@@ -1348,6 +1348,16 @@ spec:
                 - value: false
                   label: 不显示
         - $formkit: radio
+          name: enable_console_version_info
+          label: 控制台打印版本信息
+          value: true
+          help: '控制台打印版本信息包括：主题名、主题版本、网站页面加载耗时。'
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
+        - $formkit: radio
           name: enable_debug
           label:  开启 DEBUG 日志
           value: false
