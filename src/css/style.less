@@ -26,6 +26,7 @@
   z-index: 99;
   position: relative;
 }
+
 //强制给评论、联系表单插件错误层增加z-index
 lit-toast-container, halo-contact-form-toast-container {
   z-index: 100;
@@ -378,7 +379,7 @@ table td, table th {
   //vertical-align: top;
   vertical-align: middle;
 
-  &>p {
+  & > p {
     margin: auto !important;
   }
 }
@@ -2701,7 +2702,7 @@ button.swiper-pagination-bullet {
         &-grid {
           margin: 1rem 0 1.4rem 0;
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(min(100%, max(260px, 100%/4)), 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(min(100%, max(260px, 100% / 4)), 1fr));
           gap: 1rem;
 
           &:first-child {
@@ -3217,6 +3218,7 @@ button.swiper-pagination-bullet {
   }
 
   /*人生计时器*/
+
   &.timelife {
 
     .item {
@@ -3325,8 +3327,10 @@ button.swiper-pagination-bullet {
   }
 
   /*微信公众号*/
+
   &.wechat {
     /* 微信公众号翻转 */
+
     .flip-wrapper {
       position: relative;
       width: 100%;
@@ -3334,7 +3338,7 @@ button.swiper-pagination-bullet {
       z-index: 1;
       cursor: var(--cursor-default);
 
-      &.pointer{
+      &.pointer {
         cursor: var(--cursor-pointer);
       }
 
@@ -3718,32 +3722,18 @@ button.swiper-pagination-bullet {
   table {
     width: 100%;
     //max-width: 100%;
-    border-collapse: unset;
+    border-collapse: collapse;
     background: var(--bg-d);
     margin-bottom: 14px;
     margin-left: auto;
     margin-right: auto;
     overflow: hidden;
     font-size: 0.95em;
-    border: 1px solid var(--light-x);
-    border-radius: var(--radius-inner);
 
     td,
     th {
       padding: 8px;
-      border-right: 1px solid var(--light-x);
-      border-bottom: 1px solid var(--light-x);
-    }
-
-    thead {
-      th {
-        font-weight: 500;
-        background: var(--bg-h);
-
-        &:last-child {
-          border-right: none;
-        }
-      }
+      border: 1px solid var(--light-x);
     }
 
     tbody {
@@ -3753,27 +3743,16 @@ button.swiper-pagination-bullet {
         th {
           font-weight: 500;
           background: var(--bg-z);
-
-          &:last-child {
-            border-right: none;
-          }
         }
 
-        &:nth-child(2n) {
-          background: var(--bg-j);
-        }
-
-        &:last-child td {
-          border-bottom: none;
-        }
+        //&:nth-child(2n) {
+        //  background: var(--bg-j);
+        //}
 
         &:hover {
           background: rgb(179 179 179 / 15%);
         }
 
-        td:last-child {
-          border-right: none;
-        }
       }
     }
   }
