@@ -9,10 +9,10 @@
         th:onclick="${#strings.isEmpty(wechatUrl)} ? 'event.preventDefault();'" target="_blank">
         <div th:class="${!#strings.isEmpty(faceImg) && !#strings.isEmpty(backImg) ? 'flip-content animation' : 'flip-content'}">
             <div class="wechatFace">
-                <img th:if="${!#strings.isEmpty(faceImg)}" th:src="${faceImg}" alt="微信公众号"/>
+                <img th:if="${!#strings.isEmpty(faceImg)}" height="auto" width="auto" th:src="${faceImg}" alt="微信公众号"/>
             </div>
             <div th:class="${!#strings.isEmpty(faceImg) && !#strings.isEmpty(backImg) ? 'wechatBack animation' : 'wechatBack'}" th:classappend="${#strings.isEmpty(faceImg)}? 'show'">
-                <img th:if="${!#strings.isEmpty(backImg)}" th:src="${backImg}" alt="微信公众号"/>
+                <img th:if="${!#strings.isEmpty(backImg)}" height="auto" width="auto" th:src="${backImg}" alt="微信公众号"/>
             </div>
         </div>
     </a>
