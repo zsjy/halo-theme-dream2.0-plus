@@ -4,7 +4,7 @@
      class="card card-transparent"
      th:with="urlParamStr = ${#strings.substringAfter(data.prevUrl,'?')},
               urlParams = ${urlParamStr == null ? '' : ('?' + urlParamStr)}">
-  <nav class="pagination" role="navigation" aria-label="pagination">
+  <nav class="pagination" aria-label="pagination">
     <a th:href="${data.prevUrl}"
        th:class="'pagination-previous' + ${data.hasPrevious()?'':' is-invisible is-hidden-mobile'}">上一页</a>
     <a th:href="${data.nextUrl}"

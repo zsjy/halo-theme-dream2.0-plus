@@ -25,7 +25,7 @@
     //可以进行版本修改，删除缓存
     const version = '1.0.0'
     // 取得缓存名称
-    const cacheName = `Dream-${version}`
+    const cacheName = `Dream2-plus-${version}`
     // 取得请求参数
     const envParams = new URLSearchParams(location.href.split('?')[1])
     // 是否开启多cdn源并发请求
@@ -33,7 +33,7 @@
     // 是否开启全站缓存
     const isGlobalCache = envParams.get('cache')
     // 主题路径
-    const themePath = location.origin + '/themes/dream'
+    const themePath = location.origin + '/themes/theme-dream2-plus'
     // cdn源站点，一行一个
     const cdnSource = envParams.get('cdn').split(',').filter(item => item.length > 0 && item.indexOf('http') === 0)
 
@@ -64,7 +64,7 @@
           const version = new URLSearchParams(url.split('?')[1]).get('mew') || 'latest'
           return [
             url,
-            ...cdnSource.map(value => `${value}/halo-theme-dream@${version}${path}`)
+            ...cdnSource.map(value => `${value}/halo-theme-dream2-plus@${version}${path}`)
           ]
         },
       },

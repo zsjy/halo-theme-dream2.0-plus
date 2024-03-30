@@ -5,7 +5,7 @@
     <nav class="level">
       <div class="level-item" style="flex-direction: column;">
         <figure class="image">
-          <img class="avatar" th:src="${contributor.avatar}" th:alt="${contributor.displayName}">
+          <img class="avatar" height="auto" width="auto" th:src="${contributor.avatar}" th:alt="${contributor.displayName}">
         </figure>
         <p class="nickname" th:text="${contributor.displayName}"></p>
         <p class="motto spark-input" th:text="${contributor.bio}"></p>
