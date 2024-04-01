@@ -140,6 +140,7 @@ spec:
               label: 不显示
         - $formkit: radio
           name: enable_image_bg
+          id: enable_image_bg
           label: 开启博客背景图
           value: false
           help: '如果某个选项的背景图链接未指定，则不开启那个选项的背景图。'
@@ -150,22 +151,27 @@ spec:
               value: false
         - $formkit: attachment
           name: background_pc
+          if: $get(enable_image_bg).value
           label: '明亮模式 PC 端背景图'
           placeholder: '请输入/选择图片路径'
         - $formkit: attachment
           name: background_mobile
+          if: $get(enable_image_bg).value
           label: 明亮模式移动端背景图
           placeholder: '请输入/选择图片路径'
         - $formkit: attachment
           name: night_background_pc
+          if: $get(enable_image_bg).value
           label: '黑暗模式 PC 端背景图'
           placeholder: '请输入/选择图片路径'
         - $formkit: attachment
           name: night_background_mobile
+          if: $get(enable_image_bg).value
           label: 黑暗模式移动端背景图
           placeholder: '请输入/选择图片路径'
         - $formkit: radio
           name: enable_banner
+          id: enable_banner
           label: 开启博客横幅大图
           value: false
           options:
@@ -175,10 +181,12 @@ spec:
               value: false
         - $formkit: attachment
           name: banner_image
+          if: $get(enable_banner).value
           label: 横幅背景图
           placeholder: '请输入/选择图片路径'
         - $formkit: text
           name: banner_description
+          if: $get(enable_banner).value
           label: 横幅文字描述
           placeholder: '请输入描述内容'
         - $formkit: select
@@ -188,9 +196,9 @@ spec:
           help: '主题风格效果，不改变主题整体框架。'
           options:
             - value: 'default'
-              label:  默认
+              label: 默认
             - value: 'clean'
-              label:  清爽
+              label: 清爽
             - value: 'celebration'
               label: 庆典
         - $formkit: select
@@ -215,6 +223,7 @@ spec:
           value: '#5d93db'
         - $formkit: select
           name: web_font
+          id: web_font
           label:  博客字体
           value: 'default'
           options:
@@ -228,6 +237,7 @@ spec:
               label:  自定义
         - $formkit: attachment
           name: custom_font
+          if: $get(web_font).value === 'custom'
           label: 自定义博客字体
           placeholder: '请输入/选择字体路径'
           help: '自定义博客字体，在博客字体选项为自定义时生效。支持woff2/woff/ttf/eot/svg格式的字体文件链接，建议使用woff2格式。'
@@ -246,28 +256,6 @@ spec:
               label:  模块化（左侧）
             - value: 'module-right'
               label:  模块化（右侧）
-        - $formkit: repeater
-          name: carousel_options
-          label: 首页大图轮播选项
-          children:
-            - $formkit: text
-              name: title
-              label: 标题
-            - $formkit: text
-              name: url
-              label: 地址
-            - $formkit: attachment
-              name: image
-              label: 背景图
-            - $formkit: radio
-              name: target
-              label:  打开方式
-              value: '_blank'
-              options:
-                - value: '_blank'
-                  label:  新窗口
-                - value: '_self'
-                  label:  原窗口
         - $formkit: repeater
           name: module_options
           label: 模块化布局选项
@@ -316,6 +304,28 @@ spec:
               label:  固定底部
             - value: none
               label:  不悬浮
+        - $formkit: repeater
+          name: carousel_options
+          label: 首页大图轮播选项
+          children:
+            - $formkit: text
+              name: title
+              label: 标题
+            - $formkit: text
+              name: url
+              label: 地址
+            - $formkit: attachment
+              name: image
+              label: 背景图
+            - $formkit: radio
+              name: target
+              label: 打开方式
+              value: '_blank'
+              options:
+                - value: '_blank'
+                  label: 新窗口
+                - value: '_self'
+                  label: 原窗口
     - group: post
       label: '文章设置'
       formSchema:
