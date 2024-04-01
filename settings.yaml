@@ -713,6 +713,7 @@ spec:
                   label:  不隐藏
         - $formkit: radio
           name: enable_color_character
+          id: enable_color_character
           label:  侧边栏信息-开启彩字切换
           value: false
           options:
@@ -722,6 +723,7 @@ spec:
               label:  关闭
         - $formkit: textarea
           name: color_character
+          if: $get(enable_color_character).value
           label: 侧边栏信息-彩字内容
           placeholder: 请输入彩字内容
           rows: 4
