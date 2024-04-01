@@ -140,7 +140,6 @@ spec:
               label: 不显示
         - $formkit: radio
           name: enable_image_bg
-          id: enable_image_bg
           label: 开启博客背景图
           value: false
           help: '如果某个选项的背景图链接未指定，则不开启那个选项的背景图。'
@@ -151,27 +150,22 @@ spec:
               value: false
         - $formkit: attachment
           name: background_pc
-          if: $get(enable_image_bg).value
           label: '明亮模式 PC 端背景图'
           placeholder: '请输入/选择图片路径'
         - $formkit: attachment
           name: background_mobile
-          if: $get(enable_image_bg).value
           label: 明亮模式移动端背景图
           placeholder: '请输入/选择图片路径'
         - $formkit: attachment
           name: night_background_pc
-          if: $get(enable_image_bg).value
           label: '黑暗模式 PC 端背景图'
           placeholder: '请输入/选择图片路径'
         - $formkit: attachment
           name: night_background_mobile
-          if: $get(enable_image_bg).value
           label: 黑暗模式移动端背景图
           placeholder: '请输入/选择图片路径'
         - $formkit: radio
           name: enable_banner
-          id: enable_banner
           label: 开启博客横幅大图
           value: false
           options:
@@ -181,12 +175,10 @@ spec:
               value: false
         - $formkit: attachment
           name: banner_image
-          if: $get(enable_banner).value
           label: 横幅背景图
           placeholder: '请输入/选择图片路径'
         - $formkit: text
           name: banner_description
-          if: $get(enable_banner).value
           label: 横幅文字描述
           placeholder: '请输入描述内容'
         - $formkit: select
@@ -223,7 +215,6 @@ spec:
           value: '#5d93db'
         - $formkit: select
           name: web_font
-          id: web_font
           label:  博客字体
           value: 'default'
           options:
@@ -237,7 +228,6 @@ spec:
               label:  自定义
         - $formkit: attachment
           name: custom_font
-          if: $get(web_font).value === 'custom'
           label: 自定义博客字体
           placeholder: '请输入/选择字体路径'
           help: '自定义博客字体，在博客字体选项为自定义时生效。支持woff2/woff/ttf/eot/svg格式的字体文件链接，建议使用woff2格式。'
@@ -713,7 +703,6 @@ spec:
                   label:  不隐藏
         - $formkit: radio
           name: enable_color_character
-          id: enable_color_character
           label:  侧边栏信息-开启彩字切换
           value: false
           options:
@@ -723,7 +712,6 @@ spec:
               label:  关闭
         - $formkit: textarea
           name: color_character
-          if: $get(enable_color_character).value
           label: 侧边栏信息-彩字内容
           placeholder: 请输入彩字内容
           rows: 4
