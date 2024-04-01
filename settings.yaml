@@ -241,6 +241,28 @@ spec:
           label: 自定义博客字体
           placeholder: '请输入/选择字体路径'
           help: '自定义博客字体，在博客字体选项为自定义时生效。支持woff2/woff/ttf/eot/svg格式的字体文件链接，建议使用woff2格式。'
+        - $formkit: repeater
+          name: carousel_options
+          label: 首页大图轮播选项
+          children:
+            - $formkit: text
+              name: title
+              label: 标题
+            - $formkit: text
+              name: url
+              label: 地址
+            - $formkit: attachment
+              name: image
+              label: 背景图
+            - $formkit: radio
+              name: target
+              label: 打开方式
+              value: '_blank'
+              options:
+                - value: '_blank'
+                  label: 新窗口
+                - value: '_self'
+                  label: 原窗口
         - $formkit: select
           name: sidebar_column
           label:  博客布局方式
@@ -304,28 +326,6 @@ spec:
               label:  固定底部
             - value: none
               label:  不悬浮
-        - $formkit: repeater
-          name: carousel_options
-          label: 首页大图轮播选项
-          children:
-            - $formkit: text
-              name: title
-              label: 标题
-            - $formkit: text
-              name: url
-              label: 地址
-            - $formkit: attachment
-              name: image
-              label: 背景图
-            - $formkit: radio
-              name: target
-              label: 打开方式
-              value: '_blank'
-              options:
-                - value: '_blank'
-                  label: 新窗口
-                - value: '_self'
-                  label: 原窗口
     - group: post
       label: '文章设置'
       formSchema:
