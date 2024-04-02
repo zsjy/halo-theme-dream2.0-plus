@@ -811,10 +811,20 @@ spec:
               name: wechat_img_face
               label: 公众号正面图
               placeholder: '请输入/选择公众号正面图路径'
+            - $formkit: color
+              name: wechat_img_face_color
+              label: 公众号正面图背景色
+              help: 用于填充图片无法铺满部分的颜色。
+              value: '#07c261'
             - $formkit: attachment
               name: wechat_img_back
               label: 公众号背面图
               placeholder: '请输入/选择公众号背面图路径'
+            - $formkit: color
+              name: wechat_img_back_color
+              label: 公众号背面图背景色
+              help: 用于填充图片无法铺满部分的颜色。
+              value: '#ffffff'
         - $formkit: attachment
           name: love_oneself_avatar
           label: 侧边栏恋爱墙-自己的头像
