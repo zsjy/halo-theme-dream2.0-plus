@@ -1074,16 +1074,6 @@ spec:
               label:  开启
             - value: false
               label:  关闭
-        - $formkit: radio
-          name: enable_journals_tag
-          label: 瞬间页面-开启标签显示
-          value: false
-          help: '瞬间存在标签时，开启后会显示，反之不显示。发布瞬间时使用“#xxx”添加标签。'
-          options:
-            - value: true
-              label: 开启
-            - value: false
-              label: 关闭
         - $formkit: number
           name: journals_fold_height
           label:  瞬间页面-动态内容折叠
