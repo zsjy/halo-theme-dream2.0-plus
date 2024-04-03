@@ -4,6 +4,17 @@
   th:with="isJournals = true, enableShare = ${theme.config.page_config.enable_journals_share}, baseEnableComment = ${theme.config.page_config.enable_journals_comment}"
   xmlns:th="https://www.thymeleaf.org">
   <th:block th:fragment="content">
+    <div class="card card-content journal" th:if="${!#lists.isEmpty(tags)}">
+      <div class="card-tab">
+        <div>
+          [[${#strings.replace(title, ' - ' + site.title, '')}]]
+        </div>
+      </div>
+      <div class="journal-teams">
+        <a th:class="${#strings.isEmpty(param.tag)? 'item active' : 'item'}" th:href="@{/moments}">全部</a>
+        <a th:each="tag : ${tags}" th:class="${#strings.equals(param.tag, tag.name)? 'item active' : 'item'}" th:href="@{/moments(tag=${tag.name})}" th:text="${tag.name}"></a>
+      </div>
+    </div>
     <div class="card card-content journal" th:each="moment : ${moments.items}">
       <p class="journal-date">
         <i class="ri-send-plane-line"></i>

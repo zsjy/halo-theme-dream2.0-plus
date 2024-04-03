@@ -4,23 +4,26 @@ th:with="description=${isPost ? post != null ? post.status.excerpt : singlePage 
   <title th:text="${title + (#strings.isEmpty(site.subtitle) ? '' : '|' + site.subtitle)}"></title>
   <script th:if="${theme.config.enhance.enable_sw}" th:src="${(theme.config.enhance.enable_sw == 'uninstall')? #theme.assets('/assets/js/sw.min.js?uninstall=true') + '&mew=1.2.1' : '/sw.min.js?mew=1.2.1' + theme.config.enhance.enable_sw + '&cdn=' + theme.config.enhance.sw_cdn_source.replaceAll('\n', ',')}"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta http-equiv="X-UA-Compatible" content="on">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="keywords" th:content="${site.seo.keywords}"/>
   <meta name="description" th:content="${description}">
   <meta name="author" th:content="${site.title}">
   <meta name="site" th:content="${site.url}">
-  <meta property="og:type" content="website">
-  <meta property="og:title" th:content="${site.title}">
-  <meta property="og:url" th:content="${canonical}">
-  <meta property="og:site_name" th:content="${title}">
-  <meta property="og:description" th:content="${description}">
-  <meta property="og:locale" content="zh">
-  <meta property="og:image" th:content="${site.logo}">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" th:content="${title}">
-  <meta name="twitter:description" th:content="${description}">
-  <meta name="twitter:image" th:content="${site.logo}">
-  <link rel="canonical" th:href="${canonical}"/>
+  <th:block th:if="${theme.config.basic_info.social_media}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" th:content="${site.title}">
+    <meta property="og:url" th:content="${#strings.startsWith(canonical,'http') ? canonical : (#strings.endsWith(site.url,'/') ? #strings.substringBefore(site.url, '/') : site.url + canonical)}">
+    <meta property="og:site_name" th:content="${title}">
+    <meta property="og:description" th:content="${description}">
+    <meta property="og:locale" content="zh">
+    <meta property="og:image" th:content="${#strings.startsWith(site.favicon,'http') ? site.favicon : (#strings.endsWith(site.url,'/') ? #strings.substringBefore(site.url, '/') : site.url + site.favicon)}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" th:content="${title}">
+    <meta name="twitter:description" th:content="${description}">
+    <meta name="twitter:image" th:content="${#strings.startsWith(site.favicon,'http') ? site.favicon : (#strings.endsWith(site.url,'/') ? #strings.substringBefore(site.url, '/') : site.url + site.favicon)}">
+  </th:block>
+
+  <link rel="canonical" th:href="${#strings.startsWith(canonical,'http') ? canonical : (#strings.endsWith(canonical,'/') ? #strings.substringBefore(site.url, '/') : site.url + canonical)}"/>
 
   <link rel="preload stylesheet" as="style" th:href="@{/assets/css/theme.min.css(mew=${theme.spec.version})}">
 <!--  <link rel="preload stylesheet" as="style" th:href="@{/assets/lib/remixicon@3.5.0/remixicon.min.css}">-->
