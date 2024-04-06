@@ -11,6 +11,12 @@ spec:
     name: 智识家
     # 作者网址
     website: https://www.sw0.top
+  customTemplates:
+    page:
+      - name: 安全链接页面模版
+        description: 支持安全链接页面配置
+        screenshot:
+        file: security_link.html
   # 主题描述
   description: '梦之城，童话梦境'
   # 主题logo地址
@@ -22,6 +28,6 @@ spec:
   settingName: theme-dream-setting
   configMapName: theme-dream-configMap
   # 版本号
-  version: 1.0.4
+  version: 1.0.4.50
   # 最低支持的 Halo 版本
   require: ">=2.6.0"

@@ -288,7 +288,7 @@ const commonContext = {
     let timer = null
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) {
-        if(!DreamConfig.document_visible_title || document.title !== DreamConfig.document_visible_title) {
+        if (!DreamConfig.document_visible_title || document.title !== DreamConfig.document_visible_title) {
           originTitle = document.title
         }
         DreamConfig.document_hidden_title && (document.title = DreamConfig.document_hidden_title)
@@ -296,7 +296,7 @@ const commonContext = {
       } else {
         document.title = DreamConfig.document_visible_title || originTitle
         DreamConfig.document_visible_title && (timer = setTimeout(function () {
-          if(document.title === DreamConfig.document_visible_title){
+          if (document.title === DreamConfig.document_visible_title) {
             document.title = originTitle
           }
         }, 2000))
@@ -424,19 +424,19 @@ const commonContext = {
     let nowYear = now.getFullYear()
     const grt = new Date(DreamConfig.website_time)
     let getYear = grt.getFullYear()
-    if(nowYear === getYear) {
-      webCopyright.innerText = '© '+nowYear+' '+ DreamConfig.site_title
+    if (nowYear === getYear) {
+      webCopyright.innerText = '© ' + nowYear + ' ' + DreamConfig.site_title
       return
     }
 
-    webCopyright.innerText = '© '+getYear + '-'+nowYear+' '+ DreamConfig.site_title
+    webCopyright.innerText = '© ' + getYear + '-' + nowYear + ' ' + DreamConfig.site_title
   },
   /* 激活侧边栏人生倒计时 */
   initTimeCount() {
     if (!$('.timelife').length) {
       return
     }
-    if(timeLifeHour === new Date().getHours()) {
+    if (timeLifeHour === new Date().getHours()) {
       return
     }
     let timelife = [
@@ -523,15 +523,47 @@ const commonContext = {
     })
     $('.aside-timelife').html(htmlStr)
   },
+  /* 安全链接 */
+  initSecurityLink() {
+    if (!DreamConfig.enable_security_link || !DreamConfig.security_link_url || DreamConfig.security_link_url.length === 0) {
+      return
+    }
+    $(document).on('click', 'a[target=_blank]', (event) => {
+      event.preventDefault() // 防止链接默认行为，即打开新页面
+      var href = $(event.currentTarget).attr('href')
+      var hostname = window.location.hostname
+
+      const isInternalLink = (url, siteDomain) => {
+        // 将URL和站点域名转换为小写，去除前导和尾随空格
+        url = url.toLowerCase().trim()
+        siteDomain = siteDomain.toLowerCase().trim()
+        // 如果URL是协议相对路径或者绝对路径，则转换为完整的URL
+        if (url.startsWith('//')) {
+          url = window.location.protocol + url
+        } else if (url.startsWith('/')) {
+          url = window.location.origin + url
+        }
+        // 如果URL以'http://'或'https://'开头，则去除尾部斜杠
+        if (url.startsWith('http://') || url.startsWith('https://')) {
+          url = url.replace(/\/$/, '')
+        }
+        // 对比URL和站点域名
+        return url.includes(siteDomain)
+      }
+
+      var tempwindow = window.open('_blank')
+      tempwindow.location = isInternalLink(href, hostname) ? href : (DreamConfig.security_link_url + '?target=' + encodeURIComponent(href))
+    })
+  },
   /* 灰色模式 */
   initGrayMode() {
-    if(DreamConfig.gray_mode === true) {
+    if (DreamConfig.gray_mode === true) {
       $('html').addClass('gray-mode')
-    } else if(DreamConfig.gray_mode === 'custom') {
+    } else if (DreamConfig.gray_mode === 'custom') {
       var now = new Date().getTime()
       var startTime = new Date(DreamConfig.gray_mode_start_time).getTime()
       var endTime = new Date(DreamConfig.gray_mode_end_time).getTime()
-      if(now >= startTime && now <= endTime) {
+      if (now >= startTime && now <= endTime) {
         $('html').addClass('gray-mode')
       }
     }
@@ -566,7 +598,7 @@ const commonContext = {
   },
   /* 显示主题版本信息 */
   showThemeVersion() {
-    if(!DreamConfig.enable_console_version_info) {
+    if (!DreamConfig.enable_console_version_info) {
       return
     }
     window.logger(`%c页面加载耗时：${Math.round(performance.now())}ms | Theme By Dream2 Plus ${DreamConfig.theme_version}`,
