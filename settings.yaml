@@ -1405,7 +1405,7 @@ spec:
           id: enable_security_link
           label: 开启 安全链接页面
           value: false
-          help: '开启安全链接页面前，请先使用’安全链接页面模版‘创建页面。'
+          help: '开启安全链接页面前，请先使用“安全链接页面模版”创建页面。'
           options:
             - value: true
               label: 开启
@@ -1422,8 +1422,8 @@ spec:
           label: 安全链接页面-URL
           if: $get(enable_security_link).value
           validation: required
-          placeholder: '请输入使用’安全链接页面模版‘创建的页面访问路径'
-          help: '输入使用’安全链接页面模版‘创建的页面访问路径，不能省略’/‘。'
+          placeholder: '请输入使用“安全链接页面模版”创建的页面访问路径'
+          help: '输入使用”安全链接页面模版“创建的页面访问路径，不能省略’/‘。'
         - $formkit: attachment
           name: security_link_tip_img
           if: $get(enable_security_link).value
