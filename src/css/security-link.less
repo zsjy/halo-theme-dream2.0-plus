@@ -18,6 +18,10 @@ html {
   color: var(--main);
   font-family: "Dream Font", serif;
 
+  halo-contact-form-auto-loader, #live2d-plugin, #live2d-toggle {
+    display: none;
+  }
+
   body {
     width: 100%;
     height: 100%;
@@ -27,11 +31,14 @@ html {
     align-items: center;
     position: absolute;
 
-
     @media (max-width: (@mobile-max-width - 1)) {
       .content {
         max-width: 90% !important;
         min-width: auto !important;
+
+        .others-end {
+          justify-content: center !important;
+        }
       }
     }
 
