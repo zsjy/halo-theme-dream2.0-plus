@@ -2,11 +2,15 @@
 <html lang="zh" xmlns:th="https://www.thymeleaf.org"
       th:class="${theme.config.basic_style.theme_style}"
       th:with="urlCode = ${param.target},
-               url = ${#uris.unescapePath(urlCode)}">
+               url = ${#uris.unescapePath(urlCode)},
+               title = ${singlePage.spec.title} + ' - ' + ${site.title},
+               contributor = ${contributorFinder.getContributor(theme.config.basic_info.metadata_name)},
+               enableComment = false, isPost = false, canonical = ${theme.config.security_link_config.security_link_url}">
 <head>
     <meta charset="utf-8"/>
-    <title th:text="${singlePage.spec.title + ' - ' + site.title + (#strings.isEmpty(site.subtitle) ? '' : '|' + site.subtitle)}"></title>
+    <title th:text="${title + (#strings.isEmpty(site.subtitle) ? '' : '|' + site.subtitle)}"></title>
     <link rel="preload stylesheet" as="style" th:href="@{/assets/css/theme.min.css(mew=${theme.spec.version})}">
+    <link th:if="${theme.config.enhance.cursor_style != 'none'}" rel="stylesheet" th:href="@{/assets/css/cursor.min.css(mew=${theme.spec.version})}">
     <link data-pjax rel="preload stylesheet" as="style" th:href="@{/assets/css/security-link.min.css(mew=${theme.spec.version})}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <th:block th:replace="~{common/config}"/>
@@ -15,15 +19,19 @@
 <div class="content">
     <div class="content-title">
         <img th:src="${#strings.isEmpty(theme.config.security_link_config.security_link_site_img) ? site.favicon : theme.config.security_link_config.security_link_site_img}" alt="favicon">
-        <span th:title="${site.title}">[[${site.title}]]</span>
+        <span th:if="${!#strings.isEmpty(theme.config.security_link_config.security_link_site_title)}"
+              th:with="t = ${theme.config.security_link_config.security_link_site_title},
+                       t1 = ${#strings.replace(t, '{title}', site.title)}"
+              th:title="${t1}">[[${t1}]]</span>
     </div>
     <div class="others">
         <div class="others-tip">
             <img th:src="${#strings.isEmpty(theme.config.security_link_config.security_link_tip_img) ? #theme.assets('/img/warning.webp') : theme.config.security_link_config.security_link_tip_img}" alt="">
             <span>[[${#strings.isEmpty(theme.config.security_link_config.security_link_tip_desc) ? '请注意您的账号和财产安全！': theme.config.security_link_config.security_link_tip_desc}]]</span>
         </div>
-        <div class="others-topic">
-            <span>您即将离开</span><span class="site-title">[[${site.title}]]</span><span>，去往：</span><a class="loading-color2">[[${url}]]</a>
+        <div class="others-topic" th:with="oDesc = ${theme.config.security_link_config.security_link_jump_desc},
+                                           o1 = ${#strings.replace(oDesc, '{title}', site.title)},
+                                           o2 = ${#strings.replace(o1, '{url}', url)}" th:utext="${o2}">
         </div>
         <div class="others-end">
             <a th:href="${url}" target="_self">继续</a>
