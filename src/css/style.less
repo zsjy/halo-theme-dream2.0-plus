@@ -4073,9 +4073,15 @@ button.swiper-pagination-bullet {
 
     .icon-spot {
       &:first-child > *:not(:first-child):before {
-        content: "·";
-        margin: 0 0.3em;
+        content: "";
+        width: 4px;
+        height: 4px;
+        margin: 0 0.4em;
+        border-radius: 50%;
         display: inline-block;
+        background: var(--dark-b);
+        opacity: .5;
+        vertical-align: 0.2em;
       }
 
       &:not(:first-child) > *:not(:first-child):before {
@@ -4086,7 +4092,7 @@ button.swiper-pagination-bullet {
         border-radius: 50%;
         display: inline-block;
         background: var(--dark-b);
-        opacity: .3;
+        opacity: .5;
         vertical-align: 0.2em;
       }
 
@@ -4096,6 +4102,14 @@ button.swiper-pagination-bullet {
     }
 
     a:not([class]) {
+      color: var(--dark-b);
+
+      &:hover {
+        color: var(--theme);
+      }
+    }
+
+    a.record {
       color: var(--dark-b);
 
       &:hover {
