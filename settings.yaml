@@ -1,7 +1,7 @@
 apiVersion: v1alpha1
 kind: Setting
 metadata:
-  name: theme-dream-setting
+  name: theme-dream2-plus-setting
 spec:
   forms:
     - group: basic_info
@@ -215,20 +215,19 @@ spec:
           value: '#5d93db'
         - $formkit: select
           name: web_font
+          id: web_font
           label:  博客字体
           value: 'default'
           options:
             - value: 'default'
               label:  默认字体
-            - value: 'WenCang.woff2'
-              label:  问藏书房体
-            - value: 'AlimamaDaoLiTi.woff2'
-              label: 阿里巴巴刀隶体
             - value: 'custom'
               label:  自定义
         - $formkit: attachment
           name: custom_font
           label: 自定义博客字体
+          validation: required
+          if: $get(web_font).value == 'custom'
           placeholder: '请输入/选择字体路径'
           help: '自定义博客字体，在博客字体选项为自定义时生效。支持woff2/woff/ttf/eot/svg格式的字体文件链接，建议使用woff2格式。'
         - $formkit: repeater
@@ -264,36 +263,6 @@ spec:
               label:  仅显示左侧
             - value: 'only-right'
               label:  仅显示右侧
-            - value: 'module-left'
-              label:  模块化（左侧）
-            - value: 'module-right'
-              label:  模块化（右侧）
-        - $formkit: repeater
-          name: module_options
-          label: 模块化布局选项
-          help: 可填写 1~6 个链接。
-          children:
-            - $formkit: text
-              name: tag
-              label: 标签
-            - $formkit: text
-              name: title
-              label: 标题
-            - $formkit: text
-              name: url
-              label: 地址
-            - $formkit: attachment
-              name: image
-              label: 背景图
-            - $formkit: radio
-              name: target
-              label:  打开方式
-              value: '_blank'
-              options:
-                - value: '_blank'
-                  label:  新窗口
-                - value: '_self'
-                  label:  原窗口
         - $formkit: radio
           name: left_sidebar_sticky
           label:  左侧边栏悬浮
@@ -728,7 +697,7 @@ spec:
           value:
             - type: post
             - type: category
-            - type: comment
+            - type: tag
           children:
             - $formkit: select
               name: type
@@ -755,7 +724,7 @@ spec:
         - $formkit: repeater
           name: custom_options
           label: 社交渠道
-          help: 图标目前仅支持 RemixIcon V4.2.0。
+          help: 图标支持 RemixIcon。
           value:
             - name: QQ聊天
               icon: 'ri-qq-fill'
@@ -1249,8 +1218,8 @@ spec:
           if: $get(effects_lantern_mode).value != 'none'
           label: 灯笼特效文本定义
           value:
-            effects_lantern_left: 喜
-            effects_lantern_right: 庆
+            effects_lantern_left: 欢
+            effects_lantern_right: 迎
           children:
             - $formkit: text
               name: effects_lantern_left
@@ -1261,7 +1230,7 @@ spec:
         - $formkit: radio
           name: effects_sakura_mode
           label:  樱花飘落特效显示模式
-          value: day
+          value: none
           options:
             - value: none
               label:  不显示

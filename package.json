@@ -14,20 +14,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nineya/halo-theme-dream2.0.git"
+    "url": "git+https://github.com/zsjy/halo-theme-dream2.0-plus"
   },
   "keywords": [
     "halo",
     "dream",
     "nineya",
     "halo-theme",
-    "halo-theme-dream"
+    "halo-theme-dream",
+    "halo-theme-dream2",
+    "halo-theme-dream2.0-plus"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nineya/halo-theme-dream2.0/issues"
+    "url": "https://github.com/zsjy/halo-theme-dream2.0-plus/issues"
   },
-  "homepage": "https://github.com/nineya/halo-theme-dream2.0#readme",
+  "homepage": "https://github.com/zsjy/halo-theme-dream2.0-plus#readme",
   "devDependencies": {
     "@babel/core": "^7.15.5",
     "@babel/plugin-transform-runtime": "^7.15.0",

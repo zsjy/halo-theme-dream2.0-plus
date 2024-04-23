@@ -8,7 +8,7 @@ spec:
   displayName: Dream2.0 Plus
   author:
     # 作者名称
-    name: 智识家
+    name: 智识家园
     # 作者网址
     website: https://www.sw0.top
   customTemplates:
@@ -20,14 +20,14 @@ spec:
   # 主题描述
   description: '梦之城，童话梦境'
   # 主题logo地址
-  logo: /themes/theme-dream/assets/img/logo.png
+  logo: /themes/theme-dream2-plus/assets/img/logo.png
   # 主题地址
   website: https://github.com/zsjy/halo-theme-dream2.0-plus
   # 主题github开源地址
   repo: https://github.com/zsjy/halo-theme-dream2.0-plus.git
-  settingName: theme-dream-setting
-  configMapName: theme-dream-configMap
+  settingName: theme-dream2-plus-setting
+  configMapName: theme-dream2-plus-configMap
   # 版本号
-  version: 1.0.6
+  version: 1.0.6.00012
   # 最低支持的 Halo 版本
-  require: ">=2.6.0"
+  require: ">=2.12.0"

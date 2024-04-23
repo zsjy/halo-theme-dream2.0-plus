@@ -14,42 +14,12 @@
     </th:block>
   </th:block>
 
-  <th:block th:if="${posts.first}" th:fragment="firstIndex"
-            th:with="moduleSize = ${#lists.isEmpty(theme.config.basic_style.module_options) ? 0 : #lists.size(theme.config.basic_style.module_options)}, isModule = ${(theme.config.basic_style.sidebar_column=='module-left' || theme.config.basic_style.sidebar_column=='module-right') && moduleSize > 0}">
-    <th:block th:if="${isModule}">
-      <div class="model model-index">
-        <th:block th:replace="~{::carousel}"/>
-        <div class="model model-index-side">
-          <th:block th:each="index : ${#numbers.sequence(0, 1)}">
-            <th:block th:if="${index < moduleSize}">
-              <th:block th:replace="~{::buildModule (${theme.config.basic_style.module_options.get(index)})}"/>
-            </th:block>
-          </th:block>
-        </div>
-      </div>
-      <div th:if="${moduleSize > 2}" class="'model model-attach model-attach-' + ${moduleSize - 2}">
-        <th:block th:each="index : ${#numbers.sequence(2, 5)}">
-          <th:block th:if="${index < moduleSize}">
-            <th:block th:replace="~{::buildModule (${theme.config.basic_style.module_options.get(index)})}"/>
-          </th:block>
-        </th:block>
-      </div>
-    </th:block>
-    <th:block th:unless="${isModule}">
+  <th:block th:if="${posts.first}" th:fragment="firstIndex">
+    <th:block>
       <th:block th:replace="~{::carousel}"/>
     </th:block>
     <div th:if="${!#strings.isEmpty(theme.config.basic_info.index_inform)}" class="card tips brightness"
          th:utext="${theme.config.basic_info.index_inform}"></div>
-  </th:block>
-
-  <th:block th:fragment="buildModule (option)">
-    <a th:class="'card widget brightness ' + ${option.title != ''? 'bg-shadow' : ''}"
-       th:target="${option.target}"
-       th:style="'background-image: url(' + ${option.image} + ')'"
-       th:href="${option.url}">
-      <div class="title" th:href="${option.title}"></div>
-      <div class="tag" th:text="${option.tag}"></div>
-    </a>
   </th:block>
 
   <th:block th:fragment="carousel">

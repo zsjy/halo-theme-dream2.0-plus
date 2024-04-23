@@ -1,6 +1,3 @@
-<p align="center">
-<img src="https://cdn.jsdelivr.net/gh/nineya/halo-theme-dream2.0/screenshot.png" alt="halo-theme-dream2.0" width="180">
-</p>
 <h1 align="center">halo-theme-dream2.0</h1>
 
 <p align="center">
@@ -15,14 +12,15 @@
 ## Plus版
 
 - 文档：https://www.sw0.top/docs/halo-theme-dream2.0
+- **V1.1.0版本起不在使用原主题配置文件，因此升级后均需要重新配置主题，配置一次后，后续升级无需再次配置。**
 
 
 
 ## 版本适配关系
 
-| 主题版本    | 适配Halo版本                | 测试用Halo版本 |
-| ----------- | --------------------------- | -------------- |
-| x.x      | 2.6.0+ | 2.14.0      |
+| 主题版本    | 适配Halo版本 | 测试用Halo版本 |
+| ----------- |----------| -------------- |
+| x.x      | 2.12.0+  | 2.14.0      |
 
 
 
