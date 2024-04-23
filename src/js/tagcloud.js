@@ -226,7 +226,7 @@ window.tagcloud = (function (win, doc) { // ns
           self.items[j].element.style.zIndex = Math.ceil(per * 10 - 5)
         }
         self.items[j].element.style.fontSize = self.items[j].fontsize + 'px'
-        self.items[j].element.style.left = self.items[j].x + (self.box.offsetWidth - self.items[j].offsetWidth) / 2 + 'px'
+        self.items[j].element.style.left = self.items[j].x + (self.box.offsetWidth - self.items[j].offsetWidth / 2) / 2 + 'px'
         self.items[j].element.style.top = self.items[j].y + (self.box.offsetHeight - self.items[j].offsetHeight) / 2 + 'px'
         self.items[j].element.style.filter = 'alpha(opacity=' + 100 * self.items[j].alpha + ')'
         self.items[j].element.style.opacity = self.items[j].alpha
@@ -251,7 +251,7 @@ window.tagcloud = (function (win, doc) { // ns
         item.x = self.radius * 1.5 * Math.cos(item.angle.theta) * Math.sin(item.angle.phi)
         item.y = self.radius * 1.5 * Math.sin(item.angle.theta) * Math.sin(item.angle.phi)
         item.z = self.radius * 1.5 * Math.cos(item.angle.phi)
-        item.element.style.left = item.x + (self.box.offsetWidth - item.offsetWidth) / 2 + 'px'
+        item.element.style.left = item.x + (self.box.offsetWidth - item.offsetWidth / 2) / 2 + 'px'
         item.element.style.top = item.y + (self.box.offsetHeight - item.offsetHeight) / 2 + 'px'
         items.push(item)
       }
