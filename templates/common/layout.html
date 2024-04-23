@@ -27,11 +27,11 @@
             <th:block th:replace="${content}"/>
           </div>
           <th:block
-            th:if="${theme.config.basic_style.sidebar_column!='only-right' && theme.config.basic_style.sidebar_column!='module-left'}">
+            th:if="${theme.config.basic_style.sidebar_column!='only-right'}">
             <th:block th:replace="~{common/widget :: widget('left')}"/>
           </th:block>
           <th:block
-            th:if="${theme.config.basic_style.sidebar_column!='only-left' && theme.config.basic_style.sidebar_column!='module-right'}">
+            th:if="${theme.config.basic_style.sidebar_column!='only-left'}">
             <th:block th:replace="~{common/widget :: widget('right')}"/>
           </th:block>
         </div>
