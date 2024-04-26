@@ -126,7 +126,9 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
   const $currentTarget = $($.parseHTML(data, document, true))
   const $head = $('head')
   $head.find('meta').remove()
+  $head.find('link[rel="canonical"]').remove()
   $head.append($currentTarget.filter('meta'))
+  $head.append($currentTarget.filter('link[rel="canonical"]'))
   $currentTarget.filter('link[data-pjax]').each(function () {
     let href = $(this).attr('href')
     if (!cssLoadCompletes.has(href)) {
@@ -213,6 +215,6 @@ $(document).on('pjax:end', function (event, xhr, options) {
   }
 })
 
-$(document).on('pjax:popstate', function () {
+$(document).on('pjax:popstate', function (event) {
   console.log('pjax:popstate')
 })
