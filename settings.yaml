@@ -746,10 +746,12 @@ spec:
               name: url
               label: 地址
               value: ""
-        - $formkit: textarea
+        - $formkit: code
           name: notice_content
           label: 侧边栏公告-博客公告
           placeholder: 请输入公告内容
+          language: html
+          height: 240px
           help: 公告内容支持 HTML 标签。
         - $formkit: radio
           name: notice_show_mode
@@ -881,9 +883,11 @@ spec:
           label:  侧边栏广告-广告图片链接
           placeholder: '请输入/选择图片路径'
           help: '图片+链接模式时不能为空。'
-        - $formkit: textarea
+        - $formkit: code
           name: ad_custom_code
           label:  侧边栏广告-自定义广告代码
+          language: html
+          height: 240px
           placeholder: '请输入广告代码'
           help: '在这里黏贴广告联盟提供的广告代码，自定义广告代码模式时不能为空。'
         - $formkit: number
@@ -1019,6 +1023,8 @@ spec:
           name: links_info
           label: "友链页面-补充信息"
           placeholder: '请输入补充信息'
+          language: html
+          height: 240px
           help: '友链页面最低部的补充说明信息，支持 HTML 格式。'
         - $formkit: radio
           name: link_enable_comment
@@ -1417,7 +1423,7 @@ spec:
           if: $get(enable_security_link).value
           validation: required
           label: 安全链接页面-跳转提示区域文本描述
-          height: 80px
+          height: 240px
           language: html
           value: '您即将离开<span>{title}</span>，去往：<span>{url}</span>'
           placeholder: '请输入安全链接页面跳转提示区域的文本描述'
