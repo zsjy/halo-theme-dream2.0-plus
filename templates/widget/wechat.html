@@ -1,6 +1,6 @@
 <div xmlns:th="https://www.thymeleaf.org"
-     th:fragment="widget (hide)"
-     th:class="'card widget wechat ' + ${hide}"
+     th:fragment="widget (sidebar)"
+     th:class="'card widget wechat ' + ${sidebar.hide}"
      th:with="faceImg = ${theme.config.sidebar.wechat.wechat_img_face},
               backImg = ${theme.config.sidebar.wechat.wechat_img_back},
               wechatUrl = ${theme.config.sidebar.wechat.wechat_url}">
