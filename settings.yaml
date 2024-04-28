@@ -688,7 +688,7 @@ spec:
               height: 100px
               label: 侧边栏内容
               placeholder: 请输入 HTML 内容
-              help: '非必填，仅在侧边栏类型为公告、自定义时生效。'
+              help: '非必填，仅在侧边栏类型为公告、广告(自定义广告代码)、自定义时生效。'
         - $formkit: radio
           name: enable_color_character
           label:  侧边栏信息-开启彩字切换
@@ -879,6 +879,7 @@ spec:
         - $formkit: radio
           name: ad_mode
           label:  侧边栏广告-广告展示方法
+          help: '选择“自定义广告代码”时，必须在“侧边栏内容”中填写广告代码。'
           value: true
           options:
             - value: true
@@ -895,13 +896,6 @@ spec:
           label:  侧边栏广告-广告图片链接
           placeholder: '请输入/选择图片路径'
           help: '图片+链接模式时不能为空。'
-        - $formkit: code
-          name: ad_custom_code
-          label:  侧边栏广告-自定义广告代码
-          language: html
-          height: 240px
-          placeholder: '请输入广告代码'
-          help: '在这里黏贴广告联盟提供的广告代码，自定义广告代码模式时不能为空。'
         - $formkit: number
           name: recent_posts_num
           label:  侧边栏最近文章-展示文章数量
