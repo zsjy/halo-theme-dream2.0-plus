@@ -424,11 +424,11 @@ const commonContext = {
     const grt = new Date(DreamConfig.website_time)
     let getYear = grt.getFullYear()
     if (nowYear === getYear) {
-      webCopyright.innerText = '© ' + nowYear + ' ' + DreamConfig.site_title
+      webCopyright.innerText = '© ' + nowYear
       return
     }
 
-    webCopyright.innerText = '© ' + getYear + '-' + nowYear + ' ' + DreamConfig.site_title
+    webCopyright.innerText = '© ' + getYear + '-' + nowYear
   },
   /* 激活侧边栏人生倒计时 */
   initTimeCount() {
