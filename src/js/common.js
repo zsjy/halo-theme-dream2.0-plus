@@ -389,10 +389,9 @@ const commonContext = {
     if (DreamConfig.website_time === '') {
       return
     }
-    const now = new Date()
-    const grt = new Date(DreamConfig.website_time)
+    const grt = new Date(DreamConfig.website_time).getTime()
     setInterval(function () {
-      now.setTime(now.getTime() + 1000)
+      let now = Date.now()
       let difference = parseInt((now - grt) / 1000)
       let seconds = difference % 60
       if (String(seconds).length === 1) {
@@ -412,7 +411,7 @@ const commonContext = {
       }
       let days = parseInt(difference / 24)
       websiteDate.innerHTML = `建站<span class="stand">${days}</span>天<span class="stand">${hours}</span>时<span class="stand">${minutes}</span>分<span class="stand">${seconds}</span>秒`
-    }, 1000)
+    }, 500)
   },
   /* 显示web版权 */
   webCopyright() {
