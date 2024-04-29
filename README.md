@@ -13,7 +13,7 @@
 
 - 文档：https://www.sw0.top/docs/halo-theme-dream2.0
 - **V1.1.0版本起不在使用原主题配置文件，因此升级后均需要重新配置主题，配置一次后，后续升级无需再次配置。**
-
+- 侧边栏组件：https://www.sw0.top/docs/halo-theme-dream2.0/sidebar-assembly
 
 
 ## 版本适配关系
