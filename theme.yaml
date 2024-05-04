@@ -25,9 +25,15 @@ spec:
   website: https://github.com/zsjy/halo-theme-dream2.0-plus
   # 主题github开源地址
   repo: https://github.com/zsjy/halo-theme-dream2.0-plus.git
+  # 提交问题地址
+  issues: https://github.com/zsjy/halo-theme-dream2.0-plus/issues
   settingName: theme-dream2-plus-setting
   configMapName: theme-dream2-plus-configMap
   # 版本号
   version: 1.2.0
   # 最低支持的 Halo 版本
   require: ">=2.12.0"
+  # 许可
+  license:
+    - name: "MIT"
+      url: "https://github.com/zsjy/halo-theme-dream2.0-plus?tab=MIT-1-ov-file"
