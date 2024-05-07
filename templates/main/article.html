@@ -92,11 +92,21 @@
 
     <div class="card card-content comment-wrapper-z-index" id="comment-wrapper" th:if="${enableComment}">
         <h3 class="comment-title">评论</h3>
-        <comment-widget
-                group="content.halo.run"
-                th:kind="${type}"
-                version="v1alpha1"
-                th:name="${post.metadata.name}"
-        ></comment-widget>
+        <th:block th:if="${theme.config.enhance.enable_pjax}">
+            <comment-widget
+                    group="content.halo.run"
+                    th:kind="${type}"
+                    version="v1alpha1"
+                    th:name="${post.metadata.name}"
+                    with-replies="false"
+            ></comment-widget>
+        </th:block>
+        <th:block th:unless="${theme.config.enhance.enable_pjax}">
+            <halo:comment
+                    group="content.halo.run"
+                    th:kind="${type}"
+                    th:attr="name=${post.metadata.name}"
+            />
+        </th:block>
     </div>
 </th:block>

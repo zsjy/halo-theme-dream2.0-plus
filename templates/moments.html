@@ -57,12 +57,22 @@
         </div>
       </div>
       <div class="journal-comment comment-wrapper-z-index" th:if="${enableComment}">
-        <comment-widget
-                group="moment.halo.run"
-                kind="Moment"
-                version="v1alpha1"
-                th:name="${moment.metadata.name}"
-        ></comment-widget>
+        <th:block th:if="${theme.config.enhance.enable_pjax}">
+          <comment-widget
+                  group="moment.halo.run"
+                  kind="Moment"
+                  version="v1alpha1"
+                  th:name="${moment.metadata.name}"
+                  with-replies="false"
+          ></comment-widget>
+        </th:block>
+        <th:block th:unless="${theme.config.enhance.enable_pjax}">
+          <halo:comment
+                  group="moment.halo.run"
+                  kind="Moment"
+                  th:attr="name=${moment.metadata.name}"
+          />
+        </th:block>
       </div>
     </div>
     <th:block th:replace="~{main/pagination :: pagination (${moments}, '/moments')}"/>
