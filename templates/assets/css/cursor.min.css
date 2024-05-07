@@ -1,1 +1,41 @@
-body{cursor:var(--cursor-default)}.actions>div,.expand-done,.main-content figure>figcaption div,.navbar-above .navbar-nav .item,.navbar-searchicon,.navbar-slideicon,.photos .picture-details,.widget .ad-tag .click-close,a,button{cursor:var(--cursor-pointer)}.aplayer .aplayer-bar-wrap,.aplayer .aplayer-icon,.aplayer .aplayer-music,.aplayer .aplayer-pic{cursor:var(--cursor-pointer)!important}.main-content :not(.jg-entry)>img:not([class]){cursor:var(--cursor-zoom-in)}blockquote,code,h1,h2,h3,h4,h5,h6,hr,input[type=text],li,p,td,textarea,th{cursor:var(--cursor-text)}
+body {
+  cursor: var(--cursor-default);
+}
+a,
+button,
+.expand-done,
+.navbar-above .navbar-nav .item,
+.navbar-slideicon,
+.navbar-searchicon,
+.widget .ad-tag .click-close,
+.actions > div,
+.main-content figure > figcaption div,
+.photos .picture-details {
+  cursor: var(--cursor-pointer);
+}
+.aplayer .aplayer-pic,
+.aplayer .aplayer-music,
+.aplayer .aplayer-bar-wrap,
+.aplayer .aplayer-icon {
+  cursor: var(--cursor-pointer) !important;
+}
+.main-content :not(.jg-entry) > img:not([class]) {
+  cursor: var(--cursor-zoom-in);
+}
+p,
+input[type=text],
+blockquote,
+th,
+td,
+code,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+li,
+textarea {
+  cursor: var(--cursor-text);
+}
