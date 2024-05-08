@@ -162,7 +162,7 @@ spec:
     - $formkit: "text"
       name: "icon"
       label: "图标"
-      placeholder: '请输入菜单图标，支持RemixIcon'
+      placeholder: '请输入图标 class 内容'
     - $formkit: "text"
       name: "desc"
       label: "描述"
