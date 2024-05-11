@@ -30,8 +30,6 @@ jobs:
       run: npm install
     - name: Build
       run: npm run build
-      env:
-      GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
     # 上传构建产物zip
     - name: Upload artifacts
       uses: actions/upload-artifact@v3.1.3
