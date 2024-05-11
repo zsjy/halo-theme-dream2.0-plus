@@ -5,7 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "master", "dev" ]
+    branches: [ "master" ]
     paths: ["version"]
 
 jobs:
@@ -40,7 +40,7 @@ jobs:
       id: create_release
       uses: actions/create-release@latest
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
         tag_name: v${{ env.app_version }}
         release_name: v${{ env.app_version }}
@@ -51,7 +51,7 @@ jobs:
     - name: Upload Release Asset
       uses: dwenegar/upload-release-assets@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       with:
         release_id: ${{ steps.create_release.outputs.id }}
         assets_path: |
