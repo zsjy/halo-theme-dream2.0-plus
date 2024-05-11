@@ -31,7 +31,7 @@ jobs:
         elif [[ $GITHUB_REF == refs/heads/dev ]]; then
           branch_type=dev
         fi
-        echo "$branch_type=$branch_type" >> $GITHUB_ENV
+        echo "branch_type=$branch_type" >> $GITHUB_ENV
       shell: bash
     # 确定构建版本
     - name: version
