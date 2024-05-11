@@ -6,8 +6,7 @@ name: Node.js CI
 on:
   push:
     branches: [ "master", "dev" ]
-  pull_request:
-    branches: [ "master" ]
+    paths: ["version"]
 
 jobs:
   build:
@@ -21,6 +20,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: version
+      id: version
+      run: |
+        version=$(cat version |sed -ne "s/VERSION\s=\s'v\(.*\)'/\1/gp")
+        echo "version=$version" >> $GITHUB_ENV
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
@@ -30,7 +34,7 @@ jobs:
       run: npm install
     # Actions构建
     - name: Build
-      run: npm run actions
+      run: npm run actions --tag=${{ env.version }}
     # 上传构建产物zip
     - name: Upload artifacts
       uses: actions/upload-artifact@v4

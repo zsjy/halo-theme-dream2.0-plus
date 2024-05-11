@@ -149,7 +149,7 @@ task('default', series('clean', parallel('css', 'js'), 'zip'))
 task('release', series('clean', 'version', parallel('css', 'js'), 'zip'))
 
 // GitHub - Actions模式
-task('actions', series('clean', parallel('css', 'js'), 'actions-build'))
+task('actions', series('clean', 'version', parallel('css', 'js'), 'actions-build'))
 
 // push模式，需要使用--tag参数指定版本号
 task('push', series('clean', 'version', parallel('css', 'js'), 'zip', 'publish'))
