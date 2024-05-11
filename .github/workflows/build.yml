@@ -5,7 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "dev" ]
     paths: ["version"]
 
 jobs:
@@ -20,6 +20,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Determine Branch Type
+      id: determine_branch_type
+      run: |
+        branch_type=unknown
+        if [[ $GITHUB_REF == refs/heads/master ]]; then
+          branch_type=master
+        elif [[ $GITHUB_REF == refs/heads/dev ]]; then
+          branch_type=dev
+        fi
+        echo "::set-output name=type::$branch_type"
+      shell: bash
     - name: version
       id: version
       run: |
@@ -44,6 +55,7 @@ jobs:
         path: dist
 
     - name: Create Release
+      if: ${{ steps.determine_branch_type.outputs.type == 'master' }}
       id: create_release
       uses: actions/create-release@latest
       env:
@@ -56,6 +68,7 @@ jobs:
         prerelease: false
 
     - name: Upload Release Asset
+      if: ${{ steps.determine_branch_type.outputs.type == 'master' }}
       uses: dwenegar/upload-release-assets@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
