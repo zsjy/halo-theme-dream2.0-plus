@@ -70,8 +70,6 @@ jobs:
         body: ${{ github.event.commits[0].message }}
         draft: false
         prerelease: false
-      run: |
-        echo "release_id=${{ steps.create_release.outputs.id }}" >> $GITHUB_ENV
 
     # 如果是master分支，创建Release Asset
     - name: Upload Release Asset
@@ -80,6 +78,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        release_id: ${{ env.release_id }}
+        release_id: ${{ steps.create_release.outputs.id }}
         assets_path: |
           ./releases/
