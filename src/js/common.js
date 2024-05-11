@@ -344,10 +344,9 @@ const commonContext = {
       $elem.html(loveTime)
       return
     }
-    const now = new Date()
     const grt = new Date(loveTime)
     setInterval(function () {
-      now.setTime(now.getTime() + 1000)
+      let now= Date.now()
       let difference = parseInt((now - grt) / 1000)
       let seconds = difference % 60
       difference = parseInt(difference / 60)
@@ -378,7 +377,7 @@ const commonContext = {
       } else {
         $elem.html(`${days} 天 ${hours} 时 ${minutes} 分 ${seconds} 秒`)
       }
-    }, 1000)
+    }, 300)
   },
   /* 激活建站倒计时功能 */
   websiteTime() {
@@ -411,7 +410,7 @@ const commonContext = {
       }
       let days = parseInt(difference / 24)
       websiteDate.innerHTML = `建站<span class="stand">${days}</span>天<span class="stand">${hours}</span>时<span class="stand">${minutes}</span>分<span class="stand">${seconds}</span>秒`
-    }, 500)
+    }, 300)
   },
   /* 显示web版权 */
   webCopyright() {
@@ -559,7 +558,7 @@ const commonContext = {
     if (DreamConfig.gray_mode === true) {
       $('html').addClass('gray-mode')
     } else if (DreamConfig.gray_mode === 'custom') {
-      var now = new Date().getTime()
+      var now = Date.now()
       var startTime = new Date(DreamConfig.gray_mode_start_time).getTime()
       var endTime = new Date(DreamConfig.gray_mode_end_time).getTime()
       if (now >= startTime && now <= endTime) {
