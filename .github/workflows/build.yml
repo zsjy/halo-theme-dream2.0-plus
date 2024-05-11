@@ -19,7 +19,9 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    # 迁出代码
     - uses: actions/checkout@v4
+    # 确定构建分支类型
     - name: Determine Branch Type
       id: determine_branch_type
       run: |
@@ -31,6 +33,7 @@ jobs:
         fi
         echo "::set-output name=type::$branch_type"
       shell: bash
+    # 确定构建版本
     - name: version
       id: version
       run: |
@@ -54,6 +57,7 @@ jobs:
         name: halo-theme-dream2.0-plus
         path: dist
 
+    # 如果是master分支，创建Release
     - name: Create Release
       if: ${{ steps.determine_branch_type.outputs.type == 'master' }}
       id: create_release
@@ -67,6 +71,7 @@ jobs:
         draft: false
         prerelease: false
 
+    # 如果是master分支，创建Release Asset
     - name: Upload Release Asset
       if: ${{ steps.determine_branch_type.outputs.type == 'master' }}
       uses: dwenegar/upload-release-assets@v1
