@@ -5,8 +5,8 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "master", "dev" ]
-    paths: ["version"]
+    branches: [ "dev" ]
+    paths: ["version-dev"]
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
     - name: version
       id: version
       run: |
-        version=$(cat version)
+        version=$(cat version-dev)
         echo "version=$version" >> $GITHUB_ENV
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
@@ -35,24 +35,9 @@ jobs:
     # Actions构建
     - name: Build
       run: npm run actions --tag=${{ env.version }}
-
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@latest
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # 上传构建产物zip
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
       with:
-        tag_name: v${{ env.app_version }}
-        release_name: v${{ env.app_version }}
-        body: ${{ github.event.commits[0].message }}
-        draft: false
-        prerelease: false
-
-    - name: Upload Release Asset
-      uses: dwenegar/upload-release-assets@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        release_id: ${{ steps.create_release.outputs.id }}
-        assets_path: |
-          ./releases/
+        name: halo-theme-dream2.0-plus
+        path: dist
