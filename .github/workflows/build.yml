@@ -31,7 +31,7 @@ jobs:
         elif [[ $GITHUB_REF == refs/heads/dev ]]; then
           branch_type=dev
         fi
-        echo "::set-output name=type::$branch_type"
+        echo "$branch_type=$branch_type" >> $GITHUB_ENV
       shell: bash
     # 确定构建版本
     - name: version
@@ -59,7 +59,7 @@ jobs:
 
     # 如果是master分支，创建Release
     - name: Create Release
-      if: ${{ steps.determine_branch_type.outputs.type == 'master' }}
+      if: ${{ env.branch_type == 'master' }}
       id: create_release
       uses: actions/create-release@latest
       env:
@@ -73,7 +73,7 @@ jobs:
 
     # 如果是master分支，创建Release Asset
     - name: Upload Release Asset
-      if: ${{ steps.determine_branch_type.outputs.type == 'master' }}
+      if: ${{ env.branch_type == 'master' }}
       uses: dwenegar/upload-release-assets@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
