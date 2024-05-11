@@ -36,6 +36,13 @@ jobs:
     - name: Build
       run: npm run actions --tag=${{ env.version }}
 
+      # 上传构建产物zip
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: halo-theme-dream2.0-plus
+        path: dist
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@latest
