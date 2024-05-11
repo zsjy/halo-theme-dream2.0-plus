@@ -7,6 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "release": "eslint src/**/*.js && gulp release",
+    "actions": "eslint src/**/*.js && gulp actions",
     "push": "eslint src/**/*.js && gulp push",
     "zip": "gulp zip",
     "build": "eslint src/**/*.js && gulp",

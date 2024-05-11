@@ -129,6 +129,12 @@ task('zip', () => {
     .pipe(dest(distPath))
 })
 
+task('actions-build', () => {
+  const target = ['./templates/**', './*.yaml', 'README.md', 'LICENSE']
+  return src(target, {base: '.'})
+    .pipe(dest(distPath))
+})
+
 task('publish', (done) => {
   // 需要将tag标签内容置为 latest
   process.env.npm_config_tag = 'latest'
@@ -141,6 +147,9 @@ task('default', series('clean', parallel('css', 'js'), 'zip'))
 
 // release模式，需要使用--tag参数指定版本号
 task('release', series('clean', 'version', parallel('css', 'js'), 'zip'))
+
+// GitHub - Actions模式
+task('actions', series('clean', parallel('css', 'js'), 'actions-build'))
 
 // push模式，需要使用--tag参数指定版本号
 task('push', series('clean', 'version', parallel('css', 'js'), 'zip', 'publish'))
