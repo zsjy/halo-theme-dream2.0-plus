@@ -23,7 +23,7 @@ jobs:
     - name: version
       id: version
       run: |
-        version=$(cat version |sed -ne "s/VERSION\s=\s'v\(.*\)'/\1/gp")
+        version=$(cat version)
         echo "version=$version" >> $GITHUB_ENV
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
