@@ -15,8 +15,8 @@
 - **V1.1.0版本起不在使用原主题配置文件，因此升级后均需要重新配置主题，配置一次后，后续升级无需再次配置。**
 - 侧边栏组件：https://www.sw0.top/docs/halo-theme-dream2.0/sidebar-assembly
 
-## 开发功能预览
-- 点击仓库`Actions`标签页，找到`dev`分支的工作流，点击对应工作流下载文件，`下载后解压获得主题压缩包文件`，安装`主题压缩包文件`完成升级。
+## 开发中功能
+- 点击仓库`Actions`标签页，找到`dev`分支的工作流，点击对应工作流下载`halo-theme-dream2.0-plus.zip`文件，安装`halo-theme-dream2.0-plus.zip`完成升级。
 
 
 ## 版本适配关系
