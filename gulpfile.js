@@ -14,6 +14,7 @@ const resolve = (name) => path.resolve(__dirname, name)
 const cssPath = './templates/assets/css'
 const jsPath = './templates/assets/js'
 const distPath = './dist'
+const distPathActions = './dist-actions'
 const devModel = process.env.npm_config_devel
 const version = process.env.npm_config_tag
 
@@ -132,7 +133,7 @@ task('zip', () => {
 task('actions-build', () => {
   const target = ['./templates/**', './*.yaml', 'README.md', 'LICENSE']
   return src(target, {base: '.'})
-    .pipe(dest(distPath))
+    .pipe(dest(distPathActions))
 })
 
 task('publish', (done) => {
@@ -149,7 +150,7 @@ task('default', series('clean', parallel('css', 'js'), 'zip'))
 task('release', series('clean', 'version', parallel('css', 'js'), 'zip'))
 
 // GitHub - Actions模式
-task('actions', series('clean', 'version', parallel('css', 'js'), 'actions-build'))
+task('actions', series('clean', 'version', parallel('css', 'js'), 'zip', 'actions-build'))
 
 // push模式，需要使用--tag参数指定版本号
 task('push', series('clean', 'version', parallel('css', 'js'), 'zip', 'publish'))

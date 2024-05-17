@@ -55,7 +55,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: halo-theme-dream2.0-plus
-        path: dist
+        path: dist-actions
 
     # 如果是master分支，创建Release
     - name: Create Release
