@@ -80,4 +80,4 @@ jobs:
       with:
         release_id: ${{ steps.create_release.outputs.id }}
         assets_path: |
-          ./releases/
+          dist
