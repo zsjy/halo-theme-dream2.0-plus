@@ -1,4 +1,4 @@
-<header class="navbar" th:classappend="${!theme.config.basic_info.header_fixed}? 'animation'" xmlns:th="https://www.thymeleaf.org">
+<header class="navbar" th:classappend="${!theme.config.basic_info.header_fixed}? 'animation' : 'fixed'" xmlns:th="https://www.thymeleaf.org">
     <div class="navbar-above" th:classappend="${!theme.config.basic_info.header_fixed}? 'animation'">
         <div th:class="${theme.config.basic_style.sidebar_column != 'all' ? 'container two-column' : 'container' }">
             <i class="ri-list-unordered navbar-slideicon"></i>
