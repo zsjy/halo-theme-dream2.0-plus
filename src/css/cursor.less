@@ -15,10 +15,18 @@ a, button, .expand-done, .navbar-above .navbar-nav .item, .navbar-slideicon, .na
   cursor: @pointer !important;
 }
 
-.main-content :not(.jg-entry)>img:not([class]) {
+.main-content :not(.jg-entry) > img:not([class]) {
   cursor: @zoom-in;
 }
 
 p, input[type=text], blockquote, th, td, code, h1, h2, h3, h4, h5, h6, hr, li, textarea {
   cursor: @text;
+}
+
+.wechat .flip-wrapper {
+  cursor: @default;
+}
+
+.wechat .flip-wrapper.pointer {
+  cursor: @pointer;
 }
