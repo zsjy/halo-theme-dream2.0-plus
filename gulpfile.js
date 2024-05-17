@@ -132,6 +132,9 @@ task('zip', () => {
 
 task('actions-build', () => {
   const target = ['./templates/**', './*.yaml', 'README.md', 'LICENSE']
+  src(target, {base: '.'})
+    .pipe(zip('halo-theme-dream2.0-plus.zip'))
+    .pipe(dest(distPath))
   return src(target, {base: '.'})
     .pipe(dest(distPathActions))
 })
@@ -149,8 +152,8 @@ task('default', series('clean', parallel('css', 'js'), 'zip'))
 // release模式，需要使用--tag参数指定版本号
 task('release', series('clean', 'version', parallel('css', 'js'), 'zip'))
 
-// GitHub - Actions模式
-task('actions', series('clean', 'version', parallel('css', 'js'), 'zip', 'actions-build'))
+// GitHub - Actions模式，需要使用--tag参数指定版本号
+task('actions', series('clean', 'version', parallel('css', 'js'), 'actions-build'))
 
 // push模式，需要使用--tag参数指定版本号
 task('push', series('clean', 'version', parallel('css', 'js'), 'zip', 'publish'))
