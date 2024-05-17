@@ -36,13 +36,12 @@ lit-toast-container, halo-contact-form-toast-container {
   filter: grayscale(1) !important;
 }
 
-body > .footer, body > .navbar, body > .section {
-  opacity: 0;
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-}
-
 .navbar-above {
-  transform: translateY(-100%);
+
+  &.animation {
+    transform: translateY(-100%);
+  }
+
 }
 
 .load-block {
@@ -95,13 +94,13 @@ html {
   text-size-adjust: 100%;
 
   &.loaded {
-    body > .footer, body > .navbar, body > .section {
-      opacity: 1;
-    }
 
     .navbar-above {
-      transform: translateY(0);
       z-index: 100;
+
+      &.animation {
+        transform: translateY(0);
+      }
     }
 
     .card, .load-block {
@@ -123,7 +122,11 @@ html {
   &:not(.disable-scroll) {
 
     body.move-up .navbar-above {
-      transform: translate3d(0, -100%, 0);
+      opacity: 1;
+
+      &.animation {
+        transform: translate3d(0, -100%, 0);
+      }
     }
 
     .actions.show {

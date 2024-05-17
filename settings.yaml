@@ -59,6 +59,16 @@ spec:
           label: '云服务提供商 URL'
           placeholder: '请输入链接地址'
         - $formkit: radio
+          name: header_fixed
+          label: 固定标题栏
+          value: false
+          help: 固定标题栏时不会随着页面滚动而隐藏，始终显示标题栏。
+          options:
+            - label: 不固定
+              value: false
+            - label: 固定
+              value: true
+        - $formkit: radio
           name: footer_center
           label: 页脚对齐方式
           value: false
