@@ -695,7 +695,7 @@ spec:
             - $formkit: code
               name: content
               language: html
-              height: 100px
+              height: 150px
               label: 侧边栏内容
               placeholder: 请输入 HTML 内容
               help: '非必填，仅在侧边栏类型为公告、广告(自定义广告代码)、自定义时生效。'
