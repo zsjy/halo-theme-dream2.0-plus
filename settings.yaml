@@ -871,6 +871,7 @@ spec:
         - $formkit: radio
           name: show_ad_tag
           label:  侧边栏广告-显示“广告”标签
+          help: '控制所有“广告模块”的显示广告标签功能。'
           value: true
           options:
             - value: true
@@ -880,6 +881,7 @@ spec:
         - $formkit: radio
           name: ad_tag_close
           label:  侧边栏广告-点击“广告”标签可关闭广告
+          help: '控制所有“广告模块”的关闭广告功能。'
           value: true
           options:
             - value: true
