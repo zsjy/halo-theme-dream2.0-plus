@@ -64,7 +64,7 @@ spec:
           value: false
           help: 固定标题栏时不会随着页面滚动而隐藏，始终显示标题栏。
           options:
-            - label: 不固定
+            - label: 默认
               value: false
             - label: 固定
               value: true
