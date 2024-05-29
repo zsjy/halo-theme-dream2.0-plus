@@ -886,26 +886,6 @@ spec:
               label:  是
             - value: false
               label:  否
-        - $formkit: radio
-          name: ad_mode
-          label:  侧边栏广告-广告展示方法
-          help: '选择“自定义广告代码”时，必须在“侧边栏内容”中填写广告代码。'
-          value: true
-          options:
-            - value: true
-              label:  图片+链接
-            - value: false
-              label:  自定义广告代码
-        - $formkit: text
-          name: ad_target_url
-          label:  侧边栏广告-广告目标地址
-          placeholder: '请输入链接地址'
-          help: '填写广告跳转的目标路径。'
-        - $formkit: attachment
-          name: ad_image
-          label:  侧边栏广告-广告图片链接
-          placeholder: '请输入/选择图片路径'
-          help: '图片+链接模式时不能为空。'
         - $formkit: number
           name: recent_posts_num
           label:  侧边栏最近文章-展示文章数量
