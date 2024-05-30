@@ -3458,49 +3458,16 @@ button.swiper-pagination-bullet {
     border-left: 5px solid var(--theme);
     border-radius: var(--radius-inner);
 
-    & > :not(:last-child) {
+    & :not(:last-child) {
       margin-bottom: 4px !important;
+    }
+
+    & :last-child {
+      margin-bottom: 0 !important;
     }
 
     & > figure {
       margin-top: 0 !important;
-    }
-
-    & > :last-child {
-      margin: 0 !important;
-
-      & > li:last-child {
-        margin-bottom: 0 !important;
-
-        & > p:last-child {
-          margin-bottom: 0 !important;
-        }
-      }
-    }
-
-    ol,
-    ul {
-
-      li {
-
-        ol, ul {
-          &:not(:last-child) {
-            margin-bottom: 4px !important;
-          }
-
-          &:last-child {
-            margin-bottom: 0 !important;
-          }
-        }
-
-        p:not(:last-child) {
-          margin-bottom: 4px !important;
-        }
-
-        p:last-child {
-          margin-bottom: 0 !important;
-        }
-      }
     }
 
   }
