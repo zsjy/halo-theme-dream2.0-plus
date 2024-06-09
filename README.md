@@ -9,7 +9,7 @@
 
 本仓库为 `Halo 2.x` 主题仓库，如果你使用的是 `Halo 1.x` ，请前往：https://github.com/nineya/halo-theme-dream
 
-## Plus版
+## Plus版，[预览地址](https://www.sw0.top/)
 
 - 文档：
   - [智识家园 - 主题文档](https://www.sw0.top/docs/halo-theme-dream2.0)
