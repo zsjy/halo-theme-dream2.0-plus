@@ -25,13 +25,13 @@
 
 | 主题版本    | 适配Halo版本 | 测试用Halo版本 |
 | ----------- |----------| -------------- |
-| x.x      | 2.12.0+  | 2.14.0      |
+| x.x      | 2.12.0+  | 2+     |
 
 
 
 ## 安装 & 更新
 
-1. 进入主题 `Release` 界面：https://github.com/zsjy/halo-theme-dream2.0-plus/releases 下载主题压缩包 `halo-theme-dream2.0-plus.zip` 压缩包文件；
+1. 进入主题 [Release](https://github.com/zsjy/halo-theme-dream2.0-plus/releases) 界面，下载主题压缩包 `halo-theme-dream2.0-plus.zip` 压缩包文件；
 2. 进入博客后台管理 `主题->主题管理->安装主题`，选择下载的 `halo-theme-dream2.0-plus.zip` 安装包进行上传；
 3. 等待安装完成；
 4. 更新方法同上。
