@@ -15,10 +15,11 @@
                 <span id="webCopyright" th:text="'&copy; '+${#dates.format(#dates.createNow(), 'yyyy')}+' '"></span><a class="record"
                         th:href="${site.url}" rel="noopener noreferrer nofollow"
                         th:text="${site.title}"></a><span th:unless="${theme.config.basic_info.footer_hide_theme_info}" class="footer-truncation">Powered by <span class="footer-copyright"><a class="powered footer-copyright-halo" href="https://halo.run/" target="_blank">Halo</a> & <a class="powered" href="https://github.com/zsjy/halo-theme-dream2.0-plus" target="_blank">Dream2.0 Plus</a></span></span></p>
-                <p class="icon-spot" th:if="${!#strings.isEmpty(theme.config.basic_info.record_number_ps) || !#strings.isEmpty(theme.config.basic_info.record_number)}"><a
-                        th:if="${!#strings.isEmpty(theme.config.basic_info.record_number)}" class="record"
-                        href="http://beian.miit.gov.cn/publish/query/indexFirst.action" target="_blank" rel="noopener noreferrer nofollow"
-                        th:text="${theme.config.basic_info.record_number}"></a><a th:if="${!#strings.isEmpty(theme.config.basic_info.record_number_ps)}" class="record footer-truncation" th:href="'https://beian.mps.gov.cn/#/query/webSearch?code=' + ${theme.config.basic_info.record_number_ps.replaceAll('[^\d]', '')}" target="_blank" rel="noopener noreferrer nofollow"><img
+                <p class="icon-spot" th:if="${!#strings.isEmpty(theme.config.basic_info.record_number_ps) || !#strings.isEmpty(theme.config.basic_info.record_number)}">
+                    <a th:if="${!#strings.isEmpty(theme.config.basic_info.record_number)}" class="record"
+                        href="http://beian.miit.gov.cn/publish/query/indexFirst.action" target="_blank" rel="noopener noreferrer nofollow"><img
+                        th:src="${#theme.assets('/img/ba.webp')}" height="auto" width="auto" alt="备案" style="vertical-align: text-top; width: 1.2em; margin-right: 4px;"/>[[${theme.config.basic_info.record_number}]]</a>
+                    <a th:if="${!#strings.isEmpty(theme.config.basic_info.record_number_ps)}" class="record footer-truncation" th:href="'https://beian.mps.gov.cn/#/query/webSearch?code=' + ${theme.config.basic_info.record_number_ps.replaceAll('[^\d]', '')}" target="_blank" rel="noopener noreferrer nofollow"><img
                         th:src="${#theme.assets('/img/ga.webp')}" height="auto" width="auto" alt="公网安备" style="vertical-align: text-top; width: 1.2em; margin-right: 4px;"/>[[${theme.config.basic_info.record_number_ps}]]</a></p>
                 <p class="icon-spot" th:if="${!#strings.isEmpty(theme.config.basic_info.website_time) || theme.config.enhance.enable_busuanzi == true}">
                 <span th:if="${!#strings.isEmpty(theme.config.basic_info.website_time)}" id="websiteDate">建站<span class="stand">00</span>天<span class="stand">0</span>时<span class="stand">0</span>分<span class="stand">0</span>秒</span>
