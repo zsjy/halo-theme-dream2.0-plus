@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <th:block xmlns:th="https://www.thymeleaf.org"
           th:insert="~{common/layout :: layout (title = ${#strings.defaultString(linksTitle, '友链')} + ' - ' + ${site.title}, canonical = @{/links}, content = ~{::content}, isPost = false)}"
-          th:with="baseEnableComment = ${!#strings.isEmpty(theme.config.page_config.link_comment_id) && theme.config.page_config.link_enable_comment}">
+          th:with="baseEnableComment = ${theme.config.page_config.link_enable_comment}">
     <th:block th:fragment="content"
               th:with="defaultAvatar = ${#strings.defaultString(theme.config.page_config.links_default_avatar, #theme.assets('/img/avatar.svg'))}">
         <div class="card">
@@ -51,18 +51,18 @@
             <h3 class="comment-title">评论</h3>
             <th:block th:if="${theme.config.enhance.enable_pjax}">
                 <comment-widget
-                        group="content.halo.run"
-                        kind="SinglePage"
+                        group="plugin.halo.run"
+                        kind="Plugin"
                         version="v1alpha1"
-                        th:name="${theme.config.page_config.link_comment_id}"
+                        th:name="${pluginName}"
                         with-replies="false"
                 ></comment-widget>
             </th:block>
             <th:block th:unless="${theme.config.enhance.enable_pjax}">
                 <halo:comment
-                        group="content.halo.run"
-                        kind="SinglePage"
-                        th:attr="name=${theme.config.page_config.link_comment_id}"
+                        group="plugin.halo.run"
+                        kind="Plugin"
+                        th:attr="name=${pluginName}"
                 />
             </th:block>
         </div>

@@ -30,9 +30,9 @@ spec:
   settingName: theme-dream2-plus-setting
   configMapName: theme-dream2-plus-configMap
   # 版本号
-  version: 0.0.0.13
+  version: 0.0.0.15
   # 最低支持的 Halo 版本
-  require: ">=2.12.0"
+  require: ">=2.15.0"
   # 许可
   license:
     - name: "MIT"
