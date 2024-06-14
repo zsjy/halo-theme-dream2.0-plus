@@ -990,11 +990,6 @@ spec:
     - group: page_config
       label: '页面设置'
       formSchema:
-        - $formkit: text
-          name: links_title
-          label: 友链页面-标题
-          placeholder: '请输入友链页面的标题名称'
-          help: '填写友链页面的标题名称，留空时显示“友链”。'
         - $formkit: attachment
           name: links_thumbnail
           label: 友链页面-封面图
