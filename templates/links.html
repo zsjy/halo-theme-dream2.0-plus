@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <th:block xmlns:th="https://www.thymeleaf.org"
-          th:insert="~{common/layout :: layout (title = ${#strings.defaultString(theme.config.page_config.links_title, '友链')} + ' - ' + ${site.title}, canonical = @{/links}, content = ~{::content}, isPost = false)}"
-          th:with="baseEnableComment = ${!#strings.isEmpty(theme.config.page_config.link_comment_id) && theme.config.page_config.link_enable_comment}">
+          th:insert="~{common/layout :: layout (title = ${#strings.defaultString(linksTitle, '友链')} + ' - ' + ${site.title}, canonical = @{/links}, content = ~{::content}, isPost = false)}"
+          th:with="baseEnableComment = ${theme.config.page_config.link_enable_comment == true || (!#strings.isEmpty(theme.config.page_config.link_comment_id) && theme.config.page_config.link_enable_comment == 'custom')}">
     <th:block th:fragment="content"
               th:with="defaultAvatar = ${#strings.defaultString(theme.config.page_config.links_default_avatar, #theme.assets('/img/avatar.svg'))}">
         <div class="card">
             <div th:if="${!#strings.isEmpty(theme.config.page_config.links_thumbnail)}" class="card-image cover-image" th:style="'background-image: url(' + ${theme.config.page_config.links_thumbnail} + ')'">
             </div>
             <div class="card-content main">
-                <h1 class="title" th:text="${#strings.defaultString(theme.config.page_config.links_title, '友链')} + ' - ' + ${contributor.displayName} + '的小伙伴们'"></h1>
+                <h1 class="title" th:text="${#strings.defaultString(linksTitle, '友链')} + ' - ' + ${contributor.displayName} + '的小伙伴们'"></h1>
                 <div class="main-content">
                     <th:block th:each="group : ${groups}">
                         <div th:if="${!#lists.isEmpty(group.links)}" class="links">
@@ -50,20 +50,40 @@
         <div class="card card-content comment-wrapper-z-index" id="comment-wrapper" th:if="${enableComment}">
             <h3 class="comment-title">评论</h3>
             <th:block th:if="${theme.config.enhance.enable_pjax}">
-                <comment-widget
-                        group="content.halo.run"
-                        kind="SinglePage"
-                        version="v1alpha1"
-                        th:name="${theme.config.page_config.link_comment_id}"
-                        with-replies="false"
-                ></comment-widget>
+                <th:block th:if="${theme.config.page_config.link_enable_comment == 'custom'}">
+                    <comment-widget
+                            group="content.halo.run"
+                            kind="SinglePage"
+                            version="v1alpha1"
+                            th:name="${theme.config.page_config.link_comment_id}"
+                            with-replies="false"
+                    ></comment-widget>
+                </th:block>
+                <th:block th:if="${theme.config.page_config.link_enable_comment != 'custom'}">
+                    <comment-widget
+                            group="plugin.halo.run"
+                            kind="Plugin"
+                            version="v1alpha1"
+                            th:name="${pluginName}"
+                            with-replies="false"
+                    ></comment-widget>
+                </th:block>
             </th:block>
             <th:block th:unless="${theme.config.enhance.enable_pjax}">
-                <halo:comment
-                        group="content.halo.run"
-                        kind="SinglePage"
-                        th:attr="name=${theme.config.page_config.link_comment_id}"
-                />
+                <th:block th:if="${theme.config.page_config.link_enable_comment == 'custom'}">
+                    <halo:comment
+                            group="content.halo.run"
+                            kind="SinglePage"
+                            th:attr="name=${theme.config.page_config.link_comment_id}"
+                    />
+                </th:block>
+                <th:block th:if="${theme.config.page_config.link_enable_comment != 'custom'}">
+                    <halo:comment
+                            group="plugin.halo.run"
+                            kind="Plugin"
+                            th:attr="name=${pluginName}"
+                    />
+                </th:block>
             </th:block>
         </div>
     </th:block>

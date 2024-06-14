@@ -990,11 +990,6 @@ spec:
     - group: page_config
       label: '页面设置'
       formSchema:
-        - $formkit: text
-          name: links_title
-          label: 友链页面-标题
-          placeholder: '请输入友链页面的标题名称'
-          help: '填写友链页面的标题名称，留空时显示“友链”。'
         - $formkit: attachment
           name: links_thumbnail
           label: 友链页面-封面图
@@ -1032,18 +1027,24 @@ spec:
           help: '友链页面最低部的补充说明信息，支持 HTML 格式。'
         - $formkit: radio
           name: link_enable_comment
+          id: link_enable_comment
           label:  友链页面-开启评论区
+          help: '当链接插件版本>=1.4.0时，将内置评论区ID。为保留历史评论数据，可选择“开启并自定义评论区ID”选项。'
           value: true
           options:
             - value: true
               label:  开启
+            - value: custom
+              label:  开启并自定义评论区ID
             - value: false
               label:  关闭
         - $formkit: singlePageSelect
           name: link_comment_id
+          if: $get(link_enable_comment).value == 'custom'
           label:  友链页面-评论区ID
+          validation: required
           placeholder: '请选择一个页面作为友链页面的评论区ID'
-          help: '友链页面没有 ID，需要指定一个自定义页面的 ID 用于评论，被指定的页面评论区将作为友链的评论区，未选择时则友链界面不显示评论区。'
+          help: '指定一个“自定义页面”用于友链页面的评论区ID，被指定的页面评论区将作为友链的评论区。'
         - $formkit: radio
           name: enable_tags_tag_color
           label:  标签页面-开启标签颜色

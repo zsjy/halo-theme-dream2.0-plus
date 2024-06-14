@@ -3454,6 +3454,23 @@ button.swiper-pagination-bullet {
     line-height: 2.5rem;
   }
 
+  div.columns {
+    margin: 0 0 14px 0;
+
+    & > .column {
+      border: 1px solid var(--light-b);
+      border-radius: var(--radius-wrap);
+
+      & :not(:last-child) {
+        margin-bottom: 4px !important;
+      }
+
+      & :last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+
   blockquote {
     line-height: 1.7em;
     margin-bottom: 14px;
