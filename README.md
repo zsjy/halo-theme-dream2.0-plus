@@ -14,7 +14,6 @@
 
 - 文档：
   - [智识家园 - 主题文档](https://www.sw0.top/docs/halo-theme-dream2.0)
-  - [WIKI文档](https://github.com/zsjy/halo-theme-dream2.0-plus/wiki)
 - **V1.1.0版本起不在使用原主题配置文件，因此升级后均需要重新配置主题，配置一次后，后续升级无需再次配置。**
 - [智识家园站点使用的侧边栏组件](https://www.sw0.top/docs/halo-theme-dream2.0/theme/sidebar-assembly)
 
@@ -26,7 +25,7 @@
 
 | 主题版本    | 适配Halo版本 | 测试用Halo版本 |
 | ----------- |----------| -------------- |
-| x.x      | 2.12.0+  | 2+     |
+| x.x      | 2.15.0+  | 2+     |
 
 
 
