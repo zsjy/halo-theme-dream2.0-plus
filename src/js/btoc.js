@@ -88,7 +88,7 @@ const observers = []
 function register($toc) {
   // toc滚动时间和偏移量
   const time = 20
-  const headingsOffset = 50
+  const headingsOffset = 75
   const currentInView = new Set()
   const headingToMenu = new Map()
   const $menus = Array.from($toc.querySelectorAll('.menu-list > li > a'))
