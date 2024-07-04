@@ -97,7 +97,7 @@
       <p th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"></p>
     </a>
 
-    <div th:if="${#strings.isEmpty(thumbnail_mode) || thumbnail_mode == 'default'}"
+    <div th:if="${(#strings.isEmpty(thumbnail) && thumbnail_mode != 'fold') || thumbnail_mode == 'default'}"
       class="card widget">
       <a th:if="${!#strings.isEmpty(thumbnail)}" class="thumbnail" th:href="${post.status.permalink}">
         <div class="thumbnail-image" th:style="'background-image: url(' + ${thumbnail} + ')'">
