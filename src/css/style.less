@@ -3570,10 +3570,12 @@ button.swiper-pagination-bullet {
           font-weight: 400;
           color: var(--theme);
           transition: all .5s;
+          top: 50%; left: 0;
+          transform: rotate(0deg) translateY(-50%);
         }
 
         &:hover:before {
-          transform: rotate(360deg);
+          transform: rotate(360deg) translateY(-50%);
           color: #e67700;
           font-size: 1.1em;
         }
@@ -3597,10 +3599,12 @@ button.swiper-pagination-bullet {
       background: 0 0;
       transition: all .5s;
       transform: rotateZ(45deg);
+      top: 50%; left: 0;
+      transform: rotateZ(45deg) translateY(-50%);
     }
 
     &:hover:before {
-      transform: rotate(360deg);
+      transform: rotate(360deg) translateY(-50%);
       border-color: #e67700;
     }
   }
