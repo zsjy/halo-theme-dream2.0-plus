@@ -10,7 +10,7 @@
 
 本仓库为 `Halo 2.x` 主题仓库，如果你使用的是 `Halo 1.x` ，请前往：https://github.com/nineya/halo-theme-dream
 
-## [预览地址](https://www.sw0.top/)
+## [主题预览](https://www.sw0.top/)
 
 - [主题文档](https://www.sw0.top/docs/halo-theme-dream2.0)
 - **V1.1.0版本起不在使用原主题配置文件，因此升级V1.1.0版本后需要重新配置主题，配置一次后，后续升级无需再次配置。**
