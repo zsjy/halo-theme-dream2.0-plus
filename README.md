@@ -10,12 +10,11 @@
 
 本仓库为 `Halo 2.x` 主题仓库，如果你使用的是 `Halo 1.x` ，请前往：https://github.com/nineya/halo-theme-dream
 
-## [预览地址](https://www.sw0.top/)
+## [主题预览](https://www.sw0.top/)
 
-- 文档：
-  - [智识家园 - 主题文档](https://www.sw0.top/docs/halo-theme-dream2.0)
-- **V1.1.0版本起不在使用原主题配置文件，因此升级后均需要重新配置主题，配置一次后，后续升级无需再次配置。**
-- [智识家园站点使用的侧边栏组件](https://www.sw0.top/docs/halo-theme-dream2.0/theme/sidebar-assembly)
+- [主题文档](https://www.sw0.top/docs/halo-theme-dream2.0) 
+- **V1.1.0版本起不在使用原主题配置文件，因此升级V1.1.0版本后需要重新配置主题，配置一次后，后续升级无需再次配置。**
+- [侧边栏组件](https://www.sw0.top/docs/halo-theme-dream2.0/theme/sidebar-assembly)
 
 ## 开发中功能
 - 点击仓库 [Actions](https://github.com/zsjy/halo-theme-dream2.0-plus/actions) 标签页，找到`dev`分支的工作流，点击对应工作流下载`halo-theme-dream2.0-plus.zip`文件，安装`halo-theme-dream2.0-plus.zip`完成升级。
@@ -44,7 +43,7 @@
 
 1. 开发环境准备
     - 安装 `nodejs` 版本需要在 `15+`；
-    - 主题目录下执行 `npm i` 安装依赖；
+    - 主题目录下执行 `npm i` 安装依赖。
 
 2. npm 命令
    
