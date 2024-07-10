@@ -1113,7 +1113,7 @@ spec:
             - $formkit: radio
               id: search_enable
               name: search_enable
-              label: 搜索页面-开启新版搜索
+              label: 搜索按钮-搜索风格
               options:
                 - value: true
                   label: 新版
