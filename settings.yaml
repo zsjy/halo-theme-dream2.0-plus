@@ -1099,6 +1099,54 @@ spec:
               label:  开启
             - value: false
               label:  关闭
+        - $formkit: group
+          name: search
+          label: 搜索
+          help: 使用新版搜索需要 halo >= 2.17.0 & 搜索插件 >= 1.5.0。
+          value:
+            search_enable: false
+            search_title: '搜索'
+            search_placeholder: '输入搜索内容'
+            search_btn_title: '搜索'
+            search_target: '_self'
+          children:
+            - $formkit: radio
+              id: search_enable
+              name: search_enable
+              label: 搜索按钮-搜索风格
+              options:
+                - value: true
+                  label: 新版
+                - value: false
+                  label: 经典
+            - $formkit: text
+              if: $get(search_enable).value
+              name: search_title
+              validation: required
+              label: 搜索页面-标题
+              placeholder: '输入新版搜索页面标题'
+            - $formkit: text
+              if: $get(search_enable).value
+              name: search_placeholder
+              validation: required
+              label: 搜索页面-输入框提示语
+              placeholder: '输入新版搜索页面输入框提示语'
+            - $formkit: text
+              if: $get(search_enable).value
+              name: search_btn_title
+              validation: required
+              placeholder: '输入新版搜索页面搜索按钮提示语'
+              label: 搜索页面-搜索按钮提示语
+            - $formkit: radio
+              if: $get(search_enable).value
+              name: search_target
+              validation: required
+              label: 搜索页面-搜索结果跳转方式
+              options:
+                - value: _blank
+                  label: 新标签页
+                - value: _self
+                  label: 当前窗口
     - group: enhance
       label: '增强功能'
       formSchema:

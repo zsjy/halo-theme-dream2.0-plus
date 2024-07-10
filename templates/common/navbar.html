@@ -64,9 +64,11 @@
                 </th:block>
             </nav>
             <div th:if="${pluginFinder.available('PluginSearchWidget')}" class="navbar-search">
-                <button onclick="javascript:SearchWidget.open();" class="submit" aria-label="搜索按钮" style="border-radius: 17px;"><i class="ri-search-line"></i></button>
+                <button th:unless="${theme.config.page_config.search.search_enable}" onclick="javascript:SearchWidget.open();" class="submit" aria-label="搜索按钮" style="border-radius: 17px;"><i class="ri-search-line"></i></button>
+                <a th:if="${theme.config.page_config.search.search_enable}" target="_self" href="/search" class="submit" aria-label="搜索按钮" style="border-radius: 17px;display: flex;align-items: center;justify-content: center;"><i class="ri-search-line"></i></a>
             </div>
-            <i class="ri-search-line navbar-searchicon" onclick="javascript:SearchWidget.open();"></i>
+            <i th:unless="${theme.config.page_config.search.search_enable}" class="ri-search-line navbar-searchicon" onclick="javascript:SearchWidget.open();"></i>
+            <a th:if="${theme.config.page_config.search.search_enable}" class="navbar-searchicon" target="_self" href="/search"><i class="ri-search-line navbar-searchicon"></i></a>
             <a th:if="${theme.config.basic_style.console.show_console}" class="navbar-console" href="/console" target="_blank"
                th:title="${theme.config.basic_style.console.console_title}">
                 <i th:class="${#strings.defaultString(theme.config.basic_style.console.console_icon, 'ri-equalizer-line')}"></i>
