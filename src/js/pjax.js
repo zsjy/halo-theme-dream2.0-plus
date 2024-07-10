@@ -62,7 +62,7 @@ $(document).on('click', 'a[target!=_blank][href]:not(data-not-pjax)', (event) =>
 
 $(document).on('submit', 'form[data-pjax]', function (event) {
   $.pjax.submit(event, '.column-main', {
-    scrollTo: 0,
+    scrollTo: computeScrollTop(event.currentTarget),
     fragment: '.column-main',
     serialNumber: createSerialNumber(),
     timeout: 8000,
