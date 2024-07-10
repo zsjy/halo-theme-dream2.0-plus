@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<th:block
+  th:insert="~{common/layout :: layout (title = ${theme.config.page_config.search.search_title} + ' - ' + ${site.title}, canonical = @{/search}, content = ~{::content}, isPost = true)}"
+  th:with="isJournals = true, enableShare = false, baseEnableComment = false"
+  xmlns:th="https://www.thymeleaf.org">
+  <th:block th:fragment="content">
+    <div class="card card-content search">
+      <div class="card-tab">
+        <div>[[${#strings.replace(title, ' - ' + site.title, '')}]]</div>
+      </div>
+      <div class="search-box">
+        <form class="search-form-inner" method="get" action="/search" role="search" data-pjax>
+          <span class="iconify icon-search" data-icon="solar:magnifer-outline"> </span>
+          <input
+                  class="text-input"
+                  type="search"
+                  name="keyword"
+                  th:placeholder="${theme.config.page_config.search.search_placeholder}"
+                  th:value="${searchResult.keyword}"
+                  data-i18n="[placeholder]search.search_modal.placeholder"
+                  required
+          />
+          <button class="search-form-btn" th:title="${theme.config.page_config.search.search_btn_title}" type="submit">
+            <i class="ri-search-line"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="widget card search" th:each="hit : ${searchResult.hits}">
+      <a th:href="${hit.permalink}" th:target="${theme.config.page_config.search.search_target}" >
+        <div class="card-content main">
+          <h2 class="title" th:utext="${hit.title}"></h2>
+          <div class="main-content not-toc" th:utext="${hit.description}"></div>
+          <hr/>
+          <div class="meta">
+            <div></div>
+            <em th:text="'最后更新于 ' + ${#dates.format(hit.updateTimestamp,'yyyy年MM月dd日 HH:mm:ss')}"></em>
+          </div>
+        </div>
+      </a>
+    </div>
+  </th:block>
+</th:block>

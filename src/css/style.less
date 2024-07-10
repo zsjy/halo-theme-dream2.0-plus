@@ -5215,3 +5215,56 @@ button.swiper-pagination-bullet {
     }
   }
 }
+
+/* 搜索界面 */
+.search {
+
+  .search-form-inner {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .text-input {
+      width: 100%;
+      font-size: 1.2rem;
+      padding: 0.6rem;;
+      border-radius: var(--radius-inner) 0 0 var(--radius-inner);
+      border: var(--theme) 1px solid;
+    }
+
+    .search-form-btn {
+      font-size: 1.2rem;
+      padding: 0.6rem;;
+      border-radius: 0 var(--radius-inner) var(--radius-inner) 0;
+      border: var(--theme) 1px solid;
+      background: var(--theme);
+      min-width: 60px;
+
+      i {
+        color: #fff;
+        font-size: 1.2rem;
+      }
+    }
+
+  }
+
+  .meta {
+    font-size: 1em !important;
+
+    a {
+      line-height: 1.1em;
+      color: var(--dark-a);
+    }
+
+    img {
+      height: 1.5em;
+      width: 1.5em;
+    }
+  }
+
+  b {
+    color: var(--light-z);
+    background: var(--theme);
+  }
+}
