@@ -6,7 +6,7 @@ name: halo-theme-dream2.0-plus CI
 on:
   push:
     branches: [ "master", "dev" ]
-    paths: ["version"]
+    paths: ["theme.yaml"]
 
 jobs:
   build:
@@ -37,7 +37,7 @@ jobs:
     - name: version
       id: version
       run: |
-        version=$(cat version)
+        version=$(grep 'version:' theme.yaml | sed 's/.*:\s*//')
         echo "version=$version" >> $GITHUB_ENV
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
