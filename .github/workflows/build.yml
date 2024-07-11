@@ -84,13 +84,13 @@ jobs:
 
     # 如果是master分支，创建Release Asset
     - name: Upload Release Asset
-        id: upload_asset
-        if: ${{ env.branch_type == 'master' }}
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/halo-theme-dream2.0-plus.zip
-          asset_name: halo-theme-dream2.0-plus.zip
-          asset_content_type: application/zip
+      id: upload_asset
+      if: ${{ env.branch_type == 'master' }}
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./dist/halo-theme-dream2.0-plus.zip
+        asset_name: halo-theme-dream2.0-plus.zip
+        asset_content_type: application/zip
