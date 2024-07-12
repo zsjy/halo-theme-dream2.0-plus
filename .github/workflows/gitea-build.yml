@@ -57,9 +57,8 @@ jobs:
         name: halo-theme-dream2.0-plus
         path: dist-actions
 
-    # 如果是master分支，创建Release
+    # 如果是master分支，创建latest的Release，否则创建 预览版
     - name: Create Release
-      if: ${{ env.branch_type == 'master' }}
       id: create_release
       uses: actions/create-release@latest
       env:
@@ -69,4 +68,4 @@ jobs:
         release_name: ${{ env.version }}
         body: ${{ github.event.commits[0].message }}
         draft: false
-        prerelease: false
+        prerelease: ${{ env.branch_type != 'master' }}
