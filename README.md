@@ -17,7 +17,7 @@
 - [侧边栏组件](https://www.sw0.top/docs/halo-theme-dream2.0/theme/sidebar-assembly)
 
 ## 开发中功能
-- 点击仓库 [Actions](https://github.com/zsjy/halo-theme-dream2.0-plus/actions) 标签页，找到`dev`分支的工作流，点击对应工作流下载`halo-theme-dream2.0-plus.zip`文件，安装`halo-theme-dream2.0-plus.zip`完成升级。
+- 开发中功能已发行为**预发布版**，开发中的功能不保证留存到正式版，包括但不限于：主题配置位置、配置方式、页面样式等等。
 
 
 ## 版本适配关系
