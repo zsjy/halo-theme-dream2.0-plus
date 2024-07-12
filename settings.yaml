@@ -695,7 +695,7 @@ spec:
             - $formkit: code
               name: content
               language: html
-              height: 150px
+              height: 160px
               label: 侧边栏内容
               placeholder: 请输入 HTML 内容
               help: '非必填，仅在侧边栏类型为公告、广告、自定义时生效。'
@@ -1147,6 +1147,15 @@ spec:
                   label: 新标签页
                 - value: _self
                   label: 当前窗口
+            - $formkit: code
+              if: $get(search_enable).value
+              name: search_empty_tips
+              validation: required
+              label: "搜索页面-无搜索结果提示语"
+              language: html
+              value: '没有搜索结果'
+              height: 160px
+              help: '搜索页面-无搜索结果提示语，支持 HTML 格式。'
     - group: enhance
       label: '增强功能'
       formSchema:
