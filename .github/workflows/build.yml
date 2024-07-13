@@ -7,7 +7,8 @@ on:
   push:
     branches: [ "master", "dev" ]
     paths: ["theme.yaml"]
-
+  workflow_dispatch:
+  
 jobs:
   build:
 
