@@ -14,6 +14,7 @@
                   class="text-input"
                   type="search"
                   name="keyword"
+                  th:title="${theme.config.page_config.search.search_placeholder}"
                   th:placeholder="${theme.config.page_config.search.search_placeholder}"
                   th:value="${searchResult.keyword}"
                   required
