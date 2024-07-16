@@ -16,7 +16,7 @@
 - [侧边栏组件](https://www.sw0.top/docs/halo-theme-dream2.0/theme/sidebar-assembly)
 
 ## 开发中功能
-- 开发中功能已发布为**预发行版**，开发中的功能不保证留存到正式版，包括但不限于：主题配置位置、配置方式、页面样式等等。
+- 开发中功能已发布为[预发行版](https://github.com/zsjy/halo-theme-dream2.0-plus/releases)，开发中的功能不保证留存到正式版，包括但不限于：主题配置位置、配置方式、页面样式等等。
 
 
 ## 版本适配关系
