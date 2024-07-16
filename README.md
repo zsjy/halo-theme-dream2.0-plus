@@ -10,7 +10,7 @@
 
 本仓库为 `Halo 2.x` 主题仓库。
 
-## [主题预览](https://www.sw0.top/)
+## [主题预览](https://www.sw0.top/?preview-theme=theme-dream2-plus)
 
 - [主题文档](https://www.sw0.top/docs/halo-theme-dream2.0) 
 - [侧边栏组件](https://www.sw0.top/docs/halo-theme-dream2.0/theme/sidebar-assembly)
