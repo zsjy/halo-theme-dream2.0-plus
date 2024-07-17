@@ -10,20 +10,27 @@
       </div>
       <div class="search-box">
         <script th:inline="javascript">
-          $(function(){
-            document.getElementById('halo-search-form').addEventListener('submit', function(event) {
-              var searchInput = document.getElementById('halo-search-form-text-input');
-              var query = searchInput.value.trim();
+          $(function () {
+            var searchForm = document.getElementById('halo-search-form')
+            searchForm.addEventListener('submit', function (event) {
+              var searchInput = document.getElementById('halo-search-form-text-input')
+              var query = searchInput.value.trim()
               if (!query || query.startsWith('*')) {
                 // 阻止表单提交
-                event.preventDefault();
+                event.preventDefault()
                 // 显示错误信息
-                Qmsg.warning(!query ? '请输入搜索内容' : '搜索内容不能以 * 开头');
+                Qmsg.warning(!query ? '请输入搜索内容' : '搜索内容不能以 * 开头')
+                return
               }
-            });
+              if(DreamConfig.pjax_state) {
+                // 阻止表单提交
+                event.preventDefault()
+                searchForm.setAttribute('data-pjax', '')
+              }
+            })
           })
         </script>
-        <form id="halo-search-form" class="search-form-inner" method="get" action="/search" role="search" data-pjax>
+        <form id="halo-search-form" class="search-form-inner" method="get" action="/search" role="search">
           <input
                   id="halo-search-form-text-input"
                   class="text-input"
