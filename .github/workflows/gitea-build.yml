@@ -39,16 +39,16 @@ jobs:
       run: |
         version=$(grep 'version:' theme.yaml | sed 's/.*:\s*//')
         echo "version=$version" >> $GITHUB_ENV        
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: Install dependencies
-      run: npm install
-    # Actions构建
-    - name: Build
-      run: npm run actions --tag=${{ env.version }}
+    # - name: Use Node.js ${{ matrix.node-version }}
+    #   uses: actions/setup-node@v4
+    #   with:
+    #     node-version: ${{ matrix.node-version }}
+    #     cache: 'npm'
+    # - name: Install dependencies
+    #   run: npm install
+    # # Actions构建
+    # - name: Build
+    #   run: npm run actions --tag=${{ env.version }}
 
 #      # 上传构建产物zip
 #    - name: Upload artifacts
