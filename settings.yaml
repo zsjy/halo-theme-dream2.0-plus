@@ -1154,7 +1154,7 @@ spec:
               label: "搜索页面-无搜索结果提示语"
               language: html
               value: '没有搜索结果'
-              height: 160px
+              height: 240px
               help: '搜索页面-无搜索结果提示语，支持 HTML 格式。'
     - group: enhance
       label: '增强功能'
