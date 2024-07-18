@@ -9,15 +9,36 @@
         <div>[[${#strings.replace(title, ' - ' + site.title, '')}]]</div>
       </div>
       <div class="search-box">
-        <form class="search-form-inner" method="get" action="/search" role="search" data-pjax>
+        <script th:inline="javascript">
+          $(function () {
+            var searchForm = document.getElementById('halo-search-form')
+            searchForm.addEventListener('submit', function (event) {
+              var searchInput = document.getElementById('halo-search-form-text-input')
+              var query = searchInput.value.trim()
+              if (!query || query.startsWith('*')) {
+                // 阻止表单提交
+                event.preventDefault()
+                // 显示错误信息
+                Qmsg.warning(!query ? '请输入搜索内容' : '搜索内容不能以 * 开头')
+                return
+              }
+              if(DreamConfig.pjax_state) {
+                // 阻止表单提交
+                event.preventDefault()
+                searchForm.setAttribute('data-pjax', '')
+              }
+            })
+          })
+        </script>
+        <form id="halo-search-form" class="search-form-inner" method="get" action="/search" role="search">
           <input
+                  id="halo-search-form-text-input"
                   class="text-input"
                   type="search"
                   name="keyword"
                   th:title="${theme.config.page_config.search.search_placeholder}"
                   th:placeholder="${theme.config.page_config.search.search_placeholder}"
                   th:value="${searchResult.keyword}"
-                  required
           />
           <button class="search-form-btn" th:title="${theme.config.page_config.search.search_btn_title}" type="submit">
             <i class="ri-search-line"></i>
