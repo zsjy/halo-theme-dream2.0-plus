@@ -19,7 +19,7 @@
                 // 阻止表单提交
                 event.preventDefault()
                 // 显示错误信息
-                Qmsg.warning(!query ? '请输入搜索内容' : '搜索内容不能以 * 开头')
+                Qmsg.warning(!query ? '请输入内容' : '不能输入星号（*）作为内容开头')
                 return
               }
               if(DreamConfig.pjax_state) {
@@ -31,6 +31,7 @@
           })
         </script>
         <form id="halo-search-form" class="search-form-inner" method="get" action="/search" role="search">
+          <input type="hidden" name="limit" th:value="${theme.config.page_config.search.search_limit}">
           <input
                   id="halo-search-form-text-input"
                   class="text-input"
