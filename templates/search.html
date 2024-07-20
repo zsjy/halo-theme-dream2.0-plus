@@ -51,7 +51,9 @@
       <a th:href="${hit.permalink}" th:target="${theme.config.page_config.search.search_target}" >
         <div class="card-content main">
           <h2 class="title" th:utext="${hit.title}"></h2>
-          <div class="main-content not-toc" th:utext="${hit.description}"></div>
+          <div class="main-content not-toc">
+            <span th:utext="${hit.description}"></span>
+          </div>
           <hr/>
           <div class="meta">
             <div></div>
