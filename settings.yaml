@@ -1156,6 +1156,14 @@ spec:
               value: '没有搜索结果'
               height: 240px
               help: '搜索页面-无搜索结果提示语，支持 HTML 格式。'
+            - $formkit: number
+              if: $get(search_enable).value
+              name: search_limit
+              validation: required
+              label: "搜索页面-搜索结果最大显示数量"
+              value: 10
+              height: 240px
+              help: '搜索页面-搜索结果最大显示数量。'
     - group: enhance
       label: '增强功能'
       formSchema:

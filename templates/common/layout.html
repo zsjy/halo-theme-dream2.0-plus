@@ -3,17 +3,8 @@
       th:fragment="layout (title, canonical, content, isPost)">
 <th:block th:with="contributor = ${contributorFinder.getContributor(theme.config.basic_info.metadata_name)},
       enableComment = ${baseEnableComment == true && site.comment.enable && pluginFinder.available('PluginCommentWidget')}">
-  <th:block th:if="${!#strings.equals('',param._pjax)}">
-    <th:block th:replace="~{common/head :: head}"/>
-    <body>
-    <div class="column-main">
-      <th:block th:replace="${content}"/>
-    </div>
-    <th:block th:replace="~{common/scripts}"/>
-    </body>
-  </th:block>
-  <th:block th:unless="${!#strings.equals('',param._pjax)}"
-            th:with="stats = ${siteStatsFinder.getStats()}">
+
+  <th:block th:with="stats = ${siteStatsFinder.getStats()}">
     <th:block th:replace="~{common/head :: head}"/>
     <body>
     <th:block th:replace="~{common/navbar}"/>
