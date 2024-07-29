@@ -16,18 +16,23 @@
               var searchInput = document.getElementById('halo-search-form-text-input')
               var query = searchInput.value.trim()
               if (!query || query.startsWith('*')) {
-                // 阻止表单提交
                 event.preventDefault()
-                // 显示错误信息
                 Qmsg.warning(!query ? '请输入内容' : '不能输入星号（*）作为内容开头')
                 return
               }
               if(DreamConfig.pjax_state) {
-                // 阻止表单提交
                 event.preventDefault()
                 searchForm.setAttribute('data-pjax', '')
               }
             })
+            document.addEventListener('keydown', function(event) {
+              if (event.key === 'Enter') {
+                if (!searchForm.contains(document.activeElement)) {
+                  event.preventDefault(); // 阻止默认行为
+                  searchForm.dispatchEvent(new Event('submit')); // 触发submit事件
+                }
+              }
+            });
           })
         </script>
         <form id="halo-search-form" class="search-form-inner" method="get" action="/search" role="search">
