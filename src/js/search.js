@@ -22,8 +22,8 @@ $(function () {
   })
 
   function removeHTMLTags(str) {
-    // 保留 <mark> 和 </mark> 标签，移除其他所有标签
-    return str.replace(/<(?!(?:mark\b[^<>]*)<\/mark>|mark\b)[^<>]*>/gi, '')
+    const regex = /<(?!\/?mark\b)[^>]*>/g
+    return str.replace(regex, '')
   }
 
   function findResult(keyword) {
@@ -44,26 +44,32 @@ $(function () {
       }
     })
       .then((_res) => {
-        console.log(_res)
         if (_res.hits.length > 0) {
           searchResultEmpty.hide()
           searchResult.empty()
           for (var i = 0; i < _res.hits.length; i++) {
-            var hit = _res.hits[i]
-            searchResult.append('<div class="widget card search">\n' +
-              '<div class="card-content main">\n' +
-              '<a href="' + hit.permalink + '" ' + ' target="' + target + '">\n' +
-              '<h2 class="title">' + removeHTMLTags(hit.title) + '</h2>\n' +
-              '</a>\n' +
-              '<div class="main-content not-toc description">\n' +
-              removeHTMLTags(hit.description) +
-              '\n</div>\n' +
-              '<hr/>\n' +
-              '<div class="meta">\n' +
-              '<div></div>\n' +
-              '<em text="最后更新于 ' + Utils.formatDate(hit.updateTimestamp, 'yyyy年MM月dd日 HH:mm:ss') + '"></em>\n' +
-              '</div>\n' +
-              '</div>\n')
+            try {
+              var hit = _res.hits[i]
+              var title = removeHTMLTags(hit.title)
+              var description = hit.content ? removeHTMLTags(hit.content) : ''
+
+              searchResult.append('<div class="widget card search">\n' +
+                '<div class="card-content main">\n' +
+                '<a href="' + hit.permalink + '" ' + ' target="' + target + '">\n' +
+                '<h2 class="title">' + title + '</h2>\n' +
+                '</a>\n' +
+                (description ?
+                  ('<div class="main-content not-toc description">\n' + description +
+                '\n</div>\n') : '') +
+                '<hr/>\n' +
+                '<div class="meta">\n' +
+                '<div></div>\n' +
+                '<em text="最后更新于 ' + Utils.formatDate(hit.updateTimestamp, 'yyyy年MM月dd日 HH:mm:ss') + '"></em>\n' +
+                '</div>\n' +
+                '</div>\n')
+              // eslint-disable-next-line no-empty
+            } catch (e) {
+            }
           }
         } else {
           searchResultEmpty.show()
