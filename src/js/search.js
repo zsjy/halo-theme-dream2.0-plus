@@ -88,4 +88,4 @@ $(function () {
     var event = new Event('input', {bubbles: true})
     searchInput.dispatchEvent(event)
   }
-})()
+})
