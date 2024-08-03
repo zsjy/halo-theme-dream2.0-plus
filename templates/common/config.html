@@ -106,6 +106,7 @@
     DreamConfig["enable_security_link"] = [[${theme.config.security_link_config.enable_security_link}]];
     DreamConfig["security_link_url"] = [[${theme.config.security_link_config.security_link_url}]];
 
+    DreamConfig["search_target"] = [[${theme.config.page_config.search.search_target}]];
     DreamConfig["theme_version"] = [[${theme.spec.version}]];
     DreamConfig["theme_base"] = "[(${#theme.assets('/')})]";
     [(${!#strings.isEmpty(theme.config.post.code_fold_line)?'DreamConfig["code_fold_line"] = "' + theme.config.post.code_fold_line + '";': ''})]

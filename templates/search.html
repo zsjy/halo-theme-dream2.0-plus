@@ -9,34 +9,10 @@
                 <div>[[${#strings.replace(title, ' - ' + site.title, '')}]]</div>
             </div>
             <div class="search-box">
-                <script th:inline="javascript">
-                  $(function () {
-                    var searchForm = document.getElementById('halo-search-form')
-                    searchForm.addEventListener('submit', function (event) {
-                      var searchInput = document.getElementById('halo-search-form-text-input')
-                      var query = searchInput.value.trim()
-                      if (!query || query.startsWith('*')) {
-                        event.preventDefault()
-                        Qmsg.warning(!query ? '请输入内容' : '不能输入星号（*）作为内容开头')
-                        return
-                      }
-                      if (DreamConfig.pjax_state) {
-                        event.preventDefault()
-                        searchForm.setAttribute('data-pjax', '')
-                      }
-                    })
-                    document.addEventListener('keydown', function (event) {
-                      if (event.key === 'Enter') {
-                        if (!searchForm.contains(document.activeElement)) {
-                          event.preventDefault() // 阻止默认行为
-                          searchForm.dispatchEvent(new Event('submit')) // 触发submit事件
-                        }
-                      }
-                    })
-                  })
-                </script>
-                <form id="halo-search-form" class="search-form-inner" method="get" action="/search" role="search">
-                    <input type="hidden" name="limit" th:value="${theme.config.page_config.search.search_limit}">
+                <script th:src="@{/assets/js/search.min.js(mew=${theme.spec.version})}"></script>
+                <form id="dream-search-form" class="search-form-inner" method="get" action="/search" role="search">
+                    <input id="halo-search-form-limit" type="hidden" name="limit"
+                           th:value="${theme.config.page_config.search.search_limit}">
                     <input
                             id="halo-search-form-text-input"
                             class="text-input"
@@ -53,21 +29,9 @@
                 </form>
             </div>
         </div>
-        <div th:if="${searchResult.hits.size() > 0}" class="widget card search" th:each="hit : ${searchResult.hits}">
-            <div class="card-content main">
-                <a th:href="${hit.permalink}" th:target="${theme.config.page_config.search.search_target}">
-                    <h2 class="title">[(${hit.title})]</h2>
-                </a>
-<!--                <div class="main-content not-toc description" th:utext="${hit.description}">-->
-<!--                </div>-->
-                <hr/>
-                <div class="meta">
-                    <div></div>
-                    <em th:text="'最后更新于 ' + ${#dates.format(hit.updateTimestamp,'yyyy年MM月dd日 HH:mm:ss')}"></em>
-                </div>
-            </div>
+        <div id="dream-search-result">
         </div>
-        <div th:unless="${searchResult.hits.size() > 0}" class="widget card search">
+        <div id="dream-search-result-empty" class="widget card search">
             <div class="result-empty">
                 <div class="result-empty-tips" th:utext="${theme.config.page_config.search.search_empty_tips}"></div>
             </div>
