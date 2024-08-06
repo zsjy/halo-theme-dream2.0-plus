@@ -1,76 +1,141 @@
 <!DOCTYPE html>
 <th:block
-  th:insert="~{common/layout :: layout (title = ${theme.config.page_config.search.search_title} + ' - ' + ${site.title}, canonical = @{/search}, content = ~{::content}, isPost = true)}"
-  th:with="isJournals = true, enableShare = false, baseEnableComment = false"
-  xmlns:th="https://www.thymeleaf.org">
-  <th:block th:fragment="content">
-    <div class="card card-content search">
-      <div class="card-tab">
-        <div>[[${#strings.replace(title, ' - ' + site.title, '')}]]</div>
-      </div>
-      <div class="search-box">
-        <script th:inline="javascript">
-          $(function () {
-            var searchForm = document.getElementById('halo-search-form')
-            searchForm.addEventListener('submit', function (event) {
-              var searchInput = document.getElementById('halo-search-form-text-input')
-              var query = searchInput.value.trim()
-              if (!query || query.startsWith('*')) {
-                event.preventDefault()
-                Qmsg.warning(!query ? '请输入内容' : '不能输入星号（*）作为内容开头')
-                return
-              }
-              if(DreamConfig.pjax_state) {
-                event.preventDefault()
-                searchForm.setAttribute('data-pjax', '')
-              }
-            })
-            document.addEventListener('keydown', function(event) {
-              if (event.key === 'Enter') {
-                if (!searchForm.contains(document.activeElement)) {
-                  event.preventDefault(); // 阻止默认行为
-                  searchForm.dispatchEvent(new Event('submit')); // 触发submit事件
-                }
-              }
-            });
-          })
-        </script>
-        <form id="halo-search-form" class="search-form-inner" method="get" action="/search" role="search">
-          <input type="hidden" name="limit" th:value="${theme.config.page_config.search.search_limit}">
-          <input
-                  id="halo-search-form-text-input"
-                  class="text-input"
-                  type="search"
-                  name="keyword"
-                  th:title="${theme.config.page_config.search.search_placeholder}"
-                  th:placeholder="${theme.config.page_config.search.search_placeholder}"
-                  th:value="${searchResult.keyword}"
-          />
-          <button class="search-form-btn" th:title="${theme.config.page_config.search.search_btn_title}" type="submit">
-            <i class="ri-search-line"></i>
-          </button>
-        </form>
-      </div>
-    </div>
-    <div th:if="${searchResult.hits.size() > 0}" class="widget card search" th:each="hit : ${searchResult.hits}">
-      <a th:href="${hit.permalink}" th:target="${theme.config.page_config.search.search_target}" >
-        <div class="card-content main">
-          <h2 class="title" th:utext="${hit.title}"></h2>
-          <div class="main-content not-toc">
-            <span th:utext="${hit.description}"></span>
-          </div>
-          <hr/>
-          <div class="meta">
-            <div></div>
-            <em th:text="'最后更新于 ' + ${#dates.format(hit.updateTimestamp,'yyyy年MM月dd日 HH:mm:ss')}"></em>
-          </div>
+        th:insert="~{common/layout :: layout (title = ${theme.config.page_config.search.search_title} + ' - ' + ${site.title}, canonical = @{/search}, content = ~{::content}, isPost = true)}"
+        th:with="isJournals = true, enableShare = false, baseEnableComment = false"
+        xmlns:th="https://www.thymeleaf.org">
+    <th:block th:fragment="content">
+        <div class="card card-content search">
+            <div class="card-tab">
+                <div>[[${#strings.replace(title, ' - ' + site.title, '')}]]</div>
+            </div>
+            <div class="search-box">
+                <script th:inline="javascript">
+                  $(function () {
+                    var searchForm = document.getElementById('dream-search-form')
+                    var target = [[${theme.config.page_config.search.search_target}]]
+                    var searchInput = document.getElementById('halo-search-form-text-input')
+                    var searchResult = $('#dream-search-result')
+                    var searchResultEmpty = $('#dream-search-result-empty')
+                    searchForm.addEventListener('submit', function (event) {
+                      event.preventDefault()
+                      findResult(searchInput.value)
+                    })
+                    document.addEventListener('keydown', function (event) {
+                      if (event.key === 'Enter') {
+                        if (searchForm.contains(document.activeElement)) {
+                          event.preventDefault()
+                          findResult(searchInput.value)
+                        }
+                      }
+                    })
+                    // 监听输入事件
+                    searchInput.addEventListener('input', function (event) {
+                      findResult(event.target.value)
+                    })
+
+                    function removeHTMLTags(str) {
+                      const regex = /<(?!\/?mark\b)[^>]*>/g
+                      return str.replace(regex, '')
+                    }
+
+                    function findResult(keyword) {
+                      if (!keyword) {
+                        searchResult.empty()
+                        searchResultEmpty.show()
+                        return
+                      }
+                      Utils.request({
+                        url: '/apis/api.halo.run/v1alpha1/indices/post',
+                        contentType: 'application/json;charset=UTF-8',
+                        returnRaw: true,
+                        data: {
+                          keyword,
+                          limit: $('#halo-search-form-limit').val(),
+                          highlightPreTag: '<mark>',
+                          highlightPostTag: '</mark>'
+                        },
+                        noErrorTip: true
+                      })
+                        .then((_res) => {
+                          if (_res.hits.length > 0) {
+                            searchResultEmpty.hide()
+                            searchResult.empty()
+                            for (var i = 0; i < _res.hits.length; i++) {
+                              try {
+                                var hit = _res.hits[i]
+                                var title = removeHTMLTags(hit.title)
+                                var description = hit.content ? removeHTMLTags(hit.content) : ''
+
+                                searchResult.append('<div class="widget card search">\n' +
+                                  '<div class="card-content main">\n' +
+                                  '<a href="' + hit.permalink + '" ' + ' target="' + target + '">\n' +
+                                  '<h2 class="title">' + title + '</h2>\n' +
+                                  '</a>\n' +
+                                  (description ?
+                                    ('<div class="main-content not-toc description">\n' + description +
+                                      '\n</div>\n') : '') +
+                                  '<hr/>\n' +
+                                  '<div class="meta">\n' +
+                                  '<div></div>\n' +
+                                  '<em>' + '最后更新于 ' + Utils.formatDate(hit.updateTimestamp, 'yyyy年MM月dd日') + '</em>\n' +
+                                  '</div>\n' +
+                                  '</div>\n')
+                                // eslint-disable-next-line no-empty
+                              } catch (e) {
+                              }
+                            }
+                          } else {
+                            searchResultEmpty.show()
+                            searchResult.empty()
+                          }
+                        })
+                        .catch((err) => {
+                          searchResultEmpty.show()
+                          searchResult.empty()
+                        })
+                    }
+
+                    function getParameterByName(name, url = window.location.href) {
+                      name = name.replace(/[\[\]]/g, '\\$&')
+                      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                        results = regex.exec(url)
+                      if (!results) return null
+                      if (!results[2]) return ''
+                      return decodeURIComponent(results[2].replace(/\+/g, ' '))
+                    }
+
+                    var keyword = getParameterByName('keyword')
+                    if (keyword) {
+                      var event = new Event('input', {bubbles: true})
+                      searchInput.dispatchEvent(event)
+                    }
+                  })
+                </script>
+                <form id="dream-search-form" class="search-form-inner" method="get" action="/search" role="search">
+                    <input id="halo-search-form-limit" type="hidden" name="limit"
+                           th:value="${theme.config.page_config.search.search_limit}">
+                    <input
+                            id="halo-search-form-text-input"
+                            class="text-input"
+                            type="search"
+                            name="keyword"
+                            th:title="${theme.config.page_config.search.search_placeholder}"
+                            th:placeholder="${theme.config.page_config.search.search_placeholder}"
+                            th:value="${searchResult.keyword}"
+                    />
+                    <button class="search-form-btn" th:title="${theme.config.page_config.search.search_btn_title}"
+                            type="submit">
+                        <i class="ri-search-line"></i>
+                    </button>
+                </form>
+            </div>
         </div>
-      </a>
-    </div>
-    <div th:unless="${searchResult.hits.size() > 0}" class="widget card search" >
-      <div class="result-empty">
-        <div class="result-empty-tips" th:utext="${theme.config.page_config.search.search_empty_tips}"></div>
-      </div>
-    </div>
-  </th:block>
+        <div id="dream-search-result">
+        </div>
+        <div id="dream-search-result-empty" class="widget card search">
+            <div class="result-empty">
+                <div class="result-empty-tips" th:utext="${theme.config.page_config.search.search_empty_tips}"></div>
+            </div>
+        </div>
+    </th:block>
 </th:block>

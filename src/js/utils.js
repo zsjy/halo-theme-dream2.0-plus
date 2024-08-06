@@ -109,7 +109,8 @@ const Utils = {
     timeout = 10000,
     returnRaw = false,
     contentType,
-    resultType = 'json'
+    resultType = 'json',
+    noErrorTip = false,
   }) {
     return new Promise((resolve, reject) => {
       method = method.toUpperCase()
@@ -142,7 +143,9 @@ const Utils = {
               ? err.responseJSON.title
               : '请求失败'
             : '请求失败'
-          Qmsg.error(errMsg)
+          if(!noErrorTip) {
+            Qmsg.error(errMsg)
+          }
           reject(errMsg)
         },
       })

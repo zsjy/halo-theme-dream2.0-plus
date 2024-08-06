@@ -1101,7 +1101,7 @@ spec:
               label:  关闭
         - $formkit: group
           name: search
-          label: 搜索
+          label: 搜索页面
           help: 使用新版搜索需要 halo >= 2.17.0 & 搜索插件 >= 1.5.0。
           value:
             search_enable: false

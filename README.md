@@ -10,10 +10,10 @@
 
 本仓库为 `Halo 2.x` 主题仓库。
 
-## [主题预览](https://www.sw0.top/?preview-theme=theme-dream2-plus)
+## [主题预览](https://www.hcjike.com/?preview-theme=theme-dream2-plus)
 
-- [主题文档](https://www.sw0.top/docs/halo-theme-dream2.0) 
-- [侧边栏组件](https://www.sw0.top/docs/halo-theme-dream2.0/theme/sidebar-assembly)
+- [主题文档](https://www.hcjike.com/docs/halo-theme-dream2.0) 
+- [侧边栏组件](https://www.hcjike.com/docs/halo-theme-dream2.0/theme/sidebar-assembly)
 
 ## 开发中功能
 - 开发中功能已发布为[预发行版](https://github.com/zsjy/halo-theme-dream2.0-plus/releases)，开发中的功能不保证留存到正式版，包括但不限于：主题配置位置、配置方式、页面样式等等。
