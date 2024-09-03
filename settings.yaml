@@ -695,7 +695,7 @@ spec:
             - $formkit: code
               name: content
               language: html
-              height: 160px
+              height: 45px
               label: 侧边栏内容
               placeholder: 请输入 HTML 内容
               help: '非必填，仅在侧边栏类型为公告、广告、自定义时生效。'
@@ -1023,7 +1023,7 @@ spec:
           label: "友链页面-补充信息"
           placeholder: '请输入补充信息'
           language: html
-          height: 240px
+          height: 45px
           help: '友链页面最低部的补充说明信息，支持 HTML 格式。'
         - $formkit: radio
           name: link_enable_comment
@@ -1154,7 +1154,7 @@ spec:
               label: "搜索页面-无搜索结果提示语"
               language: html
               value: '没有搜索结果'
-              height: 240px
+              height: 45px
               help: '搜索页面-无搜索结果提示语，支持 HTML 格式。'
             - $formkit: number
               if: $get(search_enable).value
@@ -1162,7 +1162,7 @@ spec:
               validation: required
               label: "搜索页面-搜索结果最大显示数量"
               value: 10
-              height: 240px
+              height: 45px
               help: '搜索页面-搜索结果最大显示数量。'
     - group: enhance
       label: '增强功能'
@@ -1494,7 +1494,7 @@ spec:
           validation: required
           label: 安全链接页面-跳转提示区域文本描述
           language: html
-          height: 240px
+          height: 45px
           value: '您即将离开<span>{title}</span>，去往：<span>{url}</span>'
           placeholder: '请输入安全链接页面跳转提示区域的文本描述'
           help: '"<span></span>"包裹时字体颜色为主题色，“ {title} ”表示站点主标题，“ {url} ”表示跳转URL，区分大小写。默认值：“您即将离开<span>{title}</span>，去往：<span>{url}</span>”'
@@ -1510,34 +1510,34 @@ spec:
         - $formkit: code
           name: inline_css
           language: css
-          height: 240px
+          height: 45px
           label: "内嵌 CSS"
           placeholder: 请输入 CSS 样式内容
           help: '填入CSS代码，无需style标签，将插入head标签尾部。'
         - $formkit: code
           name: external_js_head
           language: javascript
-          height: 240px
+          height: 45px
           label: "外部 JS 链接（head）"
           placeholder: 请输入 script 标签
           help: '填入外部JS链接，需要script标签，可按情况指定async和defer属性，将插入head标签尾部。'
         - $formkit: code
           name: inline_js_head
           language: javascript
-          height: 240px
+          height: 45px
           label: "内嵌 JS（head）"
           placeholder: 请输入 JS 代码内容
           help: '填入JS代码，无需script标签，将插入head标签尾部。'
         - $formkit: code
           name: external_js_body
           language: javascript
-          height: 240px
+          height: 45px
           label: "外部 JS 链接（body）"
           placeholder: 请输入 script 标签
           help: '填入外部JS链接，需要script标签，可按情况指定async和defer属性，将插入body标签尾部。'
         - $formkit: code
           language: javascript
-          height: 240px
+          height: 45px
           name: inline_js_body
           label: "内嵌JS（body）"
           placeholder: 请输入 JS 代码内容
