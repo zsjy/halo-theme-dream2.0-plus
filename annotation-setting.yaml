@@ -22,22 +22,22 @@ spec:
     - $formkit: select
       name: thumbnail_mode
       label: 文章列表缩略图模式
-      value: ""
+      value: "none"
       help: '文章在列表的缩略图模式，除网格布局外，当前配置将覆盖主题中的默认配置。'
       options:
-        - value: default
+        - value: "default"
           label:  默认模式
-        - value: back
+        - value: "back"
           label:  背景图模式
-        - value: small
+        - value: "small"
           label:  小图模式（左侧）
-        - value: small-right
+        - value: "small-right"
           label:  小图模式（右侧）
-        - value: small-alter
+        - value: "small-alter"
           label:  小图模式（交替）
-        - value: fold
+        - value: "fold"
           label:  折叠模式
-        - value: ""
+        - value: "none"
           label:  跟随默认配置
     - $formkit: text
       name: tips

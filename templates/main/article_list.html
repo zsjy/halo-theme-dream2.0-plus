@@ -2,7 +2,7 @@
           th:fragment="articleList (posts)">
   <th:block th:each="post : ${posts}"
             th:with="thumbnail = ${#strings.isEmpty(post.spec.cover) ? #strings.isEmpty(theme.config.post.default_thumbnail) ? '' : theme.config.post.default_thumbnail + (#strings.contains(theme.config.post.default_thumbnail, '?') ? '&' : '?') + 'id=' + post.metadata.name : thumbnail.gen(post.spec.cover, 's')},
-            thumbnail_mode = ${(theme.config.post.top_thumbnail_mode == 'grid' || (!post.spec.pinned && theme.config.post.thumbnail_mode == 'grid'))? 'grid' : !#strings.isEmpty(post.metadata.annotations.get('thumbnail_mode'))? post.metadata.annotations.get('thumbnail_mode') : post.spec.pinned ? theme.config.post.top_thumbnail_mode : theme.config.post.thumbnail_mode}">
+            thumbnail_mode = ${(theme.config.post.top_thumbnail_mode == 'grid' || (!post.spec.pinned && theme.config.post.thumbnail_mode == 'grid'))? 'grid' : (!#strings.isEmpty(post.metadata.annotations.get('thumbnail_mode')) && post.metadata.annotations.get('thumbnail_mode') != 'none')? post.metadata.annotations.get('thumbnail_mode') : post.spec.pinned ? theme.config.post.top_thumbnail_mode : theme.config.post.thumbnail_mode}">
     <div th:if="${!#strings.isEmpty(thumbnail) && thumbnail_mode == 'back'}" class="card widget card-cover">
       <a th:href="${post.status.permalink}">
         <div class="cover-image" th:style="'background-image: url(' + ${thumbnail} + ')'"></div>
