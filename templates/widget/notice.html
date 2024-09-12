@@ -2,7 +2,8 @@
      th:fragment="widget (sidebar)"
      th:class="'card widget notice ' + ${sidebar.hide} + ' is-hidden-all'">
     <div class="card-title">
-        <i th:class="${#strings.defaultString(sidebar.icon, 'ri-volume-up-line') + ' card-title-label'}"></i><span th:text="${#strings.defaultString(sidebar.title, '公告')}"></span>
+        <i th:class="${#strings.defaultString(sidebar.icon, 'ri-volume-up-line') + ' card-title-label'}"></i><span
+            th:text="${#strings.defaultString(sidebar.title, '公告')}"></span>
     </div>
     <th:block th:if="${#strings.isEmpty(sidebar.content)}">
         <div class="card-content">
@@ -10,6 +11,8 @@
         </div>
     </th:block>
     <th:block th:if="${!#strings.isEmpty(sidebar.content)}">
-        [(${sidebar.content})]
+        <div class="card-content">
+            [(${sidebar.content})]
+        </div>
     </th:block>
 </div>
