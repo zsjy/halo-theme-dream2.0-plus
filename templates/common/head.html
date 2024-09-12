@@ -10,19 +10,17 @@ th:with="description=${isPost ? post != null ? post.status.excerpt : singlePage 
   <meta name="description" th:content="${description}">
   <meta name="author" th:content="${site.title}">
   <meta name="site" th:content="${site.url}">
-  <th:block th:if="${theme.config.basic_info.social_media}">
-    <meta property="og:type" content="website">
-    <meta property="og:title" th:content="${site.title}">
-    <meta property="og:url" th:content="${#strings.isEmpty(canonical) ? '' : #strings.startsWith(canonical,'http') ? canonical : (#strings.endsWith(site.url,'/') ? #strings.substringBefore(site.url, '/') : site.url + canonical)}">
-    <meta property="og:site_name" th:content="${title}">
-    <meta property="og:description" th:content="${description}">
-    <meta property="og:locale" content="zh">
-    <meta property="og:image" th:content="${#strings.isEmpty(site.favicon) ? '' : #strings.startsWith(site.favicon,'http') ? site.favicon : (#strings.endsWith(site.url,'/') ? #strings.substringBefore(site.url, '/') : site.url + site.favicon)}">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" th:content="${title}">
-    <meta name="twitter:description" th:content="${description}">
-    <meta name="twitter:image" th:content="${#strings.isEmpty(site.favicon) ? '' : #strings.startsWith(site.favicon,'http') ? site.favicon : (#strings.endsWith(site.url,'/') ? #strings.substringBefore(site.url, '/') : site.url + site.favicon)}">
-  </th:block>
+  <meta property="og:type" content="website">
+  <meta property="og:title" th:content="${site.title}">
+  <meta property="og:url" th:content="${#strings.isEmpty(canonical) ? '' : #strings.startsWith(canonical,'http') ? canonical : (#strings.endsWith(site.url,'/') ? #strings.substringBefore(site.url, '/') : site.url + canonical)}">
+  <meta property="og:site_name" th:content="${title}">
+  <meta property="og:description" th:content="${description}">
+  <meta property="og:locale" content="zh">
+  <meta property="og:image" th:content="${#strings.isEmpty(site.favicon) ? '' : #strings.startsWith(site.favicon,'http') ? site.favicon : (#strings.endsWith(site.url,'/') ? #strings.substringBefore(site.url, '/') : site.url + site.favicon)}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" th:content="${title}">
+  <meta name="twitter:description" th:content="${description}">
+  <meta name="twitter:image" th:content="${#strings.isEmpty(site.favicon) ? '' : #strings.startsWith(site.favicon,'http') ? site.favicon : (#strings.endsWith(site.url,'/') ? #strings.substringBefore(site.url, '/') : site.url + site.favicon)}">
 
   <link rel="canonical" th:href="${#strings.isEmpty(canonical) ? '' : #strings.startsWith(canonical,'http') ? canonical : (#strings.endsWith(canonical,'/') ? #strings.substringBefore(site.url, '/') : site.url + canonical)}"/>
 
