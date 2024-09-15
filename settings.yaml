@@ -88,16 +88,6 @@ spec:
               value: false
             - label: 隐藏
               value: true
-        - $formkit: radio
-          name: social_media
-          label: 社交媒体
-          value: true
-          help: 是否在HTML下添加社交媒体的META参数，隐藏时可由相关插件添加。
-          options:
-            - label: 显示
-              value: true
-            - label: 隐藏
-              value: false
     - group: basic_style
       label: '基础样式'
       formSchema:
