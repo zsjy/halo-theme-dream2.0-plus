@@ -88,16 +88,6 @@ spec:
               value: false
             - label: 隐藏
               value: true
-        - $formkit: radio
-          name: social_media
-          label: 社交媒体
-          value: true
-          help: 是否在HTML下添加社交媒体的META参数，隐藏时可由相关插件添加。
-          options:
-            - label: 显示
-              value: true
-            - label: 隐藏
-              value: false
     - group: basic_style
       label: '基础样式'
       formSchema:
@@ -1090,15 +1080,6 @@ spec:
           name: journals_share_image
           label: 瞬间页面-瞬间分享背景图
           placeholder: '请输入/选择图片路径'
-        - $formkit: radio
-          name: enable_friends_stats
-          label:  朋友圈页面-开启朋友圈统计信息显示
-          value: true
-          options:
-            - value: true
-              label:  开启
-            - value: false
-              label:  关闭
         - $formkit: group
           name: search
           label: 搜索页面
@@ -1275,6 +1256,16 @@ spec:
               label:  开启
             - value: false
               label:  关闭
+        - $formkit: radio
+          name: enable_comment_type
+          label:  评论加载方式
+          value: true
+          help: '在使用Halo评论组件时，建议您关闭Pjax加载功能以获得最佳体验。同时，Halo评论组件支持评论插件的新特性。而对于Web评论组件，它支持Pjax加载，但请注意，部分新特性可能不被Web评论组件所支持。'
+          options:
+            - value: true
+              label: Halo评论组件
+            - value: false
+              label: Web评论组件
         - $formkit: radio
           name: effects_lantern_mode
           id: effects_lantern_mode

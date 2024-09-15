@@ -49,7 +49,7 @@
         </div>
         <div class="card card-content comment-wrapper-z-index" id="comment-wrapper" th:if="${enableComment}">
             <h3 class="comment-title">评论</h3>
-            <th:block th:if="${theme.config.enhance.enable_pjax}">
+            <th:block th:unless="${theme.config.enhance.enable_comment_type}">
                 <th:block th:if="${theme.config.page_config.link_enable_comment == 'custom'}">
                     <comment-widget
                             group="content.halo.run"
@@ -69,7 +69,7 @@
                     ></comment-widget>
                 </th:block>
             </th:block>
-            <th:block th:unless="${theme.config.enhance.enable_pjax}">
+            <th:block th:if="${theme.config.enhance.enable_comment_type}">
                 <th:block th:if="${theme.config.page_config.link_enable_comment == 'custom'}">
                     <halo:comment
                             group="content.halo.run"

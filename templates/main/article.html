@@ -1,7 +1,7 @@
 <th:block xmlns:th="https://www.thymeleaf.org"
      th:fragment="article (post, type)"
      th:with="updateInterval = ${T(java.lang.Math).floor((#dates.createNow().getTime()/1000.0 - post.status.lastModifyTime.getEpochSecond())/86400.0).intValue()},
-     thumbnail = ${#strings.isEmpty(post.spec.cover) ? #strings.isEmpty(theme.config.post.default_thumbnail) ? '' : theme.config.post.default_thumbnail + (#strings.contains(theme.config.post.default_thumbnail, '?') ? '&' : '?') + 'id=' + post.metadata.name : thumbnail.gen(post.spec.cover, 'm')}">
+     thumbnail = ${#strings.isEmpty(post.spec.cover) ? #strings.isEmpty(theme.config.post.default_thumbnail) ? '' : theme.config.post.default_thumbnail + (#strings.contains(theme.config.post.default_thumbnail, '?') ? '&' : '?') + 'id=' + post.metadata.name : thumbnail.gen(post.spec.cover, 'xl')}">
 
     <div th:if="${!#strings.isEmpty(thumbnail)}" class="card widget">
         <div class="cover-image" th:style="'background-image: url(' + ${thumbnail} + ')'">
@@ -92,7 +92,7 @@
 
     <div class="card card-content comment-wrapper-z-index" id="comment-wrapper" th:if="${enableComment}">
         <h3 class="comment-title">评论</h3>
-        <th:block th:if="${theme.config.enhance.enable_pjax}">
+        <th:block th:unless="${theme.config.enhance.enable_comment_type}">
             <comment-widget
                     group="content.halo.run"
                     th:kind="${type}"
@@ -101,7 +101,7 @@
                     with-replies="false"
             ></comment-widget>
         </th:block>
-        <th:block th:unless="${theme.config.enhance.enable_pjax}">
+        <th:block th:if="${theme.config.enhance.enable_comment_type}">
             <halo:comment
                     group="content.halo.run"
                     th:kind="${type}"
