@@ -68,7 +68,7 @@
         </div>
       </div>
       <div class="journal-comment comment-wrapper-z-index" th:if="${enableComment}">
-        <th:block th:if="${theme.config.enhance.enable_pjax}">
+        <th:block th:unless="${theme.config.enhance.enable_comment_type}">
           <comment-widget
                   group="moment.halo.run"
                   kind="Moment"
@@ -77,7 +77,7 @@
                   with-replies="false"
           ></comment-widget>
         </th:block>
-        <th:block th:unless="${theme.config.enhance.enable_pjax}">
+        <th:block th:if="${theme.config.enhance.enable_comment_type}">
           <halo:comment
                   group="moment.halo.run"
                   kind="Moment"
