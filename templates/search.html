@@ -11,6 +11,7 @@
             <div class="search-box">
                 <script th:inline="javascript">
                   $(function () {
+                    let timer
                     var searchForm = document.getElementById('dream-search-form')
                     var target = [[${theme.config.page_config.search.search_target}]]
                     var searchInput = document.getElementById('halo-search-form-text-input')
@@ -30,7 +31,10 @@
                     })
                     // 监听输入事件
                     searchInput.addEventListener('input', function (event) {
-                      findResult(searchInput.value)
+                      clearTimeout(timer)
+                      timer = setTimeout(function () {
+                        findResult(searchInput.value)
+                      }, 150)
                     })
 
                     function removeHTMLTags(str) {
