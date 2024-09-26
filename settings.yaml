@@ -893,6 +893,16 @@ spec:
               label: 显示
             - value: false
               label: 不显示
+        - $formkit: radio
+          name: recent_posts_pinned
+          label: 侧边栏最近文章-显示”置顶”标记
+          value: false
+          help: '侧边栏最近文章是否显示”置顶”标记。'
+          options:
+            - value: true
+              label: 显示
+            - value: false
+              label: 不显示
         - $formkit: number
           name: recent_comments_num
           label:  侧边栏最近评论-展示评论数量
