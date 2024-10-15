@@ -4,7 +4,7 @@
         th:with="isJournals = true, enableShare = false, baseEnableComment = false"
         xmlns:th="https://www.thymeleaf.org">
     <th:block th:fragment="content">
-        <div class="card card-content search-page">
+        <div class="card card-content search-page search-page-title">
             <div class="card-tab">
                 <div>[[${#strings.replace(title, ' - ' + site.title, '')}]]</div>
             </div>
