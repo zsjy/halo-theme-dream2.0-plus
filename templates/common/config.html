@@ -91,11 +91,15 @@
     /** 配置灯笼特效文本 */
     let effects_lantern_left = [[${theme.config.enhance.effects_lantern.effects_lantern_left}]];
     let effects_lantern_right = [[${theme.config.enhance.effects_lantern.effects_lantern_right}]];
-    if(effects_lantern_left.length > 1) {
+    if(effects_lantern_left && effects_lantern_left.length > 1) {
       effects_lantern_left = effects_lantern_left.charAt(0);
+    } else {
+      effects_lantern_left = '';
     }
-    if(effects_lantern_right.length > 1) {
+    if(effects_lantern_left && effects_lantern_right.length > 1) {
       effects_lantern_right = effects_lantern_right.charAt(0);
+    } else {
+      effects_lantern_right = '';
     }
     DreamConfig["effects_lantern_left"] = effects_lantern_left;
     DreamConfig["effects_lantern_right"] = effects_lantern_right;
