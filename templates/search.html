@@ -4,7 +4,7 @@
         th:with="isJournals = true, enableShare = false, baseEnableComment = false"
         xmlns:th="https://www.thymeleaf.org">
     <th:block th:fragment="content">
-        <div class="card card-content search">
+        <div class="card card-content search-page">
             <div class="card-tab">
                 <div>[[${#strings.replace(title, ' - ' + site.title, '')}]]</div>
             </div>
@@ -70,7 +70,7 @@
                                 var title = removeHTMLTags(hit.title)
                                 var description = hit.content ? removeHTMLTags(hit.content) : ''
 
-                                searchResult.append('<div class="widget card search">\n' +
+                                searchResult.append('<div class="widget card search-page">\n' +
                                   '<div class="card-content main">\n' +
                                   '<a href="' + hit.permalink + '" ' + ' target="' + target + '">\n' +
                                   '<h2 class="title">' + title + '</h2>\n' +
@@ -136,7 +136,7 @@
         </div>
         <div id="dream-search-result">
         </div>
-        <div id="dream-search-result-empty" class="widget card search">
+        <div id="dream-search-result-empty" class="widget card search-page">
             <div class="result-empty">
                 <div class="result-empty-tips" th:utext="${theme.config.page_config.search.search_empty_tips}"></div>
             </div>
