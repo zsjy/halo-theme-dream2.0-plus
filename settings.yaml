@@ -98,6 +98,8 @@ spec:
             show_console: false
             console_icon: ri-equalizer-line
             console_title: 控制台
+            console_url: '/console'
+            console_target: _blank
           children:
             - $formkit: radio
               name: show_console
@@ -111,11 +113,28 @@ spec:
             - $formkit: text
               name: console_icon
               if: $get(show_console).value
-              label: 控制台图标，留空显示默认图标
+              label: 控制台图标
+              help: '控制台图标，留空显示默认图标。'
             - $formkit: text
               name: console_title
               if: $get(show_console).value
               label: 控制台鼠标悬停提示，留空不显示
+            - $formkit: text
+              name: console_url
+              validation: required
+              if: $get(show_console).value
+              label: 控制台跳转URL
+              help: '控制台跳转URL，可使用“redirect_uri”参数进行登录后跳转，例如：“/login?redirect_uri=/”，登录后默认跳转到前台页面。'
+            - $formkit: radio
+              if: $get(show_console).value
+              name: console_target
+              validation: required
+              label: 控制台跳转方式
+              options:
+                - value: _blank
+                  label: 新标签页
+                - value: _self
+                  label: 当前窗口
         - $formkit: radio
           name: load_progress
           label: 加载进度条
@@ -888,6 +907,16 @@ spec:
           label: 侧边栏最近文章-显示”更多”按钮
           value: true
           help: '侧边栏最近文章是否显示更多按钮。更多按钮跳转至文章归档页面。'
+          options:
+            - value: true
+              label: 显示
+            - value: false
+              label: 不显示
+        - $formkit: radio
+          name: recent_posts_pinned
+          label: 侧边栏最近文章-显示”置顶”标记
+          value: false
+          help: '侧边栏最近文章是否显示”置顶”标记。'
           options:
             - value: true
               label: 显示

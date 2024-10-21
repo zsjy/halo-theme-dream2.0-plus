@@ -10,7 +10,7 @@
     <div th:unless="${isEmpty}" class="card-content">
         <ul class="list">
             <li class="item" th:each="post : ${posts}">
-                <a class="link" th:href="@{${post.status.permalink}}" th:title="${post.spec.title}" th:text="${post.spec.title}"></a>
+                <a class="link" th:href="@{${post.status.permalink}}" th:title="${post.spec.title}"><span class="top" th:if="${post.spec.pinned && theme.config.sidebar.recent_posts_pinned}">置顶</span>[[${post.spec.title}]]</a>
                 <i class="ri-link"></i>
             </li>
         </ul>
