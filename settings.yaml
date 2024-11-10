@@ -46,6 +46,11 @@ spec:
           name: record_number_ps
           label: 公安部备案
           placeholder: 'X公网安备 XXXXXXXXXXXXXX号'
+        - $formkit: text
+          name: custom_text
+          label: 自定义内容
+          placeholder: '自定义内容'
+          help: '在网站页脚建站时间上方显示自定义内容。'
         - $formkit: datetime-local
           name: website_time
           label: 建站时间
