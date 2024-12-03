@@ -128,13 +128,33 @@ spec:
               name: console_url
               validation: required
               if: $get(show_console).value
-              label: 控制台跳转URL
-              help: '控制台跳转URL，可使用“redirect_uri”参数进行登录后跳转，例如：“/login?redirect_uri=/”，登录后默认跳转到前台页面。'
+              label: 未登录时，控制台跳转URL
+              value: '/login'
+              help: '未登录时，控制台跳转URL，可使用“redirect_uri”参数进行登录后跳转，例如：“/login?redirect_uri=/”，登录后默认跳转到前台页面。'
             - $formkit: radio
               if: $get(show_console).value
               name: console_target
               validation: required
-              label: 控制台跳转方式
+              value: _blank
+              label: 未登录时，控制台跳转方式
+              options:
+                - value: _blank
+                  label: 新标签页
+                - value: _self
+                  label: 当前窗口
+            - $formkit: text
+              name: console_logon_url
+              validation: required
+              if: $get(show_console).value
+              value: '/console'
+              label: 登录时，控制台跳转URL
+              help: '登录时，控制台跳转URL。'
+            - $formkit: radio
+              if: $get(show_console).value
+              name: console_logon_target
+              validation: required
+              value: _blank
+              label: 登录时，控制台跳转方式
               options:
                 - value: _blank
                   label: 新标签页

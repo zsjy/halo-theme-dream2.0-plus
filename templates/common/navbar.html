@@ -69,7 +69,8 @@
             </div>
             <i th:unless="${theme.config.page_config.search.search_enable}" class="ri-search-line navbar-searchicon" onclick="javascript:SearchWidget.open();"></i>
             <a th:if="${theme.config.page_config.search.search_enable}" class="navbar-searchicon" target="_self" href="/search"><i class="ri-search-line navbar-searchicon"></i></a>
-            <a data-not-pjax th:if="${theme.config.basic_style.console.show_console}" class="navbar-console" th:href="@{${theme.config.basic_style.console.console_url}}" th:target="${theme.config.basic_style.console.console_target}"
+            <a data-not-pjax th:if="${theme.config.basic_style.console.show_console}" class="navbar-console" th:href="${!#strings.isEmpty(logonUserName) ? theme.config.basic_style.console.console_logon_url : theme.config.basic_style.console.console_url}"
+               th:target="${!#strings.isEmpty(logonUserName) ? theme.config.basic_style.console.console_logon_target : theme.config.basic_style.console.console_target}"
                th:title="${theme.config.basic_style.console.console_title}">
                 <i th:class="${#strings.defaultString(theme.config.basic_style.console.console_icon, 'ri-equalizer-line')}"></i>
             </a>
