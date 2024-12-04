@@ -46,10 +46,12 @@ spec:
           name: record_number_ps
           label: 公安部备案
           placeholder: 'X公网安备 XXXXXXXXXXXXXX号'
-        - $formkit: text
+        - $formkit: code
           name: custom_text
+          language: html
+          height: 45px
           label: 自定义内容
-          placeholder: '自定义内容'
+          placeholder: '自定义内容，支持html'
           help: '在网站页脚建站时间上方显示自定义内容。'
         - $formkit: datetime-local
           name: website_time
@@ -126,7 +128,7 @@ spec:
               label: 控制台鼠标悬停提示，留空不显示
             - $formkit: text
               name: console_url
-              validation: required
+              validation: requiredc
               if: $get(show_console).value
               label: 未登录时，控制台跳转URL
               value: '/login'
