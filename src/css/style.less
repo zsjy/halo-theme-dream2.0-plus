@@ -37,7 +37,7 @@ lit-toast-container, halo-contact-form-toast-container {
 }
 
 .qmsg.qmsg-wrapper {
-  color: #333  !important;
+  color: #333 !important;
   top: 60px !important;
 }
 
@@ -4136,17 +4136,11 @@ button.swiper-pagination-bullet {
     }
 
     .navbar-console {
-      float: right;
-      margin-left: 5px;
-      align-items: center;
-      justify-content: center;
-      display: flex;
-      background: transparent !important;
+      display: none !important;
+    }
 
-      & > i {
-        font-size: 23px;
-        color: var(--main);
-      }
+    .navbar-logon {
+      display: none !important;
     }
   }
 }
@@ -4183,9 +4177,6 @@ button.swiper-pagination-bullet {
       margin-left: 0;
     }
 
-    .navbar-console {
-      display: none;
-    }
   }
 
   .swiper-button-prev,
@@ -5315,4 +5306,87 @@ button.swiper-pagination-bullet {
 
 .search-page-title {
   margin-top: 0 !important;
+}
+
+//登录组件
+.navbar-logon {
+  margin-left: 5px;
+
+  &-head {
+
+    & > img {
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+    }
+
+  }
+
+  &-group {
+    display: block;
+    visibility: hidden;
+    position: absolute;
+    width: auto;
+    min-width: 8rem;
+    top: 60px;
+    z-index: 5;
+    opacity: 0;
+    border-top: 3px solid var(--theme);
+    transform-origin: top;
+    background: var(--bg-d);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+    border-radius: 0 0 var(--radius-inner) var(--radius-inner);
+    padding: 10px 0;
+    transform: translateX(-50%) perspective(600px) rotateX(-45deg);
+    transition: opacity .35s, visibility .35s, transform .35s, -webkit-transform .35s;
+
+    &-menu {
+      padding: 5px;
+      text-align: center;
+      line-height: 2rem;
+
+      & > a {
+        color: var(--title);
+        font-size: 15px;
+      }
+
+      & > i {
+        margin-right: 5px;
+        color: var(--title);
+        font-size: 18px;
+      }
+
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      right: 1.8rem;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 7px solid var(--theme);
+    }
+  }
+
+}
+
+.navbar-logon:hover .navbar-logon-group,
+.navbar-logon:focus-within .navbar-logon-group {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) perspective(600px) rotateX(0);
+}
+
+.navbar-logon-group-menu:hover ,
+.navbar-logon-group-menu:focus-within {
+  background: var(--bg-a);
+
+  a, i {
+    color: var(--theme);
+  }
+
 }
