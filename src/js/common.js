@@ -143,6 +143,25 @@ const commonContext = {
       }
     })
   },
+  /* 激活登录窗口下拉框功能 */
+  initLogonMenu() {
+    $('.navbar-logon').each(function (index, item) {
+      const trigger = $(item).attr('trigger') || 'click'
+      if (trigger === 'hover') {
+        $(this).hover(
+          () => $(this).addClass('active'),
+          () => $(this).removeClass('active')
+        )
+      } else {
+        $(this).on('click', function (e) {
+          e.stopPropagation()
+          $(this).toggleClass('active')
+          $(document).one('click', () => $(this).removeClass('active'))
+          e.stopPropagation()
+        })
+      }
+    })
+  },
   /* 处理滚动 */
   initScroll() {
     window.initTop = 0

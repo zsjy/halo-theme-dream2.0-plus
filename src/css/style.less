@@ -5328,6 +5328,7 @@ button.swiper-pagination-bullet {
     position: absolute;
     width: auto;
     min-width: 8rem;
+    right: -6.8rem;
     top: 60px;
     z-index: 5;
     opacity: 0;
@@ -5348,21 +5349,19 @@ button.swiper-pagination-bullet {
       & > a {
         color: var(--title);
         font-size: 15px;
-      }
 
-      & > i {
-        margin-right: 5px;
-        color: var(--title);
-        font-size: 18px;
+        i {
+          color: var(--title);
+          font-size: 18px;
+        }
       }
-
     }
 
     &::before {
       content: "";
       position: absolute;
       top: -10px;
-      right: 1.8rem;
+      left: 50%;
       transform: translateX(-50%);
       width: 0;
       height: 0;
@@ -5372,21 +5371,19 @@ button.swiper-pagination-bullet {
     }
   }
 
-}
+  &.active {
+    .navbar-logon-group {
+      visibility: visible;
+      opacity: 1;
+      transform: translateX(-50%) perspective(600px) rotateX(0);
+    }
 
-.navbar-logon:hover .navbar-logon-group,
-.navbar-logon:focus-within .navbar-logon-group {
-  visibility: visible;
-  opacity: 1;
-  transform: translateX(-50%) perspective(600px) rotateX(0);
-}
+    .navbar-logon-group-menu:hover {
+      background: var(--bg-a);
 
-.navbar-logon-group-menu:hover ,
-.navbar-logon-group-menu:focus-within {
-  background: var(--bg-a);
-
-  a, i {
-    color: var(--theme);
+      a, i {
+        color: var(--theme);
+      }
+    }
   }
-
 }
