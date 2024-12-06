@@ -1,4 +1,5 @@
-<header class="navbar" th:classappend="${!theme.config.basic_info.header_fixed}? 'animation' : 'fixed'" xmlns:th="https://www.thymeleaf.org">
+<header class="navbar" th:classappend="${!theme.config.basic_info.header_fixed}? 'animation' : 'fixed'"
+        xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div class="navbar-above" th:classappend="${!theme.config.basic_info.header_fixed}? 'animation'">
         <div th:class="${theme.config.basic_style.sidebar_column != 'all' ? 'container two-column' : 'container' }">
             <i class="ri-list-unordered navbar-slideicon"></i>
@@ -69,10 +70,32 @@
             </div>
             <i th:unless="${theme.config.page_config.search.search_enable}" class="ri-search-line navbar-searchicon" onclick="javascript:SearchWidget.open();"></i>
             <a th:if="${theme.config.page_config.search.search_enable}" class="navbar-searchicon" target="_self" href="/search"><i class="ri-search-line navbar-searchicon"></i></a>
-            <a data-not-pjax th:if="${theme.config.basic_style.console.show_console}" class="navbar-console" th:href="@{${theme.config.basic_style.console.console_url}}" th:target="${theme.config.basic_style.console.console_target}"
+            <a data-not-pjax th:if="${theme.config.basic_style.show_console == 'console'}" class="navbar-console" th:href="${!#strings.isEmpty(logonUserName) ? theme.config.basic_style.console.console_logon_url : theme.config.basic_style.console.console_url}"
+               th:target="${!#strings.isEmpty(logonUserName) ? theme.config.basic_style.console.console_logon_target : theme.config.basic_style.console.console_target}"
                th:title="${theme.config.basic_style.console.console_title}">
                 <i th:class="${#strings.defaultString(theme.config.basic_style.console.console_icon, 'ri-equalizer-line')}"></i>
             </a>
+            <div th:if="${theme.config.basic_style.show_console == 'logon'}" class="navbar-logon" trigger="hover" th:with="currentUser = ${contributorFinder.getContributor(#authentication.name)}">
+                <div class="navbar-logon-head">
+                    <img th:src="${currentUser.avatar ?: #theme.assets('/img/avatar.svg')}"
+                         th:alt="${currentUser.displayName}"
+                    />
+                </div>
+                <ul class="navbar-logon-group">
+                    <li sec:authorize="isAuthenticated()" class="navbar-logon-group-menu">
+                        <a href="/uc" target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_person_class)}" th:class="${theme.config.basic_style.logon.console_person_class}"></i> 个人中心</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()" class="navbar-logon-group-menu">
+                        <a href="/console" target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_manage_class)}" th:class="${theme.config.basic_style.logon.console_manage_class}"></i> 后台管理</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()" class="navbar-logon-group-menu">
+                        <a href="/logout"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_logout_class)}" th:class="${theme.config.basic_style.logon.console_logout_class}"></i> 退出登录</a>
+                    </li>
+                    <li sec:authorize="isAnonymous()" class="navbar-logon-group-menu">
+                        <a href="/login" onclick="this.href = '/login?redirect_uri=' + encodeURIComponent(window.location.href)"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_login_class)}" th:class="${theme.config.basic_style.logon.console_login_class}"></i> 登录</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
