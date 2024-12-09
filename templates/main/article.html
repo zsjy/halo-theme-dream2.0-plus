@@ -1,11 +1,12 @@
 <th:block xmlns:th="https://www.thymeleaf.org"
      th:fragment="article (post, type)"
      th:with="updateInterval = ${T(java.lang.Math).floor((#dates.createNow().getTime()/1000.0 - post.status.lastModifyTime.getEpochSecond())/86400.0).intValue()},
+     isPost = ${type == 'Post'},
      thumbnail = ${#strings.isEmpty(post.spec.cover) ? #strings.isEmpty(theme.config.post.default_thumbnail) ? '' : theme.config.post.default_thumbnail + (#strings.contains(theme.config.post.default_thumbnail, '?') ? '&' : '?') + 'id=' + post.metadata.name : thumbnail.gen(post.spec.cover, 'xl')}">
 
     <div th:if="${!#strings.isEmpty(thumbnail)}" class="card widget">
         <div class="cover-image" th:style="'background-image: url(' + ${thumbnail} + ')'">
-            <div th:if="${type == 'Post' && !#lists.isEmpty(post.categories)}" class="category">
+            <div th:if="${isPost && !#lists.isEmpty(post.categories)}" class="category">
                 <a th:each="cy : ${post.categories}" th:href="${cy.status.permalink}"
                    th:text="${cy.spec.displayName}"></a>&nbsp;
             </div>
@@ -18,7 +19,8 @@
                     </li>
                     <li><i class="ri-thumb-up-line"></i>[[${post.stats.upvote}]]</li>
                     <li><i class="ri-quill-pen-line"></i>[[${#strings.length(#strings.trim(post.content.content))}]]</li>
-                    <li th:if="${theme.config.basic_style.expand_login_skill && logonUserName == post.spec.owner}" class="is-hidden-laptop"><a target="_blank" title="编辑文章" th:href="@{/console/posts/editor(name=${post.metadata.name})}"><i class="ri-edit-2-line"></i>编辑</a></li>
+                    <li th:if="${theme.config.basic_style.expand_login_skill && logonUserName == post.spec.owner}" class="is-hidden-laptop">
+                        <a target="_blank" title="编辑文章" th:href="@{|/console/${isPost ? 'posts' : 'single-pages'}/editor?name=${post.metadata.name}|}"><i class="ri-edit-2-line"></i>编辑</a></li>
                 </ul>
             </div>
         </div>
@@ -46,9 +48,10 @@
                         </li>
                         <li><i class="ri-thumb-up-line"></i>[[${post.stats.upvote}]]</li>
                         <li><i class="ri-quill-pen-line"></i>[[${#strings.length(#strings.trim(post.content.content))}]]</li>
-                        <li th:if="${theme.config.basic_style.expand_login_skill && logonUserName == post.spec.owner}" class="is-hidden-laptop"><a target="_blank" title="编辑文章" th:href="@{/console/posts/editor(name=${post.metadata.name})}"><i class="ri-edit-2-line"></i>编辑</a></li>
+                        <li th:if="${theme.config.basic_style.expand_login_skill && logonUserName == post.spec.owner}" class="is-hidden-laptop">
+                            <a target="_blank" title="编辑文章"  th:href="@{|/console/${isPost ? 'posts' : 'single-pages'}/editor?name=${post.metadata.name}|}"><i class="ri-edit-2-line"></i>编辑</a></li>
                     </ul>
-                    <div th:if="${type == 'Post' && !#lists.isEmpty(post.categories)}" class="level-item">
+                    <div th:if="${isPost && !#lists.isEmpty(post.categories)}" class="level-item">
                         <a th:each="cy : ${post.categories}" th:href="${cy.status.permalink}"
                            th:text="${cy.spec.displayName}"></a>&nbsp;
                     </div>
@@ -62,7 +65,7 @@
 
             <th:block th:replace="~{main/admire}"/>
 
-            <div th:if="${type == 'Post' && !#lists.isEmpty(post.tags)}" class="article-operation">
+            <div th:if="${isPost && !#lists.isEmpty(post.tags)}" class="article-operation">
                 <div class="level-item">
                     <a th:each=" tag : ${post.tags}" th:href="${tag.status.permalink}"
                        th:text="${tag.spec.displayName}"></a>&nbsp;
@@ -78,7 +81,7 @@
         </div>
     </div>
 
-    <th:block th:if="${type == 'Post'}" th:with="postCursor = ${postFinder.cursor(post.metadata.name)}">
+    <th:block th:if="${isPost}" th:with="postCursor = ${postFinder.cursor(post.metadata.name)}">
         <div th:if="${postCursor.hasPrevious() || postCursor.hasNext()}" class="card">
             <div class="level post-navigation card-content">
                 <a th:if="${postCursor.hasPrevious()}" class="level-item"
