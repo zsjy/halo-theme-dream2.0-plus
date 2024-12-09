@@ -116,11 +116,21 @@ spec:
           if: $get(show_console).value != 'false'
           label: 登录组件样式
           value:
+            console_post_class: 'ri-book-read-line'
+            console_moment_class: 'ri-camera-lens-line'
             console_login_class: 'ri-login-circle-line'
             console_person_class: 'ri-account-circle-line'
             console_manage_class: 'ri-settings-3-line'
             console_logout_class: 'ri-logout-circle-line'
           children:
+            - $formkit: text
+              name: console_post_class
+              label: 新建文章图标
+              help: '输入新建文章图标class，清空不显示图标。'
+            - $formkit: text
+              name: console_moment_class
+              label: 发布瞬间图标
+              help: '输入发布瞬间图标class，清空不显示图标。'
             - $formkit: text
               name: console_login_class
               label: 登录按钮图标
@@ -186,6 +196,16 @@ spec:
                   label: 新标签页
                 - value: '_self'
                   label: 当前窗口
+        - $formkit: radio
+          name: expand_login_skill
+          label: 扩展登录后能力
+          help: 开启后，在文章详情界面，根据作者身份显示编辑按钮。控制台按钮 - 登录组件样式 添加 新建文章 和 发布瞬间 菜单项。登录用户需要具有进入控制台的权限。
+          value: true
+          options:
+            - label: 开启
+              value: true
+            - label: 关闭
+              value: false
         - $formkit: radio
           name: load_progress
           label: 加载进度条

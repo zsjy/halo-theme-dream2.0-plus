@@ -547,6 +547,14 @@ table td, table th {
       color: var(--light-d);
       padding: 0 5px;
     }
+
+    a {
+      color: inherit;
+
+      &:hover {
+        color: var(--theme);
+      }
+    }
   }
 }
 
@@ -4102,6 +4110,10 @@ button.swiper-pagination-bullet {
     .thumbnail-image {
       min-height: 20vw;
     }
+  }
+
+  .is-hidden-laptop {
+    display: none !important;
   }
 
   .swiper-slide-details {
