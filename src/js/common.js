@@ -143,6 +143,12 @@ const commonContext = {
       }
     })
   },
+  /*初始化任务列表，禁止点击*/
+  iniTaskItemDisabled() {
+    $('li[data-type="taskItem"]').each(function () {
+      $(this).find('label > input[type="checkbox"]').prop('disabled', true)
+    })
+  },
   /* 激活登录窗口下拉框功能 */
   initLogonMenu() {
     $('.navbar-logon').each(function (index, item) {
@@ -365,7 +371,7 @@ const commonContext = {
     }
     const grt = new Date(loveTime)
     setInterval(function () {
-      let now= Date.now()
+      let now = Date.now()
       let difference = parseInt((now - grt) / 1000)
       let seconds = difference % 60
       difference = parseInt(difference / 60)
@@ -612,7 +618,7 @@ let timeLifeHour = -1
 
 !(function () {
   const loads = ['initCarousel', 'sparkInput', 'websiteTime']
-  const omits = ['initEffects', 'showThemeVersion']
+  const omits = ['initEffects', 'showThemeVersion', 'iniTaskItemDisabled']
 
   Object.keys(commonContext).forEach(
     (c) => !loads.includes(c) && !omits.includes(c) && commonContext[c]()
