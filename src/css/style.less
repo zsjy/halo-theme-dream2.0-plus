@@ -292,11 +292,6 @@ ul[data-type=taskList] {
           position: relative;
         }
 
-        & + span:hover::before {
-          transform: rotate(360deg);
-          background: #e67700;
-        }
-
         & + span::before {
           content: '✖';
           width: 0.8rem;
@@ -333,9 +328,13 @@ ul[data-type=taskList] {
       }
     }
 
-    &:hover > label > span::before {
-      transform: rotate(360deg);
-      background: #e67700;
+    &:last-child p {
+      margin-bottom: 0;
+    }
+
+    &:hover label span::before {
+      transform: rotate(360deg) !important;
+      background: #e67700 !important;
     }
   }
 }
