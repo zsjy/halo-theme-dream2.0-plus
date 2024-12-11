@@ -264,6 +264,85 @@ li, ol, ul {
   list-style: none
 }
 
+ul[data-type=taskList] {
+  li {
+    display: flex;
+
+    & > div {
+      flex: 1 1 auto;
+    }
+
+    & > label {
+      flex: 0 0 auto;
+      margin-right: 0.5rem;
+      user-select: none;
+
+      & > input[type="checkbox"],
+      & > input[type="radio"] {
+        pointer-events: none;
+        display: none;
+        visibility: hidden;
+        opacity: 0;
+
+        & + span {
+          height: 1rem;
+          width: 1rem;
+          color: var(--theme);
+          margin-top: 50%;
+          display: inline-block;
+          position: relative;
+        }
+
+        & + span::before {
+          content: '✖';
+          width: 1rem;
+          height: 1rem;
+          background: var(--dark-d);
+          color: var(--light-a);
+          text-align: center;
+          line-height: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        &:checked + span::before {
+          content: '✔';
+          width: 1rem;
+          height: 1rem;
+          background: var(--theme);
+          color: var(--light-a);
+          text-align: center;
+          line-height: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      & > input[type="checkbox"] {
+        & + span::before {
+          border-radius: var(--radius-inner);
+        }
+
+        &:checked + span::before {
+          border-radius: var(--radius-inner);
+        }
+      }
+
+      & > input[type="radio"] {
+        & + span::before {
+          border-radius: 100%;
+        }
+
+        &:checked + span::before {
+          border-radius: 100%;
+        }
+      }
+    }
+  }
+}
+
 img {
   border: 0;
   vertical-align: middle;
@@ -3611,7 +3690,7 @@ button.swiper-pagination-bullet {
     }
   }
 
-  ul:not([class]):not([style]) > li:not([class]):not([style]) {
+  ul:not([class]):not([style]):not([data-type=taskList]) > li:not([class]):not([style]) {
     list-style: none;
     position: relative;
     padding-left: 1.2em;
