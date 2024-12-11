@@ -292,6 +292,11 @@ ul[data-type=taskList] {
           position: relative;
         }
 
+        & + span:hover::before {
+          transform: rotate(360deg);
+          background: #e67700;
+        }
+
         & + span::before {
           content: '✖';
           width: 0.8rem;
@@ -304,6 +309,8 @@ ul[data-type=taskList] {
           display: flex;
           align-items: center;
           justify-content: center;
+          transition: all .5s;
+          transform: rotateZ(0deg);
         }
 
         &:checked + span::before {
@@ -324,6 +331,11 @@ ul[data-type=taskList] {
           border-radius: 100%;
         }
       }
+    }
+
+    &:hover > label > span::before {
+      transform: rotate(360deg);
+      background: #e67700;
     }
   }
 }
