@@ -50,7 +50,7 @@
                         <li><i class="ri-thumb-up-line"></i>[[${post.stats.upvote}]]</li>
                         <li><i class="ri-quill-pen-line"></i>[[${#strings.length(#strings.trim(post.content.content))}]]</li>
                         <li th:if="${logonUserName == post.spec.owner && (skillUrl == 'console' || (skillUrl == 'uc' && isPost))}" class="is-hidden-laptop">
-                            <a target="_blank" title="编辑文章"  th:href="@{|/skillUrl/${isPost ? 'posts' : 'single-pages'}/editor?name=${post.metadata.name}|}"><i class="ri-edit-2-line"></i>编辑</a></li>
+                            <a target="_blank" title="编辑文章"  th:href="@{|/${skillUrl}/${isPost ? 'posts' : 'single-pages'}/editor?name=${post.metadata.name}|}"><i class="ri-edit-2-line"></i>编辑</a></li>
                     </ul>
                     <div th:if="${isPost && !#lists.isEmpty(post.categories)}" class="level-item">
                         <a th:each="cy : ${post.categories}" th:href="${cy.status.permalink}"

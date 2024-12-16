@@ -199,12 +199,12 @@ spec:
         - $formkit: radio
           name: expand_login_skill
           label: 扩展登录后能力
-          help: 开启后，在文章详情界面，根据作者身份显示编辑按钮。控制台按钮 - 登录组件样式 添加 新建文章 和 发布瞬间 菜单项。登录用户需要具有进入控制台的权限。
+          help: 开启后，在文章详情界面，根据作者身份显示编辑按钮。控制台按钮 - 登录组件样式 添加 新建文章 和 发布瞬间 菜单项。登录用户需要具有进入相应功能的权限。
           value: 'console'
           options:
-            - label: 控制台
+            - label: 跳转到控制台
               value: 'console'
-            - label: 个人
+            - label: 跳转到个人中心
               value: 'uc'
             - label: 关闭
               value: 'none'

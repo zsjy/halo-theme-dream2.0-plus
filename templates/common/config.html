@@ -78,10 +78,13 @@
     DreamConfig["pjax_state"] = [[${theme.config.enhance.enable_pjax}]];
     /** 配置分享方式 */
     let post_share = []
-    for (let share of [[${theme.config.post.custom_post_share}]]) {
-      let type = share.realNode.type;
-      if (post_share.indexOf(type) === -1) {
-        post_share.push(type);
+    let custom_post_share = [[${theme.config.post.custom_post_share}]];
+    if(custom_post_share) {
+      for (let share of custom_post_share) {
+        let type = share.realNode.type;
+        if (post_share.indexOf(type) === -1) {
+          post_share.push(type);
+        }
       }
     }
     if (post_share.length === 0) {
