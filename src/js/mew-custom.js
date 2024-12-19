@@ -116,8 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             this.getAttribute('song')
             ).then((response) => response.json())
           } else if (this.hasAttribute('playlist')) {
-            this.options.listFolded = this.getAttribute('fold')
-            this.options.order = this.getAttribute('order')
             this.options.audio = await fetch(
               'https://api.i-meto.com/meting/api?server=netease&type=playlist&id=' +
                             this.getAttribute('playlist')
