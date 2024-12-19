@@ -75,6 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
           listFolded: this.getAttribute('listFolded') || false,
           volume: this.getAttribute('volume') || 0.7,
           listMaxHeight: this.getAttribute('listMaxHeight') || 450,
+          mimi: this.getAttribute('mimi') || false,
+          order: this.getAttribute('order') || 'list',
         }
         if (!('APlayer' in window)) {
           if (!MewMusic.prototype.load) {
