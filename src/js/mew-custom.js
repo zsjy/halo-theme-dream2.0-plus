@@ -71,7 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
           theme: this.getAttribute('theme') || 'var(--theme)',
           loop: this.getAttribute('loop') || 'all',
           autoplay: this.hasAttribute('autoplay') && this.getAttribute('autoplay') !== 'false',
-          lrcType: 3,
+          lrcType: this.getAttribute('lrcType') || 3,
+          listFolded: this.getAttribute('listFolded') || false,
+          volume: this.getAttribute('volume') || 0.7,
+          listMaxHeight: this.getAttribute('listMaxHeight') || 450,
         }
         if (!('APlayer' in window)) {
           if (!MewMusic.prototype.load) {
@@ -122,6 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
               cover: this.getAttribute('cover'),
               lrc: this.getAttribute('lrc') || (this.options.lrcType = undefined),
             }]
+          } else if (this.hasAttribute('music-list')) {
+            this.options.audio = JSON.parse(this.getAttribute('music-list'))
           } else {
             this.innerHTML = '未指定播放的音乐！'
             return resolve()
