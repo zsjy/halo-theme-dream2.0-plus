@@ -68,6 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
         this.innerHTML = '音乐播放器加载中...'
         this.options = {
           container: this,
+          fixed: this.hasAttribute('fixed') || false,
+          mutex: this.hasAttribute('mutex') || true,
           theme: this.getAttribute('theme') || 'var(--theme)',
           loop: this.getAttribute('loop') || 'all',
           autoplay: this.hasAttribute('autoplay') && this.getAttribute('autoplay') !== 'false',
@@ -77,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
           listMaxHeight: this.getAttribute('listMaxHeight') || 450,
           mimi: this.getAttribute('mimi') || false,
           order: this.getAttribute('order') || 'list',
+          storageName: this.getAttribute('storageName') || 'aplayer-setting',
         }
         if (!('APlayer' in window)) {
           if (!MewMusic.prototype.load) {
@@ -84,8 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
             MewMusic.prototype.await = []
             new Promise((resolve) => {
               const $head = $('head')
-              $head.append('<link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">')
-              Utils.cachedScript('https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js')
+              $head.append('<link rel="stylesheet" href="/themes/theme-dream2-plus/assets/lib/aplayer@1.10.1/APlayer.min.css">')
+              Utils.cachedScript('/themes/theme-dream2-plus/assets/lib/aplayer@1.10.1/APlayer.min.js')
                 .done(() => resolve())
                 .fail(() => resolve())
             }).then(() => {
@@ -128,7 +131,14 @@ document.addEventListener('DOMContentLoaded', () => {
               lrc: this.getAttribute('lrc') || (this.options.lrcType = undefined),
             }]
           } else if (this.hasAttribute('music-list')) {
-            this.options.audio = JSON.parse(this.getAttribute('music-list'))
+            var musicList = JSON.parse(this.getAttribute('music-list'))
+            musicList.forEach((item) => {
+              item.lrc = item.lrc || ''
+              item.name = item.name || '音乐'
+              item.artist = item.artist || '未知歌手'
+              item.cover = item.cover || '/themes/theme-dream2-plus/assets/img/music.webp'
+            })
+            this.options.audio = musicList
           } else {
             this.innerHTML = '未指定播放的音乐！'
             return resolve()
@@ -425,7 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
             MewPhotos.prototype.load = true
             MewPhotos.prototype.await = []
             new Promise((resolve) => {
-              Utils.cachedScript('https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js')
+              Utils.cachedScript('/themes/theme-dream2-plus/assets/lib/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js')
                 .done(() => resolve())
                 .fail(() => resolve())
             }).then(() => {
