@@ -110,8 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         // eslint-disable-next-line no-async-promise-executor
         new Promise(async (resolve) => {
-          if (this.hasAttribute('meetingApi')) {
-            this.options.audio = await fetch(this.getAttribute('meetingApi'))
+          if (this.hasAttribute('meetingUrl')) {
+            this.options.audio = await fetch(this.getAttribute('meetingUrl'))
               .then((response) => response.json())
           } else if (this.hasAttribute('song')) {
             this.options.audio = await fetch(
