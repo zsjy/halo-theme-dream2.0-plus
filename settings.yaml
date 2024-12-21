@@ -1644,3 +1644,10 @@ spec:
           label: "内嵌JS（body）"
           placeholder: 请输入 JS 代码内容
           help: '填入JS代码，无需script标签，将插入body标签尾部。'
+        - $formkit: code
+          language: html
+          height: 45px
+          name: inline_body_html
+          label: "内嵌Html内容（body）"
+          placeholder: 请输入 Html 代码内容
+          help: '填入Html代码，将插入body标签尾部，用于自定义显示一段Html内容，注意：Html内容默认会在页脚下方，请注意设置样式避免页脚出现样式问题。'

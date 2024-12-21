@@ -110,7 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         // eslint-disable-next-line no-async-promise-executor
         new Promise(async (resolve) => {
-          if (this.hasAttribute('song')) {
+          if (this.hasAttribute('meetingApi')) {
+            this.options.audio = await fetch(this.getAttribute('meetingApi'))
+              .then((response) => response.json())
+          } else if (this.hasAttribute('song')) {
             this.options.audio = await fetch(
               'https://api.i-meto.com/meting/api?server=netease&type=song&id=' +
               this.getAttribute('song')
