@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
           lrcType: this.getAttribute('lrcType') || 3,
           listFolded: this.getAttribute('listFolded') || false,
           volume: this.getAttribute('volume') || 0.7,
-          listMaxHeight: this.getAttribute('listMaxHeight') || 450,
+          listMaxHeight: this.getAttribute('listMaxHeight') || '450px',
           mini: this.getAttribute('mini') || false,
           order: this.getAttribute('order') || 'list',
           storageName: this.getAttribute('storageName') || 'aplayer-setting',
