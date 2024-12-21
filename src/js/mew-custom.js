@@ -87,8 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
             MewMusic.prototype.await = []
             new Promise((resolve) => {
               const $head = $('head')
-              $head.append('<link rel="stylesheet" href="/themes/theme-dream2-plus/assets/lib/aplayer@1.10.1/APlayer.min.css">')
-              Utils.cachedScript('/themes/theme-dream2-plus/assets/lib/aplayer@1.10.1/APlayer.min.js')
+              $head.append('<link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">')
+              Utils.cachedScript('https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js')
                 .done(() => resolve())
                 .fail(() => resolve())
             }).then(() => {
@@ -441,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
             MewPhotos.prototype.load = true
             MewPhotos.prototype.await = []
             new Promise((resolve) => {
-              Utils.cachedScript('/themes/theme-dream2-plus/assets/lib/justifiedGallery@3.8.1/jquery.justifiedGallery.min.js')
+              Utils.cachedScript('https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js')
                 .done(() => resolve())
                 .fail(() => resolve())
             }).then(() => {
