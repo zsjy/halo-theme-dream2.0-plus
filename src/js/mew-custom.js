@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let isToc = $this.find('h1,h2,h3,h4,h5').length !== 0
             this.setAttribute('hide', window.encrypt(this.innerHTML))
             this.innerHTML = ''
-            if(isToc) {
+            if (isToc) {
               this.setAttribute('toc', true)
               commonContext.initTocAndNotice()
             }
@@ -113,12 +113,12 @@ document.addEventListener('DOMContentLoaded', () => {
           if (this.hasAttribute('song')) {
             this.options.audio = await fetch(
               'https://api.i-meto.com/meting/api?server=netease&type=song&id=' +
-                            this.getAttribute('song')
+              this.getAttribute('song')
             ).then((response) => response.json())
           } else if (this.hasAttribute('playlist')) {
             this.options.audio = await fetch(
               'https://api.i-meto.com/meting/api?server=netease&type=playlist&id=' +
-                            this.getAttribute('playlist')
+              this.getAttribute('playlist')
             ).then((response) => response.json())
           } else if (this.hasAttribute('url')) {
             this.options.audio = [{
@@ -144,7 +144,12 @@ document.addEventListener('DOMContentLoaded', () => {
           this.aplayer = new APlayer(this.options)
           resolve()
         })
-          .catch((e) => {})
+          .catch((e) => {
+          })
+      }
+
+      getAPlayer() {
+        return this.aplayer
       }
 
       disconnectedCallback() {
@@ -382,10 +387,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (this.options.id || this.options.slug) {
           await Utils.request({
-            url: this.options.id? `/api/content/${this.options.type}s/${this.options.id}` : `/api/content/${this.options.type}s/slug?slug=${this.options.slug}`,
+            url: this.options.id ? `/api/content/${this.options.type}s/${this.options.id}` : `/api/content/${this.options.type}s/slug?slug=${this.options.slug}`,
             method: 'GET',
           })
-            .then(res=>{
+            .then(res => {
               this.options.img = this.options.img || res.thumbnail
               this.options.href = this.options.title || res.fullPath
               this.options.title = this.options.title || res.title
@@ -447,6 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
           this.render()
         }
       }
+
       render() {
         this.options = {
           captions: this.hasAttribute('captions') && this.getAttribute('captions') !== 'false',
@@ -466,7 +472,7 @@ document.addEventListener('DOMContentLoaded', () => {
       init() {
         let html = this.innerHTML
         this.innerHTML = ''
-        const shadowRoot = this.attachShadow({ mode: 'closed' })
+        const shadowRoot = this.attachShadow({mode: 'closed'})
         shadowRoot.innerHTML = html
         this.drawComplete()
       }
