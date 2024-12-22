@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let isToc = $this.find('h1,h2,h3,h4,h5').length !== 0
             this.setAttribute('hide', window.encrypt(this.innerHTML))
             this.innerHTML = ''
-            if(isToc) {
+            if (isToc) {
               this.setAttribute('toc', true)
               commonContext.initTocAndNotice()
             }
@@ -65,13 +65,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
       constructor() {
         super()
-        this.innerHTML = '音乐播放器加载中...'
+        this.innerHTML = this.getAttribute('prompt') || '音乐播放器加载中...'
         this.options = {
           container: this,
+          fixed: this.hasAttribute('fixed') || false,
+          mutex: this.hasAttribute('mutex') || true,
           theme: this.getAttribute('theme') || 'var(--theme)',
           loop: this.getAttribute('loop') || 'all',
           autoplay: this.hasAttribute('autoplay') && this.getAttribute('autoplay') !== 'false',
-          lrcType: 3,
+          lrcType: this.getAttribute('lrcType') || 3,
+          listFolded: this.getAttribute('listFolded') || false,
+          volume: this.getAttribute('volume') || 0.7,
+          listMaxHeight: this.getAttribute('listMaxHeight') || '450px',
+          mini: this.getAttribute('mini') || false,
+          order: this.getAttribute('order') || 'list',
+          storageName: this.getAttribute('storageName') || 'aplayer-setting',
         }
         if (!('APlayer' in window)) {
           if (!MewMusic.prototype.load) {
@@ -102,17 +110,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         // eslint-disable-next-line no-async-promise-executor
         new Promise(async (resolve) => {
-          if (this.hasAttribute('song')) {
+          if (this.hasAttribute('meetingUrl')) {
+            this.options.audio = await fetch(this.getAttribute('meetingUrl'))
+              .then((response) => response.json())
+          } else if (this.hasAttribute('song')) {
             this.options.audio = await fetch(
               'https://api.i-meto.com/meting/api?server=netease&type=song&id=' +
-                            this.getAttribute('song')
+              this.getAttribute('song')
             ).then((response) => response.json())
           } else if (this.hasAttribute('playlist')) {
-            this.options.listFolded = this.getAttribute('fold')
-            this.options.order = this.getAttribute('order')
             this.options.audio = await fetch(
               'https://api.i-meto.com/meting/api?server=netease&type=playlist&id=' +
-                            this.getAttribute('playlist')
+              this.getAttribute('playlist')
             ).then((response) => response.json())
           } else if (this.hasAttribute('url')) {
             this.options.audio = [{
@@ -122,6 +131,15 @@ document.addEventListener('DOMContentLoaded', () => {
               cover: this.getAttribute('cover'),
               lrc: this.getAttribute('lrc') || (this.options.lrcType = undefined),
             }]
+          } else if (this.hasAttribute('music-list')) {
+            var musicList = JSON.parse(this.getAttribute('music-list'))
+            musicList.forEach((item) => {
+              item.lrc = item.lrc || ''
+              item.name = item.name || '音乐'
+              item.artist = item.artist || '未知歌手'
+              item.cover = item.cover || '/themes/theme-dream2-plus/assets/img/music.webp'
+            })
+            this.options.audio = musicList
           } else {
             this.innerHTML = '未指定播放的音乐！'
             return resolve()
@@ -129,7 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
           this.aplayer = new APlayer(this.options)
           resolve()
         })
-          .catch((e) => {})
+          .catch((e) => {
+          })
+      }
+
+      getAPlayer() {
+        return this.aplayer
       }
 
       disconnectedCallback() {
@@ -367,10 +390,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (this.options.id || this.options.slug) {
           await Utils.request({
-            url: this.options.id? `/api/content/${this.options.type}s/${this.options.id}` : `/api/content/${this.options.type}s/slug?slug=${this.options.slug}`,
+            url: this.options.id ? `/api/content/${this.options.type}s/${this.options.id}` : `/api/content/${this.options.type}s/slug?slug=${this.options.slug}`,
             method: 'GET',
           })
-            .then(res=>{
+            .then(res => {
               this.options.img = this.options.img || res.thumbnail
               this.options.href = this.options.title || res.fullPath
               this.options.title = this.options.title || res.title
@@ -432,6 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
           this.render()
         }
       }
+
       render() {
         this.options = {
           captions: this.hasAttribute('captions') && this.getAttribute('captions') !== 'false',
@@ -451,7 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
       init() {
         let html = this.innerHTML
         this.innerHTML = ''
-        const shadowRoot = this.attachShadow({ mode: 'closed' })
+        const shadowRoot = this.attachShadow({mode: 'closed'})
         shadowRoot.innerHTML = html
         this.drawComplete()
       }

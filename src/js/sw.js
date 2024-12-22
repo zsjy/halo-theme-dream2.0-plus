@@ -41,6 +41,7 @@
     // 后端 api 不进行缓存
     const notHandleList = [
       location.origin + '/api',
+      location.origin + '/apis',
     ]
 
     // 需要走cdn和缓存的请求（cdn优先于缓存）
@@ -165,6 +166,10 @@
       // 非 get 请求不处理，被禁止处理的地址不处理
       if (event.request.method !== 'GET'
         || isExitInUrlList(notHandleList, event.request.url)) {
+        return false
+      }
+      // 检查请求协议是否为 http 或 https
+      if (!event.request.url.startsWith('http://') && !event.request.url.startsWith('https://')) {
         return false
       }
       const isCdnAndCache = isExitInUrlList(cdnAndCacheList, event.request.url)
