@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       constructor() {
         super()
-        this.innerHTML = this.hasAttribute('prompt') || '音乐播放器加载中...'
+        this.innerHTML = this.getAttribute('prompt') || '音乐播放器加载中...'
         this.options = {
           container: this,
           fixed: this.hasAttribute('fixed') || false,
