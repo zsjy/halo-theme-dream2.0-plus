@@ -4,7 +4,8 @@
         th:with="isJournals = true, enableShare = false, baseEnableComment = false"
         xmlns:th="https://www.thymeleaf.org">
     <th:block th:fragment="content">
-        <div class="card card-content search-page search-page-title">
+        <div class="card card-content search-page"
+             th:if="${theme.config.page_config.search.search_style == 'form'}">
             <div class="card-tab">
                 <div>[[${#strings.replace(title, ' - ' + site.title, '')}]]</div>
             </div>
@@ -133,6 +134,57 @@
                     </button>
                 </form>
             </div>
+        </div>
+        <div th:if="${theme.config.page_config.search.search_style == 'box'}">
+            <script th:inline="javascript">
+              $(function () {
+                var target = [[${theme.config.page_config.search.search_target}]]
+                var searchResult = $('#dream-search-result')
+                var searchResultEmpty = $('#dream-search-result-empty')
+
+                function removeHTMLTags(str) {
+                  const regex = /<(?!\/?B\b)[^>]*>/g
+                  return str.replace(regex, '')
+                }
+
+                function findResult() {
+                  var result = [[${searchResult}]]
+                  if (result.hits.length > 0) {
+                    searchResultEmpty.hide()
+                    searchResult.empty()
+                    for (var i = 0; i < result.hits.length; i++) {
+                      try {
+                        var hit = result.hits[i]
+                        var title = removeHTMLTags(hit.title)
+                        var description = hit.content ? removeHTMLTags(hit.content) : ''
+
+                        searchResult.append('<div class="widget card search-page">\n' +
+                          '<div class="card-content main">\n' +
+                          '<a href="' + hit.permalink + '" ' + ' target="' + target + '">\n' +
+                          '<h2 class="title">' + title + '</h2>\n' +
+                          '</a>\n' +
+                          (description ?
+                            ('<div class="main-content not-toc description">\n' + description +
+                              '\n</div>\n') : '') +
+                          '<hr/>\n' +
+                          '<div class="meta">\n' +
+                          '<div></div>\n' +
+                          '<em>' + '最后更新于 ' + Utils.formatDate(hit.updateTimestamp, 'yyyy年MM月dd日') + '</em>\n' +
+                          '</div>\n' +
+                          '</div>\n')
+                        // eslint-disable-next-line no-empty
+                      } catch (e) {
+                      }
+                    }
+                  } else {
+                    searchResultEmpty.show()
+                    searchResult.empty()
+                  }
+                }
+
+                findResult()
+              })
+            </script>
         </div>
         <div id="dream-search-result">
         </div>

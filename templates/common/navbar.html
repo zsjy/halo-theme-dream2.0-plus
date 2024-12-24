@@ -65,8 +65,22 @@
                 </th:block>
             </nav>
             <div th:if="${pluginFinder.available('PluginSearchWidget')}" class="navbar-search">
-                <button th:unless="${theme.config.page_config.search.search_enable}" onclick="javascript:SearchWidget.open();" class="submit" aria-label="搜索按钮" style="border-radius: 17px;"><i class="ri-search-line"></i></button>
-                <a th:if="${theme.config.page_config.search.search_enable}" target="_self" href="/search" class="submit" aria-label="搜索按钮" style="border-radius: 17px;display: flex;align-items: center;justify-content: center;"><i class="ri-search-line"></i></a>
+                <button th:if="${theme.config.page_config.search.search_style == 'basic'}" onclick="javascript:SearchWidget.open();" class="submit" aria-label="搜索按钮" style="border-radius: 17px;"><i class="ri-search-line"></i></button>
+                <a th:if="${theme.config.page_config.search.search_style == 'form'}" target="_self" href="/search" class="submit" aria-label="搜索按钮" style="border-radius: 17px;display: flex;align-items: center;justify-content: center;"><i class="ri-search-line"></i></a>
+                <form data-pjax class="navbar-search" method="get" action="/search" th:if="${theme.config.page_config.search.search_style == 'box'}">
+                    <input autocomplete="off" th:placeholder="${theme.config.page_config.search.search_placeholder}" name="keyword" value="" class="input" type="text"/>
+                    <input id="halo-search-form-limit" type="hidden" name="limit" th:value="${theme.config.page_config.search.search_limit}"/>
+                    <button type="submit" class="submit" th:title="${theme.config.page_config.search.search_btn_title}" aria-label="搜索按钮"><i class="ri-search-line"></i></button>
+                    <span class="icon"></span>
+                    <nav class="result" th:with="searchPosts = ${postFinder.list({page: 1,size: 5,sort: {'stats.visit,desc'}})}">
+                        <a th:each="postData,pIndex : ${searchPosts}" th:href="@{${postData.status.permalink}}"
+                           th:title="${postData.spec.title}" th:target="${theme.config.page_config.search.search_target}"
+                           class="item">
+                            <span class="sort">[[${pIndex.count}]]</span>
+                            <span class="text">[[${postData.spec.title}]]</span>
+                        </a>
+                    </nav>
+                </form>
             </div>
             <i th:unless="${theme.config.page_config.search.search_enable}" class="ri-search-line navbar-searchicon" onclick="javascript:SearchWidget.open();"></i>
             <a th:if="${theme.config.page_config.search.search_enable}" class="navbar-searchicon" target="_self" href="/search"><i class="ri-search-line navbar-searchicon"></i></a>

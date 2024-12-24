@@ -1196,66 +1196,71 @@ spec:
           label: 搜索页面
           help: 使用新版搜索需要 halo >= 2.17.0 & 搜索插件 >= 1.5.0。
           value:
-            search_enable: false
+            search_style: 'box'
             search_title: '搜索'
-            search_placeholder: '输入搜索内容'
+            search_placeholder: '搜索内容...'
             search_btn_title: '搜索'
             search_target: '_self'
           children:
             - $formkit: radio
-              id: search_enable
-              name: search_enable
+              id: search_style
+              name: search_style
               label: 搜索按钮-搜索风格
               options:
-                - value: true
-                  label: 新版
-                - value: false
+                - value: 'box'
+                  label: 热门文章
+                - value: 'form'
+                  label: 搜索表单
+                - value: 'basic'
                   label: 经典
             - $formkit: text
-              if: $get(search_enable).value
+              if: $get(search_style).value != 'basic'
               name: search_title
               validation: required
               label: 搜索页面-标题
-              placeholder: '输入新版搜索页面标题'
+              placeholder: '输入页面标题，搜索表单、热门文章风格有效'
             - $formkit: text
-              if: $get(search_enable).value
+              if: $get(search_style).value != 'basic'
               name: search_placeholder
               validation: required
               label: 搜索页面-输入框提示语
-              placeholder: '输入新版搜索页面输入框提示语'
+              placeholder: '输入搜索页面输入框提示语'
+              help: '输入搜索页面输入框提示语，搜索表单、热门文章风格有效。'
             - $formkit: text
-              if: $get(search_enable).value
+              if: $get(search_style).value != 'basic'
               name: search_btn_title
               validation: required
-              placeholder: '输入新版搜索页面搜索按钮提示语'
+              placeholder: '输入搜索页面搜索按钮提示语'
               label: 搜索页面-搜索按钮提示语
+              help: '输入搜索页面搜索按钮提示语，支持 HTML 格式，搜索表单、热门文章风格有效。'
             - $formkit: radio
-              if: $get(search_enable).value
+              if: $get(search_style).value != 'basic'
               name: search_target
               validation: required
               label: 搜索页面-搜索结果跳转方式
+              help: '搜索页面-搜索结果跳转方式，搜索表单、热门文章风格有效。'
               options:
                 - value: _blank
                   label: 新标签页
                 - value: _self
                   label: 当前窗口
             - $formkit: code
-              if: $get(search_enable).value
+              if: $get(search_style).value != 'basic'
               name: search_empty_tips
               validation: required
               label: "搜索页面-无搜索结果提示语"
               language: html
               value: '没有搜索结果'
               height: 45px
-              help: '搜索页面-无搜索结果提示语，支持 HTML 格式。'
+              help: '搜索页面-无搜索结果提示语，支持 HTML 格式，搜索表单、热门文章风格有效。'
             - $formkit: number
-              if: $get(search_enable).value
+              if: $get(search_style).value != 'basic'
               name: search_limit
               validation: required
               label: "搜索页面-搜索结果最大显示数量"
               value: 10
               height: 45px
-              help: '搜索页面-搜索结果最大显示数量。'
+              help: '搜索页面-搜索结果最大显示数量，搜索表单、热门文章风格有效。'
     - group: enhance
       label: '增强功能'
       formSchema:
