@@ -68,9 +68,9 @@
                 <button th:if="${theme.config.page_config.search.search_style == 'basic'}" onclick="javascript:SearchWidget.open();" class="submit" aria-label="搜索按钮" style="border-radius: 17px;"><i class="ri-search-line"></i></button>
                 <a th:if="${theme.config.page_config.search.search_style == 'form'}" target="_self" href="/search" class="submit" aria-label="搜索按钮" style="border-radius: 17px;display: flex;align-items: center;justify-content: center;"><i class="ri-search-line"></i></a>
                 <form data-pjax class="navbar-search" method="get" action="/search" th:if="${theme.config.page_config.search.search_style == 'box'}">
-                    <input autocomplete="off" th:placeholder="${theme.config.page_config.search.search_placeholder}" name="keyword" value="" class="input" type="text"/>
+                    <input autocomplete="off" placeholder="搜索内容..." name="keyword" value="" class="input" type="text"/>
                     <input type="hidden" name="limit" th:value="${theme.config.page_config.search.search_limit}"/>
-                    <button type="submit" class="submit" th:title="${theme.config.page_config.search.search_btn_title}" aria-label="搜索按钮"><i class="ri-search-line"></i></button>
+                    <button type="submit" class="submit" title="搜索" aria-label="搜索按钮"><i class="ri-search-line"></i></button>
                     <span class="icon"></span>
                     <nav class="result" th:with="searchPosts = ${postFinder.list({page: 1,size: 5,sort: {'stats.visit,desc'}})}">
                         <a th:each="postData,pIndex : ${searchPosts}" th:href="@{${postData.status.permalink}}"
@@ -82,8 +82,7 @@
                     </nav>
                 </form>
             </div>
-            <i th:unless="${theme.config.page_config.search.search_enable}" class="ri-search-line navbar-searchicon" onclick="javascript:SearchWidget.open();"></i>
-            <a th:if="${theme.config.page_config.search.search_enable}" class="navbar-searchicon" target="_self" href="/search"><i class="ri-search-line navbar-searchicon"></i></a>
+            <i class="ri-search-line navbar-searchicon" onclick="javascript:SearchWidget.open();"></i>
             <a data-not-pjax th:if="${theme.config.basic_style.show_console == 'console'}" class="navbar-console" th:href="${!#strings.isEmpty(logonUserName) ? theme.config.basic_style.console.console_logon_url : theme.config.basic_style.console.console_url}"
                th:target="${!#strings.isEmpty(logonUserName) ? theme.config.basic_style.console.console_logon_target : theme.config.basic_style.console.console_target}"
                th:title="${theme.config.basic_style.console.console_title}">
