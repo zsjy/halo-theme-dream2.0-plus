@@ -85,16 +85,6 @@ spec:
               value: false
             - label: 居中
               value: true
-        - $formkit: radio
-          name: footer_hide_theme_info
-          label: 页脚主题信息
-          value: false
-          help: 控制页脚主题信息“Powered by Halo & Dream”的显示或隐藏。
-          options:
-            - label: 显示
-              value: false
-            - label: 隐藏
-              value: true
     - group: basic_style
       label: '基础样式'
       formSchema:
@@ -609,7 +599,6 @@ spec:
               label: 默认关闭
         - $formkit: radio
           name: enable_post_share
-          id: enable_post_share
           label: 开启文章分享
           value: true
           help: '如果文章或页面元数据配置了enable_share项，则当前配置将被覆盖。'
@@ -620,7 +609,6 @@ spec:
               label: 默认关闭
         - $formkit: repeater
           name: custom_post_share
-          if: $get(enable_post_share).value
           max: 11
           min: 1
           label: 文章分享方式
