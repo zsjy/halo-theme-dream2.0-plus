@@ -118,7 +118,7 @@ spec:
           value:
             console_post_class: 'ri-book-read-line'
             console_moment_class: 'ri-camera-lens-line'
-            console_login_class: 'ri-login-circle-line'
+            console_login_class: 'ri-fingerprint-line'
             console_person_class: 'ri-account-circle-line'
             console_manage_class: 'ri-settings-3-line'
             console_logout_class: 'ri-logout-circle-line'
