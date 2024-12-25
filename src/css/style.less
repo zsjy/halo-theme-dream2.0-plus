@@ -796,7 +796,7 @@ table td, table th {
   &.fixed {
     position: sticky;
     top: 0;
-    z-index: 99;
+    z-index: 100;
   }
 
   &-above {
@@ -5320,7 +5320,7 @@ button.swiper-pagination-bullet {
 /* 搜索界面 */
 .search-page {
 
-  margin-top: 1.4rem !important;
+  margin-bottom: 1.4rem;
 
   .search-form-inner {
     width: 100%;
@@ -5392,8 +5392,10 @@ button.swiper-pagination-bullet {
   }
 }
 
-.search-page-title {
-  margin-top: 0 !important;
+#dream-search-result {
+  .search-page:last-child {
+    margin-bottom: 0 !important;
+  }
 }
 
 //登录组件

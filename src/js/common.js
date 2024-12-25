@@ -120,6 +120,17 @@ const commonContext = {
     // 高亮移动端
     $nav_side_menus.eq(activeIndex).addClass('current')
   },
+  /* 搜索框弹窗 */
+  searchDialog() {
+    const $result = $('.navbar-search .result')
+    $('.navbar-search .input').on('click', function (e) {
+      e.stopPropagation()
+      $result.addClass('active')
+    })
+    $(document).on('click', function () {
+      $result.removeClass('active')
+    })
+  },
   /* 激活导航栏全局下拉框功能 */
   initDropMenu() {
     $('.item-dropdown').each(function (index, item) {
