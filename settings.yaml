@@ -1351,16 +1351,6 @@ spec:
             - value: false
               label: 关闭
         - $formkit: radio
-          name: enable_comment_type
-          label: 评论加载方式
-          value: true
-          help: '在使用Halo评论组件时，建议您关闭Pjax加载功能以获得最佳体验。同时，Halo评论组件支持评论插件的新特性。而对于Web评论组件，它支持Pjax加载，但请注意，部分新特性可能不被Web评论组件所支持。'
-          options:
-            - value: true
-              label: Halo评论组件
-            - value: false
-              label: Web评论组件
-        - $formkit: radio
           name: effects_lantern_mode
           id: effects_lantern_mode
           label: 灯笼特效显示模式
