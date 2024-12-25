@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <th:block
-        th:insert="~{common/layout :: layout (title = ${theme.config.page_config.search.search_title} + ' - ' + ${site.title}, canonical = @{/search}, content = ~{::content}, isPost = true)}"
+        th:insert="~{common/layout :: layout (title = '搜索' + ' - ' + ${site.title}, canonical = @{/search}, content = ~{::content}, isPost = true)}"
         th:with="isJournals = true, enableShare = false, baseEnableComment = false"
         xmlns:th="https://www.thymeleaf.org">
     <th:block th:fragment="content">
@@ -124,11 +124,10 @@
                             class="text-input"
                             type="search"
                             name="keyword"
-                            th:title="${theme.config.page_config.search.search_placeholder}"
-                            th:placeholder="${theme.config.page_config.search.search_placeholder}"
+                            placeholder="搜索内容..."
                             th:value="${searchResult.keyword}"
                     />
-                    <button class="search-form-btn" th:title="${theme.config.page_config.search.search_btn_title}"
+                    <button class="search-form-btn" title="搜索"
                             type="submit">
                         <i class="ri-search-line"></i>
                     </button>
