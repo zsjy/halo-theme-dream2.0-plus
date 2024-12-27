@@ -53,7 +53,13 @@ jobs:
 
     # Actions构建
     - name: Build
-      run: npm run actions --tag=${{ env.version }}
+      if: ${{ env.branch_type != 'master' }}
+      run: npm run release --tag=${{ env.version }}
+    - name: Build
+      if: ${{ env.branch_type == 'master' }}
+      run: npm run push --tag=${{ env.version }}
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     # 如果是master分支，创建latest的Release，否则创建 预览版
     - name: Create Release
@@ -79,13 +85,3 @@ jobs:
         asset_path: ./dist/halo-theme-dream2.0-plus.zip
         asset_name: halo-theme-dream2.0-plus-V${{ env.version }}.zip
         asset_content_type: application/zip
-
-    # 发布NPM包，master分支需要发布
-    - name: npm ci
-      if: ${{ env.branch_type == 'master' }}
-      run: npm ci
-    - name: Publish to NPM
-      if: ${{ env.branch_type == 'master' }}
-      run: npm publish --access public --tag latest
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
