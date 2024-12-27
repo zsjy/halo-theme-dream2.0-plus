@@ -57,7 +57,7 @@ jobs:
       run: npm run release --tag=${{ env.version }}
     - name: Build-Master
       if: ${{ env.branch_type == 'master' }}
-      run: npm run push --tag=${{ env.version }}
+      run: npm run release --tag=${{ env.version }}
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
