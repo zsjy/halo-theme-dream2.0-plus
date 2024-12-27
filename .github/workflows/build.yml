@@ -80,8 +80,12 @@ jobs:
         asset_name: halo-theme-dream2.0-plus-V${{ env.version }}.zip
         asset_content_type: application/zip
 
-    # 发布NPM包
+    # 发布NPM包，master分支需要发布
+    - name: npm ci
+      if: ${{ env.branch_type == 'master' }}
+      run: npm ci
     - name: Publish to NPM
-      run: npm publish --tag latest
+      if: ${{ env.branch_type == 'master' }}
+      run: npm publish --access public --tag latest
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
