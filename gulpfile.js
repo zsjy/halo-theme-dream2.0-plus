@@ -130,10 +130,15 @@ task('zip', () => {
 })
 
 task('publish', (done) => {
-  // 需要将tag标签内容置为 latest
-  process.env.npm_config_tag = 'latest'
-  console.log(execSync('npm publish').toString())
-  done()
+  try {
+    // 需要将tag标签内容置为 latest
+    process.env.npm_config_tag = 'latest';
+    console.log(execSync('npm publish').toString());
+    done();
+  } catch (error) {
+    console.error('发布失败:', error.message);
+    done(error);
+  }
 })
 
 // 默认模式
