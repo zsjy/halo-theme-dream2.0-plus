@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="photos-gallery load-block loading">
-            <div th:each="photo : ${photos.items}" th:href="${photo.spec.url}" data-fancybox="gallery" th:data-caption="${#strings.defaultString(photo.spec.description, photo.spec.displayName)}">
+            <div th:each="photo : ${photos.items}" th:href="${photo.spec.url}" data-fancybox="gallery" data-options='{"hash": false}' th:data-caption="${#strings.defaultString(photo.spec.description, photo.spec.displayName)}">
                 <img width="100%" height="100%" th:src="${photo.spec.url}"
                      th:srcset="|${thumbnail.gen(photo.spec.url, 's')} 400w,
                                  ${thumbnail.gen(photo.spec.url, 'm')} 800w,
