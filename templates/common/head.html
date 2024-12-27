@@ -2,7 +2,7 @@
 th:with="description=${isPost ? post != null ? post.status.excerpt : singlePage != null ? singlePage.status.excerpt : site.seo.description : site.seo.description}">
   <meta charset="utf-8"/>
   <title th:text="${title + (#strings.isEmpty(site.subtitle) ? '' : '|' + site.subtitle)}"></title>
-  <script th:if="${theme.config.enhance.enable_sw}" th:src="${(theme.config.enhance.enable_sw == 'uninstall')? #theme.assets('/js/sw.min.js?uninstall=true') + '&mew=1.2.2' : '/sw.min.js?mew=1.2.2' + theme.config.enhance.enable_sw + '&cdn=' + theme.config.enhance.sw_cdn_source.replaceAll('\n', ',')}"></script>
+  <script th:if="${theme.config.enhance.enable_sw}" th:src="${(theme.config.enhance.enable_sw == 'uninstall')? #theme.assets('/js/sw.min.js?uninstall=true') + '&mew=1.2.3' : '/sw.min.js?mew=1.2.3' + theme.config.enhance.enable_sw + '&cdn=' + theme.config.enhance.sw_cdn_source.replaceAll('\n', ',')}"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="applicable-device" content="pc,mobile">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
