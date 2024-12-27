@@ -131,9 +131,6 @@ task('zip', () => {
 
 task('publish', (done) => {
   try {
-    // 切换到项目根目录
-    process.chdir(path.resolve(__dirname, '..'))
-
     // 需要将tag标签内容置为 latest
     process.env.npm_config_tag = 'latest'
     console.log(execSync('npm publish').toString())
