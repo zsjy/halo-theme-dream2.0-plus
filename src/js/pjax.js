@@ -179,6 +179,8 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
   commonContext.iniTaskItemDisabled()
   /* 初始化轮播 */
   commonContext.initCarousel()
+  /** 关闭画廊 **/
+  commonContext.closeFancybox()
   window.DProgress && DProgress.done()
 })
 

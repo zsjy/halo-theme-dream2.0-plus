@@ -362,6 +362,14 @@ const commonContext = {
       },
     })
   },
+  /** 关闭画廊 **/
+  closeFancybox() {
+    // 检测Fancybox是否打开
+    if (document.querySelector('.fancybox-container')) {
+      // 关闭Fancybox
+      $.fancybox.close()
+    }
+  },
   /* 个人信息界面打印彩字 */
   sparkInput() {
     const sparkInputContent = DreamConfig.spark_input_content && DreamConfig.spark_input_content.filter(s => s.length > 0)
