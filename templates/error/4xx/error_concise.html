@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org"
+      th:fragment="error_fragment">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found</title>
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --text-color: #333;
+            --card-bg: white;
+            --heading-color: #2c3e50;
+            --link-color: #3498db;
+        }
+
+        .dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --card-bg: #2c2c2c;
+            --heading-color: #ffffff;
+            --link-color: #63b3ed;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        h1 {
+            color: var(--heading-color);
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            transition: color 0.3s;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 24px;
+            transition: transform 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="切换主题">🌓</button>
+<div class="container">
+    <div class="icon">🔍</div>
+    <h1>404 Not Found</h1>
+    <p>抱歉，您请求的页面不存在。</p>
+    <p>可能是输入的网址有误，或者该页面已被移动或删除。</p>
+    <a href="/" class="back-link">返回首页</a>
+</div>
+
+<script>
+  function toggleTheme() {
+    document.body.classList.toggle('dark-mode')
+    localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light')
+  }
+
+  const savedTheme = localStorage.getItem('theme')
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode')
+  }
+
+  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+
+  function handleThemeChange(e) {
+    if (savedTheme) return
+    if (e.matches) {
+      document.body.classList.add('dark-mode')
+    } else {
+      document.body.classList.remove('dark-mode')
+    }
+  }
+
+  mediaQuery.addListener(handleThemeChange)
+  handleThemeChange(mediaQuery)
+</script>
+</body>
+</html>

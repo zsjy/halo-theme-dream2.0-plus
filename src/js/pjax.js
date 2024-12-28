@@ -229,6 +229,8 @@ $(document).on('pjax:end', function (event, xhr, options) {
     commonContext.initTimeCount()
     /* 初始化任务列表，禁止点击 */
     commonContext.iniTaskItemDisabled()
+    /** 关闭画廊 **/
+    commonContext.closeFancybox()
     window.DProgress && DProgress.done()
     // 应该是由于浏览器缓存失效，有时候浏览器前后退还是会执行pjax:beforeSend
     $('html').removeClass('pjax-loading')

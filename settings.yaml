@@ -1338,6 +1338,36 @@ spec:
               label: 开启
             - value: false
               label: 关闭
+        - $formkit: group
+          name: error
+          label: 错误页面
+          help: 配置错误页面风格。
+          value:
+            style_4xx: 'error/common/error_default'
+            style_5xx: 'error/common/error_default'
+          children:
+            - $formkit: select
+              name: style_4xx
+              label: 4xx错误页面风格
+              help: '发生4xx错误页面风格，如：404等。'
+              options:
+                - value: 'error/4xx/error_blue_screen'
+                  label: 蓝屏代码
+                - value: 'error/4xx/error_tv_screen'
+                  label: 电视雪花屏幕
+                - value: 'error/4xx/error_train'
+                  label: 小火车
+                - value: 'error/4xx/error_concise'
+                  label: 简洁
+                - value: 'error/common/error_default'
+                  label: 默认
+            - $formkit: select
+              name: style_5xx
+              label: 5xx错误页面风格
+              help: '发生5xx错误页面风格，如：500等。'
+              options:
+                - value: 'error/common/error_default'
+                  label: 默认
         - $formkit: radio
           name: effects_lantern_mode
           id: effects_lantern_mode
