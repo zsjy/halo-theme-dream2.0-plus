@@ -51,11 +51,8 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    # Actions构建
-    - name: Build-Dev
-      if: ${{ env.branch_type != 'master' }}
-      run: npm run release --tag=${{ env.version }}
-    - name: Build-Master
+    # 构建
+    - name: Build
       if: ${{ env.branch_type == 'master' }}
       run: npm run release --tag=${{ env.version }}
       env:
@@ -85,3 +82,12 @@ jobs:
         asset_path: ./dist/halo-theme-dream2.0-plus.zip
         asset_name: halo-theme-dream2.0-plus-V${{ env.version }}.zip
         asset_content_type: application/zip
+
+    - name: npm ci
+      if: ${{ env.branch_type != 'master' }}
+      run: npm ci
+    - name: npm publish
+      if: ${{ env.branch_type != 'master' }}
+      run: npm publish --tag=latest
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
