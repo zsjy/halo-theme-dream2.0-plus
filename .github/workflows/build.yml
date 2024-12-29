@@ -84,10 +84,10 @@ jobs:
         asset_content_type: application/zip
 
     - name: npm ci
-      if: ${{ env.branch_type != 'master' }}
+      if: ${{ env.branch_type == 'master' }}
       run: npm ci
     - name: npm publish
-      if: ${{ env.branch_type != 'master' }}
+      if: ${{ env.branch_type == 'master' }}
       run: npm publish --tag=latest
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
