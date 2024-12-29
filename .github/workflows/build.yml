@@ -82,8 +82,8 @@ jobs:
 
     - name: npm cache clean
       if: ${{ env.branch_type == 'master' }}
-      run: npm ci
-    - name: npm cache clean
+      run: npm cache clean
+    - name: npm ci
       if: ${{ env.branch_type == 'master' }}
       run: npm ci
     - name: npm publish
