@@ -53,7 +53,6 @@ jobs:
 
     # 构建
     - name: Build
-      if: ${{ env.branch_type == 'master' }}
       run: npm run release --tag=${{ env.version }}
 
     # 如果是master分支，创建latest的Release，否则创建 预览版
