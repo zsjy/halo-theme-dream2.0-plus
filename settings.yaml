@@ -1307,7 +1307,7 @@ spec:
           name: enable_sw
           label: "启用 Service Worker 优化"
           value: "false"
-          help: "需要在 Nginx 中添加代理配置方可启用，配置方法见：https://blog.nineya.com/archives/104.html"
+          help: "需要在 Nginx 中添加代理配置方可启用，配置方法见：https://www.hcjike.com/archives/slrrTp6c"
           options:
             - value: "false"
               label: 关闭
@@ -1323,7 +1323,7 @@ spec:
           name: sw_cdn_source
           label: "Service Worker 并发 CDN 源"
           placeholder: 请输入 CDN 地址（一行一个）
-          help: '填入可用的 NPM 公共开源 CDN 地址（一行一个），通过 “{CDN 地址}/{项目名}@{版本号}/${文件路径}” 可访问到文件，如：https://unpkg.com/halo-theme-dream@3.2.1/source/js/utils.min.js'
+          help: '填入可用的 NPM 公共开源 CDN 地址（一行一个），通过 “{CDN 地址}/{项目名}@{版本号}/${文件路径}” 可访问到文件，如：https://unpkg.com/halo-theme-dream2-plus@1.3.6/templates/assets/js/utils.min.js'
           value: |-
             https://unpkg.com
             https://cdn.jsdelivr.net/npm
