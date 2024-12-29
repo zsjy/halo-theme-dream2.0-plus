@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 Not Found</title>
+    <title>[[${error.status + ' - ' + #strings.defaultString(error.title, 'Internal server error')}]]</title>
+    <link rel="icon" th:href="${site.favicon}">
     <style>
         :root {
             --bg-color: #f0f2f5;
@@ -103,10 +104,11 @@
 <button class="theme-toggle" onclick="toggleTheme()" aria-label="切换主题">🌓</button>
 <div class="container">
     <div class="icon">🔍</div>
-    <h1>404 Not Found</h1>
-    <p>抱歉，您请求的页面不存在。</p>
-    <p>可能是输入的网址有误，或者该页面已被移动或删除。</p>
-    <a href="/" class="back-link">返回首页</a>
+    <h1>[[${error.status + ' ' + #strings.defaultString(error.title, 'Internal server error')}]]</h1>
+    <p th:if="${error.status >= 500 && error.status < 600}">围观群众太过热情，服务器繁忙，请稍后访问。</p>
+    <p th:if="${error.status >= 400 && error.status < 500}">抱歉，您请求的页面不存在。</p>
+    <p th:if="${error.status >= 400 && error.status < 500}">可能是输入的网址有误，或者该页面已被移动或删除。</p>
+    <a th:if="${error.status >= 400 && error.status < 500}" href="/" class="back-link">返回首页</a>
 </div>
 
 <script>

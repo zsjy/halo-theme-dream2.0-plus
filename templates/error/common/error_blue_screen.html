@@ -3,7 +3,9 @@
       th:fragment="error_fragment">
 <head>
     <meta charset="utf-8"/>
-    <title>404</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[[${error.status + ' - ' + #strings.defaultString(error.title, 'Internal server error')}]]</title>
+    <link rel="icon" th:href="${site.favicon}">
     <style>
         * {
             margin: 0;
@@ -67,9 +69,9 @@
         </div>
     </div>
 </div>
-<script>
+<script th:inline="javascript">
   var n = 0
-  var speed = 100
+  var speed = 50
 
   function getUrlParams(name) { // 不传name返回所有值，否则返回对应值
     var url = window.location.search
@@ -104,26 +106,18 @@
     return nameres
   }
 
-  var res1 = getUrlParams('backurl')
-  var res2 = getUrlParams('errorcode')
-
-  if (res1 == null) {
-    res1 = '/'
-  }
-
-  if (res2 == null) {
-    res2 = '404'
-  }
+  var res1 = '/'
+  var res2 = [[${error.status}]]
 
   var errortext = ''
   switch (res2) {
-  case '502':
+  case 502:
     errortext = '终止代码:THE SERVER RESPONDED WITH A STATUS OF 502 (Bad Gateway)'
     break
-  case '403':
+  case 403:
     errortext = '终止代码:THE SERVER RESPONDED WITH A STATUS OF 403 (Forbidden)'
     break
-  case '500':
+  case 500:
     errortext = '终止代码:THE SERVER RESPONDED WITH A STATUS OF 500 (Internal Server Error)'
     break
   default:

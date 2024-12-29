@@ -1347,27 +1347,57 @@ spec:
             style_5xx: 'error/common/error_default'
           children:
             - $formkit: select
+              id: style_4xx
               name: style_4xx
               label: 4xx错误页面风格
               help: '发生4xx错误页面风格，如：404等。'
               options:
-                - value: 'error/4xx/error_blue_screen'
+                - value: 'error/common/error_blue_screen'
                   label: 蓝屏代码
-                - value: 'error/4xx/error_tv_screen'
+                - value: 'error/common/error_tv_screen'
                   label: 电视雪花屏幕
                 - value: 'error/4xx/error_train'
                   label: 小火车
-                - value: 'error/4xx/error_concise'
+                - value: 'error/common/error_concise'
                   label: 简洁
                 - value: 'error/common/error_default'
                   label: 默认
+                - value: 'error/common/error_custom'
+                  label: 自定义
+            - $formkit: code
+              name: html_content_4xx
+              if: $get(style_4xx).value === 'error/common/error_custom'
+              validation: required
+              label: 自定义4xx错误页面内容
+              language: html
+              height: 45px
+              help: '填写页面内容，填写<html>、<head>和<body>标签内容。'
             - $formkit: select
               name: style_5xx
+              id: style_5xx
               label: 5xx错误页面风格
               help: '发生5xx错误页面风格，如：500等。'
               options:
+                - value: 'error/common/error_blue_screen'
+                  label: 蓝屏代码
+                - value: 'error/common/error_tv_screen'
+                  label: 电视雪花屏幕
+                - value: 'error/5xx/error_train'
+                  label: 小火车
+                - value: 'error/common/error_concise'
+                  label: 简洁
                 - value: 'error/common/error_default'
                   label: 默认
+                - value: 'error/common/error_custom'
+                  label: 自定义
+            - $formkit: code
+              name: html_content_5xx
+              if: $get(style_5xx).value === 'error/common/error_custom'
+              validation: required
+              label: 自定义5xx错误页面内容
+              language: html
+              height: 45px
+              help: '填写页面内容，填写<html>、<head>和<body>标签内容。'
         - $formkit: radio
           name: effects_lantern_mode
           id: effects_lantern_mode

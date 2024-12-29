@@ -1,0 +1,4 @@
+<!DOCTYPE html>
+<th:block xmlns:th="https://www.thymeleaf.org" th:fragment="error_fragment">
+    [(${error.status >= 400 && error.status < 500 ? theme.config.enhance.error.html_content_4xx : theme.config.enhance.error.html_content_5xx})]
+</th:block>
