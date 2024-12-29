@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zsjy/halo-theme-dream2.0-plus"
+    "url": "git+https://github.com/zsjy/halo-theme-dream2.0-plus.git"
   },
   "keywords": [
     "halo",
@@ -47,7 +47,7 @@
     "gulp-rename": "^2.0.0",
     "gulp-uglify": "^3.0.2",
     "gulp-zip": "^5.1.0",
-    "webpack": "^5.68.0",
+    "webpack": "5.94.0",
     "webpack-stream": "^7.0.0"
   },
   "dependencies": {
