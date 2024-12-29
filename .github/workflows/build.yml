@@ -55,8 +55,6 @@ jobs:
     - name: Build
       if: ${{ env.branch_type == 'master' }}
       run: npm run release --tag=${{ env.version }}
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
     # 如果是master分支，创建latest的Release，否则创建 预览版
     - name: Create Release
