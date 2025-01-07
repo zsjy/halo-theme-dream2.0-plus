@@ -697,6 +697,7 @@ spec:
           children:
             - $formkit: select
               name: type
+              id: type
               label: 模块类型
               value: "profile"
               options:
@@ -764,6 +765,7 @@ spec:
               help: '非必填，可覆盖默认侧边栏图标。'
             - $formkit: code
               name: content
+              if: $value.type === 'notice' || $value.type === 'ad_piece' || $value.type === 'custom'
               language: html
               height: 45px
               label: 侧边栏内容
