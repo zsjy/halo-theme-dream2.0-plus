@@ -80,9 +80,6 @@ jobs:
         asset_name: halo-theme-dream2.0-plus-V${{ env.version }}.zip
         asset_content_type: application/zip
 
-    - name: npm cache clean
-      if: ${{ env.branch_type == 'master' }}
-      run: npm cache clean
     - name: npm ci
       if: ${{ env.branch_type == 'master' }}
       run: npm ci
