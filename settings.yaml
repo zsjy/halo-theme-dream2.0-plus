@@ -755,13 +755,11 @@ spec:
                   label: 不隐藏
             - $formkit: text
               name: title
-              if: $value.type !== 'wechat' && $value.type !== 'profile' && $value.type !== 'ad_piece'
               label: 侧边栏标题
               placeholder: '请输入标题内容'
               help: '非必填，可覆盖默认侧边栏标题。'
             - $formkit: text
               name: icon
-              if: $value.type !== 'wechat' && $value.type !== 'profile' && $value.type !== 'ad_piece'
               label: 侧边栏图标
               placeholder: '请输入图标 class 内容'
               help: '非必填，可覆盖默认侧边栏图标。'
