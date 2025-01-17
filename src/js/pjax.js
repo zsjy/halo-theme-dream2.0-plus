@@ -196,18 +196,21 @@ $(document).on('pjax:error', function (event, xhr, textStatus, error, options) {
 $(document).on('pjax:complete', function (event, xhr, textStatus, options) {
   console.log(`pjax:complete sn = ${options.serialNumber}`)
 
-  // 获取当前页面的标题、路径和 URL
-  const currentTitle = document.title
-  const currentPath = window.location.pathname
-  const currentUrl = window.location.href
+  //启用全局评论
+  if (DreamConfig.site_comment) {
+    // 获取当前页面的标题、路径和 URL
+    const currentTitle = document.title
+    const currentPath = window.location.pathname
+    const currentUrl = window.location.href
 
-  if (window.history && window.history.replaceState) {
-    // 更新历史记录状态
-    window.history.replaceState(
-      { url: currentUrl, title: currentTitle, path: currentPath },
-      currentTitle,
-      currentUrl
-    )
+    if (window.history && window.history.replaceState) {
+      // 更新历史记录状态
+      window.history.replaceState(
+        {url: currentUrl, title: currentTitle, path: currentPath},
+        currentTitle,
+        currentUrl
+      )
+    }
   }
 })
 
@@ -244,7 +247,8 @@ $(document).on('pjax:popstate', function (event) {
 // 监听 popstate 事件
 window.addEventListener('popstate', function (event) {
   console.log('popstate event triggered')
-  if (event.state) {
+  //启用全局评论时
+  if (DreamConfig.site_comment && event.state) {
     // console.log('State:', event.state)
 
     const currentUrl = window.location.href
