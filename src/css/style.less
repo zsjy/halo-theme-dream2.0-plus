@@ -3722,6 +3722,13 @@ button.swiper-pagination-bullet {
     overflow: hidden;
     font-size: 0.95em;
 
+    thead {
+      th {
+        font-weight: 500;
+        background: var(--bg-z);
+      }
+    }
+
     td,
     th {
       padding: 8px;
@@ -3735,6 +3742,12 @@ button.swiper-pagination-bullet {
         th {
           font-weight: 500;
           background: var(--bg-z);
+        }
+
+        &:not([style]) {
+          td {
+            text-align: center;
+          }
         }
 
         //&:nth-child(2n) {
