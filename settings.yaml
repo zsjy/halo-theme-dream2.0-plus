@@ -771,6 +771,26 @@ spec:
               label: 侧边栏内容
               placeholder: 请输入 HTML 内容
               help: '非必填，仅在侧边栏类型为公告、广告、自定义时生效。'
+            - $formkit: select
+              name: show_ad_tag
+              if: $value.type === 'ad_piece'
+              label: 侧边栏广告-显示“广告”标签
+              value: true
+              options:
+                - value: true
+                  label: 显示
+                - value: false
+                  label: 不显示
+            - $formkit: select
+              name: ad_tag_close
+              if: $value.type === 'ad_piece'
+              label: 侧边栏广告-点击“广告”标签可关闭广告
+              value: true
+              options:
+                - value: true
+                  label: 是
+                - value: false
+                  label: 否
         - $formkit: radio
           name: enable_color_character
           label: 侧边栏信息-开启彩字切换
@@ -940,26 +960,6 @@ spec:
             type="playlist"
             id="7355014621"
           help: '输入音乐参数配置(id / server / type必填)，详细配置方式见官方文档：https://github.com/metowolf/MetingJS/'
-        - $formkit: radio
-          name: show_ad_tag
-          label: 侧边栏广告-显示“广告”标签
-          help: '控制所有“广告模块”的显示广告标签功能。'
-          value: true
-          options:
-            - value: true
-              label: 显示
-            - value: false
-              label: 不显示
-        - $formkit: radio
-          name: ad_tag_close
-          label: 侧边栏广告-点击“广告”标签可关闭广告
-          help: '控制所有“广告模块”的关闭广告功能。'
-          value: true
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
         - $formkit: number
           name: recent_posts_num
           label: 侧边栏最近文章-展示文章数量
