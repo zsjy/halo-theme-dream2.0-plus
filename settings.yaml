@@ -379,7 +379,7 @@ spec:
           name: top_thumbnail_mode
           label: 置顶文章列表封面图模式
           value: back
-          help: '置顶的文章在列表的封面图模式，除网格布局外，如果文章元数据配置了thumbnail_mode项，则当前配置将被覆盖。注：设置网格布局后，非置顶文章也会变成网格布局。'
+          help: '置顶的文章在列表的封面图模式，除网格布局外，如果文章元数据配置了“文章列表缩略图模式”项，则当前配置将被覆盖。注：设置网格布局后，非置顶文章也会变成网格布局。'
           options:
             - value: default
               label: 默认模式
@@ -399,7 +399,7 @@ spec:
           name: thumbnail_mode
           label: 文章列表封面图模式
           value: default
-          help: '文章列表封面图模式，除网格布局外，如果文章元数据配置了thumbnail_mode项，则当前配置将被覆盖。'
+          help: '文章列表封面图模式，除网格布局外，如果文章元数据配置了“文章列表缩略图模式”项，则当前配置将被覆盖。'
           options:
             - value: default
               label: 默认模式
@@ -581,7 +581,7 @@ spec:
           name: enable_katex
           label: KaTeX 公式支持
           value: false
-          help: '博客通过 KaTeX 做数学公式渲染，如果文章或页面元数据配置了enable_katex项，则当前配置将被覆盖。'
+          help: '博客通过 KaTeX 做数学公式渲染，如果文章或页面元数据配置了“KaTeX 公式支持”项，则当前配置将被覆盖。'
           options:
             - value: true
               label: 默认开启
@@ -591,7 +591,7 @@ spec:
           name: enable_copyright
           label: 开启文章版权声明
           value: true
-          help: '如果文章或页面元数据配置了enable_copyright项，则当前配置将被覆盖。'
+          help: '如果文章或页面元数据配置了“开启文章版权声明”项，则当前配置将被覆盖。'
           options:
             - value: true
               label: 默认开启
@@ -601,7 +601,7 @@ spec:
           name: enable_post_share
           label: 开启文章分享
           value: true
-          help: '如果文章或页面元数据配置了enable_share项，则当前配置将被覆盖。'
+          help: '如果文章或页面元数据配置了“开启文章分享”项，则当前配置将被覆盖。'
           options:
             - value: true
               label: 默认开启
@@ -657,7 +657,7 @@ spec:
           name: enable_post_donate
           label: 开启文章打赏
           value: true
-          help: '如果文章或页面元数据配置了enable_donate项，则当前配置将被覆盖。'
+          help: '如果文章或页面元数据配置了“开启文章打赏”项，则当前配置将被覆盖。'
           options:
             - value: true
               label: 默认开启
@@ -1328,7 +1328,7 @@ spec:
           help: '填入可用的 NPM 公共开源 CDN 地址（一行一个），通过 “{CDN 地址}/{项目名}@{版本号}/${文件路径}” 可访问到文件，如：https://unpkg.com/halo-theme-dream2-plus@1.3.6/templates/assets/js/utils.min.js'
           value: |-
             https://unpkg.com
-            https://cdn.jsdelivr.net/npm
+            https://cdn.onmicrosoft.cn
             https://npm.elemecdn.com
         - $formkit: radio
           name: enable_pjax
