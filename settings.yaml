@@ -379,7 +379,7 @@ spec:
           name: top_thumbnail_mode
           label: 置顶文章列表封面图模式
           value: back
-          help: '置顶的文章在列表的封面图模式，除网格布局外，如果文章元数据配置了thumbnail_mode项，则当前配置将被覆盖。注：设置网格布局后，非置顶文章也会变成网格布局。'
+          help: '置顶的文章在列表的封面图模式，除网格布局外，如果文章元数据配置了“文章列表缩略图模式”项，则当前配置将被覆盖。注：设置网格布局后，非置顶文章也会变成网格布局。'
           options:
             - value: default
               label: 默认模式
@@ -399,7 +399,7 @@ spec:
           name: thumbnail_mode
           label: 文章列表封面图模式
           value: default
-          help: '文章列表封面图模式，除网格布局外，如果文章元数据配置了thumbnail_mode项，则当前配置将被覆盖。'
+          help: '文章列表封面图模式，除网格布局外，如果文章元数据配置了“文章列表缩略图模式”项，则当前配置将被覆盖。'
           options:
             - value: default
               label: 默认模式
@@ -581,7 +581,7 @@ spec:
           name: enable_katex
           label: KaTeX 公式支持
           value: false
-          help: '博客通过 KaTeX 做数学公式渲染，如果文章或页面元数据配置了enable_katex项，则当前配置将被覆盖。'
+          help: '博客通过 KaTeX 做数学公式渲染，如果文章或页面元数据配置了“KaTeX 公式支持”项，则当前配置将被覆盖。'
           options:
             - value: true
               label: 默认开启
@@ -591,7 +591,7 @@ spec:
           name: enable_copyright
           label: 开启文章版权声明
           value: true
-          help: '如果文章或页面元数据配置了enable_copyright项，则当前配置将被覆盖。'
+          help: '如果文章或页面元数据配置了“开启文章版权声明”项，则当前配置将被覆盖。'
           options:
             - value: true
               label: 默认开启
@@ -601,7 +601,7 @@ spec:
           name: enable_post_share
           label: 开启文章分享
           value: true
-          help: '如果文章或页面元数据配置了enable_share项，则当前配置将被覆盖。'
+          help: '如果文章或页面元数据配置了“开启文章分享”项，则当前配置将被覆盖。'
           options:
             - value: true
               label: 默认开启
@@ -657,7 +657,7 @@ spec:
           name: enable_post_donate
           label: 开启文章打赏
           value: true
-          help: '如果文章或页面元数据配置了enable_donate项，则当前配置将被覆盖。'
+          help: '如果文章或页面元数据配置了“开启文章打赏”项，则当前配置将被覆盖。'
           options:
             - value: true
               label: 默认开启
@@ -771,6 +771,26 @@ spec:
               label: 侧边栏内容
               placeholder: 请输入 HTML 内容
               help: '非必填，仅在侧边栏类型为公告、广告、自定义时生效。'
+            - $formkit: select
+              name: show_ad_tag
+              if: $value.type === 'ad_piece'
+              label: 侧边栏广告-显示“广告”标签
+              value: true
+              options:
+                - value: true
+                  label: 显示
+                - value: false
+                  label: 不显示
+            - $formkit: select
+              name: ad_tag_close
+              if: $value.type === 'ad_piece'
+              label: 侧边栏广告-点击“广告”标签可关闭广告
+              value: true
+              options:
+                - value: true
+                  label: 是
+                - value: false
+                  label: 否
         - $formkit: radio
           name: enable_color_character
           label: 侧边栏信息-开启彩字切换
@@ -940,26 +960,6 @@ spec:
             type="playlist"
             id="7355014621"
           help: '输入音乐参数配置(id / server / type必填)，详细配置方式见官方文档：https://github.com/metowolf/MetingJS/'
-        - $formkit: radio
-          name: show_ad_tag
-          label: 侧边栏广告-显示“广告”标签
-          help: '控制所有“广告模块”的显示广告标签功能。'
-          value: true
-          options:
-            - value: true
-              label: 显示
-            - value: false
-              label: 不显示
-        - $formkit: radio
-          name: ad_tag_close
-          label: 侧边栏广告-点击“广告”标签可关闭广告
-          help: '控制所有“广告模块”的关闭广告功能。'
-          value: true
-          options:
-            - value: true
-              label: 是
-            - value: false
-              label: 否
         - $formkit: number
           name: recent_posts_num
           label: 侧边栏最近文章-展示文章数量
@@ -1328,7 +1328,7 @@ spec:
           help: '填入可用的 NPM 公共开源 CDN 地址（一行一个），通过 “{CDN 地址}/{项目名}@{版本号}/${文件路径}” 可访问到文件，如：https://unpkg.com/halo-theme-dream2-plus@1.3.6/templates/assets/js/utils.min.js'
           value: |-
             https://unpkg.com
-            https://cdn.jsdelivr.net/npm
+            https://cdn.onmicrosoft.cn
             https://npm.elemecdn.com
         - $formkit: radio
           name: enable_pjax

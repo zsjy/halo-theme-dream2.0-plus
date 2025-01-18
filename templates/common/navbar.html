@@ -110,10 +110,10 @@
                         <a href="/console" target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_manage_class)}" th:class="${theme.config.basic_style.logon.console_manage_class}"></i> 后台管理</a>
                     </li>
                     <li th:if="${!#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">
-                        <a href="/logout"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_logout_class)}" th:class="${theme.config.basic_style.logon.console_logout_class}"></i> 退出登录</a>
+                        <a href="/logout" data-not-pjax><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_logout_class)}" th:class="${theme.config.basic_style.logon.console_logout_class}"></i> 退出登录</a>
                     </li>
                     <li th:if="${#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">
-                        <a href="/login" onclick="this.href = '/login?redirect_uri=' + encodeURIComponent(window.location.href)"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_login_class)}" th:class="${theme.config.basic_style.logon.console_login_class}"></i> 登录</a>
+                        <a href="/login" data-not-pjax onclick="this.href = '/login?redirect_uri=' + encodeURIComponent(window.location.href)"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_login_class)}" th:class="${theme.config.basic_style.logon.console_login_class}"></i> 登录</a>
                     </li>
                 </ul>
             </div>
