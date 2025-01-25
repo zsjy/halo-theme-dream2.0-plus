@@ -578,16 +578,6 @@ spec:
           placeholder: '请输入时间（天）'
           help: '文章超过指定天数未进行更新，展示文章或图片可能失效的温馨提示。'
         - $formkit: radio
-          name: enable_katex
-          label: KaTeX 公式支持
-          value: false
-          help: '博客通过 KaTeX 做数学公式渲染，如果文章或页面元数据配置了“KaTeX 公式支持”项，则当前配置将被覆盖。'
-          options:
-            - value: true
-              label: 默认开启
-            - value: false
-              label: 默认关闭
-        - $formkit: radio
           name: enable_copyright
           label: 开启文章版权声明
           value: true
