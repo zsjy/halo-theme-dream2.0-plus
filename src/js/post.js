@@ -92,7 +92,9 @@ const postContext = {
   /* 代码块高亮 */
   initHighlighting() {
     // 初始化代码块高亮工具
-    hljs.highlightAll()
+    if(hljs) {
+      hljs.highlightAll()
+    }
   },
   /**
      * 初始化分享
@@ -191,19 +193,6 @@ const postContext = {
       localStorage.setItem(name, encrypt(JSON.stringify(commentIds)))
     }
     postContextInitial = true
-  },
-  /* 初始化公式 */
-  initKatex() {
-    let $mainContent = $('.main-content')
-    if (!window.katex && $mainContent.length !== 0) {
-      return
-    }
-    $mainContent.find('.katex--inline').each(function (index, domEle) {
-      katex.render(domEle.innerText, domEle, { displayMode: false })
-    })
-    $mainContent.find('.katex--display').each(function (index, domEle) {
-      katex.render(domEle.innerText, domEle, { displayMode: true })
-    })
   }
 }
 window.postPjax = function (serialNumber) {

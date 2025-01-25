@@ -173,6 +173,8 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
   window.journalPjax && window.journalPjax(serialNumber)
   /* 初始化文章界面 */
   window.postPjax && window.postPjax(serialNumber)
+  /* 初始化Katex */
+  window.initKatex && window.initKatex()
   /* 刷新人生倒计时 */
   commonContext.initTimeCount()
   /* 初始化任务列表，禁止点击 */

@@ -632,6 +632,20 @@ const commonContext = {
   }
 }
 
+// 初始化katex
+window.initKatex = function () {
+  let $mainContent = $('.main-content')
+  if (!window.katex && $mainContent.length !== 0) {
+    return
+  }
+  $mainContent.find('[math-inline]').each(function (index, domEle) {
+    katex.render(domEle.innerText, domEle, { displayMode: false })
+  })
+  $mainContent.find('[math-display]').each(function (index, domEle) {
+    katex.render(domEle.innerText, domEle, { displayMode: true })
+  })
+}
+
 window.commonContext = commonContext
 let timeLifeHour = -1
 
