@@ -635,7 +635,8 @@ const commonContext = {
 // 初始化katex
 window.initKatex = function () {
   let $mainContent = $('.main-content')
-  if (!window.katex && $mainContent.length !== 0) {
+  if (typeof katex === 'undefined' || katex === null || $mainContent.length === 0) {
+    console.log('katex is not defined')
     return
   }
   $mainContent.find('[math-inline]').each(function (index, domEle) {
