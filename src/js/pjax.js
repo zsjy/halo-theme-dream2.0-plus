@@ -132,7 +132,7 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
   $currentTarget.filter('link').filter(function() {
     const isDataPjax = $(this).is('[data-pjax]')
     const href = $(this).attr('href')
-    const isStaticPath = href && href.startsWith('/plugins/PluginHighlightJS/')
+    const isStaticPath = href && (href.startsWith('/plugins/PluginHighlightJS/'))
     return isDataPjax || isStaticPath
   }).each(function () {
     let href = $(this).attr('href')
@@ -149,7 +149,7 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
   let $scripts = $currentTarget.filter('script').filter(function() {
     const isDataPjax = $(this).is('[data-pjax]')
     const src = $(this).attr('src')
-    const isStaticPath = src && src.startsWith('/plugins/PluginHighlightJS/')
+    const isStaticPath = src && (src.startsWith('/plugins/PluginHighlightJS/'))
     return isDataPjax || isStaticPath
   })
   if ($scripts.length > 0) {
