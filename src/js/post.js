@@ -92,7 +92,11 @@ const postContext = {
   /* 代码块高亮 */
   initHighlighting() {
     // 初始化代码块高亮工具
-    if(hljs) {
+    if(typeof hljs !== 'undefined' && hljs !== null) {
+      document.querySelectorAll('code[data-highlighted="yes"]').forEach(element => {
+        element.removeAttribute('data-highlighted')
+      })
+
       hljs.highlightAll()
     }
   },

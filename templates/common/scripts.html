@@ -6,7 +6,6 @@
     <script th:src="@{/assets/js/common.min.js(mew=${theme.spec.version})}"></script>
 
     <th:block th:if="${isPost}">
-        <script th:if="${isPost}" data-pjax th:src="@{/assets/lib/highlightjs@11.5.1/highlight.min.js}"></script>
         <script th:if="${isPost}" data-pjax th:src="@{/assets/lib/clipboard@2.0.10/clipboard.min.js}"></script>
         <script th:if="${enableShare}" data-pjax th:src="@{/assets/js/dshare.min.js(mew=${theme.spec.version})}"></script>
         <script th:if="${isPost}" data-pjax th:src="@{/assets/js/post.min.js(mew=${theme.spec.version})}"></script>
