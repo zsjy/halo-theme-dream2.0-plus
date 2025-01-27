@@ -46,18 +46,6 @@ spec:
       placeholder: '请输入提示内容'
       help: '在文章顶部显示一条提示。'
     - $formkit: radio
-      name: enable_katex
-      label:  KaTeX 公式支持
-      value: ""
-      help: '博客通过 KaTeX 做数学公式渲染，当前配置将覆盖主题中的默认配置。'
-      options:
-        - value: "true"
-          label:  开启
-        - value: "false"
-          label:  关闭
-        - value: ""
-          label:  跟随默认配置
-    - $formkit: radio
       name: enable_share
       label:  开启文章分享
       value: ""
@@ -111,18 +99,6 @@ spec:
       value: ""
       placeholder: '请输入提示内容'
       help: '在文章顶部显示一条提示。'
-    - $formkit: radio
-      name: enable_katex
-      label:  KaTeX 公式支持
-      value: ""
-      help: '博客通过 KaTeX 做数学公式渲染，当前配置将覆盖主题中的默认配置。'
-      options:
-        - value: "true"
-          label:  开启
-        - value: "false"
-          label:  关闭
-        - value: ""
-          label:  跟随默认配置
     - $formkit: radio
       name: enable_share
       label:  开启文章分享

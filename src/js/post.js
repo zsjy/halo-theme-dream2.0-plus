@@ -92,7 +92,13 @@ const postContext = {
   /* 代码块高亮 */
   initHighlighting() {
     // 初始化代码块高亮工具
-    hljs.highlightAll()
+    if(typeof hljs !== 'undefined' && hljs !== null) {
+      document.querySelectorAll('code[data-highlighted="yes"]').forEach(element => {
+        element.removeAttribute('data-highlighted')
+      })
+
+      hljs.highlightAll()
+    }
   },
   /**
      * 初始化分享
@@ -191,21 +197,23 @@ const postContext = {
       localStorage.setItem(name, encrypt(JSON.stringify(commentIds)))
     }
     postContextInitial = true
-  },
-  /* 初始化公式 */
-  initKatex() {
-    let $mainContent = $('.main-content')
-    if (!window.katex && $mainContent.length !== 0) {
-      return
-    }
-    $mainContent.find('.katex--inline').each(function (index, domEle) {
-      katex.render(domEle.innerText, domEle, { displayMode: false })
-    })
-    $mainContent.find('.katex--display').each(function (index, domEle) {
-      katex.render(domEle.innerText, domEle, { displayMode: true })
-    })
   }
 }
+// 初始化katex
+window.initKatex = function () {
+  let $mainContent = $('.main-content')
+  if (typeof katex === 'undefined' || katex === null || $mainContent.length === 0) {
+    console.log('katex is not defined')
+    return
+  }
+  $mainContent.find('[math-inline]').each(function (index, domEle) {
+    katex.render(domEle.innerText, domEle, { displayMode: false })
+  })
+  $mainContent.find('[math-display]').each(function (index, domEle) {
+    katex.render(domEle.innerText, domEle, { displayMode: true })
+  })
+}
+
 window.postPjax = function (serialNumber) {
   if ($('.main-content').length === 0) return
   Object.keys(postContext).forEach(

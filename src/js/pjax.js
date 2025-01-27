@@ -129,7 +129,12 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
   $head.find('link[rel="canonical"]').remove()
   $head.append($currentTarget.filter('meta'))
   $head.append($currentTarget.filter('link[rel="canonical"]'))
-  $currentTarget.filter('link[data-pjax]').each(function () {
+  $currentTarget.filter('link').filter(function() {
+    const isDataPjax = $(this).is('[data-pjax]')
+    const href = $(this).attr('href')
+    const isStaticPath = href && (href.startsWith('/plugins/PluginHighlightJS/') || href.startsWith('/plugins/plugin-katex/'))
+    return isDataPjax || isStaticPath
+  }).each(function () {
     let href = $(this).attr('href')
     if (!cssLoadCompletes.has(href)) {
       $head.append($(this))
@@ -141,7 +146,12 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
       }
     }
   })
-  let $scripts = $currentTarget.filter('script[data-pjax]')
+  let $scripts = $currentTarget.filter('script').filter(function() {
+    const isDataPjax = $(this).is('[data-pjax]')
+    const src = $(this).attr('src')
+    const isStaticPath = src && (src.startsWith('/plugins/PluginHighlightJS/'))
+    return isDataPjax || isStaticPath
+  })
   if ($scripts.length > 0) {
     $scripts.filter('[async]').each(function () {
       let src = $(this).attr('src')
@@ -173,6 +183,8 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
   window.journalPjax && window.journalPjax(serialNumber)
   /* 初始化文章界面 */
   window.postPjax && window.postPjax(serialNumber)
+  /* 初始化Katex */
+  window.initKatex && window.initKatex()
   /* 刷新人生倒计时 */
   commonContext.initTimeCount()
   /* 初始化任务列表，禁止点击 */

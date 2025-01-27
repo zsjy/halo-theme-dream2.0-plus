@@ -15,6 +15,19 @@
 - [主题文档](https://www.hcjike.com/docs/halo-theme-dream2.0) 
 - [侧边栏组件](https://www.hcjike.com/docs/halo-theme-dream2.0/theme/sidebar-assembly)
 
+## 插件
+### KaTeX
+- 安装并启用`KaTeX插件`，插件配置如下；
+  - 行内公式 CSS 选择器：`[math-inline]`；
+  - 块级公式 CSS 选择器：`[math-display]`。
+
+### highlight.js 代码高亮
+- 安装并启用`highlight.js 代码高亮`插件，插件配置如下；
+  - **开启**`启用主题侧渲染`；
+  - 页面规则添加`/**`，匹配所有页面；
+  - **不开启**`显示复制按钮`，主题端已提供复制按钮，不需要额外开启。
+
+
 ## 开发中功能
 - 开发中功能已发布为[预发行版](https://github.com/zsjy/halo-theme-dream2.0-plus/releases)，开发中的功能不保证留存到正式版，包括但不限于：主题配置位置、配置方式、页面样式等等。
 
