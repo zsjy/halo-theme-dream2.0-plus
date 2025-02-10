@@ -390,7 +390,7 @@ const commonContext = {
     }
     const grt = new Date(loveTime)
     setInterval(function () {
-      let now = Date.now()
+      let now = new Date(Date.now())
       let difference = parseInt((now - grt) / 1000)
       let seconds = difference % 60
       difference = parseInt(difference / 60)
