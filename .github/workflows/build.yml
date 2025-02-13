@@ -5,7 +5,6 @@ name: halo-theme-dream2.0-plus CI
 
 on:
   push:
-    branches: [ "master", "dev" ]
     paths: ["theme.yaml"]
   workflow_dispatch:
   
