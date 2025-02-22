@@ -1457,6 +1457,57 @@ spec:
           value: '您即将离开<span>{title}</span>，去往：<span>{url}</span>'
           placeholder: '请输入安全链接页面跳转提示区域的文本描述'
           help: '"<span></span>"包裹时字体颜色为主题色，“ {title} ”表示站点主标题，“ {url} ”表示跳转URL，区分大小写。默认值：“您即将离开<span>{title}</span>，去往：<span>{url}</span>”'
+    - group: pwa
+      label: 'PWA配置'
+      formSchema:
+        - $formkit: radio
+          name: enable_pwa
+          id: enable_pwa
+          label: 开启 PWA 配置
+          value: false
+          help: '开启 PWA，请先参考 https://www.hcjike.com/archives/MNdz7kZ6 页面的相关说明。'
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
+        - $formkit: attachment
+          name: manifest_file
+          if: $get(enable_pwa).value
+          accepts:
+            - "application/json"
+          label: manifest.json 文件路径
+          validation: required
+          placeholder: '请输入/选择 manifest.json 文件'
+          help: '请输入或选择一个 manifest.json 文件。该文件的创建方法可参考 https://www.hcjike.com/archives/MNdz7kZ6 页面的相关说明。'
+        - $formkit: color
+          name: theme_color
+          if: $get(enable_pwa).value
+          label: 主题颜色
+          validation: required
+          help: 设置浏览器地址栏、工具栏或状态栏的主题颜色。
+          value: '#50bfff'
+        - $formkit: select
+          name: apple_status_bar_style
+          if: $get(enable_pwa).value
+          label: iOS 设备状态栏样式
+          validation: required
+          value: 'black'
+          help: '控制 iOS 设备上 Web 应用的状态栏样式。'
+          options:
+            - value: 'default'
+              label: 白色文字，灰色状态栏
+            - value: 'black'
+              label: 白色文字，黑色状态栏
+            - value: 'black-translucent'
+              label: 白色文字，半透明黑色状态栏
+        - $formkit: attachment
+          name: apple_touch_icon
+          if: $get(enable_pwa).value
+          label: iOS 设备显示图标
+          validation: required
+          placeholder: '请输入/选择图标文件'
+          help: '为 iOS 设备设置添加到主屏幕时的图标。'
     - group: custom
       label: '定制主题'
       formSchema:
