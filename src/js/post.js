@@ -42,18 +42,18 @@ const postContext = {
       }
       // 生成行号
       let codes = $(this).text().split('\n') || []
-      let nums = codes.length-1
+      let nums = codes.length - 1
       let lineDigit = String(nums).length
       if (lineDigit === 1) lineDigit = 2
       let lis = ''
       for (var i = 0; i < nums; i++) {
-        lis += `<li ${(lines && /^\s*\|\+\s+/.test(codes[i]))? 'class="code-select"' : ''}>${String(i + 1).padStart(lineDigit, 0)}</li>`
+        lis += `<li ${(lines && /^\s*\|\+\s+/.test(codes[i])) ? 'class="code-select"' : ''}>${String(i + 1).padStart(lineDigit, 0)}</li>`
       }
       if (codes[nums].trim() !== '') {
-        lis += `<li ${(lines && /^\s*\|\+\s+/.test(codes[i]))? 'class="code-select"' : ''}>${String(nums + 1).padStart(lineDigit, 0)}</li>`
+        lis += `<li ${(lines && /^\s*\|\+\s+/.test(codes[i])) ? 'class="code-select"' : ''}>${String(nums + 1).padStart(lineDigit, 0)}</li>`
       }
       if (lines) {
-        $(this).text($(this).text().replace(/(^\s*)\|\+\s/gm,'$1'))
+        $(this).text($(this).text().replace(/(^\s*)\|\+\s/gm, '$1'))
       }
       // 代码块的id，用于代码块复制和折叠
       let id = `codeBlock${index}-${new Date().getTime()}`
@@ -92,7 +92,7 @@ const postContext = {
   /* 代码块高亮 */
   initHighlighting() {
     // 初始化代码块高亮工具
-    if(typeof hljs !== 'undefined' && hljs !== null) {
+    if (typeof hljs !== 'undefined' && hljs !== null) {
       document.querySelectorAll('code[data-highlighted="yes"]').forEach(element => {
         element.removeAttribute('data-highlighted')
       })
@@ -101,8 +101,8 @@ const postContext = {
     }
   },
   /**
-     * 初始化分享
-     */
+   * 初始化分享
+   */
   initShare() {
     if (!window.DShare) return
     let imageUrl = $('.cover-image').css('background-image')
@@ -206,11 +206,23 @@ window.initKatex = function () {
     console.log('katex is not defined')
     return
   }
-  $mainContent.find('[math-inline]').each(function (index, domEle) {
-    katex.render(domEle.innerText, domEle, { displayMode: false })
+  $mainContent.find('[math-inline], .math-inline, .katex--inline').each(function (index, domEle) {
+    katex.render(domEle.innerText, domEle, {displayMode: false})
   })
-  $mainContent.find('[math-display]').each(function (index, domEle) {
-    katex.render(domEle.innerText, domEle, { displayMode: true })
+  $mainContent.find('[math-display], .math-display, .katex--display').each(function (index, domEle) {
+    katex.render(domEle.innerText, domEle, {displayMode: true})
+  })
+}
+
+// 初始化Mermaid
+window.initMermaid = function () {
+  if (typeof mermaid === 'undefined' || mermaid === null) {
+    return
+  }
+  const postBody = document.body
+  mermaid.initialize({startOnLoad: true})
+  mermaid.run({
+    querySelector: 'text-diagram[data-type=mermaid]',
   })
 }
 
