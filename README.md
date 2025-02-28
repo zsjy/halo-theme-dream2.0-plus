@@ -18,8 +18,8 @@
 ## 插件
 ### KaTeX
 - 安装并启用`KaTeX插件`，插件配置如下；
-  - 行内公式 CSS 选择器：`[math-inline]`；
-  - 块级公式 CSS 选择器：`[math-display]`。
+  - 行内公式 CSS 选择器：`[math-inline],.math-inline,.katex--inline`；
+  - 块级公式 CSS 选择器：`[math-display],.math-display,.katex--display`。
 
 ### highlight.js 代码高亮
 - 安装并启用`highlight.js 代码高亮`插件，插件配置如下；
