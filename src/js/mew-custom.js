@@ -115,12 +115,12 @@ document.addEventListener('DOMContentLoaded', () => {
               .then((response) => response.json())
           } else if (this.hasAttribute('song')) {
             this.options.audio = await fetch(
-              'https://api.i-meto.com/meting/api?server=netease&type=song&id=' +
+              this.getAttribute('apiUrl') || 'https://api.i-meto.com/meting/api' + '?server=netease&type=song&id=' +
               this.getAttribute('song')
             ).then((response) => response.json())
           } else if (this.hasAttribute('playlist')) {
             this.options.audio = await fetch(
-              'https://api.i-meto.com/meting/api?server=netease&type=playlist&id=' +
+              this.getAttribute('apiUrl') || 'https://api.i-meto.com/meting/api' + '?server=netease&type=playlist&id=' +
               this.getAttribute('playlist')
             ).then((response) => response.json())
           } else if (this.hasAttribute('url')) {
