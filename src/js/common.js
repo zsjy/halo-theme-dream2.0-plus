@@ -72,10 +72,10 @@ const commonContext = {
     const applyNight = (isNightValue) => {
       if (isNightValue) {
         // 配色方案
-        $('html').addClass('color-scheme-dark').removeClass('color-scheme-light').addClass('night')
+        $('html').addClass('color-scheme-dark').removeClass('color-scheme-light').addClass('night').attr('night', true)
       } else {
         // 配色方案
-        $('html').addClass('color-scheme-light').removeClass('color-scheme-dark').removeClass('night')
+        $('html').addClass('color-scheme-light').removeClass('color-scheme-dark').removeClass('night').removeAttr('night')
       }
       localStorage.setItem('night', isNightValue)
       isNight = isNightValue
