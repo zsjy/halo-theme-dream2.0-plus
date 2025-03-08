@@ -2,17 +2,6 @@ window.encrypt = (str) => window.btoa(unescape(encodeURIComponent(str)))
 window.decrypt = (str) => decodeURIComponent(escape(window.atob(str)))
 
 const commonContext = {
-  /* 初始化widget */
-  initWidget() {
-    const $columnRight = $('.columns .column-right')
-    const $columnRightShadow = $('.columns .column-right-shadow')
-    // 实现将右边widget拷贝的左边
-    if ($columnRight.length && $columnRightShadow.length && !$columnRightShadow[0].children.length) {
-      for (const child of $columnRight[0].children) {
-        $columnRightShadow[0].append(child.cloneNode(true))
-      }
-    }
-  },
   /* 初始化目录和公告模块 */
   initTocAndNotice() {
     const {pathname} = location
@@ -72,10 +61,10 @@ const commonContext = {
     const applyNight = (isNightValue) => {
       if (isNightValue) {
         // 配色方案
-        $('html').addClass('color-scheme-dark').removeClass('color-scheme-light').addClass('night')
+        $('html').addClass('color-scheme-dark').removeClass('color-scheme-light').addClass('night').attr('night', true)
       } else {
         // 配色方案
-        $('html').addClass('color-scheme-light').removeClass('color-scheme-dark').removeClass('night')
+        $('html').addClass('color-scheme-light').removeClass('color-scheme-dark').removeClass('night').removeAttr('night')
       }
       localStorage.setItem('night', isNightValue)
       isNight = isNightValue
