@@ -42,15 +42,15 @@ const postContext = {
       }
       // 生成行号
       let codes = $(this).text().split('\n') || []
-      let nums = codes.length - 1
+      let nums = codes.length
       let lineDigit = String(nums).length
       if (lineDigit === 1) lineDigit = 2
       let lis = ''
       for (var i = 0; i < nums; i++) {
+        if (i === nums - 1 && codes[i].trim() === '') {
+          continue
+        }
         lis += `<li ${(lines && /^\s*\|\+\s+/.test(codes[i])) ? 'class="code-select"' : ''}>${String(i + 1).padStart(lineDigit, 0)}</li>`
-      }
-      if (codes[nums].trim() !== '') {
-        lis += `<li ${(lines && /^\s*\|\+\s+/.test(codes[i])) ? 'class="code-select"' : ''}>${String(nums + 1).padStart(lineDigit, 0)}</li>`
       }
       if (lines) {
         $(this).text($(this).text().replace(/(^\s*)\|\+\s/gm, '$1'))
