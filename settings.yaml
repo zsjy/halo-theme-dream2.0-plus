@@ -951,6 +951,26 @@ spec:
           label: 友链页面-RSS订阅地址
           placeholder: '请输入RSS订阅地址'
           help: '用于交换友链时添加朋友圈的RSS订阅地址。'
+        - $formkit: radio
+          name: use_user_bio
+          label: 友链页面-描述来源
+          value: true
+          options:
+            - value: true
+              label: 使用用户信息
+            - value: false
+              label: 单独提供
+        - $formkit: text
+          name: links_descriptive
+          label: 友链页面-自定义描述
+          placeholder: '请输入描述'
+          help: '用于交换友链时添加的描述。'
+          if: $get(use_user_bio).value == false
+        - $formkit: text
+          name: links_descriptive
+          label: 友链页面-描述（仅在选择单独提供时可用）
+          placeholder: '请输入描述'
+          help: '用于交换友链时添加的描述。'
         - $formkit: code
           name: links_info
           label: "友链页面-补充信息"
