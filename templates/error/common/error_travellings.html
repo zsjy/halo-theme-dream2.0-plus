@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="https://www.thymeleaf.org"
+      th:fragment="error_fragment">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[[${error.status + ' - ' + #strings.defaultString(error.title, 'Internal server error')}]]</title>
+    <link rel="icon" th:href="${site.favicon}">
+    <style>
+        * {
+            color: #111827;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        body {
+            transition: background-color 0.5s;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            * {
+                color: #f9fafb;
+            }
+            body {
+                background: #111111;
+            }
+        }
+
+        .blink {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            display: -webkit-flex;
+            align-items: center;
+            justify-content: center;
+            animation: blink 4s linear infinite;
+            -webkit-animation: blink 4s linear infinite;
+            -moz-animation: blink 4s linear infinite;
+            -ms-animation: blink 4s linear infinite;
+            -o-animation: blink 4s linear infinite;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 0;
+                transform: scale(1);
+            }
+
+            40% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            80% {
+                opacity: 1;
+                transform: scale(0.98);
+            }
+
+            100% {
+                opacity: 0.2;
+                transform: scale(1.2);
+            }
+        }
+
+        .botCenter {
+            position: fixed;
+            width: 100%;
+            height: 50px;
+            bottom: 10px;
+            line-height: 20px;
+            font-size: 12px;
+            text-align: center;
+            animation: botCenter 3s linear;
+        }
+
+        @keyframes botCenter {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .links {
+            --link-color: #5372b4;
+            color: var(--link-color);
+        }
+        .links:hover {
+            border-bottom: 2px solid var(--link-color);
+        }
+        @media (prefers-color-scheme: dark) {
+            .links {
+                --link-color: #9ca3af;
+            }
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 10px;
+            background-color: #ddd;
+            margin: 20px auto;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .loading-bar-inner {
+            width: 0;
+            height: 100%;
+            background-color: #007bff;
+            border-radius: 5px;
+            animation: fillBar 2s ease-in-out forwards;
+        }
+
+        @keyframes fillBar {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="blink">
+        <div>
+            <h1>[[${error.status + ' ' + #strings.defaultString(error.title, 'Internal server error')}]]</h1>
+            <p th:if="${error.status >= 500 && error.status < 600}">围观群众太过热情，服务器繁忙，请稍后访问。</p>
+            <p th:if="${error.status >= 400 && error.status < 500}">抱歉，您请求的页面不存在。</p>
+            <p th:if="${error.status >= 400 && error.status < 500}">可能是输入的网址有误，或者该页面已被移动或删除。</p>
+            <a th:if="${error.status >= 400 && error.status < 500}" href="/" class="back-link">手动返回首页</a>
+            <div class="loading-bar">
+                <div class="loading-bar-inner"></div>
+            </div>
+        </div>
+    </div>
+    <div class="botCenter">
+        本页面基于 <a href="https://github.com/travellings-link/travellings" class="links" target="_blank">开往</a> 制作
+    </div>
+
+    <script>
+        const websites = [
+            "/"
+        ];
+
+        function redirectToRandomWebsite() {
+            const randomIndex = Math.floor(Math.random() * websites.length);
+            const randomWebsite = websites[randomIndex];
+            setTimeout(() => {
+                window.location.href = randomWebsite;
+            }, 4000);
+        }
+
+        window.onload = redirectToRandomWebsite;
+    </script>
+</body>
+
+</html>
