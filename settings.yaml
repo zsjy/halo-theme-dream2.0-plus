@@ -1213,6 +1213,8 @@ spec:
                   label: 小火车
                 - value: 'error/common/error_concise'
                   label: 简洁
+                - value: 'error/common/error_travellings'
+                  label: 类似开往页面
                 - value: 'error/common/error_default'
                   label: 默认
                 - value: 'error/common/error_custom'
@@ -1239,6 +1241,8 @@ spec:
                   label: 小火车
                 - value: 'error/common/error_concise'
                   label: 简洁
+                - value: 'error/common/error_travellings'
+                  label: 类似开往页面
                 - value: 'error/common/error_default'
                   label: 默认
                 - value: 'error/common/error_custom'
