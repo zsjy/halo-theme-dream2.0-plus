@@ -73,8 +73,18 @@
     DreamConfig["site_title"] = [[${site.title}]];
     /** 灰色模式 */
     DreamConfig["gray_mode"] = [[${theme.config.enhance.gray_mode_group.enable_gray_mode}]];
-    DreamConfig["gray_mode_start_time"] = [[${theme.config.enhance.gray_mode_group.gray_mode_start_time}]];
-    DreamConfig["gray_mode_end_time"] = [[${theme.config.enhance.gray_mode_group.gray_mode_end_time}]];
+    /** 配置自定义灰色模式时段 */
+    let gray_mode_time_list = []
+    let custom_gray_mode_time_list = [[${theme.config.enhance.gray_mode_group.gray_mode_time_list}]];
+    if(custom_gray_mode_time_list) {
+      for (let time of custom_gray_mode_time_list) {
+        let type = time.realNode.time_span;
+        if (gray_mode_time_list.indexOf(type) === -1) {
+          gray_mode_time_list.push(type);
+        }
+      }
+    }
+    DreamConfig["gray_mode_time_list"] = gray_mode_time_list;
     DreamConfig["pjax_state"] = [[${theme.config.enhance.enable_pjax}]];
     /** 配置分享方式 */
     let post_share = []

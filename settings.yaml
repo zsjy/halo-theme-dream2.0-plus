@@ -1351,19 +1351,18 @@ spec:
                   label: 自定义
                 - value: false
                   label: 关闭
-            - $formkit: datetime-local
-              name: gray_mode_start_time
-              id: gray_mode_start_time
+            - $formkit: repeater
+              name: gray_mode_time_list
               if: $get(enable_gray_mode).value == 'custom'
+              label: 灰色模式时间段
               validation: required
-              help: 请选择开始时间，包含开始时间。
-              label: 灰色模式 - 开始时间
-            - $formkit: datetime-local
-              name: gray_mode_end_time
-              if: $get(enable_gray_mode).value == 'custom'
-              validation: required
-              help: 请选择结束时间，结束时间须大于开始时间，不包含结束时间。
-              label: 灰色模式 - 结束时间
+              help: '请输入时间段，格式: 01/01|01/07 或 1/1|1/7，表示每年的1月1日00时00分00秒至1月7日23时59分59秒，持续7天。'
+              children:
+                - $formkit: text
+                  name: time_span
+                  label: 灰色模式时间段
+                  value: ""
+                  placeholder: '请输入时间段，必须包含“|”分割开始和结束时间'
         - $formkit: group
           name: busuanzi_group
           label: busuanzi 访客统计

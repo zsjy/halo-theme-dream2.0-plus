@@ -590,12 +590,35 @@ const commonContext = {
   initGrayMode() {
     if (DreamConfig.gray_mode === true) {
       $('html').addClass('gray-mode')
-    } else if (DreamConfig.gray_mode === 'custom') {
-      var now = Date.now()
-      var startTime = new Date(DreamConfig.gray_mode_start_time).getTime()
-      var endTime = new Date(DreamConfig.gray_mode_end_time).getTime()
-      if (now >= startTime && now <= endTime) {
-        $('html').addClass('gray-mode')
+    } else if (DreamConfig.gray_mode === 'custom' && DreamConfig.gray_mode_time_list) {
+      const now = new Date()
+      const month = now.getMonth() + 1
+      const day = now.getDate()
+      const isDateInRange = (currentMonth, currentDay, startDate, endDate) => {
+        const [startMonth, startDay] = startDate.split('/').map(part => part.trim()).map(Number)
+        const [endMonth, endDay] = endDate.split('/').map(part => part.trim()).map(Number)
+        if (!startMonth || !startDay || !endMonth || !endDay) {
+          return false
+        }
+        const start = new Date(now.getFullYear(), startMonth - 1, startDay)
+        const end = new Date(now.getFullYear(), endMonth - 1, endDay)
+        const current = new Date(now.getFullYear(), currentMonth - 1, currentDay)
+        return current >= start && current <= end
+      }
+
+      for (const timeRange of DreamConfig.gray_mode_time_list) {
+        try {
+          const [startDate, endDate] = timeRange.split('|').map(part => part.trim())
+          if (!startDate || !endDate) {
+            continue
+          }
+          if (isDateInRange(month, day, startDate, endDate)) {
+            $('html').addClass('gray-mode')
+            break
+          }
+        } catch (e) {
+          console.log(e)
+        }
       }
     }
   },
