@@ -951,6 +951,11 @@ spec:
           label: 友链页面-RSS订阅地址
           placeholder: '请输入RSS订阅地址'
           help: '用于交换友链时添加朋友圈的RSS订阅地址。'
+        - $formkit: text
+          name: links_descriptive
+          label: 友链页面-自定义描述
+          placeholder: '请输入描述'
+          help: '用于交换友链时添加的描述，留空使用用户信息。'
         - $formkit: code
           name: links_info
           label: "友链页面-补充信息"
@@ -1213,6 +1218,8 @@ spec:
                   label: 小火车
                 - value: 'error/common/error_concise'
                   label: 简洁
+                - value: 'error/common/error_travellings'
+                  label: 智能归航
                 - value: 'error/common/error_default'
                   label: 默认
                 - value: 'error/common/error_custom'
@@ -1239,6 +1246,8 @@ spec:
                   label: 小火车
                 - value: 'error/common/error_concise'
                   label: 简洁
+                - value: 'error/common/error_travellings'
+                  label: 智能归航
                 - value: 'error/common/error_default'
                   label: 默认
                 - value: 'error/common/error_custom'
