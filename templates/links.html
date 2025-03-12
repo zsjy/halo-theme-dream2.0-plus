@@ -40,11 +40,11 @@
                             <li>名称：[[${site.title}]]</li>
                             <li>地址：<a th:href="${site.url}" target="_blank" th:text="${site.url}"></a></li>
                             <li>图标：<a th:href="${bloggerAvatar}" target="_blank" th:text="${bloggerAvatar}"></a></li>
-                            <li th:if="${theme.config.page_config.use_user_bio}">
-                                描述：<span th:text="${contributor.bio}"></span>
-                            </li>
-                            <li th:unless="${theme.config.page_config.use_user_bio}" th:if="${!#strings.isEmpty(descriptive)}">
-                                描述：<span th:text="${descriptive}"></span>
+                            <li th:with="descriptive = ${#strings.defaultString(theme.config.page_config.links_descriptive, '')}">
+                                <span th:if="${!#strings.isEmpty(descriptive)}">描述：</span>
+                                <span th:if="${!#strings.isEmpty(descriptive)}" th:text="${descriptive}"></span>
+                                <span th:if="${#strings.isEmpty(descriptive)}">描述：</span>
+                                <span th:if="${#strings.isEmpty(descriptive)}" th:text="${contributor.bio}"></span>
                             </li>
                             <li th:if="${!#strings.isEmpty(theme.config.page_config.links_rss_address)}">订阅：<a th:href="${theme.config.page_config.links_rss_address}" target="_blank" th:text="${theme.config.page_config.links_rss_address}"></a></li>
                         </ul>

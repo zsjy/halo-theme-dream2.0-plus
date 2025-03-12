@@ -141,21 +141,26 @@
             </div>
         </div>
     </div>
-    <div class="botCenter">
-        本页面基于 <a href="https://github.com/travellings-link/travellings" class="links" target="_blank">开往</a> 制作
-    </div>
 
     <script>
         const websites = [
-            "/"
+            // 在此处添加更多友链地址
+            "/",
+            "https://example.com"
         ];
 
         function redirectToRandomWebsite() {
-            const randomIndex = Math.floor(Math.random() * websites.length);
-            const randomWebsite = websites[randomIndex];
-            setTimeout(() => {
-                window.location.href = randomWebsite;
-            }, 4000);
+            // 获取错误状态码（通过解析标题文本）
+            const errorCode = parseInt(document.querySelector('h1').textContent.split(' ')[0]);
+            
+            // 仅当 400 <= 错误码 < 500 时执行跳转
+            if (errorCode >= 400 && errorCode < 500) {
+                const randomIndex = Math.floor(Math.random() * websites.length);
+                const randomWebsite = websites[randomIndex];
+                setTimeout(() => {
+                    window.location.href = randomWebsite;
+                }, 4000);
+            }
         }
 
         window.onload = redirectToRandomWebsite;
