@@ -3,6 +3,7 @@
     <script th:src="@{/assets/js/btoc.min.js(mew=${theme.spec.version})}"></script>
     <script th:if="${isFirstIndex == true && !#lists.isEmpty(theme.config.basic_style.carousel_options)}" data-pjax
             th:src="@{/assets/lib/swiper@8.4.6/swiper-bundle.min.js}"></script>
+    <script th:src="@{/assets/lib/qmsg/qmsg.min.js}"></script>
     <script th:src="@{/assets/js/common.min.js(mew=${theme.spec.version})}"></script>
 
     <th:block th:if="${isPost}">
@@ -21,7 +22,6 @@
         <script th:src="@{/assets/lib/jquery-pjax@2.0.1/jquery.pjax.min.js}"></script>
         <script th:src="@{/assets/js/pjax.min.js(mew=${theme.spec.version})}"></script>
     </th:block>
-    <script async th:src="@{/assets/lib/qmsg/qmsg.min.js}"></script>
 
     <script th:if="${isPost == true || isPhotos == true}" data-pjax async th:src="@{/assets/lib/fancybox@5.3.7/jquery.fancybox.min.js}"></script>
 
