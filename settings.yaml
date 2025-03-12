@@ -1369,9 +1369,15 @@ spec:
               children:
                 - $formkit: text
                   name: time_span
-                  label: 灰色模式时间段
+                  label: 时间段
                   value: ""
                   placeholder: '请输入时间段，必须包含“|”分割开始和结束时间'
+                - $formkit: textarea
+                  name: time_span_desc
+                  label: 描述
+                  value: ""
+                  help: '请输入描述，这会显示一条消息，留空时不显示'
+                  placeholder: '请输入描述'
         - $formkit: group
           name: busuanzi_group
           label: busuanzi 访客统计
