@@ -135,24 +135,22 @@
             <p th:if="${error.status >= 500 && error.status < 600}">围观群众太过热情，服务器繁忙，请稍后访问。</p>
             <p th:if="${error.status >= 400 && error.status < 500}">抱歉，您请求的页面不存在。</p>
             <p th:if="${error.status >= 400 && error.status < 500}">可能是输入的网址有误，或者该页面已被移动或删除。</p>
-            <a th:if="${error.status >= 400 && error.status < 500}" href="/" class="back-link">手动返回首页</a>
-            <div class="loading-bar">
+            <a th:if="${error.status >= 400 && error.status < 500}" href="/" class="back-link">手动返回首页</a></p>
+            <div th:if="${error.status >= 400 && error.status < 500}" class="loading-bar">
                 <div class="loading-bar-inner"></div>
             </div>
         </div>
     </div>
 
-    <script>
+    <script  th:inline="javascript">
         const websites = [
-            // 在此处添加更多友链地址
-            "/",
-            "https://example.com"
+            "/"
         ];
 
         function redirectToRandomWebsite() {
             // 获取错误状态码（通过解析标题文本）
-            const errorCode = parseInt(document.querySelector('h1').textContent.split(' ')[0]);
-            
+            const errorCode = [[${error.status}]];
+
             // 仅当 400 <= 错误码 < 500 时执行跳转
             if (errorCode >= 400 && errorCode < 500) {
                 const randomIndex = Math.floor(Math.random() * websites.length);

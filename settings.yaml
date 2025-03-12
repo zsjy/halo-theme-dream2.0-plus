@@ -953,9 +953,9 @@ spec:
           help: '用于交换友链时添加朋友圈的RSS订阅地址。'
         - $formkit: text
           name: links_descriptive
-          label: 友链页面-自定义描述（留空使用用户信息）
+          label: 友链页面-自定义描述
           placeholder: '请输入描述'
-          help: '用于交换友链时添加的描述。'
+          help: '用于交换友链时添加的描述,(留空使用用户信息)。'
         - $formkit: code
           name: links_info
           label: "友链页面-补充信息"
