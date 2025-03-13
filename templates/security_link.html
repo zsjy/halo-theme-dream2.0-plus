@@ -180,8 +180,8 @@
             right: -6px;
             bottom: -6px;
             border-radius: 26px;
-            background: linear-gradient(145deg, 
-                rgba(255,255,255,0.3) 0%, 
+            background: linear-gradient(145deg,
+                rgba(255,255,255,0.3) 0%,
                 rgba(255,255,255,0.1) 100%);
             z-index: -1;
         }
@@ -192,7 +192,7 @@
         }
 
         html.dark .loading::before {
-            background: linear-gradient(145deg, 
+            background: linear-gradient(145deg,
                 rgba(255,255,255,0.1) 0%,
                 rgba(255,255,255,0.05) 100%);
         }
@@ -203,7 +203,6 @@
             border-radius: 50%;
             margin-bottom: 15px;
             display: block;
-            margin: 0 auto;
             border: 3px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
@@ -369,18 +368,22 @@
     </div>
     <script>
         window.onload = function() {
-            document.querySelector('.progress').style.width = '100%';
-            let countdown = [[${theme.config.security_link_config.security_link_auto_jump_time}]];
-            const countdownElement = document.getElementById('countdown');
-            
-            const timer = setInterval(function() {
-                countdown--;
-                countdownElement.textContent = countdown;
-                if (countdown <= 0) {
-                    clearInterval(timer);
-                    window.location.href = '[[${url}]]';
-                }
-            }, 1000);
+          let countdown = [[${theme.config.security_link_config.security_link_auto_jump_time}]]
+          if (countdown > 0) {
+            document.querySelector('.progress').style.width = '100%'
+            const countdownElement = document.getElementById('countdown')
+            const timer = setInterval(function () {
+              countdown--
+              countdownElement.textContent = countdown
+              if (countdown <= 0) {
+                clearInterval(timer)
+                window.location.href = '[[${url}]]'
+              }
+            }, 1000)
+          } else {
+            document.querySelector('.progress-bar').style.display = 'none';
+            document.querySelector('.countdown-text').style.display = 'none';
+          }
         }
     </script>
 </body>

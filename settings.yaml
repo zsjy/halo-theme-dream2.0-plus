@@ -1475,7 +1475,7 @@ spec:
           value: 5
           validation: required
           placeholder: '请输入安全链接页面自动跳转时间(秒)'
-          help: '输入安全链接页面自动跳转时间(秒)，默认5秒。'
+          help: '输入安全链接页面自动跳转时间(秒)，默认5秒，小于等于0时关闭自动跳转。'
         - $formkit: code
           name: security_link_jump_desc
           if: $get(enable_security_link).value
