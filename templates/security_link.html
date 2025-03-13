@@ -7,36 +7,378 @@
                contributor = ${contributorFinder.getContributor(theme.config.basic_info.metadata_name)},
                enableComment = false, isPost = false, canonical = ${theme.config.security_link_config.security_link_url}">
 <head>
-    <meta charset="utf-8"/>
-    <title th:text="${title + (#strings.isEmpty(site.subtitle) ? '' : '|' + site.subtitle)}"></title>
-    <link rel="preload stylesheet" as="style" th:href="@{/assets/css/theme.min.css(mew=${theme.spec.version})}">
-    <link th:if="${theme.config.enhance.cursor_style != 'none'}" rel="stylesheet" th:href="@{/assets/css/cursor.min.css(mew=${theme.spec.version})}">
-    <link data-pjax rel="preload stylesheet" as="style" th:href="@{/assets/css/security-link.min.css(mew=${theme.spec.version})}"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <th:block th:replace="~{common/config}"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow"/>
+    <title>[[${site.title}]]-安全中心</title>
+    <style type="text/css">
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            flex-direction: column;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-image: url([[${#strings.isEmpty(theme.config.security_link_config.security_link_site_img_background) ? '' : theme.config.security_link_config.security_link_site_img_background}]]);
+        }
+
+        html.light body {
+            background-color: #f6d365;
+            background-image: linear-gradient(135deg, #f6d365 0%, #fda085 100%), url([[${#strings.isEmpty(theme.config.security_link_config.security_link_site_img_background) ? '' : theme.config.security_link_config.security_link_site_img_background}]]);
+            background-blend-mode: overlay;
+        }
+
+        html.dark body {
+            background-color: #434343;
+            background-image: linear-gradient(135deg, #434343 0%, #000000 100%), url([[${#strings.isEmpty(theme.config.security_link_config.security_link_site_img_background) ? '' : theme.config.security_link_config.security_link_site_img_background}]]);
+            background-blend-mode: overlay;
+        }
+
+        html.light .loading {
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        html.light .others-tip {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        html.dark body {
+            background: linear-gradient(135deg, #434343 0%, #000000 100%);
+        }
+
+        html.dark .loading {
+            background: rgba(57, 62, 70, 0.6);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        html.dark .others-tip {
+            background: rgba(51, 51, 51, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+
+        .others-end a {
+            background: rgba(63, 193, 201, 0.8);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(63, 193, 201, 0.2);
+            line-height: 20px;
+        }
+
+        .others-end a:hover {
+            background: rgba(63, 193, 201, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(63, 193, 201, 0.3);
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress {
+            box-shadow: 0 0 10px rgba(171, 237, 216, 0.5);
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loading {
+            animation: fadein 0.6s ease-out;
+        }
+
+        html.light .others-topic,
+        html.light .others-tip,
+        html.light .content-title span {
+            color: #333;
+        }
+
+        html.light .others-tip {
+            border: 1px solid #ccc;
+            background-color: #F7F9FE;
+        }
+
+        html.light .progress {
+            background-color: #abedd8;
+        }
+
+        /* 暗黑主题 */
+        html.dark body {
+            background: linear-gradient(135deg, #364f6b, #222831);
+        }
+
+        html.dark .loading {
+            background: #393e46;
+            box-shadow: 0 4px 8px rgba(100, 100, 100, 0.1);
+        }
+
+        html.dark .others-topic,
+        html.dark .others-tip,
+        html.dark .content-title span {
+            color: #EFEFEF;
+        }
+
+        html.dark .others-tip {
+            border: 1px solid #777;
+            background-color: #333;
+        }
+
+        html.dark .progress {
+            background-color: #888;
+        }
+
+        html.dark .progress-bar {
+            background-color: #444;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 35px;
+            border-radius: 24px;
+            animation: fadein 0.6s ease-out;
+            width: 400px;
+            max-width: 90%;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
+            position: relative;
+        }
+
+        .loading::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            border-radius: 26px;
+            background: linear-gradient(145deg, 
+                rgba(255,255,255,0.3) 0%, 
+                rgba(255,255,255,0.1) 100%);
+            z-index: -1;
+        }
+
+        html.dark .loading {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(57, 62, 70, 0.85);
+        }
+
+        html.dark .loading::before {
+            background: linear-gradient(145deg, 
+                rgba(255,255,255,0.1) 0%,
+                rgba(255,255,255,0.05) 100%);
+        }
+
+        .content-title img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            display: block;
+            margin: 0 auto;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .content-title img:hover {
+            transform: scale(1.05);
+        }
+
+        .others-tip {
+            font-size: 18px;
+            display: block;
+            margin-top: 5px;
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #333;
+        }
+
+        html.dark .others-tip {
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(51, 51, 51, 0.6);
+            color: #EFEFEF;
+        }
+
+        .others-end a {
+            padding: 12px 24px;
+            border-radius: 20px;
+            font-size: 16px;
+            width: auto;
+            height: auto;
+            background: linear-gradient(135deg, #3fc1c9, #45b7d1);
+            color: white;
+            box-shadow: 0 4px 15px rgba(63, 193, 201, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .others-end a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(63, 193, 201, 0.4);
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress {
+            box-shadow: 0 0 10px rgba(171, 237, 216, 0.5);
+        }
+
+        .content-title {
+            margin-bottom: 20px;
+        }
+
+        .content-title img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .others-topic {
+            margin-bottom: 10px;
+            font-size: 16px;
+            letter-spacing: 1px;
+            color: #333;
+        }
+
+        .others-tip {
+            font-size: 20px;
+            display: block;
+            margin-top: 5px;
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #F7F9FE;
+            color: #333;
+        }
+
+        .others-end {
+            display: flex;
+            justify-content: center;
+            gap: 20%;
+            margin-top: 20px;
+        }
+
+        .others-end a {
+            padding: 10px 20px;
+            border-radius: 16px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            width: 70px;
+            height: 20px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #3fc1c9;
+            color: white;
+        }
+
+        .progress-bar {
+            width: 100%;
+            border-radius: 5px;
+            overflow: hidden;
+            height: 10px;
+            margin-top: 20px;
+        }
+
+        .progress {
+            width: 0;
+            height: 100%;
+            background-color: #abedd8;
+            transition: width 4s linear;
+        }
+        .countdown-text {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #333;
+        }
+
+        html.dark .countdown-text {
+            color: #EFEFEF;
+        }
+    </style>
 </head>
 <body>
-<div class="content">
-    <div class="content-title">
-        <img th:src="${#strings.isEmpty(theme.config.security_link_config.security_link_site_img) ? site.favicon : theme.config.security_link_config.security_link_site_img}" alt="favicon">
-        <span th:if="${!#strings.isEmpty(theme.config.security_link_config.security_link_site_title)}"
-              th:with="t = ${theme.config.security_link_config.security_link_site_title},
-                       t1 = ${#strings.replace(t, '{title}', site.title)}"
-              th:title="${t1}">[[${t1}]]</span>
-    </div>
-    <div class="others">
-        <div class="others-tip">
-            <img th:src="${#strings.isEmpty(theme.config.security_link_config.security_link_tip_img) ? #theme.assets('/img/warning.webp') : theme.config.security_link_config.security_link_tip_img}" alt="">
-            <span>[[${#strings.isEmpty(theme.config.security_link_config.security_link_tip_desc) ? '请注意您的账号和财产安全！': theme.config.security_link_config.security_link_tip_desc}]]</span>
+    <div class="loading">
+        <div class="content-title">
+            <img th:src="${#strings.isEmpty(theme.config.security_link_config.security_link_site_img) ? site.favicon : theme.config.security_link_config.security_link_site_img}" alt="favicon">
+            <span th:if="${!#strings.isEmpty(theme.config.security_link_config.security_link_site_title)}"
+                  th:with="t = ${theme.config.security_link_config.security_link_site_title},
+                           t1 = ${#strings.replace(t, '{title}', site.title)}"
+                  th:text="${t1}"></span>
         </div>
-        <div class="others-topic" th:with="oDesc = ${theme.config.security_link_config.security_link_jump_desc},
+        <div class="others">
+            <div class="others-tip">
+                <span>[[${#strings.isEmpty(theme.config.security_link_config.security_link_tip_desc) ? '请注意您的账号和财产安全！': theme.config.security_link_config.security_link_tip_desc}]]</span>
+            </div>
+            <div class="others-topic" th:with="oDesc = ${theme.config.security_link_config.security_link_jump_desc},
                                            o1 = ${#strings.replace(oDesc, '{title}', site.title)},
                                            o2 = ${#strings.replace(o1, '{url}', url)}" th:utext="${o2}">
-        </div>
-        <div class="others-end">
-            <a th:href="${url}" target="_self">继续</a>
+            </div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="countdown-text">
+                ⚡将在<span id="countdown">4</span>秒后跳转，请自行确认链接安全性
+            </div>
+            <div class="others-end">
+                <a th:href="${url}" target="_self">继续访问</a>
+            </div>
         </div>
     </div>
-</div>
+    <script>
+        window.onload = function() {
+            document.querySelector('.progress').style.width = '100%';
+            let countdown = 4;
+            const countdownElement = document.getElementById('countdown');
+            
+            const timer = setInterval(function() {
+                countdown--;
+                countdownElement.textContent = countdown;
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    window.location.href = '[[${url}]]';
+                }
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
