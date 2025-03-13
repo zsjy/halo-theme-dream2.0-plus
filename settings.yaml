@@ -1435,13 +1435,26 @@ spec:
           label: 安全链接页面-站点图标
           placeholder: '请输入/选择安全链接页面站点的图标'
           help: '请输入/选择安全链接页面站点的图标，留空使用站点的favicon。'
+        - $formkit: attachment
+          name: security_link_site_img_background
+          if: $get(enable_security_link).value
+          label: 安全链接页面-站点背景
+          placeholder: '请输入/选择安全链接页面站点的背景'
+          help: '请输入/选择安全链接页面站点的图标，留空不使用背景'
+        - $formkit: text
+          name: security_link_site_title1
+          if: $get(enable_security_link).value
+          label: 安全链接页面-站点标题
+          value: '{title}-安全中心'
+          placeholder: '请输入安全链接页面站点的标题'
+          help: '请输入/选择安全链接页面站点的标题，留空不显示，“ {title} ”表示站点主标题，位置为浏览器显示标题。'
         - $formkit: text
           name: security_link_site_title
           if: $get(enable_security_link).value
           label: 安全链接页面-站点标题
-          value: '{title}'
-          placeholder: '请输入/选择安全链接页面站点的标题'
-          help: '请输入/选择安全链接页面站点的标题，留空不显示，“ {title} ”表示站点主标题。'
+          value: '{title}-安全中心'
+          placeholder: '请输入安全链接页面站点的标题'
+          help: '请输入/选择安全链接页面站点的标题，留空不显示，“ {title} ”表示站点主标题，位置为页面头像下方。'
         - $formkit: text
           name: security_link_url
           label: 安全链接页面-URL
@@ -1449,18 +1462,20 @@ spec:
           validation: required
           placeholder: '请输入使用“安全链接页面模版”创建的页面访问路径'
           help: '输入使用”安全链接页面模版“创建的页面访问路径，不能省略’/‘。'
-        - $formkit: attachment
-          name: security_link_tip_img
-          if: $get(enable_security_link).value
-          label: 安全链接页面-提示区域图标
-          placeholder: '请输入/选择安全链接页面提示区域的图标'
-          help: '输入/选择安全链接页面提示区域的图标，留空使用默认图标。'
         - $formkit: text
           name: security_link_tip_desc
           if: $get(enable_security_link).value
           label: 安全链接页面-提示区域文本描述
           placeholder: '请输入安全链接页面提示区域的文本描述'
           help: '输入安全链接页面提示区域的文本描述，留空使用默认文本描述。'
+        - $formkit: number
+          name: security_link_auto_jump_time
+          if: $get(enable_security_link).value
+          label: 安全链接页面-自动跳转时间
+          value: 5
+          validation: required
+          placeholder: '请输入安全链接页面自动跳转时间(秒)'
+          help: '输入安全链接页面自动跳转时间(秒)，默认5秒。'
         - $formkit: code
           name: security_link_jump_desc
           if: $get(enable_security_link).value
@@ -1470,7 +1485,7 @@ spec:
           height: 45px
           value: '您即将离开<span>{title}</span>，去往：<span>{url}</span>'
           placeholder: '请输入安全链接页面跳转提示区域的文本描述'
-          help: '"<span></span>"包裹时字体颜色为主题色，“ {title} ”表示站点主标题，“ {url} ”表示跳转URL，区分大小写。默认值：“您即将离开<span>{title}</span>，去往：<span>{url}</span>”'
+          help: '"“ {title} ”表示站点主标题，“ {url} ”表示跳转URL，区分大小写。默认值：“您即将离开<span>{title}</span>，去往：<span>{url}</span>”'
     - group: pwa
       label: 'PWA配置'
       formSchema:
