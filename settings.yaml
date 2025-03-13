@@ -1442,12 +1442,19 @@ spec:
           placeholder: '请输入/选择安全链接页面站点的背景'
           help: '请输入/选择安全链接页面站点的图标，留空不使用背景'
         - $formkit: text
+          name: security_link_site_title1
+          if: $get(enable_security_link).value
+          label: 安全链接页面-站点标题
+          value: '{title}-安全中心'
+          placeholder: '请输入安全链接页面站点的标题'
+          help: '请输入/选择安全链接页面站点的标题，留空不显示，“ {title} ”表示站点主标题，位置为浏览器显示标题。'
+        - $formkit: text
           name: security_link_site_title
           if: $get(enable_security_link).value
           label: 安全链接页面-站点标题
           value: '{title}-安全中心'
-          placeholder: '请输入/选择安全链接页面站点的标题'
-          help: '请输入/选择安全链接页面站点的标题，留空不显示，“ {title} ”表示站点主标题。'
+          placeholder: '请输入安全链接页面站点的标题'
+          help: '请输入/选择安全链接页面站点的标题，留空不显示，“ {title} ”表示站点主标题，位置为页面头像下方。'
         - $formkit: text
           name: security_link_url
           label: 安全链接页面-URL
