@@ -28,18 +28,18 @@
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
-            background-image: url([[${#strings.isEmpty(theme.config.security_link_config.security_link_site_img_background) ? '' : theme.config.security_link_config.security_link_site_img_background}]]);
+            background-image: url([[${#strings.defaultString(theme.config.security_link_config.security_link_site_img_background, '')}]]);
         }
 
         html.light body {
             background-color: #f6d365;
-            background-image: linear-gradient(135deg, #f6d365 0%, #fda085 100%), url([[${#strings.isEmpty(theme.config.security_link_config.security_link_site_img_background) ? '' : theme.config.security_link_config.security_link_site_img_background}]]);
+            background-image: linear-gradient(135deg, #f6d365 0%, #fda085 100%), url([[${#strings.defaultString(theme.config.security_link_config.security_link_site_img_background, '')}]]);
             background-blend-mode: overlay;
         }
 
         html.dark body {
             background-color: #434343;
-            background-image: linear-gradient(135deg, #434343 0%, #000000 100%), url([[${#strings.isEmpty(theme.config.security_link_config.security_link_site_img_background) ? '' : theme.config.security_link_config.security_link_site_img_background}]]);
+            background-image: linear-gradient(135deg, #434343 0%, #000000 100%), url([[${#strings.defaultString(theme.config.security_link_config.security_link_site_img_background, '')}]]);
             background-blend-mode: overlay;
         }
 
@@ -326,7 +326,7 @@
             width: 0;
             height: 100%;
             background-color: #abedd8;
-            transition: width 4s linear;
+            transition: width [[${theme.config.security_link_config.security_link_auto_jump_time}]]s linear;
         }
         .countdown-text {
             margin-top: 12px;
@@ -360,7 +360,7 @@
                 <div class="progress"></div>
             </div>
             <div class="countdown-text">
-                ⚡将在<span id="countdown">4</span>秒后跳转，请自行确认链接安全性
+                ⚡将在<span id="countdown">[[${theme.config.security_link_config.security_link_auto_jump_time}]]</span>秒后跳转，请自行确认链接安全性
             </div>
             <div class="others-end">
                 <a th:href="${url}" target="_self">继续访问</a>
@@ -370,7 +370,7 @@
     <script>
         window.onload = function() {
             document.querySelector('.progress').style.width = '100%';
-            let countdown = 4;
+            let countdown = [[${theme.config.security_link_config.security_link_auto_jump_time}]];
             const countdownElement = document.getElementById('countdown');
             
             const timer = setInterval(function() {
