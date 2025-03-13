@@ -15,7 +15,7 @@
 - [主题文档](https://www.hcjike.com/docs/halo-theme-dream2.0) 
 - [侧边栏组件](https://www.hcjike.com/docs/halo-theme-dream2.0/theme/sidebar-assembly)
 
-## 插件
+## 插件相关
 ### KaTeX
 - 安装并启用`KaTeX插件`，插件配置如下；
   - 行内公式 CSS 选择器：`[math-inline],.math-inline,.katex--inline`；
@@ -31,6 +31,14 @@
 - 不支持`pjax`
 - 文章选择器：`.article`
 - 样式选择器：`night`
+
+## 主题功能配置
+### 开启ServiceWorker配置
+[Deam2 Plus主题开启ServiceWorker配置的方法](https://www.hcjike.com/archives/slrrTp6c)
+
+### 网站添加 PWA 配置
+[网站添加 PWA 配置，使网站支持像应用一样安装](https://www.hcjike.com/archives/MNdz7kZ6)
+
 
 ## 开发中功能
 - 开发中功能已发布为[预发行版](https://github.com/zsjy/halo-theme-dream2.0-plus/releases)，开发中的功能不保证留存到正式版，包括但不限于：主题配置位置、配置方式、页面样式等等。
