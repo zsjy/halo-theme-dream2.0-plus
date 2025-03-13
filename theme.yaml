@@ -5,7 +5,7 @@ metadata:
   name: theme-dream2-plus
 spec:
   # 主题名称
-  displayName: Dream2.0 Plus 仅供fishcpy测试
+  displayName: Dream2.0 Plus
   author:
     # 作者名称
     name: 宏尘极客 && fishcpy
@@ -18,7 +18,7 @@ spec:
         screenshot:
         file: security_link.html
   # 主题描述
-  description: '仅供fishcpy测试'
+  description: '梦之城，童话梦境'
   # 主题logo地址
   logo: /themes/theme-dream2-plus/assets/img/logo.png
   # 主题地址
