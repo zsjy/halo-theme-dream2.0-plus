@@ -1462,10 +1462,12 @@ spec:
           validation: required
           placeholder: '请输入使用“安全链接页面模版”创建的页面访问路径'
           help: '输入使用”安全链接页面模版“创建的页面访问路径，不能省略’/‘。'
-        - $formkit: text
+        - $formkit: code
           name: security_link_tip_desc
           if: $get(enable_security_link).value
           label: 安全链接页面-提示区域文本描述
+          language: html
+          height: 45px
           placeholder: '请输入安全链接页面提示区域的文本描述'
           help: '输入安全链接页面提示区域的文本描述，留空使用默认文本描述。'
         - $formkit: number
@@ -1483,9 +1485,9 @@ spec:
           label: 安全链接页面-跳转提示区域文本描述
           language: html
           height: 45px
-          value: '您即将离开<span>{title}</span>，去往：<span>{url}</span>'
+          value: '您即将离开{title}，去往：{url}'
           placeholder: '请输入安全链接页面跳转提示区域的文本描述'
-          help: '"“ {title} ”表示站点主标题，“ {url} ”表示跳转URL，区分大小写。默认值：“您即将离开<span>{title}</span>，去往：<span>{url}</span>”'
+          help: '"“ {title} ”表示站点主标题，“ {url} ”表示跳转URL，区分大小写。默认值：“您即将离开{title}，去往：{url}”'
     - group: pwa
       label: 'PWA配置'
       formSchema:
