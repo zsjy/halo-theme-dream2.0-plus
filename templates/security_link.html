@@ -16,6 +16,10 @@
     th:text="${#strings.isEmpty(t) ? site.title + '-安全中心' : t1}">
     </title>
     <style type="text/css">
+        html {
+            --back-img-url: url([[${#strings.defaultString(theme.config.security_link_config.security_link_site_img_background, '')}]]);
+        }
+
         body {
             display: flex;
             align-items: center;
@@ -31,12 +35,12 @@
         }
 
         html.light body {
-            background-image: linear-gradient(135deg, #a0a0a0 0%, #8c8c8c 100%), url([[${#strings.defaultString(theme.config.security_link_config.security_link_site_img_background, '')}]]);
+            background-image: linear-gradient(135deg, #a0a0a0 0%, #8c8c8c 100%), var(--back-img-url);
             background-blend-mode: overlay;
         }
 
         html.dark body {
-            background-image: linear-gradient(135deg, #364f6b 0%, #222831 100%), url([[${#strings.defaultString(theme.config.security_link_config.security_link_site_img_background, '')}]]);
+            background-image: linear-gradient(135deg, #364f6b 0%, #222831 100%), var(--back-img-url);
             background-blend-mode: overlay;
         }
 
