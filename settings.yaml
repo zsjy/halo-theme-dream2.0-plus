@@ -1439,12 +1439,13 @@ spec:
           name: security_link_site_img_background
           if: $get(enable_security_link).value
           label: 安全链接页面-站点背景
+          value: 'https://bing.ee123.net/img/'
           placeholder: '请输入/选择安全链接页面站点的背景'
           help: '请输入/选择安全链接页面站点的图标，留空不使用背景'
         - $formkit: text
-          name: security_link_site_title1
+          name: security_link_page_title
           if: $get(enable_security_link).value
-          label: 安全链接页面-站点标题
+          label: 安全链接页面-页面标题
           value: '{title}-安全中心'
           placeholder: '请输入安全链接页面站点的标题'
           help: '请输入/选择安全链接页面站点的标题，留空不显示，“ {title} ”表示站点主标题，位置为浏览器显示标题。'
@@ -1452,7 +1453,7 @@ spec:
           name: security_link_site_title
           if: $get(enable_security_link).value
           label: 安全链接页面-站点标题
-          value: '{title}-安全中心'
+          value: '{title}'
           placeholder: '请输入安全链接页面站点的标题'
           help: '请输入/选择安全链接页面站点的标题，留空不显示，“ {title} ”表示站点主标题，位置为页面头像下方。'
         - $formkit: text
@@ -1487,7 +1488,7 @@ spec:
           height: 45px
           value: '您即将离开{title}，去往：{url}'
           placeholder: '请输入安全链接页面跳转提示区域的文本描述'
-          help: '"“ {title} ”表示站点主标题，“ {url} ”表示跳转URL，区分大小写。默认值：“您即将离开{title}，去往：{url}”'
+          help: '“ {title} ”表示站点主标题，“ {url} ”表示跳转URL，区分大小写。默认值：“您即将离开{title}，去往：{url}”'
     - group: pwa
       label: 'PWA配置'
       formSchema:
