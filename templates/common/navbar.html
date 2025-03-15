@@ -83,6 +83,14 @@
                 </form>
             </div>
             <i class="ri-search-line navbar-searchicon" onclick="javascript:SearchWidget.open();"></i>
+            <!-- 开往 -->
+            <a th:if="${theme.config.basic_fishcpy.travellings_enable}" 
+               class="navbar-console" 
+               th:href="${theme.config.basic_fishcpy.travellings_url}"
+               target="_blank"
+               title="开往-友链接力">
+                <i class="ri-train-line"></i>
+            </a>
             <a data-not-pjax th:if="${theme.config.basic_style.show_console == 'console'}" class="navbar-console" th:href="${!#strings.isEmpty(logonUserName) ? theme.config.basic_style.console.console_logon_url : theme.config.basic_style.console.console_url}"
                th:target="${!#strings.isEmpty(logonUserName) ? theme.config.basic_style.console.console_logon_target : theme.config.basic_style.console.console_target}"
                th:title="${theme.config.basic_style.console.console_title}">
