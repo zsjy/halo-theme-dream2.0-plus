@@ -8,7 +8,7 @@ spec:
   displayName: Dream2.0 Plus
   author:
     # 作者名称
-    name: 宏尘极客
+    name: 宏尘极客 && fishcpy
     # 作者网址
     website: https://www.hcjike.com
   customTemplates:
@@ -30,7 +30,7 @@ spec:
   settingName: theme-dream2-plus-setting
   configMapName: theme-dream2-plus-configMap
   # 版本号
-  version: 1.4.1
+  version: 1.4.2.beta5
   # 最低支持的 Halo 版本
   require: ">=2.20.0"
   # 许可

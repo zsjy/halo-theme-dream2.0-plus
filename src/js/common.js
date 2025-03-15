@@ -559,11 +559,14 @@ const commonContext = {
     if (!DreamConfig.enable_security_link || !DreamConfig.security_link_url || DreamConfig.security_link_url.length === 0) {
       return
     }
-    $(document).on('click', 'a[target=_blank]', (event) => {
-      event.preventDefault() // 防止链接默认行为，即打开新页面
+    $(document).on('click', 'a', (event) => {
       var href = $(event.currentTarget).attr('href')
       var hostname = window.location.hostname
-
+      // 判断是否为下载链接
+      const isDownloadLink = (url) => {
+        const downloadExtensions = ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.zip', '.rar', '.7z', '.tar', '.gz', '.bz2', '.dmg', '.exe', '.msi', '.iso', '.apk']
+        return downloadExtensions.some(ext => url.toLowerCase().endsWith(ext))
+      }
       const isInternalLink = (url, siteDomain) => {
         // 将URL和站点域名转换为小写，去除前导和尾随空格
         url = url.toLowerCase().trim()
@@ -581,9 +584,14 @@ const commonContext = {
         // 对比URL和站点域名
         return url.includes(siteDomain)
       }
-
-      var tempwindow = window.open('_blank')
-      tempwindow.location = isInternalLink(href, hostname) ? href : (DreamConfig.security_link_url + '?target=' + encodeURIComponent(href))
+      if (isDownloadLink(href)) {
+        event.preventDefault()
+        // 如果是下载链接，直接跳转
+        window.open(href, '_blank')
+      } else if (!isInternalLink(href, hostname)) {
+        event.preventDefault()
+        window.open((DreamConfig.security_link_url + '?target=' + encodeURIComponent(href)), '_blank')
+      }
     })
   },
   /* 灰色模式 */

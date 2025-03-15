@@ -80,9 +80,7 @@
       for (let time of custom_gray_mode_time_list) {
         let type = time.realNode.time_span;
         let desc = time.realNode.time_span_desc;
-        if (gray_mode_time_list.indexOf(type) === -1) {
-          gray_mode_time_list.push({time: type, desc: desc});
-        }
+        gray_mode_time_list.push({time: type, desc: desc});
       }
     }
     DreamConfig["gray_mode_time_list"] = gray_mode_time_list;
