@@ -1448,21 +1448,21 @@ spec:
           label: 安全链接页面-页面标题
           value: '{title}-安全中心'
           placeholder: '请输入安全链接页面站点的标题'
-          help: '请输入/选择安全链接页面站点的标题，留空不显示，“ {title} ”表示站点主标题，位置为浏览器显示标题。'
+          help: '请输入安全链接页面站点的标题，留空不显示，“ {title} ”表示站点主标题，位置为浏览器显示标题。'
         - $formkit: text
           name: security_link_site_title
           if: $get(enable_security_link).value
           label: 安全链接页面-站点标题
           value: '{title}'
           placeholder: '请输入安全链接页面站点的标题'
-          help: '请输入/选择安全链接页面站点的标题，留空不显示，“ {title} ”表示站点主标题，位置为页面头像下方。'
+          help: '请输入安全链接页面站点的标题，留空不显示，“ {title} ”表示站点主标题，位置为页面头像下方。'
         - $formkit: text
           name: security_link_url
           label: 安全链接页面-URL
           if: $get(enable_security_link).value
           validation: required
           placeholder: '请输入使用“安全链接页面模版”创建的页面访问路径'
-          help: '输入使用”安全链接页面模版“创建的页面访问路径，不能省略’/‘。'
+          help: '请输入使用”安全链接页面模版“创建的页面访问路径，不能省略’/‘。'
         - $formkit: code
           name: security_link_tip_desc
           if: $get(enable_security_link).value
@@ -1470,7 +1470,7 @@ spec:
           language: html
           height: 45px
           placeholder: '请输入安全链接页面提示区域的文本描述'
-          help: '输入安全链接页面提示区域的文本描述，留空使用默认文本描述。'
+          help: '请输入安全链接页面提示区域的文本描述，留空使用默认：“请注意您的账号和财产安全！”。'
         - $formkit: number
           name: security_link_auto_jump_time
           if: $get(enable_security_link).value
