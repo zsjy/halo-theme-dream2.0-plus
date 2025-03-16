@@ -559,7 +559,7 @@ const commonContext = {
     if (!DreamConfig.enable_security_link || !DreamConfig.security_link_url || DreamConfig.security_link_url.length === 0) {
       return
     }
-    $(document).on('click', 'a, hyperlink-inline-card', (event) => {
+    $(document).on('click', 'a, hyperlink-inline-card, hyperlink-card', (event) => {
       var href = $(event.currentTarget).attr('href')
       var hostname = window.location.hostname
       // 判断是否为下载链接
