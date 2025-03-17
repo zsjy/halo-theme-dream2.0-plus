@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [22.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -79,6 +79,7 @@ jobs:
         asset_name: halo-theme-dream2.0-plus-V${{ env.version }}.zip
         asset_content_type: application/zip
 
+    # 如果是master分支，发布到npm
     - name: npm ci
       if: ${{ env.branch_type == 'master' }}
       run: npm ci
@@ -87,3 +88,15 @@ jobs:
       run: npm publish --tag=latest
       env:
         NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+    # 如果是master分支，发布到 halo 商店
+    - name: Release to App Store
+      if: ${{ env.branch_type == 'master' }}
+      uses: halo-sigs/app-store-release-action@v3
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        app-id: ${{ secrets.HALO_DREAM2_PLUS_ID }}
+        halo-backend-baseurl: https://www.halo.run
+        release-id: ${{ steps.create_release.outputs.id }}
+        assets-dir: ./dist
+        halo-pat: ${{ secrets.HALO_PAT }}
