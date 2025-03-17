@@ -65,6 +65,14 @@ spec:
           name: cloud_by_url
           label: '云服务提供商 URL'
           placeholder: '请输入链接地址'
+        - $formkit: attachment
+          name: cdn_by_logo
+          label: 'CDN提供商 Logo'
+          placeholder: '请输入/选择 Logo 路径'
+        - $formkit: text
+          name: cdn_by_url
+          label: 'CDN提供商 URL'
+          placeholder: '请输入链接地址'
         - $formkit: radio
           name: header_fixed
           label: 固定标题栏

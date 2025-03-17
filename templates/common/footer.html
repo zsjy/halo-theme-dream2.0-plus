@@ -35,7 +35,9 @@
               </p>
               <p th:if="${!#strings.isEmpty(theme.config.basic_info.cloud_by_logo)}">本站由<a
                 class="cloud-driven" target="_blank" rel="noopener noreferrer nofollow" th:href="${theme.config.basic_info.cloud_by_url}"><img height="auto" width="auto"
-                alt="云服务商" th:src="${theme.config.basic_info.cloud_by_logo}"/></a>提供云服务</p>
+                alt="云服务商" th:src="${theme.config.basic_info.cloud_by_logo}"/></a>提供云服务<th:block th:if="${!#strings.isEmpty(theme.config.basic_info.cdn_by_logo)}">, <a
+                  class="cloud-driven" target="_blank" rel="noopener noreferrer nofollow" th:href="${theme.config.basic_info.cdn_by_url}"><img height="auto" width="auto"
+                  alt="CDN务商" th:src="${theme.config.basic_info.cdn_by_logo}"/></a>提供CDN服务</th:block></p>
             </li>
             <li>
                 <halo:footer />
