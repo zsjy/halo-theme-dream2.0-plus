@@ -5,6 +5,7 @@ name: publish-release-branch-workflow
 
 on:
   push:
+    branches: [ "dev" ]
     paths: ["theme.yaml"]
   workflow_dispatch:
   
@@ -20,27 +21,15 @@ jobs:
     steps:
     # 迁出代码
     - uses: actions/checkout@v4
-    # 确定构建分支类型
-    - name: Determine Branch Type
-      id: determine_branch_type
-      run: |
-        branch_type_master=false
-        if [[ $GITHUB_REF == refs/heads/master ]]; then
-          branch_type_master=true
-        else
-          branch_type_master=false
-        fi
-        echo "branch_type_master=$branch_type_master" >> $GITHUB_ENV
-      shell: bash
+
     # 确定构建版本
     - name: version
       id: version
       run: |
-        version=$(grep 'version:' theme.yaml | sed 's/.*:\s*//')
+        version=$(grep -E '^version:\s*' theme.yaml | sed -E 's/version:\s*//')
         echo "version=$version" >> $GITHUB_ENV
 
     - name: Use Node.js ${{ matrix.node-version }}
-      if: ${{ env.branch_type_master != 'true' }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
@@ -48,12 +37,10 @@ jobs:
         registry-url: https://registry.npmjs.org/
 
     - name: Install dependencies
-      if: ${{ env.branch_type_master != 'true' }}
       run: npm install
 
     # 构建
     - name: Build
-      if: ${{ env.branch_type_master != 'true' }}
       run: npm run release --tag=${{ env.version }}
 
     # 如果是master分支，创建latest的Release，否则创建 预览版
@@ -67,12 +54,11 @@ jobs:
         release_name: ${{ env.version }}
         body: ${{ github.event.commits[0].message }}
         draft: false
-        prerelease: ${{ env.branch_type_master != 'true'}}
+        prerelease: true
 
     # 创建Release Asset
     - name: Upload Release Asset
       id: upload_asset
-      if: ${{ env.branch_type_master != 'true' }}
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
