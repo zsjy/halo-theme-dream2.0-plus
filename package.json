@@ -6,11 +6,12 @@
   "author": "宏尘极客",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "eslint src/**/*.js && gulp release",
-    "push": "eslint src/**/*.js && gulp push",
+    "release": "eslint src/**/*.js && gulp release && npx @halo-dev/theme-package-cli",
+    "push": "eslint src/**/*.js && gulp push && npx @halo-dev/theme-package-cli",
     "zip": "gulp zip",
     "build": "eslint src/**/*.js && gulp && npx @halo-dev/theme-package-cli",
-    "lint": "eslint src/**/*.js"
+    "lint": "eslint src/**/*.js",
+    "build-res": "eslint src/**/*.js && gulp"
   },
   "repository": {
     "type": "git",

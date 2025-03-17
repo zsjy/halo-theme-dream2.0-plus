@@ -145,7 +145,7 @@ task('publish', (done) => {
 task('default', series('clean', parallel('css', 'js')))
 
 // release模式，需要使用--tag参数指定版本号
-task('release', series('clean', 'version', parallel('css', 'js'), 'zip'))
+task('release', series('clean', 'version', parallel('css', 'js')))
 
 // push模式，需要使用--tag参数指定版本号
 task('push', series('clean', 'version', parallel('css', 'js'), 'publish'))
