@@ -27,6 +27,8 @@ jobs:
         branch_type_master=false
         if [[ $GITHUB_REF == refs/heads/master ]]; then
           branch_type_master=true
+        else
+          branch_type_master=false
         fi
         echo "branch_type_master=$branch_type_master" >> $GITHUB_ENV
       shell: bash
