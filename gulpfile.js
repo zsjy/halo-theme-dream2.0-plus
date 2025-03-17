@@ -142,10 +142,10 @@ task('publish', (done) => {
 })
 
 // 默认模式
-task('default', series('clean', parallel('css', 'js'), 'zip'))
+task('default', series('clean', parallel('css', 'js')))
 
 // release模式，需要使用--tag参数指定版本号
 task('release', series('clean', 'version', parallel('css', 'js'), 'zip'))
 
 // push模式，需要使用--tag参数指定版本号
-task('push', series('clean', 'version', parallel('css', 'js'), 'zip', 'publish'))
+task('push', series('clean', 'version', parallel('css', 'js'), 'publish'))

@@ -1,0 +1,38 @@
+name: CD
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  # 不是预览版本且名称不含beta时执行
+  cd:
+    uses: halo-sigs/reusable-workflows/.github/workflows/theme-cd.yaml@v3
+    if: |
+      !github.event.release.prerelease && 
+      !contains(github.event.release.tag_name, 'beta')
+    secrets:
+      halo-pat: ${{ secrets.HALO_PAT }}
+    permissions:
+      contents: write
+    with:
+      app-id: ${{ secrets.HALO_DREAM2_PLUS_ID }}
+      pnpm-version: 10
+      node-version: 22
+
+  # 若cd任务未执行，则此任务也不执行
+  npm publish:
+    needs: cd
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: [22.x]
+          registry-url: 'https://registry.npmjs.org'
+      - name: npm publish
+        run: npm publish --tag=latest
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

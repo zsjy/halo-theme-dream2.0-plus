@@ -1,7 +1,7 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
-name: halo-theme-dream2.0-plus CI
+name: publish-release-branch-workflow
 
 on:
   push:
@@ -16,7 +16,6 @@ jobs:
     strategy:
       matrix:
         node-version: [22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     # 迁出代码
@@ -25,13 +24,11 @@ jobs:
     - name: Determine Branch Type
       id: determine_branch_type
       run: |
-        branch_type=unknown
+        branch_type_master=false
         if [[ $GITHUB_REF == refs/heads/master ]]; then
-          branch_type=master
-        elif [[ $GITHUB_REF == refs/heads/dev ]]; then
-          branch_type=dev
+          branch_type_master=true
         fi
-        echo "branch_type=$branch_type" >> $GITHUB_ENV
+        echo "branch_type_master=$branch_type_master" >> $GITHUB_ENV
       shell: bash
     # 确定构建版本
     - name: version
@@ -41,6 +38,7 @@ jobs:
         echo "version=$version" >> $GITHUB_ENV
 
     - name: Use Node.js ${{ matrix.node-version }}
+      if: ${{ !env.branch_type_master }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
@@ -48,10 +46,12 @@ jobs:
         registry-url: https://registry.npmjs.org/
 
     - name: Install dependencies
+      if: ${{ !env.branch_type_master }}
       run: npm install
 
     # 构建
     - name: Build
+      if: ${{ !env.branch_type_master }}
       run: npm run release --tag=${{ env.version }}
 
     # 如果是master分支，创建latest的Release，否则创建 预览版
@@ -65,38 +65,17 @@ jobs:
         release_name: ${{ env.version }}
         body: ${{ github.event.commits[0].message }}
         draft: false
-        prerelease: ${{ env.branch_type != 'master' }}
+        prerelease: ${{ !env.branch_type_master}}
 
     # 创建Release Asset
     - name: Upload Release Asset
       id: upload_asset
+      if: ${{ !env.branch_type_master }}
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./dist/halo-theme-dream2.0-plus.zip
-        asset_name: halo-theme-dream2.0-plus-V${{ env.version }}.zip
+        asset_name: theme-dream2-plus-${{ env.version }}.zip
         asset_content_type: application/zip
-
-    # 如果是master分支，发布到npm
-    - name: npm ci
-      if: ${{ env.branch_type == 'master' }}
-      run: npm ci
-    - name: npm publish
-      if: ${{ env.branch_type == 'master' }}
-      run: npm publish --tag=latest
-      env:
-        NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
-    # 如果是master分支，发布到 halo 商店
-    - name: Release to App Store
-      if: ${{ env.branch_type == 'master' }}
-      uses: halo-sigs/app-store-release-action@v3
-      with:
-        github-token: ${{secrets.GITHUB_TOKEN}}
-        app-id: ${{ secrets.HALO_DREAM2_PLUS_ID }}
-        halo-backend-baseurl: https://www.halo.run
-        release-id: ${{ steps.create_release.outputs.id }}
-        assets-dir: ./dist
-        halo-pat: ${{ secrets.HALO_PAT }}
