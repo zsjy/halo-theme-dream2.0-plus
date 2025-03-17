@@ -248,17 +248,6 @@
             box-shadow: 0 6px 20px rgba(63, 193, 201, 0.4);
         }
 
-        .progress-bar {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .progress {
-            box-shadow: 0 0 10px rgba(171, 237, 216, 0.5);
-        }
-
         .content-title {
             margin-bottom: 20px;
             font-size: 20px;
@@ -330,6 +319,12 @@
             background-color: #abedd8;
             transition: width [[${theme.config.security_link_config.security_link_auto_jump_time}]]s linear;
         }
+
+        .progress-end {
+            width: 100% !important;
+            transition: none !important;
+        }
+
         .countdown-text {
             margin-top: 12px;
             font-size: 12px;
@@ -361,7 +356,7 @@
                 <div class="progress"></div>
             </div>
             <div class="countdown-text">
-                ⚡将在<span id="countdown">[[${theme.config.security_link_config.security_link_auto_jump_time}]]</span>秒后跳转，请自行确认链接安全性
+                ⚡将在 <span id="countdown">[[${theme.config.security_link_config.security_link_auto_jump_time}]]</span> 秒后跳转，请自行确认链接安全性
             </div>
             <div class="others-end">
                 <a th:href="${url}" target="_self">继续访问</a>
@@ -382,6 +377,12 @@
                 window.location.href = '[[${url}]]'
               }
             }, 1000)
+
+            document.querySelector('.others-end a').addEventListener('click', function(e) {
+              clearInterval(timer)
+              countdownElement.textContent = 0
+              document.querySelector('.progress-bar > .progress').classList.add('progress-end')
+            })
           } else {
             document.querySelector('.progress-bar').style.display = 'none';
             document.querySelector('.countdown-text').style.display = 'none';
