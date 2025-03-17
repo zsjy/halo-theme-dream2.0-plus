@@ -26,7 +26,7 @@ jobs:
     - name: version
       id: version
       run: |
-        version=$(grep -E '^version:\s*' theme.yaml | sed -E 's/version:\s*//')
+        version=$(grep 'version:' theme.yaml | sed 's/.*:\s*//')
         echo "version=$version" >> $GITHUB_ENV
 
     - name: Use Node.js ${{ matrix.node-version }}
