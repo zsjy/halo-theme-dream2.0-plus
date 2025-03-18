@@ -42,6 +42,7 @@
 
 ### 主题附加功能
 [Dream Plus主题使用HTML代码段插入附加功能](https://www.hcjike.com/archives/9bEclqkL)
+
 **注意：仅在本主题下，此功能方可被识别并生效。**
 
 ## 开发中功能
