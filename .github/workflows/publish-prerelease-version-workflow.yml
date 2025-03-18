@@ -1,7 +1,8 @@
-name: check-publish-version-workflow
+name: publish-prerelease-version-workflow
 
 on:
   push:
+    branches: [ "dev" ]
     paths: ["theme.yaml"]
   workflow_dispatch:
 
@@ -24,6 +25,8 @@ jobs:
           branch_type=unknown
           if [[ $GITHUB_REF == refs/heads/master ]]; then
             branch_type=master
+          elif [[ $GITHUB_REF == refs/heads/dev ]]; then
+            branch_type=dev
           else
             branch_type=unknown
           fi
@@ -63,7 +66,7 @@ jobs:
           release_name: ${{ env.version }}
           body: ${{ github.event.commits[0].message }}
           draft: false
-          prerelease: ${{ env.branch_type != 'master' }}
+          prerelease: true
 
       # 创建Release Asset，如果是master分支，则不执行
       - name: Upload Release Asset
