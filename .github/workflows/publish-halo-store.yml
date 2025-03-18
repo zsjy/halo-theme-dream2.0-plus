@@ -1,4 +1,4 @@
-name: CD
+name: publish-halo-store
 
 on:
   release:
@@ -17,7 +17,7 @@ jobs:
     permissions:
       contents: write
     with:
-      app-id: ${{ secrets.HALO_DREAM2_PLUS_ID }}
+      app-id: app-HrMpM
       pnpm-version: 10
       node-version: 22
 
