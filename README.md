@@ -40,6 +40,9 @@
 ### 网站添加 PWA 配置
 [网站添加 PWA 配置，使网站支持像应用一样安装](https://www.hcjike.com/archives/MNdz7kZ6)
 
+### 主题附加功能
+[Dream Plus主题使用HTML代码段插入附加功能](https://www.hcjike.com/archives/9bEclqkL)
+**注意：仅在本主题下，此功能方可被识别并生效。**
 
 ## 开发中功能
 - 开发中功能已发布为[预发行版](https://github.com/zsjy/halo-theme-dream2.0-plus/releases)，开发中的功能不保证留存到正式版，包括但不限于：主题配置位置、配置方式、页面样式等等。
