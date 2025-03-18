@@ -125,7 +125,7 @@ task('js', () => {
 task('zip', () => {
   const target = ['./templates/**', './*.yaml', 'README.md', 'LICENSE']
   return src(target, {base: '.'})
-    .pipe(zip('halo-theme-dream2.0-plus.zip'))
+    .pipe(zip('theme-dream2-plus' + (version ? ('-' + version) : '') + '.zip'))
     .pipe(dest(distPath))
 })
 
@@ -142,10 +142,13 @@ task('publish', (done) => {
 })
 
 // 默认模式
-task('default', series('clean', parallel('css', 'js')))
+task('default', series('clean', parallel('css', 'js'), 'zip'))
 
 // release模式，需要使用--tag参数指定版本号
-task('release', series('clean', 'version', parallel('css', 'js')))
+task('release', series('clean', 'version', parallel('css', 'js'), 'zip'))
+
+// build-res模式，用于编译特定版本资源，在工作流中发布npm使用，需要使用--tag参数指定版本号
+task('build-res', series('clean', 'version', parallel('css', 'js')))
 
 // push模式，需要使用--tag参数指定版本号
-task('push', series('clean', 'version', parallel('css', 'js'), 'publish'))
+task('push', series('clean', 'version', parallel('css', 'js'), 'zip', 'publish'))
