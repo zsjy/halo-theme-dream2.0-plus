@@ -1,17 +1,17 @@
 {
   "name": "halo-theme-dream2-plus",
-  "version": "1.3.6",
+  "version": "1.4.4",
   "description": "梦之城，童话梦境，动漫类型博客主题。",
   "main": "index.js",
   "author": "宏尘极客",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "eslint src/**/*.js && gulp release && npx @halo-dev/theme-package-cli",
-    "push": "eslint src/**/*.js && gulp push && npx @halo-dev/theme-package-cli",
+    "release": "eslint src/**/*.js && gulp release",
+    "push": "eslint src/**/*.js && gulp push",
     "zip": "gulp zip",
-    "build": "eslint src/**/*.js && gulp && npx @halo-dev/theme-package-cli",
+    "build": "eslint src/**/*.js && gulp",
     "lint": "eslint src/**/*.js",
-    "build-res": "eslint src/**/*.js && gulp"
+    "build-res": "eslint src/**/*.js && gulp build-res"
   },
   "repository": {
     "type": "git",

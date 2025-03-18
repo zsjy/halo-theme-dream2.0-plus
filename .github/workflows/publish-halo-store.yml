@@ -24,17 +24,11 @@ jobs:
 
   # 若cd任务未执行，则此任务也不执行
   npm-publish:
+    name: Npm Publish
     needs: cd
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      # 确定构建版本
-      - name: version
-        id: version
-        run: |
-          version=$(grep 'version:' theme.yaml | sed 's/.*:\s*//')
-          echo "version=$version" >> $GITHUB_ENV
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -48,7 +42,7 @@ jobs:
 
       # 编译资源文件，用于上传到npm
       - name: Build
-        run: npm run release --tag=${{ env.version }}
+        run: npm run build-res --tag=${{ github.event.release.tag_name }}
 
       - name: npm publish
         run: npm publish --tag=latest
