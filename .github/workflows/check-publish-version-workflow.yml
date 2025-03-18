@@ -1,4 +1,4 @@
-name: publish-version-workflow
+name: check-publish-version-workflow
 
 on:
   push:
