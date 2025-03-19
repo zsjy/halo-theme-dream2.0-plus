@@ -2,11 +2,13 @@
 <html lang="zh" xmlns:th="https://www.thymeleaf.org"
       th:class="${theme.config.basic_style.theme_style}"
       th:with="urlCode = ${param.target},
-               url = ${#uris.unescapePath(urlCode)},
+               url = ${#strings.defaultString(#uris.unescapePath(urlCode), '/')},
+               targetUrl = ${#strings.startsWith(#strings.toLowerCase(url), 'http') ? url : '/'},
                title = ${singlePage.spec.title} + ' - ' + ${site.title},
                contributor = ${contributorFinder.getContributor(theme.config.basic_info.metadata_name)},
                enableComment = false, isPost = false, canonical = ${theme.config.security_link_config.security_link_url}">
 <head>
+    <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -350,7 +352,7 @@
             </div>
             <div class="others-topic" th:with="oDesc = ${theme.config.security_link_config.security_link_jump_desc},
                                            o1 = ${#strings.replace(oDesc, '{title}', site.title)},
-                                           o2 = ${#strings.replace(o1, '{url}', url)}" th:utext="${o2}">
+                                           o2 = ${#strings.replace(o1, '{url}', targetUrl)}" th:utext="${o2}">
             </div>
             <div class="progress-bar">
                 <div class="progress"></div>
@@ -359,36 +361,44 @@
                 ⚡将在 <span id="countdown">[[${theme.config.security_link_config.security_link_auto_jump_time}]]</span> 秒后跳转，请自行确认链接安全性
             </div>
             <div class="others-end">
-                <a th:href="${url}" target="_self">继续访问</a>
+                <a th:href="${targetUrl}" target="_self">继续访问</a>
             </div>
         </div>
     </div>
     <script>
         window.onload = function() {
+          let timer
+          let countdownElement
+          // 倒计时
           let countdown = [[${theme.config.security_link_config.security_link_auto_jump_time}]]
           if (countdown > 0) {
             document.querySelector('.progress').style.width = '100%'
-            const countdownElement = document.getElementById('countdown')
-            const timer = setInterval(function () {
+            countdownElement = document.getElementById('countdown')
+            timer = setInterval(function () {
               countdown--
               countdownElement.textContent = countdown
               if (countdown <= 0) {
                 clearInterval(timer)
-                window.location.href = '[[${url}]]'
+                window.location.replace('[[${targetUrl}]]');
               }
             }, 1000)
-
-            document.querySelector('.others-end a').addEventListener('click', function(e) {
-              clearInterval(timer)
-              countdownElement.textContent = 0
-              document.querySelector('.progress-bar > .progress').classList.add('progress-end')
-            })
           } else {
             document.querySelector('.progress-bar').style.display = 'none';
             document.querySelector('.countdown-text').style.display = 'none';
           }
-
-          /** 配置主题模式 */
+          // 继续访问，不记录历史，避免返回此页面
+          document.querySelector('.others-end a').addEventListener('click', function (e) {
+            e.preventDefault()
+            if (timer) {
+              clearInterval(timer)
+            }
+            window.location.replace(e.target)
+            if (countdownElement) {
+              countdownElement.textContent = 0
+            }
+            document.querySelector('.progress-bar > .progress').classList.add('progress-end')
+          })
+          /* 配置主题模式 */
           let default_theme = '[[${theme.config.basic_style.default_theme}]]';
           const hasNightInLocal = () => localStorage.getItem('night') !== null;
           const getNightInConfig = () => {
