@@ -3,10 +3,22 @@
       th:class="${theme.config.basic_style.theme_style}"
       th:with="urlCode = ${param.target},
                url = ${#strings.defaultString(#uris.unescapePath(urlCode), '/')},
-               targetUrl = ${#strings.startsWith(#strings.toLowerCase(url), 'http') ? url : '/'},
+               normalizedUrl = ${#strings.endsWith(url, '/') ? url : url + '/'},
+               targetUrl = ${#strings.startsWith(#strings.toLowerCase(normalizedUrl), 'http') ? normalizedUrl : '/'},
+               whitelist = ${#strings.defaultString(theme.config.security_link_config.whitelist_domains, '')},
+               urlDomain = ${#strings.substringBefore(#strings.substringAfter(normalizedUrl, '://'), '/')},
+               isWhitelisted = ${#strings.contains(',' + whitelist + ',', ',' + urlDomain + ',') || #strings.contains(whitelist, urlDomain)},
                title = ${singlePage.spec.title} + ' - ' + ${site.title},
                contributor = ${contributorFinder.getContributor(theme.config.basic_info.metadata_name)},
                enableComment = false, isPost = false, canonical = ${theme.config.security_link_config.security_link_url}">
+
+<!-- 如果在白名单中，直接重定向 -->
+<th:block th:if="${isWhitelisted}">
+    <meta th:http-equiv="'Refresh'" th:content="'0; url=' + ${url}"/>
+</th:block>
+
+<!-- 如果不在白名单中 -->
+<th:block th:unless="${isWhitelisted}">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -75,7 +87,6 @@
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
         }
-
 
         .others-end a {
             background: rgba(63, 193, 201, 0.8);
@@ -365,6 +376,9 @@
             </div>
         </div>
     </div>
+    <script th:if="${isWhitelisted}" th:inline="javascript">
+        window.location.href = /*[[${normalizedUrl}]]*/ '';
+    </script>
     <script>
         window.onload = function() {
           let timer
@@ -414,5 +428,6 @@
           document.documentElement.classList.add(isNight.toString() === 'true' ? 'dark' : 'light');
         }
     </script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'922deaaf082f4960',t:'MTc0MjM5NzIzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
