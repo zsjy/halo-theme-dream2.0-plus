@@ -154,10 +154,11 @@ spec:
     group: core.halo.run
     kind: LinkGroup
   formSchema:
-    - $formkit: "select"
+    - $formkit: radio
       name: "hide"
       label: "是否隐藏"
       value: "false"
+      help: '控制是否在"/links"页面中隐藏此分组。'
       options:
         - value: "true"
           label: 是
@@ -174,10 +175,11 @@ spec:
     group: core.halo.run
     kind: Link
   formSchema:
-    - $formkit: "select"
+    - $formkit: radio
       name: "hide"
       label: "是否隐藏"
       value: "false"
+      help: '控制是否在"/links"页面中隐藏此链接。'
       options:
         - value: "true"
           label: 是
