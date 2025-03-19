@@ -3,6 +3,7 @@
       th:class="${theme.config.basic_style.theme_style}"
       th:with="urlCode = ${param.target},
                url = ${#strings.defaultString(#uris.unescapePath(urlCode), '/')},
+               targetUrl = ${#strings.startsWith(#strings.toLowerCase(url), 'http') ? url : '/'},
                title = ${singlePage.spec.title} + ' - ' + ${site.title},
                contributor = ${contributorFinder.getContributor(theme.config.basic_info.metadata_name)},
                enableComment = false, isPost = false, canonical = ${theme.config.security_link_config.security_link_url}">
@@ -350,7 +351,7 @@
             </div>
             <div class="others-topic" th:with="oDesc = ${theme.config.security_link_config.security_link_jump_desc},
                                            o1 = ${#strings.replace(oDesc, '{title}', site.title)},
-                                           o2 = ${#strings.replace(o1, '{url}', url)}" th:utext="${o2}">
+                                           o2 = ${#strings.replace(o1, '{url}', targetUrl)}" th:utext="${o2}">
             </div>
             <div class="progress-bar">
                 <div class="progress"></div>
@@ -359,7 +360,7 @@
                 ⚡将在 <span id="countdown">[[${theme.config.security_link_config.security_link_auto_jump_time}]]</span> 秒后跳转，请自行确认链接安全性
             </div>
             <div class="others-end">
-                <a th:href="${url}" target="_self">继续访问</a>
+                <a th:href="${targetUrl}" target="_self">继续访问</a>
             </div>
         </div>
     </div>
@@ -377,7 +378,7 @@
               countdownElement.textContent = countdown
               if (countdown <= 0) {
                 clearInterval(timer)
-                window.location.replace('[[${url}]]');
+                window.location.replace('[[${targetUrl}]]');
               }
             }, 1000)
           } else {
