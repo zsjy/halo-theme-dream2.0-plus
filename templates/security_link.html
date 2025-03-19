@@ -2,7 +2,7 @@
 <html lang="zh" xmlns:th="https://www.thymeleaf.org"
       th:class="${theme.config.basic_style.theme_style}"
       th:with="urlCode = ${param.target},
-               url = ${#uris.unescapePath(urlCode)},
+               url = ${#strings.defaultString(#uris.unescapePath(urlCode), '/')},
                title = ${singlePage.spec.title} + ' - ' + ${site.title},
                contributor = ${contributorFinder.getContributor(theme.config.basic_info.metadata_name)},
                enableComment = false, isPost = false, canonical = ${theme.config.security_link_config.security_link_url}">
@@ -365,30 +365,38 @@
     </div>
     <script>
         window.onload = function() {
+          let timer
+          let countdownElement
+          // 倒计时
           let countdown = [[${theme.config.security_link_config.security_link_auto_jump_time}]]
           if (countdown > 0) {
             document.querySelector('.progress').style.width = '100%'
-            const countdownElement = document.getElementById('countdown')
-            const timer = setInterval(function () {
+            countdownElement = document.getElementById('countdown')
+            timer = setInterval(function () {
               countdown--
               countdownElement.textContent = countdown
               if (countdown <= 0) {
                 clearInterval(timer)
-                window.location.href = '[[${url}]]'
+                window.location.replace('[[${url}]]');
               }
             }, 1000)
-
-            document.querySelector('.others-end a').addEventListener('click', function(e) {
-              clearInterval(timer)
-              countdownElement.textContent = 0
-              document.querySelector('.progress-bar > .progress').classList.add('progress-end')
-            })
           } else {
             document.querySelector('.progress-bar').style.display = 'none';
             document.querySelector('.countdown-text').style.display = 'none';
           }
-
-          /** 配置主题模式 */
+          // 继续访问，不记录历史，避免返回此页面
+          document.querySelector('.others-end a').addEventListener('click', function (e) {
+            e.preventDefault()
+            if (timer) {
+              clearInterval(timer)
+            }
+            window.location.replace(e.target)
+            if (countdownElement) {
+              countdownElement.textContent = 0
+            }
+            document.querySelector('.progress-bar > .progress').classList.add('progress-end')
+          })
+          /* 配置主题模式 */
           let default_theme = '[[${theme.config.basic_style.default_theme}]]';
           const hasNightInLocal = () => localStorage.getItem('night') !== null;
           const getNightInConfig = () => {
