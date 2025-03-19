@@ -561,6 +561,9 @@ const commonContext = {
     }
     $(document).on('click', 'a, hyperlink-inline-card, hyperlink-card', (event) => {
       var href = $(event.currentTarget).attr('href')
+      if (!href) {
+        return
+      }
       var hostname = window.location.hostname
       // 判断是否为下载链接
       const isDownloadLink = (url) => {
