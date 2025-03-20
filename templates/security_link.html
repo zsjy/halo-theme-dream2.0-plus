@@ -127,6 +127,10 @@
             background-color: #abedd8;
         }
 
+        .font-color {
+            color: #abedd8;
+        }
+
         html.dark .loading {
             background: #393e46;
             box-shadow: 0 4px 8px rgba(100, 100, 100, 0.1);
@@ -353,7 +357,7 @@
                 <div class="progress"></div>
             </div>
             <div class="countdown-text">
-                ⚡将在 <span id="countdown">[[${theme.config.security_link_config.security_link_auto_jump_time}]]</span> 秒后跳转，请自行确认链接安全性
+                ⚡将在 <span id="countdown" class="font-color">[[${theme.config.security_link_config.security_link_auto_jump_time}]]</span> 秒后跳转，请自行确认链接安全性
             </div>
             <div class="others-end">
                 <a th:href="${targetUrl}" target="_self">继续访问</a>
