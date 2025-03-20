@@ -1,0 +1,49 @@
+name: Pull request check
+
+on:
+  pull_request:
+    branches:
+      - master
+      - dev
+    types: [ opened, synchronize ]  # 创建或更新 PR 时触发（默认包含这两种类型）
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+
+    steps:
+      # 迁出代码
+      - uses: actions/checkout@v4
+
+      # 确定构建版本
+      - name: version
+        id: version
+        run: |
+          version=$(grep 'version:' theme.yaml | sed 's/.*:\s*//')
+          echo "version=$version" >> $GITHUB_ENV
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install dependencies
+        run: npm install
+
+      # 构建或检查是否可以正常打包
+      - name: Build
+        run: npm run release --tag=${{ env.version }}
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: theme-dream2-plus-${{ env.version }}.zip
+          path: dist
