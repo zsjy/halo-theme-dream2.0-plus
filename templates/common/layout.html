@@ -38,7 +38,7 @@
 <!-- 默认 -->
     <th:block th:if="${theme.config.sidebar.enable_music == true && theme.config.sidebar.music_style == 'default'}">
       <div class="bottom-player is-hidden-mobile">
-        <mew-music listFolded="true" fixed="true" mini="true" prompt="音乐加载中..." listMaxHeight="200px" playlist=${theme.config.sidebar.playlist_id}></mew-music>
+        <mew-music listFolded="true" fixed="true" mini="true" prompt="音乐加载中..." listMaxHeight="200px" th:attr="playlist=${theme.config.sidebar.playlist_id}"></mew-music>
       </div>
       <style>
         .bottom-player {
