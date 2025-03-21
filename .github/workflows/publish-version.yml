@@ -6,6 +6,9 @@ on:
       - published
 
 jobs:
+  permissions:
+    contents: read    # 读取仓库代码
+
   # 非正式版执行时，不发布到商店
   cd:
     uses: zsjy/reusable-workflows/.github/workflows/theme-cd.yaml@v3
