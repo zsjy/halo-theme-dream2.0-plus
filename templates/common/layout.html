@@ -33,6 +33,84 @@
     <th:block th:replace="~{common/footer}"/>
     <th:block th:replace="~{common/scripts}"/>
     <th:block th:utext="${theme.config.custom.inline_body_html}"></th:block>
+
+<!-- 音乐播放器 -->
+<!-- 默认 -->
+    <th:block th:if="${theme.config.sidebar.enable_music == true && theme.config.sidebar.music_style == 'default'}">
+      <div class="bottom-player is-hidden-mobile">
+        <mew-music listFolded="true" fixed="true" mini="true" prompt="音乐加载中..." listMaxHeight="200px" playlist=${theme.config.sidebar.playlist_id}></mew-music>
+      </div>
+      <style>
+        .bottom-player {
+          position: relative;
+          width: 100%;
+          height: 100%;
+        }
+        .bottom-player mew-music {
+          margin: initial !important;
+          position: fixed;
+          bottom: 0;
+        }
+        .bottom-player .aplayer.aplayer-fixed .aplayer-body {
+          background: #00000000 !important;
+        }
+        .bottom-player .aplayer-list {
+          border: 1px solid #00000000 !important;
+        }
+        .bottom-player .aplayer-info {
+          border-top: 1px solid #00000000 !important;
+        }
+      </style>
+    </th:block>
+<!-- 圆盘 -->
+    <th:block th:if="${theme.config.sidebar.enable_music == true && theme.config.sidebar.music_style == 'disk'}">
+      <div class="bottom-player is-hidden-mobile">
+        <mew-music listFolded="true" mini="true" volume="0.3" prompt="加载中..." order="random" listMaxHeight="200px" th:attr="playlist=${theme.config.sidebar.playlist_id}"></mew-music>
+      </div>
+      <style>
+        .bottom-player .aplayer.aplayer-narrow {
+          border-radius: 50%;
+          border: 1px solid var(--theme);
+          left: 10px;
+          bottom: 10px;
+          animation: spin 20s linear infinite;
+        }
+        .bottom-player .aplayer-button {
+          animation: reverse-spin 20s linear infinite;
+        }
+        .bottom-player .aplayer .aplayer-pic .aplayer-pause {
+          width: 26px;
+          height: 26px;
+          border: 2px solid #fff;
+          bottom: 50%;
+          right: 50%;
+          margin: 0 -15px -15px 0;
+        }
+        .bottom-player .aplayer .aplayer-pic .aplayer-pause svg {
+          position: absolute;
+          top: 3px;
+          left: 3px;
+          height: 20px;
+          width: 20px;
+        }
+        .bottom-player mew-music {
+          margin: initial !important;
+          position: fixed;
+          bottom: 0;
+        }
+        /* 定义旋转动画 */
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        /* 定义逆向旋转动画 */
+        @keyframes reverse-spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(-360deg); }
+        }
+      </style>
+    </th:block>
+   
     </body>
   </th:block>
 </th:block>

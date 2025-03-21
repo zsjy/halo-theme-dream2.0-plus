@@ -819,6 +819,35 @@ spec:
             type="playlist"
             id="7355014621"
           help: '输入音乐参数配置(id / server / type必填)，详细配置方式见官方文档：https://github.com/metowolf/MetingJS/'
+        - $formkit: radio
+          name: enable_music
+          id: enable_music
+          label: 开启 左下角音乐
+          value: false
+          help: '开启 左下角音乐'
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
+        - $formkit: select
+          name: music_style
+          label: 音乐播放器风格
+          value: 'default'
+          if: $get(enable_music).value
+          help: '音乐播放器风格。'
+          options:
+            - value: 'default'
+              label: 默认
+            - value: 'disk'
+              label: 圆盘
+        - $formkit: text
+          name: playlist_id
+          label: '侧边栏音乐-网易云歌单 ID'
+          placeholder: '请输入网易云歌单 ID'
+          validation: required
+          if: $get(enable_music).value
+          help: '填写网易云歌单 ID。'
         - $formkit: number
           name: recent_posts_num
           label: 侧边栏最近文章-展示文章数量
