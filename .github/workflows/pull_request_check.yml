@@ -48,3 +48,4 @@ jobs:
           name: theme-dream2-plus-${{ env.version }}.zip
           path: dist/theme-dream2-plus-${{ env.version }}.zip
           archive: false
+          compression-level: 0
