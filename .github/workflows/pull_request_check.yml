@@ -10,6 +10,8 @@ on:
 
 jobs:
   build:
+    permissions:
+      contents: read    # 读取仓库代码
 
     runs-on: ubuntu-latest
 
