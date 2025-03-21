@@ -835,7 +835,7 @@ spec:
           label: 音乐播放器风格
           value: 'default'
           if: $get(enable_music).value
-          help: '音乐播放器风格。'
+          help: '音乐播放器风格，预览https://blog.fishcpy.top/archives/1742571829762。'
           options:
             - value: 'default'
               label: 默认
