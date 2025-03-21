@@ -46,5 +46,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: theme-dream2-plus-${{ env.version }}.zip
-          path: dist/theme-dream2-plus-${{ env.version }}.zip  # 指向已生成的 ZIP 文件路径
+          path: dist/*.zip  # zip文件只会有一个
           archive: false
