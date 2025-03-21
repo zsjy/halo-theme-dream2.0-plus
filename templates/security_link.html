@@ -3,7 +3,6 @@
       th:class="${theme.config.basic_style.theme_style}"
       th:with="urlCode = ${param.target},
                url = ${#strings.defaultString(#uris.unescapePath(urlCode), '/')},
-               targetUrl = ${#strings.startsWith(#strings.toLowerCase(url), 'http') ? url : '/'},
                title = ${singlePage.spec.title} + ' - ' + ${site.title},
                contributor = ${contributorFinder.getContributor(theme.config.basic_info.metadata_name)},
                enableComment = false, isPost = false, canonical = ${theme.config.security_link_config.security_link_url}">
@@ -270,6 +269,7 @@
 
         .others-topic {
             margin-bottom: 10px;
+            line-height: 1.2rem;
             font-size: 16px;
             letter-spacing: 1px;
             color: #333;
@@ -326,6 +326,11 @@
             transition: width [[${theme.config.security_link_config.security_link_auto_jump_time}]]s linear;
         }
 
+        .progress-end {
+            width: 100% !important;
+            transition: none !important;
+        }
+
         .countdown-text {
             margin-top: 12px;
             font-size: 12px;
@@ -335,6 +340,19 @@
         html.dark .countdown-text {
             color: #EFEFEF;
         }
+
+        #countdown {
+          font-weight: bold;
+        }
+
+        html.dark #countdown {
+            color: #3fc1c9;
+        }
+
+        html.light #countdown {
+            color: #26a1a6;
+        }
+
     </style>
 </head>
 <body>
@@ -349,9 +367,7 @@
         <div class="others">
             <div class="others-tip" th:utext="${#strings.defaultString(theme.config.security_link_config.security_link_tip_desc, '请注意您的账号和财产安全！')}">
             </div>
-            <div class="others-topic" th:with="oDesc = ${theme.config.security_link_config.security_link_jump_desc},
-                                           o1 = ${#strings.replace(oDesc, '{title}', site.title)},
-                                           o2 = ${#strings.replace(o1, '{url}', targetUrl)}" th:utext="${o2}">
+            <div class="others-topic">
             </div>
             <div class="progress-bar">
                 <div class="progress"></div>
@@ -360,15 +376,32 @@
                 ⚡将在 <span id="countdown">[[${theme.config.security_link_config.security_link_auto_jump_time}]]</span> 秒后跳转，请自行确认链接安全性
             </div>
             <div class="others-end">
-                <a th:href="${targetUrl}" target="_self">继续访问</a>
+                <a target="_self" href="/">继续访问</a>
             </div>
         </div>
     </div>
     <script>
         window.onload = function() {
+          //处理跳转链接，若链接不合法则跳转到首页
+          const siteTitle = '[[${site.title}]]'
+          let link_jump_desc = '[(${theme.config.security_link_config.security_link_jump_desc})]'
+          let targetUrl = '[[${url}]]'
+          //校验链接是否合法
+          try {
+            let tUrl = new URL(targetUrl)
+          } catch (e) {
+            // URL解析失败，返回首页
+            targetUrl = '/'
+          }
+          // 使用正则表达式进行全局替换
+          link_jump_desc = link_jump_desc.replace(new RegExp('{title}', 'g'), siteTitle);
+          link_jump_desc = link_jump_desc.replace(new RegExp('{url}', 'g'), targetUrl);
+          document.querySelector('.others-topic').innerHTML = link_jump_desc
+          document.querySelector('.others-end a').setAttribute('href', targetUrl);
+
+          // 倒计时
           let timer
           let countdownElement
-          // 倒计时
           let countdown = [[${theme.config.security_link_config.security_link_auto_jump_time}]]
           if (countdown > 0) {
             document.querySelector('.progress').style.width = '100%'
@@ -378,7 +411,7 @@
               countdownElement.textContent = countdown
               if (countdown <= 0) {
                 clearInterval(timer)
-                window.location.replace('[[${targetUrl}]]');
+                window.location.replace(targetUrl);
               }
             }, 1000)
           } else {
@@ -391,7 +424,7 @@
             if (timer) {
               clearInterval(timer)
             }
-            window.location.replace(e.target)
+            window.location.replace(targetUrl)
             if (countdownElement) {
               countdownElement.textContent = 0
             }

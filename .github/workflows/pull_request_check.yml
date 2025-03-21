@@ -25,8 +25,8 @@ jobs:
       - name: version
         id: version
         run: |
-          version=$(grep 'version:' theme.yaml | sed 's/.*:\s*//')
-          echo "version=$version" >> $GITHUB_ENV
+          VERSION_SUFFIX=$(TZ='Asia/Shanghai' date +'%Y%m%d%H%M%S')
+          echo "version=0.0.$VERSION_SUFFIX" >> $GITHUB_ENV
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
@@ -45,6 +45,6 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: theme-dream2-plus-${{ env.version }}.zip
-          path: dist/theme-dream2-plus-${{ env.version }}.zip  # 指向已生成的 ZIP 文件路径
+          name: theme-dream2-plus-unzip
+          path: dist/theme-dream2-plus-${{ env.version }}.zip
           archive: false
