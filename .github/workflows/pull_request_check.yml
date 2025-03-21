@@ -26,7 +26,7 @@ jobs:
         id: version
         run: |
           VERSION_SUFFIX=$(date -u +'%Y%m%d%H%M%S')
-          echo "version=0.0.${{ VERSION_SUFFIX }}" >> $GITHUB_ENV
+          echo "version=0.0.VERSION_SUFFIX" >> $GITHUB_ENV
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
