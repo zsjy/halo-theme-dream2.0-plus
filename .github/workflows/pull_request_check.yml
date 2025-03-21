@@ -25,7 +25,7 @@ jobs:
       - name: version
         id: version
         run: |
-          VERSION_SUFFIX=$(date -u +'%Y%m%d%H%M%S')
+          VERSION_SUFFIX=$(TZ='Asia/Shanghai' date +'%Y%m%d%H%M%S')
           echo "version=0.0.$VERSION_SUFFIX" >> $GITHUB_ENV
 
       - name: Use Node.js ${{ matrix.node-version }}
@@ -46,5 +46,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: theme-dream2-plus-${{ env.version }}.zip
-          path: dist/*.zip  # zip文件只会有一个
+          path: dist/theme-dream2-plus-${{ env.version }}.zip
           archive: false
