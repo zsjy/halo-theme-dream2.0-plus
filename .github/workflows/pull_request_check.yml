@@ -44,9 +44,15 @@ jobs:
       - name: Build
         run: npm run release --tag=${{ env.version }}
 
+      - name: Unzip file
+        run: |
+          mkdir -p distFiles
+          unzip dist/theme-dream2-plus-${{ env.version }}.zip -d distFiles/
+          rm -rf dist/
+          ls -l distFiles/
+        
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: theme-dream2-plus-unzip
-          path: dist/theme-dream2-plus-${{ env.version }}.zip
-          archive: false
+          name: theme-dream2-plus-${{ env.version }}
+          path: distFiles
