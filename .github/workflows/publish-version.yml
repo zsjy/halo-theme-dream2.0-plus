@@ -16,7 +16,7 @@ jobs:
       contents: write
     with:
       app-id: app-HrMpM
-      skip-appstore-release: ${{ (github.event.release.prerelease || !contains(github.event.release.tag_name, 'beta')) }}
+      skip-appstore-release: ${{ (github.event.release.prerelease || contains(github.event.release.tag_name, 'beta')) }}
       pnpm-version: 10
       node-version: 22
 
