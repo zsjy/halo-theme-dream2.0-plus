@@ -561,7 +561,7 @@ const commonContext = {
     }
     $(document).on('click', 'a, hyperlink-inline-card, hyperlink-card', (event) => {
       var href = $(event.currentTarget).attr('href')
-      if (!href) {
+      if (!href || (!href.toLowerCase().startsWith('http://') && !href.toLowerCase().startsWith('https://'))) {
         return
       }
       // 判断是否为下载链接
