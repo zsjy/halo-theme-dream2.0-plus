@@ -11,7 +11,8 @@
     "zip": "gulp zip",
     "build": "eslint src/**/*.js && gulp",
     "lint": "eslint src/**/*.js",
-    "build-res": "eslint src/**/*.js && gulp build-res"
+    "build-res": "eslint src/**/*.js && gulp build-res",
+    "dev": "eslint src/**/*.js && gulp dev"
   },
   "repository": {
     "type": "git",
