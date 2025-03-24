@@ -197,7 +197,25 @@ const postContext = {
       localStorage.setItem(name, encrypt(JSON.stringify(commentIds)))
     }
     postContextInitial = true
-  }
+  },
+  /* 初始化阅读时间 */
+  initPostWordCount() {
+    let span = $('.post-word-count')
+    if (!span || span.length === 0) return
+    let html = $('.main-content').html()
+
+    function extractTextFromHtml(html) {
+      // 使用 DOMParser 解析 HTML 字符串
+      const parser = new DOMParser()
+      const doc = parser.parseFromString(html, 'text/html')
+      // 提取 body 中的文本内容
+      return doc.body.textContent || ''
+    }
+
+    let wordCount = extractTextFromHtml(html).length
+    let time = Math.round(wordCount / 400)
+    span.text(time === 0 ? '小于1分钟' : (time + '分钟'))
+  },
 }
 // 初始化katex
 window.initKatex = function () {
@@ -233,7 +251,7 @@ window.postPjax = function (serialNumber) {
   )
 }
 !(function () {
-  const advances = ['initEvent', 'initCodeBlock', 'initLiterature', 'initLike', 'foldImage']
+  const advances = ['initEvent', 'initCodeBlock', 'initLiterature', 'initLike', 'foldImage', 'initPostWordCount']
   Object.keys(postContext).forEach(
     (c) => !window.pjaxSerialNumber && advances.includes(c) && postContext[c]()
   )

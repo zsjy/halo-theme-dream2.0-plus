@@ -13,13 +13,14 @@
             </div>
             <div class="details">
                 <h1 class="title" th:text="${post.spec.title}"></h1>
-                <ul class="breadcrumb">
+                <ul class="breadcrumb" th:with="wordCount = ${#strings.length(#strings.trim(post.content.content))},
+                                 time = ${wordCount / 400}">
                     <li th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd HH:mm')}"></li>
                     <li><i class="ri-eye-line"></i>[[${post.stats.visit}]]</li>
                     <li th:if="${post.spec.allowComment}" class="is-hidden-mobile"><i class="ri-question-answer-line"></i>[[${post.stats.comment}]]
                     </li>
                     <li><i class="ri-thumb-up-line"></i>[[${post.stats.upvote}]]</li>
-                    <li><i class="ri-quill-pen-line"></i>[[${#strings.length(#strings.trim(post.content.content))}]]</li>
+                    <li><i class="ri-time-line"></i><span class="post-word-count"></span></li>
                     <li th:if="${logonUserName == post.spec.owner && (skillUrl == 'console' || (skillUrl == 'uc' && isPost))}" class="is-hidden-laptop">
                         <a target="_blank" title="编辑文章" th:href="@{|/${skillUrl}/${isPost ? 'posts' : 'single-pages'}/editor?name=${post.metadata.name}|}"><i class="ri-edit-2-line"></i>编辑</a></li>
                 </ul>
@@ -42,13 +43,14 @@
             <th:block th:if="${#strings.isEmpty(thumbnail)}">
                 <h1 class="title" th:text="${post.spec.title}"></h1>
                 <div class="meta">
-                    <ul class="breadcrumb">
+                    <ul class="breadcrumb" th:with="wordCount = ${#strings.length(#strings.trim(post.content.content))},
+                                 time = ${wordCount / 400}">
                         <li th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd HH:mm')}"></li>
                         <li><i class="ri-eye-line"></i>[[${post.stats.visit}]]</li>
                         <li th:if="${post.spec.allowComment}" class="is-hidden-mobile"><i class="ri-question-answer-line"></i>[[${post.stats.comment}]]
                         </li>
                         <li><i class="ri-thumb-up-line"></i>[[${post.stats.upvote}]]</li>
-                        <li><i class="ri-quill-pen-line"></i>[[${#strings.length(#strings.trim(post.content.content))}]]</li>
+                        <li><i class="ri-time-line"></i><span class="post-word-count"></span></li>
                         <li th:if="${logonUserName == post.spec.owner && (skillUrl == 'console' || (skillUrl == 'uc' && isPost))}" class="is-hidden-laptop">
                             <a target="_blank" title="编辑文章"  th:href="@{|/${skillUrl}/${isPost ? 'posts' : 'single-pages'}/editor?name=${post.metadata.name}|}"><i class="ri-edit-2-line"></i>编辑</a></li>
                     </ul>
