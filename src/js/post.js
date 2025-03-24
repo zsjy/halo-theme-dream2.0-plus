@@ -198,24 +198,23 @@ const postContext = {
     }
     postContextInitial = true
   },
+  /* 初始化阅读时间 */
   initPostWordCount() {
+    let span = $('.post-word-count')
+    if (!span || span.length === 0) return
     let html = $('.main-content').html()
-    if (html.length === 0) return
 
-    function calculateWordCount(content) {
-      // 去除 <script> 标签及其内容
-      content = content.replace(/<script\b[^>]*>([\s\S]*?)<\/script>/gi, '')
-      // 去除 <link> 标签及其内容
-      content = content.replace(/<link\b[^>]*>([\s\S]*?)<\/link>/gi, '')
-      // 去除多余的空格和换行符
-      content = content.trim()
-      // 计算字数（字符数）
-      return content.length
+    function extractTextFromHtml(html) {
+      // 使用 DOMParser 解析 HTML 字符串
+      const parser = new DOMParser()
+      const doc = parser.parseFromString(html, 'text/html')
+      // 提取 body 中的文本内容
+      return doc.body.textContent || ''
     }
 
-    let wordCount = calculateWordCount(html)
+    let wordCount = extractTextFromHtml(html).length
     let time = Math.round(wordCount / 400)
-    $('.word-count').text(time === 0 ? '少于1分钟' : (time + '分钟'))
+    span.text(time === 0 ? '小于1分钟' : (time + '分钟'))
   },
 }
 // 初始化katex
