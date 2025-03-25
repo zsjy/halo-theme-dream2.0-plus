@@ -208,40 +208,41 @@ const postContext = {
       // 使用 DOMParser 解析 HTML 字符串
       const parser = new DOMParser()
       const doc = parser.parseFromString(html, 'text/html')
+      // 移除不需要的标签（如 script, style, noscript 等）
+      doc.querySelectorAll('script, style, noscript, template').forEach(el => el.remove())
       // 提取 body 中的文本内容
       return doc.body.textContent || ''
     }
 
-    let wordCount = extractTextFromHtml(html).length
+    let text = extractTextFromHtml(html)
+    const wordCount = text.replace(/\s+/g, ' ').trim().length
     let time = Math.round(wordCount / 400)
     span.text(time === 0 ? '小于1分钟' : (time + '分钟'))
   },
-}
-// 初始化katex
-window.initKatex = function () {
-  let $mainContent = $('.main-content')
-  if (typeof katex === 'undefined' || katex === null || $mainContent.length === 0) {
-    console.log('katex is not defined')
-    return
+  /* 初始化Mermaid */
+  initMermaid() {
+    if (typeof mermaid === 'undefined' || mermaid === null) {
+      return
+    }
+    mermaid.initialize({ startOnLoad: true })
+    mermaid.run({
+      querySelector: 'text-diagram[data-type=mermaid]',
+    })
+  },
+  /* 初始化Katex */
+  initKatex() {
+    let $mainContent = $('.main-content')
+    if (typeof katex === 'undefined' || katex === null || $mainContent.length === 0) {
+      console.log('katex is not defined')
+      return
+    }
+    $mainContent.find('[math-inline], .math-inline, .katex--inline').each(function (index, domEle) {
+      katex.render(domEle.innerText, domEle, {displayMode: false})
+    })
+    $mainContent.find('[math-display], .math-display, .katex--display').each(function (index, domEle) {
+      katex.render(domEle.innerText, domEle, {displayMode: true})
+    })
   }
-  $mainContent.find('[math-inline], .math-inline, .katex--inline').each(function (index, domEle) {
-    katex.render(domEle.innerText, domEle, {displayMode: false})
-  })
-  $mainContent.find('[math-display], .math-display, .katex--display').each(function (index, domEle) {
-    katex.render(domEle.innerText, domEle, {displayMode: true})
-  })
-}
-
-// 初始化Mermaid
-window.initMermaid = function () {
-  if (typeof mermaid === 'undefined' || mermaid === null) {
-    return
-  }
-  const postBody = document.body
-  mermaid.initialize({startOnLoad: true})
-  mermaid.run({
-    querySelector: 'text-diagram[data-type=mermaid]',
-  })
 }
 
 window.postPjax = function (serialNumber) {
@@ -251,7 +252,7 @@ window.postPjax = function (serialNumber) {
   )
 }
 !(function () {
-  const advances = ['initEvent', 'initCodeBlock', 'initLiterature', 'initLike', 'foldImage', 'initPostWordCount']
+  const advances = ['initEvent', 'initCodeBlock', 'initLiterature', 'initLike', 'foldImage', 'initPostWordCount', 'initMermaid', 'initKatex']
   Object.keys(postContext).forEach(
     (c) => !window.pjaxSerialNumber && advances.includes(c) && postContext[c]()
   )
