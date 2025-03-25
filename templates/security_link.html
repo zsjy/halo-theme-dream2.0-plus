@@ -404,7 +404,10 @@
         let countdownElement
         let countdown = [[${theme.config.security_link_config.security_link_auto_jump_time}]]
         if (countdown > 0) {
-          document.querySelector('.progress').style.width = '100%'
+          const progress = document.querySelector('.progress');
+          progress.style.width = '0';
+          void progress.offsetWidth;
+          progress.style.width = '100%';
           countdownElement = document.getElementById('countdown')
           timer = setInterval(function () {
             countdown--
