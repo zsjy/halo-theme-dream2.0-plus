@@ -3,25 +3,9 @@
       th:class="${theme.config.basic_style.theme_style}"
       th:with="urlCode = ${param.target},
                url = ${#strings.defaultString(#uris.unescapePath(urlCode), '/')},
-<<<<<<< HEAD
-               normalizedUrl = ${#strings.endsWith(url, '/') ? url : url + '/'},
-               targetUrl = ${#strings.startsWith(#strings.toLowerCase(normalizedUrl), 'http') ? normalizedUrl : '/'},
-               whitelist = ${#strings.defaultString(theme.config.security_link_config.whitelist_domains, '')},
-               urlDomain = ${#strings.substringBefore(#strings.substringAfter(normalizedUrl, '://'), '/')},
-               isWhitelisted = ${#strings.contains(',' + whitelist + ',', ',' + urlDomain + ',') || #strings.contains(whitelist, urlDomain)},
-=======
->>>>>>> master
                title = ${singlePage.spec.title} + ' - ' + ${site.title},
                contributor = ${contributorFinder.getContributor(theme.config.basic_info.metadata_name)},
                enableComment = false, isPost = false, canonical = ${theme.config.security_link_config.security_link_url}">
-
-<!-- 如果在白名单中，直接重定向 -->
-<th:block th:if="${isWhitelisted}">
-    <meta th:http-equiv="'Refresh'" th:content="'0; url=' + ${url}"/>
-</th:block>
-
-<!-- 如果不在白名单中 -->
-<th:block th:unless="${isWhitelisted}">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
