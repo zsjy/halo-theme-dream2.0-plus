@@ -15,7 +15,7 @@ const cssPath = './templates/assets/css'
 const jsPath = './templates/assets/js'
 const distPath = './dist'
 const devModel = process.env.npm_config_devel
-const version = process.env.npm_config_tag
+let version = process.env.npm_config_tag
 
 if (devModel) {
   console.log('> 开发模式')
@@ -31,6 +31,22 @@ task('clean', () => {
       force: true,
     })
   )
+})
+
+//生成测试版本号
+task('generate', (done) => {
+  // 生成格式化的时间戳 (yyyyMMddHHmmss)
+  const pad = n => n.toString().padStart(2, '0')
+  const now = new Date()
+  version = '0.0.' + [
+    now.getFullYear(),
+    pad(now.getMonth() + 1),
+    pad(now.getDate()),
+    pad(now.getHours()),
+    pad(now.getMinutes()),
+    pad(now.getSeconds())
+  ].join('')
+  done()
 })
 
 task('version', (done) => {
@@ -149,6 +165,9 @@ task('release', series('clean', 'version', parallel('css', 'js'), 'zip'))
 
 // build-res模式，用于编译特定版本资源，在工作流中发布npm使用，需要使用--tag参数指定版本号
 task('build-res', series('clean', 'version', parallel('css', 'js')))
+
+//根据执行时间打包生成“0.0.yyyyMMddHHmmss”格式的版本号，用于测试环境安装调试
+task('dev', series('clean', 'generate', 'version', parallel('css', 'js'), 'zip'))
 
 // push模式，需要使用--tag参数指定版本号
 task('push', series('clean', 'version', parallel('css', 'js'), 'zip', 'publish'))

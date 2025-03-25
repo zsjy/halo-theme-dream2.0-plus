@@ -10,11 +10,11 @@
             <div class="card-content main">
                 <h1 class="title" th:text="${#strings.defaultString(linksTitle, '友链')} + ' - ' + ${contributor.displayName} + '的小伙伴们'"></h1>
                 <div class="main-content">
-                    <th:block th:each="group : ${groups}">
+                    <th:block th:each="group : ${groups}" th:if="${#annotations.getOrDefault(group, 'hide','false') == 'false'}">
                         <div th:if="${!#lists.isEmpty(group.links)}" class="links">
                             <h3 class="link-title" th:text="${#strings.defaultString(group.spec.displayName, '小伙伴们')}" th:id="'toc' + ${groupStat.index}"></h3>
                             <ul class="link-items">
-                                <li th:each="link : ${group.links}">
+                                <li th:each="link : ${group.links}" th:if="${#annotations.getOrDefault(link, 'hide','false') == 'false'}">
                                     <a class="links-item" th:href="${link.spec.url}" rel="noopener noreferrer" target="_blank"
                                        th:title="${link.spec.description}">
                                         <img th:if="${#strings.isEmpty(link.spec.logo)}" class="not-gallery" th:title="${link.spec.displayName}" th:src="${defaultAvatar}" th:alt="${link.spec.displayName}">

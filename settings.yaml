@@ -1497,12 +1497,21 @@ spec:
           value: '您即将离开{title}，去往：{url}'
           placeholder: '请输入安全链接页面跳转提示区域的文本描述'
           help: '“ {title} ”表示站点主标题，“ {url} ”表示跳转URL，区分大小写。默认值：“您即将离开{title}，去往：{url}”'
+<<<<<<< HEAD
         - $formkit: text
           name: whitelist_domains
           label: 域名白名单
           placeholder: '请输入域名，多个域名用英文逗号分隔'
           if: $get(enable_security_link).value
           help: '在白名单中的域名将直接跳转，不显示安全提示页面。例如: example.com,test.com'
+=======
+        - $formkit: textarea
+          name: whitelist_domains
+          label: 域名白名单
+          placeholder: '请输入域名，每行一个。使用泛域名：*.example.com 换行 example.com'
+          if: $get(enable_security_link).value
+          help: '列入白名单的域名将实现直接跳转，不会显示安全提示页面。每行一个域名，并支持泛域名设置。请注意，泛域名不包含主域名，无需输入“http://”或“https://”。'
+>>>>>>> master
     - group: pwa
       label: 'PWA配置'
       formSchema:

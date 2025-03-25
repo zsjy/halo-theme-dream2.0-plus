@@ -561,37 +561,57 @@ const commonContext = {
     }
     $(document).on('click', 'a, hyperlink-inline-card, hyperlink-card', (event) => {
       var href = $(event.currentTarget).attr('href')
-      if (!href) {
+      if (!href || (!href.toLowerCase().startsWith('http://') && !href.toLowerCase().startsWith('https://'))) {
         return
       }
-      var hostname = window.location.hostname
       // 判断是否为下载链接
       const isDownloadLink = (url) => {
         const downloadExtensions = ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.ppt', '.pptx', '.zip', '.rar', '.7z', '.tar', '.gz', '.bz2', '.dmg', '.exe', '.msi', '.iso', '.apk']
         return downloadExtensions.some(ext => url.toLowerCase().endsWith(ext))
       }
-      const isInternalLink = (url, siteDomain) => {
-        // 将URL和站点域名转换为小写，去除前导和尾随空格
+      const isInternalLink = (url, domainList) => {
+        // 将URL转换为小写并去除前导和尾随空格
         url = url.toLowerCase().trim()
-        siteDomain = siteDomain.toLowerCase().trim()
-        // 如果URL是协议相对路径或者绝对路径，则转换为完整的URL
+        // 处理协议相对路径或绝对路径，转换为完整URL
         if (url.startsWith('//')) {
           url = window.location.protocol + url
         } else if (url.startsWith('/')) {
           url = window.location.origin + url
         }
-        // 如果URL以'http://'或'https://'开头，则去除尾部斜杠
+        // 去除以http/https开头的URL的尾部斜杠
         if (url.startsWith('http://') || url.startsWith('https://')) {
           url = url.replace(/\/$/, '')
         }
-        // 对比URL和站点域名
-        return url.includes(siteDomain)
+        let parsedHostname
+        try {
+          parsedHostname = new URL(url).hostname
+        } catch (e) {
+          // URL解析失败，视为外部链接
+          return false
+        }
+        // 检查是否匹配任一域名
+        return domainList.some(domain => {
+          if (domain.startsWith('*.')) {
+            // 处理泛域名
+            const mainDomain = domain.slice(2) // 移除开头的*.
+            const mainParts = mainDomain.split('.')
+            const hostParts = parsedHostname.split('.')
+            // 检查host的尾部是否与主域名匹配，并且存在子域
+            return (
+              hostParts.length > mainParts.length &&
+              hostParts.slice(-mainParts.length).join('.') === mainDomain
+            )
+          } else {
+            // 处理完整域名
+            return parsedHostname === domain
+          }
+        })
       }
       if (isDownloadLink(href)) {
         event.preventDefault()
         // 如果是下载链接，直接跳转
         window.open(href, '_blank')
-      } else if (!isInternalLink(href, hostname)) {
+      } else if (!isInternalLink(href, DreamConfig.security_link_whitelist)) {
         event.preventDefault()
         window.open((DreamConfig.security_link_url + '?target=' + encodeURIComponent(href)), '_blank')
       }

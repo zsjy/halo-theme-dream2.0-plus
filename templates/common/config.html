@@ -121,6 +121,16 @@
     /** 安全链接配置 */
     DreamConfig["enable_security_link"] = [[${theme.config.security_link_config.enable_security_link}]];
     DreamConfig["security_link_url"] = [[${theme.config.security_link_config.security_link_url}]];
+    let whitelistStr = [[${theme.config.security_link_config.whitelist_domains}]];
+    let hostname = window.location.hostname;
+    if (whitelistStr) {
+      DreamConfig['security_link_whitelist'] = whitelistStr.split('\n').map(domain => domain.toLowerCase().trim()).filter(domain => domain.length > 0);
+      if(DreamConfig['security_link_whitelist'].indexOf(hostname) === -1) {
+        DreamConfig['security_link_whitelist'].push(hostname);
+      }
+    } else {
+      DreamConfig['security_link_whitelist'] = [hostname];
+    }
 
     DreamConfig["theme_version"] = [[${theme.spec.version}]];
     DreamConfig["site_comment"] = [[${site.comment.enable}]];

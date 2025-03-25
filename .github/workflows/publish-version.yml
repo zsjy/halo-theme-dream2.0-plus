@@ -1,4 +1,4 @@
-name: publish-halo-store
+name: Publish version
 
 on:
   release:
@@ -6,25 +6,29 @@ on:
       - published
 
 jobs:
-  # 不是预览版本且名称不含beta时执行
+
+  # 非正式版执行时，不发布到商店
   cd:
     uses: zsjy/reusable-workflows/.github/workflows/theme-cd.yaml@v3
-    if: |
-      !github.event.release.prerelease && 
-      !contains(github.event.release.tag_name, 'beta')
     secrets:
       halo-pat: ${{ secrets.HALO_PAT }}
     permissions:
       contents: write
     with:
       app-id: app-HrMpM
+      skip-appstore-release: ${{ (github.event.release.prerelease || contains(github.event.release.tag_name, 'beta')) }}
       pnpm-version: 10
       node-version: 22
 
-  # 若cd任务未执行，则此任务也不执行
+  # 若cd任务未执行、发布的版本是预览版、发布的标签名含有'beta'字样，则此任务也不执行
   npm-publish:
+    permissions:
+      contents: read    # 读取仓库代码
     name: Npm Publish
     needs: cd
+    if: |
+      !github.event.release.prerelease && 
+      !contains(github.event.release.tag_name, 'beta')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
