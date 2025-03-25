@@ -303,7 +303,7 @@
             border: none;
             cursor: pointer;
             font-size: 16px;
-            width: 70px;
+            width: 120px;
             height: 20px;
             text-align: center;
             text-decoration: none;
@@ -376,7 +376,8 @@
                 ⚡将在 <span id="countdown">[[${theme.config.security_link_config.security_link_auto_jump_time}]]</span> 秒后跳转，请自行确认链接安全性
             </div>
             <div class="others-end">
-                <a target="_self" href="/">继续访问</a>
+                <a class="confirm-button" href="javascript:void(0);" onclick="closeWindow()">取消跳转</a>
+                <a class="confirm-button" target="_self" href="/">立即跳转</a>
             </div>
         </div>
     </div>
@@ -386,6 +387,19 @@
         const siteTitle = '[[${site.title}]]'
         let link_jump_desc = '[(${theme.config.security_link_config.security_link_jump_desc})]'
         let targetUrl = '[[${url}]]'
+        
+        // 关闭页面的函数
+        function closeWindow() {
+            window.opener = null;
+            window.close();
+            // 如果无法关闭窗口，则返回首页
+            setTimeout(function() {
+                window.location.replace('/');
+            }, 300);
+        }
+        // 将closeWindow函数暴露到全局作用域
+        window.closeWindow = closeWindow;
+        
         //校验链接是否合法
         try {
           let tUrl = new URL(targetUrl)
@@ -397,7 +411,7 @@
         link_jump_desc = link_jump_desc.replace(new RegExp('{title}', 'g'), siteTitle);
         link_jump_desc = link_jump_desc.replace(new RegExp('{url}', 'g'), targetUrl);
         document.querySelector('.others-topic').innerHTML = link_jump_desc
-        document.querySelector('.others-end a').setAttribute('href', targetUrl);
+        document.querySelector('.others-end a.confirm-button').setAttribute('href', targetUrl);
 
         // 倒计时
         let timer
@@ -419,7 +433,7 @@
           document.querySelector('.countdown-text').style.display = 'none';
         }
         // 继续访问，不记录历史，避免返回此页面
-        document.querySelector('.others-end a').addEventListener('click', function (e) {
+        document.querySelector('.others-end a.confirm-button').addEventListener('click', function (e) {
           e.preventDefault()
           if (timer) {
             clearInterval(timer)
