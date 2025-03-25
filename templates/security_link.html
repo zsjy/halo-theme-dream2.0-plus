@@ -394,10 +394,6 @@
         function closeWindow() {
             window.opener = null;
             window.close();
-            // 如果无法关闭窗口，则返回首页
-            setTimeout(function() {
-                window.location.replace('/');
-            }, 300);
         }
         // 将closeWindow函数暴露到全局作用域
         window.closeWindow = closeWindow;
