@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - master
-      - dev
     types: [ opened, synchronize ]  # 创建或更新 PR 时触发（默认包含这两种类型）
   workflow_dispatch:
 
