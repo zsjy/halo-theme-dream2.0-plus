@@ -198,27 +198,6 @@ const postContext = {
     }
     postContextInitial = true
   },
-  /* 初始化阅读时间 */
-  initPostWordCount() {
-    let span = $('.post-word-count')
-    if (!span || span.length === 0) return
-    let html = $('.main-content').html()
-
-    function extractTextFromHtml(html) {
-      // 使用 DOMParser 解析 HTML 字符串
-      const parser = new DOMParser()
-      const doc = parser.parseFromString(html, 'text/html')
-      // 移除不需要的标签（如 script, style, noscript 等）
-      doc.querySelectorAll('script, style, noscript, template').forEach(el => el.remove())
-      // 提取 body 中的文本内容
-      return doc.body.textContent || ''
-    }
-
-    let text = extractTextFromHtml(html)
-    const wordCount = text.replace(/\s+/g, ' ').trim().length
-    let time = Math.round(wordCount / 400)
-    span.text(time === 0 ? '小于1分钟' : (time + '分钟'))
-  },
   /* 初始化Mermaid */
   initMermaid() {
     if (typeof mermaid === 'undefined' || mermaid === null) {
@@ -252,7 +231,7 @@ window.postPjax = function (serialNumber) {
   )
 }
 !(function () {
-  const advances = ['initEvent', 'initCodeBlock', 'initLiterature', 'initLike', 'foldImage', 'initPostWordCount', 'initMermaid', 'initKatex']
+  const advances = ['initEvent', 'initCodeBlock', 'initLiterature', 'initLike', 'foldImage', 'initMermaid', 'initKatex']
   Object.keys(postContext).forEach(
     (c) => !window.pjaxSerialNumber && advances.includes(c) && postContext[c]()
   )
