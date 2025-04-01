@@ -21,8 +21,8 @@
                                         <img th:unless="${#strings.isEmpty(link.spec.logo)}" class="not-gallery" th:title="${link.spec.displayName}" th:src="${defaultAvatar}"
                                              th:data-url="${link.spec.logo}"
                                              th:data-default="${defaultAvatar}"
-                                             onload="if(!this.finish){this.finish=true;this.src=this.getAttribute('data-url')}"
-                                             onerror="this.onerror='';if (this.finish) {this.src=this.getAttribute('data-default')} else {this.finish=true;this.src=this.getAttribute('data-url')}"
+                                             onload="handleImageLoad(this)"
+                                             onerror="handleImageError(this)"
                                              th:alt="${link.spec.displayName}">
                                         <span class="link-name" th:text="${link.spec.displayName}"></span>
                                         <div class="link-desc" th:text="${#strings.defaultString(link.spec.description, '他还没有自我介绍呢')}"></div>
@@ -47,6 +47,24 @@
                     <div th:if="${!#strings.isEmpty(theme.config.page_config.links_info)}" th:utext="${theme.config.page_config.links_info}"></div>
                 </div>
             </div>
+            <script>
+              function handleImageLoad(img) {
+                if (!img.finish) {
+                  img.finish = true;
+                  img.src = img.getAttribute('data-url');
+                }
+              }
+
+              function handleImageError(img) {
+                img.onerror = ''; // 防止无限循环
+                if (img.finish) {
+                  img.src = img.getAttribute('data-default');
+                } else {
+                  img.finish = true;
+                  img.src = img.getAttribute('data-url');
+                }
+              }
+            </script>
         </div>
         <div class="card card-content comment-wrapper-z-index" id="comment-wrapper" th:if="${enableComment}">
             <h3 class="comment-title">评论</h3>
