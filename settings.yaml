@@ -257,16 +257,19 @@ spec:
         - $formkit: radio
           name: enable_banner
           label: 开启博客横幅大图
-          value: false
+          value: 'false'
           options:
-            - label: 开启
-              value: true
+            - label: 视频
+              value: 'video'
+            - label: 图片
+              value: 'image'
             - label: 关闭
-              value: false
+              value: 'false'
         - $formkit: attachment
           name: banner_image
-          label: 横幅背景图
-          placeholder: '请输入/选择图片路径'
+          label: 横幅背景图/视频
+          placeholder: '请输入/选择图片/视频路径'
+          help: '输入/选择图片/视频路径，视频支持mp4格式，不支持声音播放。'
         - $formkit: text
           name: banner_description
           label: 横幅文字描述

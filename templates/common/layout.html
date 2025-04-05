@@ -9,7 +9,7 @@
     <th:block th:replace="~{common/head :: head}"/>
     <body>
     <th:block th:replace="~{common/navbar}"/>
-    <th:block th:if="${theme.config.basic_style.enable_banner}">
+    <th:block th:if="${theme.config.basic_style.enable_banner != 'false'}">
       <th:block th:replace="~{common/banner :: banner}"/>
     </th:block>
     <section class="section">
