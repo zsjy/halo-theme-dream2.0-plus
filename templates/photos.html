@@ -35,6 +35,7 @@
         <script>
             var timer = setInterval(() => {
                 if($.fn.justifiedGallery) {
+                  clearInterval(timer);
                     $('.photos-gallery')
                       .justifiedGallery({
                           rowHeight: 200,
