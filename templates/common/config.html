@@ -86,20 +86,7 @@
     DreamConfig["gray_mode_time_list"] = gray_mode_time_list;
     DreamConfig["pjax_state"] = [[${theme.config.enhance.enable_pjax}]];
     /** 配置分享方式 */
-    let post_share = []
-    let custom_post_share = [[${theme.config.post.custom_post_share}]];
-    if(custom_post_share) {
-      for (let share of custom_post_share) {
-        let type = share.realNode.type;
-        if (post_share.indexOf(type) === -1) {
-          post_share.push(type);
-        }
-      }
-    }
-    if (post_share.length === 0) {
-      post_share.push('link');
-    }
-    DreamConfig["post_share_sites"] = post_share;
+    DreamConfig["post_share_sites"] = [[${theme.config.post.custom_post_share}]];
     /** 配置灯笼特效文本 */
     let effects_lantern_left = [[${theme.config.enhance.effects_lantern.effects_lantern_left}]];
     let effects_lantern_right = [[${theme.config.enhance.effects_lantern.effects_lantern_right}]];
