@@ -69,7 +69,6 @@
                 <a th:if="${theme.config.page_config.search.search_style == 'form'}" target="_self" href="/search" class="submit" aria-label="搜索按钮" style="border-radius: 17px;display: flex;align-items: center;justify-content: center;"><i class="ri-search-line"></i></a>
                 <form data-pjax class="navbar-search" method="get" action="/search" th:if="${theme.config.page_config.search.search_style == 'box'}">
                     <input id="box-search-content-input" autocomplete="off" placeholder="搜索内容..." name="keyword" value="" class="input" type="text"/>
-                    <input type="hidden" name="limit" th:value="${theme.config.page_config.search.search_limit}"/>
                     <button type="submit" class="submit" title="搜索" aria-label="搜索按钮"><i class="ri-search-line"></i></button>
                     <span class="icon"></span>
                     <nav class="result" th:with="searchPosts = ${postFinder.list({page: 1,size: 5,sort: {'stats.visit,desc'}})}">
@@ -131,7 +130,7 @@
                 </div>
             </div>
             <ul class="navbar-slideout-menu" th:if="${!#lists.isEmpty(theme.config.sidebar.custom_stats)}">
-                <li class="item" th:each="itemData,sindex :${theme.config.sidebar.custom_stats}" th:switch="${itemData.type}">
+                <li class="item" th:each="itemData,sindex :${theme.config.sidebar.custom_stats}" th:switch="${itemData}">
                     <div th:case="visit">
                         <i class="ri-pie-chart-line"></i>
                         <span>累计收获 <strong th:text="${stats.visit}"></strong> 次访问</span>
