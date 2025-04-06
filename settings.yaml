@@ -478,17 +478,17 @@ spec:
           searchable: false
           validation: required
           value:
-            - type: qq
-            - type: qzone
-            - type: wechat
-            - type: weibo
-            - type: douban
-            - type: linkedin
-            - type: facebook
-            - type: twitter
-            - type: google
-            - type: link
-            - type: poster
+            - 'qq'
+            - 'qzone'
+            - 'wechat'
+            - 'weibo'
+            - 'douban'
+            - 'linkedin'
+            - 'facebook'
+            - 'twitter'
+            - 'google'
+            - 'link'
+            - 'poster'
           help: '配置文章分享方式，支持拖拽排序。'
           options:
             - value: 'qq'
@@ -670,33 +670,32 @@ spec:
           name: profile_location
           label: 侧边栏信息-地理位置
           placeholder: '请输入个人所在地'
-        - $formkit: repeater
+        - $formkit: select
           name: custom_stats
           label: 侧边栏信息-统计
-          help: 可最多配置3个统计项，未配置统计项时不显示。
-          max: 3
+          help: '可最多配置3个统计项，未配置统计项时不显示，支持拖拽排序。'
+          sortable: true
+          multiple: true
+          clearable: true
+          searchable: false
+          maxCount: 3
           value:
-            - type: post
-            - type: category
-            - type: tag
-          children:
-            - $formkit: select
-              name: type
-              label: 统计项
-              value: ""
-              options:
-                - value: 'post'
-                  label: 文章数量
-                - value: 'category'
-                  label: 分类数量
-                - value: 'tag'
-                  label: 标签数量
-                - value: 'comment'
-                  label: 评论数量
-                - value: 'upvote'
-                  label: 点赞数量
-                - value: 'visit'
-                  label: 访问数量
+            - 'post'
+            - 'category'
+            - 'tag'
+          options:
+            - value: 'post'
+              label: 文章数量
+            - value: 'category'
+              label: 分类数量
+            - value: 'tag'
+              label: 标签数量
+            - value: 'comment'
+              label: 评论数量
+            - value: 'upvote'
+              label: 点赞数量
+            - value: 'visit'
+              label: 访问数量
         - $formkit: text
           name: profile_theme_button
           label: 侧边栏信息-主题按钮

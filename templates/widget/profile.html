@@ -16,7 +16,7 @@
       </div>
     </nav>
     <nav class="level" th:if="${!#lists.isEmpty(theme.config.sidebar.custom_stats)}">
-      <div th:each="item,sindex :${theme.config.sidebar.custom_stats}" class="level-item" th:switch="${item.type}">
+      <div th:each="item,sindex :${theme.config.sidebar.custom_stats}" class="level-item" th:switch="${item}">
         <div th:case="visit" th:with="visit = ${stats.visit}">
           <p class="heading" th:text="|访问${visit / 10000000 > 0 ? '(千万)' : (visit / 10000 > 0 ? '(万)' : '')}|"></p>
           <p class="value" th:title="${visit / 10000 > 0} ? ${visit}" th:text="${visit / 10000000 > 0} ? (${#numbers.formatDecimal(visit / 10000000.0,1,1)}) : (${visit / 10000 > 0} ? (${#numbers.formatDecimal(visit / 10000.0,1,1)}) : ${visit})"></p>
