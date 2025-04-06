@@ -59,7 +59,7 @@
                         returnRaw: true,
                         data: {
                           keyword,
-                          limit: (searchResultLimit || searchResultLimit !== '') ? searchResultLimit : 10,
+                          limit: (searchResultLimit && searchResultLimit !== '') ? searchResultLimit : 10,
                           highlightPreTag: '<B>',
                           highlightPostTag: '</B>'
                         },
