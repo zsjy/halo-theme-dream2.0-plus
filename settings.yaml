@@ -1190,7 +1190,7 @@ spec:
           name: sw_cdn_source
           label: "Service Worker 并发 CDN 源"
           placeholder: 请输入 CDN 地址（一行一个）
-          help: '填入可用的 NPM 公共开源 CDN 地址（一行一个），通过 “{CDN 地址}/{项目名}@{版本号}/${文件路径}” 可访问到文件，如：https://unpkg.com/halo-theme-dream2-plus@1.3.6/templates/assets/js/utils.min.js'
+          help: '填入可用的 NPM 公共开源 CDN 地址（一行一个），通过 “{CDN 地址}/{项目名}@{版本号}/${文件路径}” 可访问到文件，如：https://unpkg.com/halo-theme-dream2-plus@latest/templates/assets/js/utils.min.js'
           value: |-
             https://unpkg.com
             https://cdn.onmicrosoft.cn
