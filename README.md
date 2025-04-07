@@ -15,6 +15,7 @@
 
 - [主题文档](https://www.hcjike.com/docs/halo-theme-dream2.0) 
 - [侧边栏组件](https://www.hcjike.com/docs/halo-theme-dream2.0/theme/sidebar-assembly)
+- [使用iconfont替换主题部分功能图标](https://www.hcjike.com/archives/TsR84KYw)
 
 ## 插件相关
 ### KaTeX
