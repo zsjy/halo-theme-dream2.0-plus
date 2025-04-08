@@ -204,6 +204,10 @@
             return handleRequest(event.request, isCdnAndCache)
               .then((response) => {
                 const responseClone = response.clone()
+                //忽略 206 状态码，因为 206 状态码是分片下载，会导致缓存失效
+                if (response.status === 206) {
+                  return response
+                }
                 // ignoreSearch 忽略请求参数进行查找，用于匹配不同版本
                 cache.matchAll(event.request, {'ignoreSearch': true})
                   .then(function (cache_response_list) {
