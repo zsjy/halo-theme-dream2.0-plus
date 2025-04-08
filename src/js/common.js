@@ -559,7 +559,7 @@ const commonContext = {
     if (!DreamConfig.enable_security_link || !DreamConfig.security_link_url || DreamConfig.security_link_url.length === 0) {
       return
     }
-    $(document).on('click', 'a, hyperlink-inline-card, hyperlink-card', (event) => {
+    $(document).on('click', 'a[href]:not([data-not-security]), hyperlink-inline-card[href]:not([data-not-security]), hyperlink-card[href]:not([data-not-security])', (event) => {
       var href = $(event.currentTarget).attr('href')
       if (!href || (!href.toLowerCase().startsWith('http://') && !href.toLowerCase().startsWith('https://'))) {
         return

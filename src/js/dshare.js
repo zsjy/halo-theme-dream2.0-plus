@@ -73,7 +73,7 @@ window.DShare = {
     element.addClass('dshare-container')
     for (let site of config.sites) {
       let clazz = 'icon-' + site
-      element.append(`<a class="dshare-icon ${clazz}" data-not-pjax${channels[site].template ? ` target="_blank" href=${makeUrl(site, config)}` : ''} title="${channels[site].name}"></a>`)
+      element.append(`<a class="dshare-icon ${clazz}" data-not-security data-not-pjax${channels[site].template ? ` target="_blank" href=${makeUrl(site, config)}` : ''} title="${channels[site].name}"></a>`)
     }
     config.sites.indexOf('wechat') !== -1 && createWechatShare(config, element)
     if(config.sites.indexOf('link') !== -1){
