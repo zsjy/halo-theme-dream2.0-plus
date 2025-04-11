@@ -274,6 +274,15 @@ spec:
           name: banner_description
           label: 横幅文字描述
           placeholder: '请输入描述内容'
+        - $formkit: number
+          name: banner_height
+          label: 横幅高度
+          placeholder: 请输入横幅高度
+          value: 54
+          validation: required
+          min: 50
+          max: 100
+          help: '横幅高度，输入高度百分比，范围：50-100'
         - $formkit: select
           name: theme_style
           label: 主题风格
