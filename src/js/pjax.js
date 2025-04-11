@@ -17,7 +17,7 @@ const computeScrollTop = (target) => {
   if (target.pathname !== '/' && $('.banner').length !== 0) {
     // 避免跳转时顶部导航栏收缩
     window.initTop = 99999999
-    return window.innerHeight / 2
+    return window.innerHeight / 1
   }
   return 0
 }
