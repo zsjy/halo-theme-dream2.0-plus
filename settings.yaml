@@ -276,7 +276,7 @@ spec:
           placeholder: '请输入描述内容'
         - $formkit: radio
           name: banner_full_screen
-          label: 横幅风格
+          label: 横幅高度
           value: false
           options:
             - label: 全屏
