@@ -274,6 +274,15 @@ spec:
           name: banner_description
           label: 横幅文字描述
           placeholder: '请输入描述内容'
+        - $formkit: radio
+          name: banner_full_screen
+          label: 横幅高度
+          value: false
+          options:
+            - label: 全屏
+              value: true
+            - label: 默认
+              value: false
         - $formkit: select
           name: theme_style
           label: 主题风格

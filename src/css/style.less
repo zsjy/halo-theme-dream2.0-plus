@@ -2264,6 +2264,26 @@ button.swiper-pagination-bullet {
       }
     }
   }
+
+  &-slide {
+    bottom: 4rem;
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    animation: slideUpDown 1.5s infinite ease-in-out;
+  }
+
+  /* 定义上下移动动画 */
+  @keyframes slideUpDown {
+    0%, 100% {
+      transform: translateY(0);
+      fill: #ffffff;
+    }
+    50% {
+      transform: translateY(10px);
+      fill: #9b9b9b;
+    }
+  }
 }
 
 .item-dropdown {

@@ -1,7 +1,8 @@
 <div xmlns:th="https://www.thymeleaf.org"
      th:fragment="banner"
      class="banner"
-     th:style="${theme.config.basic_style.enable_banner == 'image' ? ('background-image: url(' + theme.config.basic_style.banner_image + ')') : ''}">
+     th:style="${(theme.config.basic_style.enable_banner == 'image' ? ('background-image: url(' + theme.config.basic_style.banner_image + ');') : '') +
+     (theme.config.basic_style.banner_full_screen ? ('height: ' + (theme.config.basic_info.header_fixed ? 'calc(100vh - 3.5rem)' : '100vh') + ';') : '' )}">
     <video preload="auto" loop autoplay muted playsinline
            th:if="${theme.config.basic_style.enable_banner == 'video'}"
            th:src="${theme.config.basic_style.banner_image}"
@@ -12,7 +13,8 @@
         <div class="banner-info-title" th:text="${site.title}"></div>
         <div class="banner-info-desc" th:text="${theme.config.basic_style.banner_description}"></div>
     </div>
-    <svg class="banner-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <svg class="banner-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+         viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
         <defs>
             <path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88
                     -18 s 58 18 88 18 v 44 h -352 Z"></path>
@@ -24,4 +26,21 @@
             <use xlink:href="#gentle-wave" x="48" y="7"></use>
         </g>
     </svg>
+
+    <th:block th:if="${theme.config.basic_style.banner_full_screen}">
+        <svg class="banner-slide" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" onclick="scrollToText()">
+            <path d="M448.72390438 351.872a88.32 88.32 0 0 0 124.41599999 0L894.93190437 32l52.99200001 52.992a87.552 87.552 0 0 1 0 124.416l-372.86400001 372.864a88.32 88.32 0 0 1-124.416 0L75.85990438 209.408a88.32 88.32 0 0 1 0-124.416L128.85190438 32z m124.41599999 384L894.93190437 416l52.99200001 52.992a87.552 87.552 0 0 1 0 124.416l-372.86400001 372.864a88.32 88.32 0 0 1-124.416 0L75.85990438 593.408a88.32 88.32 0 0 1 0-124.416L128.85190438 416l319.872 319.872a88.32 88.32 0 0 0 124.41599999 0z"
+                  fill=""></path>
+        </svg>
+        <script th:inline="javascript">
+          function scrollToText() {
+            const bannerElement = document.querySelector('.banner')
+            if (bannerElement) {
+              window.scrollTo({
+                top: bannerElement.offsetHeight,
+                behavior: 'smooth'})
+            }
+          }
+        </script>
+    </th:block>
 </div>
