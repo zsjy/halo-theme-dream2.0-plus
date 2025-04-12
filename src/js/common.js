@@ -682,13 +682,16 @@ const commonContext = {
   autoScrollToContent() {
     const {pathname} = location
     if (pathname !== '/') {
-      const bannerElement = document.querySelector('.banner')
-      if (bannerElement) {
-        const targetTop = bannerElement.offsetHeight || 0
-        window.scrollTo({
-          top: targetTop,
-          behavior: 'auto' // 直接滚动，不需要动画
-        })
+      // 检查当前页面的滚动距离是否为0
+      if (window.scrollY === 0) {
+        const bannerElement = document.querySelector('.banner')
+        if (bannerElement) {
+          const targetTop = bannerElement.offsetHeight || 0
+          window.scrollTo({
+            top: targetTop,
+            behavior: 'auto' // 直接滚动，不需要动画
+          })
+        }
       }
     }
   },
