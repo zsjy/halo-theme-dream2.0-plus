@@ -698,7 +698,7 @@ window.commonContext = commonContext
 let timeLifeHour = -1
 
 !(function () {
-  const loads = ['initCarousel', 'sparkInput', 'websiteTime']
+  const loads = ['initCarousel', 'sparkInput', 'websiteTime', 'autoScrollToContent']
   const omits = ['initEffects', 'showThemeVersion', 'iniTaskItemDisabled']
 
   Object.keys(commonContext).forEach(
@@ -715,6 +715,5 @@ let timeLifeHour = -1
   window.addEventListener('load', function () {
     omits.forEach((c) => commonContext[c] && commonContext[c]())
     $('html').addClass('ready')
-    commonContext.autoScrollToContent()
   })
 })()
