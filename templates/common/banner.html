@@ -1,6 +1,7 @@
 <div xmlns:th="https://www.thymeleaf.org"
      th:fragment="banner"
      class="banner"
+     th:classappend="${theme.config.basic_style.banner_hide_mask ? 'hide-mask' : ''}"
      th:style="${(theme.config.basic_style.enable_banner == 'image' ? ('background-image: url(' + theme.config.basic_style.banner_image + ');') : '') +
      (theme.config.basic_style.banner_full_screen ? ('height: ' + (theme.config.basic_info.header_fixed ? 'calc(100vh - 3.5rem)' : '100vh') + ';') : '' )}">
     <video preload="auto" loop autoplay muted playsinline

@@ -283,6 +283,16 @@ spec:
               value: true
             - label: 默认
               value: false
+        - $formkit: radio
+          name: banner_hide_mask
+          label: 隐藏横幅遮罩
+          value: false
+          options:
+            - label: 显示
+              value: false
+            - label: 隐藏
+              value: true
+          help: '隐藏后横幅显示会更亮'
         - $formkit: select
           name: theme_style
           label: 主题风格

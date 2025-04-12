@@ -2181,6 +2181,13 @@ button.swiper-pagination-bullet {
   overflow: hidden;
 }
 
+.hide-mask {
+  &:before {
+    width: 0 !important;
+    height: 0 !important;
+  }
+}
+
 .banner {
   width: 100%;
   height: 54vh;
@@ -4984,7 +4991,7 @@ button.swiper-pagination-bullet {
 
 /* 文本绘图 */
 text-diagram[data-type="mermaid"] {
-  display: flex  ;
+  display: flex;
   justify-content: center;
 }
 
