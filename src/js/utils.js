@@ -176,6 +176,7 @@ const Utils = {
       e.stopPropagation()
       let $this = $(this)
       let id = $this.attr('data-id')
+      let type2 = $this.attr('data-type')
       Utils.request({
         url: '/apis/api.halo.run/v1alpha1/trackers/upvote',
         method: 'POST',
@@ -183,8 +184,8 @@ const Utils = {
         returnRaw: true,
         resultType: 'text',
         data: JSON.stringify({
-          group: type === 'moments' ? 'moment.halo.run' : 'content.halo.run',
-          plural: type,
+          group: type2 === 'Moments' ? 'moment.halo.run' : (type2 === 'Post' ? 'content.halo.run' : 'content.halo.run'),
+          plural: type2 === 'Moments' ? 'moments' : (type2 === 'Post' ? 'posts' : ''),
           name: id
         })
       })
