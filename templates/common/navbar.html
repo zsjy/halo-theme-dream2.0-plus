@@ -1,5 +1,5 @@
 <header class="navbar" th:classappend="${!theme.config.basic_info.header_fixed}? 'animation' : 'fixed'"
-        xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+        xmlns:th="https://www.thymeleaf.org">
     <div class="navbar-above" th:classappend="${!theme.config.basic_info.header_fixed}? 'animation'">
         <div th:class="${theme.config.basic_style.sidebar_column != 'all' ? 'container two-column' : 'container' }">
             <i class="ri-list-unordered navbar-slideicon"></i>
@@ -97,16 +97,16 @@
                     />
                 </div>
                 <ul class="navbar-logon-group">
-                    <li th:if="${skillUrl != 'none' && !#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">
+                    <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
                         <a th:href="@{|/${skillUrl}/posts/editor|}" target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_person_class)}" th:class="${theme.config.basic_style.logon.console_post_class}"></i> 新建文章</a>
                     </li>
-                    <li th:if="${skillUrl != 'none' && !#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">
+                    <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
                         <a th:href="@{|/${skillUrl}/moments|}" target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_person_class)}" th:class="${theme.config.basic_style.logon.console_moment_class}"></i> 发布瞬间</a>
                     </li>
                     <li th:if="${!#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">
                         <a href="/uc" target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_person_class)}" th:class="${theme.config.basic_style.logon.console_person_class}"></i> 个人中心</a>
                     </li>
-                    <li th:if="${!#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">
+                    <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
                         <a href="/console" target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_manage_class)}" th:class="${theme.config.basic_style.logon.console_manage_class}"></i> 后台管理</a>
                     </li>
                     <li th:if="${!#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">

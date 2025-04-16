@@ -2,7 +2,6 @@
      th:fragment="article (post, type)"
      th:with="updateInterval = ${T(java.lang.Math).floor((#dates.createNow().getTime()/1000.0 - post.status.lastModifyTime.getEpochSecond())/86400.0).intValue()},
      isPost = ${type == 'Post'},
-     skillUrl = ${theme.config.basic_style.expand_login_skill},
      thumbnail = ${#strings.isEmpty(post.spec.cover) ? #strings.isEmpty(theme.config.post.default_thumbnail) ? '' : theme.config.post.default_thumbnail + (#strings.contains(theme.config.post.default_thumbnail, '?') ? '&' : '?') + 'id=' + post.metadata.name : thumbnail.gen(post.spec.cover, 'xl')},
      wordCountTime = ${#strings.length(#strings.trim(post.content.raw)) / 400},
      wordCountTimeStr = ${wordCountTime == 0 ? '小于1分钟' : (wordCountTime + '分钟')}">
@@ -22,8 +21,8 @@
                     </li>
                     <li><i class="ri-thumb-up-line"></i>[[${post.stats.upvote}]]</li>
                     <li><i class="ri-time-line"></i>[[${wordCountTimeStr}]]</li>
-                    <li th:if="${logonUserName == post.spec.owner && (skillUrl == 'console' || (skillUrl == 'uc' && isPost))}" class="is-hidden-laptop">
-                        <a target="_blank" title="编辑文章" th:href="@{|/${skillUrl}/${isPost ? 'posts' : 'single-pages'}/editor?name=${post.metadata.name}|}"><i class="ri-edit-2-line"></i>编辑</a></li>
+                    <li sec:authorize="hasRole('ROLE_super-role')" class="is-hidden-laptop">
+                        <a target="_blank" title="编辑" th:href="@{|/console/${isPost ? 'posts' : 'single-pages'}/editor?name=${post.metadata.name}|}"><i class="ri-edit-2-line"></i>编辑</a></li>
                 </ul>
             </div>
         </div>
@@ -51,8 +50,8 @@
                         </li>
                         <li><i class="ri-thumb-up-line"></i>[[${post.stats.upvote}]]</li>
                         <li><i class="ri-time-line"></i>[[${wordCountTimeStr}]]</li>
-                        <li th:if="${logonUserName == post.spec.owner && (skillUrl == 'console' || (skillUrl == 'uc' && isPost))}" class="is-hidden-laptop">
-                            <a target="_blank" title="编辑文章"  th:href="@{|/${skillUrl}/${isPost ? 'posts' : 'single-pages'}/editor?name=${post.metadata.name}|}"><i class="ri-edit-2-line"></i>编辑</a></li>
+                        <li sec:authorize="hasRole('ROLE_super-role')" class="is-hidden-laptop">
+                            <a target="_blank" title="编辑"  th:href="@{|/console/${isPost ? 'posts' : 'single-pages'}/editor?name=${post.metadata.name}|}"><i class="ri-edit-2-line"></i>编辑</a></li>
                     </ul>
                     <div th:if="${isPost && !#lists.isEmpty(post.categories)}" class="level-item">
                         <a th:each="cy : ${post.categories}" th:href="${cy.status.permalink}"
