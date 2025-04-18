@@ -39,7 +39,7 @@
                     </ol>
                 </div>
             </button>
-            <button type="button" class="agree like" th:data-id="${post.metadata.name}"
+            <button th:if="${type == 'Post'}" type="button" class="agree like" th:data-id="${post.metadata.name}"
                     th:data-likes="${post.stats.upvote}" th:data-type="${type}">
                 <i class="ri-thumb-up-line"></i>
                 <span>赞<span th:text="${post.stats.upvote}"></span></span>
