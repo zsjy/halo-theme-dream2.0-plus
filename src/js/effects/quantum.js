@@ -8,7 +8,7 @@
     }
   }
 
-  // 获取动态颜色的函数
+  // 获取颜色的函数
   function getDynamicColor(alpha) {
     return `rgba(128,128,128, ${Math.min(alpha + 0.2, 1)})`
   }
