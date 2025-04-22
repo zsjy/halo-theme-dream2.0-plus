@@ -1353,6 +1353,19 @@ spec:
               label: 黑暗模式
             - value: all
               label: 全模式
+        - $formkit: radio
+          name: effects_quantum_silk_thread_mode
+          label: 量子丝线特效显示模式
+          value: none
+          options:
+            - value: none
+              label: 不显示
+            - value: day
+              label: 明亮模式
+            - value: night
+              label: 黑暗模式
+            - value: all
+              label: 全模式
         - $formkit: group
           name: gray_mode_group
           label: 灰色模式
