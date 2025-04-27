@@ -3,7 +3,7 @@ const notice_read_key = 'notice_read_key'
 
 function shouldShowNotice() {
   // 示例条件：检查cookie或localStorage判断是否已读
-  return Utils.compressHTML(DreamConfig.pop_notice_stagnant_content) !== localStorage.getItem(notice_read_key)
+  return Utils.secureCompressHTML(DreamConfig.pop_notice_stagnant_content) !== localStorage.getItem(notice_read_key)
 }
 
 // 创建公告弹窗
@@ -159,7 +159,7 @@ function createNoticePopup() {
     document.body.classList.remove('body-no-scroll')
     window.scrollTo(0, document.body.dataset.scrollY || 0)
     // 可选：设置标记表示用户已关闭
-    localStorage.setItem(notice_read_key, Utils.compressHTML(DreamConfig.pop_notice_stagnant_content))
+    localStorage.setItem(notice_read_key, Utils.secureCompressHTML(DreamConfig.pop_notice_stagnant_content))
   })
 }
 
