@@ -163,7 +163,7 @@ function createNoticePopup() {
   })
 }
 
-// 页面全部加载时检查并显示公告
+// 页面加载时检查并显示公告
 document.addEventListener('DOMContentLoaded', function () {
   if (shouldShowNotice()) {
     // 记录当前滚动位置（可选）

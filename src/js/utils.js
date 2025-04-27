@@ -16,20 +16,45 @@ const Utils = {
     return false
   },
   /**
-   * 压缩html
-   * @param html
-   * @returns {*}
+   * 安全压缩HTML（防御XSS/注入攻击）
+   * @param {string} html - 待处理的HTML字符串
+   * @param {boolean} [keepBasicTags=true] - 是否保留基础标签
+   * @returns {string} 安全压缩后的HTML
    */
-  compressHTML(html) {
-    if (typeof html !== 'string' || !html.trim()) {
-      return ''
+  secureCompressHTML(html, keepBasicTags = true) {
+    if (typeof html !== 'string') return ''
+
+    // 防御层1：先进行实体化转义（关键步骤）
+    const escapeMap = {
+      '<': '&lt;',
+      '>': '&gt;',
+      '&': '&amp;',
+      '"': '&quot;',
+      '\'': '&#x27;',
+      '/': '&#x2F;'
     }
-    return html
-      .replace(/<!--[\s\S]*?-->/g, '')     // 删除注释
-      .replace(/\s+/g, ' ')                // 合并空白字符
-      .replace(/>\s+</g, '><')             // 删除标签间空格
-      .replace(/\s+>/g, '>')               // 删除标签结尾空格
-      .replace(/<\s+/g, '<')              // 删除标签开头空格
+
+    let safeHtml = html.replace(/[<>&"'\/]/g, char => escapeMap[char])
+
+    // 防御层2：选择性允许安全标签（白名单机制）
+    if (keepBasicTags) {
+      const tagWhitelist = ['p', 'br', 'div', 'span', 'a', 'b', 'i', 'strong', 'em']
+      tagWhitelist.forEach(tag => {
+        const regex = new RegExp(`&lt;(${tag})([^&]*)&gt;`, 'gi')
+        safeHtml = safeHtml.replace(regex, `<${tag}$2>`)
+
+        const closeRegex = new RegExp(`&lt;\\/(${tag})&gt;`, 'gi')
+        safeHtml = safeHtml.replace(closeRegex, `</${tag}>`)
+      })
+    }
+
+    // 防御层3：安全压缩（在转义后的内容上操作）
+    return safeHtml
+      .replace(/&lt;!--[\s\S]*?--&gt;/g, '')  // 处理转义后的注释
+      .replace(/\s+/g, ' ')
+      .replace(/&gt;\s+&lt;/g, '&gt;&lt;')
+      .replace(/\s+&gt;/g, '&gt;')
+      .replace(/&lt;\s+/g, '&lt;')
   },
   /**
    * 有缓存的方式加载js
