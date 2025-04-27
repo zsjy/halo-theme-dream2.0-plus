@@ -1604,7 +1604,7 @@ spec:
               validation: required
               height: 180px
               value: '通知'
-              label: 弹窗公告的内容，支持html
+              label: 弹窗通知的内容，支持html
               help: '显示弹窗通知的内容，支持html，若内容发生变更则重新显示。'
             - $formkit: text
               name: pop_notice_btn
