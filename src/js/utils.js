@@ -1,23 +1,39 @@
 const Utils = {
   /**
-     * 是否移动设备
-     */
+   * 是否移动设备
+   */
   isMobile() {
     if (
       navigator.userAgent.match(/Android/i) ||
-            navigator.userAgent.match(/webOS/i) ||
-            navigator.userAgent.match(/iPhone/i) ||
-            navigator.userAgent.match(/iPad/i) ||
-            navigator.userAgent.match(/iPod/i) ||
-            navigator.userAgent.match(/BlackBerry/i) ||
-            navigator.userAgent.match(/Windows Phone/i)
+      navigator.userAgent.match(/webOS/i) ||
+      navigator.userAgent.match(/iPhone/i) ||
+      navigator.userAgent.match(/iPad/i) ||
+      navigator.userAgent.match(/iPod/i) ||
+      navigator.userAgent.match(/BlackBerry/i) ||
+      navigator.userAgent.match(/Windows Phone/i)
     )
       return true
     return false
   },
   /**
-     * 有缓存的方式加载js
-     */
+   * 压缩html
+   * @param html
+   * @returns {*}
+   */
+  compressHTML(html) {
+    if (typeof html !== 'string' || !html.trim()) {
+      return ''
+    }
+    return html
+      .replace(/<!--[\s\S]*?-->/g, '')     // 删除注释
+      .replace(/\s+/g, ' ')                // 合并空白字符
+      .replace(/>\s+</g, '><')             // 删除标签间空格
+      .replace(/\s+>/g, '>')               // 删除标签结尾空格
+      .replace(/<\s+/g, '<')              // 删除标签开头空格
+  },
+  /**
+   * 有缓存的方式加载js
+   */
   cachedScript(url, callback) {
     return $.ajax(jQuery.extend({
       url: url,
@@ -28,9 +44,9 @@ const Utils = {
     }, $.isPlainObject(url) && url))
   },
   /**
-     * 时间格式化
-     * @param {*} time
-     */
+   * 时间格式化
+   * @param {*} time
+   */
   formatDate(date, fmt = 'yyyy-MM-dd') {
     date = new Date(date)
     if (/(y+)/.test(fmt)) {
@@ -143,7 +159,7 @@ const Utils = {
               ? err.responseJSON.title
               : '请求失败'
             : '请求失败'
-          if(!noErrorTip) {
+          if (!noErrorTip) {
             Qmsg.error(errMsg)
           }
           reject(errMsg)
@@ -152,10 +168,10 @@ const Utils = {
     })
   },
   /**
-     * 初始化喜欢按钮
-     * @param buttonSelect 喜欢按钮的选择器
-     * @param type 喜欢的类型
-     */
+   * 初始化喜欢按钮
+   * @param buttonSelect 喜欢按钮的选择器
+   * @param type 喜欢的类型
+   */
   initLikeButton(buttonSelect, type) {
     const name = encrypt('agree-' + type)
     let agrees = localStorage.getItem(name)
@@ -168,8 +184,8 @@ const Utils = {
     })
   },
   /**
-     * 初始化喜欢按钮点击事件
-     */
+   * 初始化喜欢按钮点击事件
+   */
   initLikeEvent(buttonSelect, type, likeNumFunc) {
     let name = encrypt('agree-' + type)
     $('body').on('click', buttonSelect, function (e) {
@@ -220,10 +236,10 @@ const Utils = {
     }
   },
   /**
-     * 删除元素的 class，可根据前缀来删除
-     * @param {*} el 需要删除的 dom 元素
-     * @param {*} prefix 需要删除的 class，可以仅为前缀
-     */
+   * 删除元素的 class，可根据前缀来删除
+   * @param {*} el 需要删除的 dom 元素
+   * @param {*} prefix 需要删除的 class，可以仅为前缀
+   */
   removeClassByPrefix(el, prefix) {
     const classes = el.className.split(' ').filter(function (c) {
       return c.lastIndexOf(prefix, 0) !== 0
@@ -233,12 +249,12 @@ const Utils = {
   },
 
   /**
-     * 滚动到指定控件
-     * @param element 需要被跳转到的控件
-     * @param time 跳转时间
-     * @param headingsOffset 控件距离页面顶部的距离
-     * @param callback 跳转完成后执行的函数
-     */
+   * 滚动到指定控件
+   * @param element 需要被跳转到的控件
+   * @param time 跳转时间
+   * @param headingsOffset 控件距离页面顶部的距离
+   * @param callback 跳转完成后执行的函数
+   */
   animateScroll(element, time, headingsOffset, callback) {
     let rect = element.getBoundingClientRect()
     let currentY = window.scrollY
@@ -246,6 +262,7 @@ const Utils = {
     let speed = (targetY - currentY) / time
     let offset = currentY > targetY ? -1 : 1
     let requestId
+
     function step() {
       currentY += speed
       if (currentY * offset < targetY * offset) {
@@ -257,6 +274,7 @@ const Utils = {
         callback && callback()
       }
     }
+
     requestId = window.requestAnimationFrame(step)
   },
 }
