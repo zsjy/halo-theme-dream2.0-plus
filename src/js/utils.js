@@ -1,23 +1,64 @@
 const Utils = {
   /**
-     * 是否移动设备
-     */
+   * 是否移动设备
+   */
   isMobile() {
     if (
       navigator.userAgent.match(/Android/i) ||
-            navigator.userAgent.match(/webOS/i) ||
-            navigator.userAgent.match(/iPhone/i) ||
-            navigator.userAgent.match(/iPad/i) ||
-            navigator.userAgent.match(/iPod/i) ||
-            navigator.userAgent.match(/BlackBerry/i) ||
-            navigator.userAgent.match(/Windows Phone/i)
+      navigator.userAgent.match(/webOS/i) ||
+      navigator.userAgent.match(/iPhone/i) ||
+      navigator.userAgent.match(/iPad/i) ||
+      navigator.userAgent.match(/iPod/i) ||
+      navigator.userAgent.match(/BlackBerry/i) ||
+      navigator.userAgent.match(/Windows Phone/i)
     )
       return true
     return false
   },
   /**
-     * 有缓存的方式加载js
-     */
+   * 安全压缩HTML（防御XSS/注入攻击）
+   * @param {string} html - 待处理的HTML字符串
+   * @param {boolean} [keepBasicTags=true] - 是否保留基础标签
+   * @returns {string} 安全压缩后的HTML
+   */
+  secureCompressHTML(html, keepBasicTags = true) {
+    if (typeof html !== 'string') return ''
+
+    // 防御层1：先进行实体化转义（关键步骤）
+    const escapeMap = {
+      '<': '&lt;',
+      '>': '&gt;',
+      '&': '&amp;',
+      '"': '&quot;',
+      '\'': '&#x27;',
+      '/': '&#x2F;'
+    }
+
+    let safeHtml = html.replace(/[<>&"'\/]/g, char => escapeMap[char])
+
+    // 防御层2：选择性允许安全标签（白名单机制）
+    if (keepBasicTags) {
+      const tagWhitelist = ['p', 'br', 'div', 'span', 'a', 'b', 'i', 'strong', 'em']
+      tagWhitelist.forEach(tag => {
+        const regex = new RegExp(`&lt;(${tag})([^&]*)&gt;`, 'gi')
+        safeHtml = safeHtml.replace(regex, `<${tag}$2>`)
+
+        const closeRegex = new RegExp(`&lt;\\/(${tag})&gt;`, 'gi')
+        safeHtml = safeHtml.replace(closeRegex, `</${tag}>`)
+      })
+    }
+
+    // 防御层3：安全压缩（在转义后的内容上操作）
+    return safeHtml
+      .replace(/&lt;!--[\s\S]*?--&gt;/g, '')  // 处理转义后的注释
+      .replace(/\s+/g, ' ')
+      .replace(/&gt;\s+&lt;/g, '&gt;&lt;')
+      .replace(/\s+&gt;/g, '&gt;')
+      .replace(/&lt;\s+/g, '&lt;')
+  },
+  /**
+   * 有缓存的方式加载js
+   */
   cachedScript(url, callback) {
     return $.ajax(jQuery.extend({
       url: url,
@@ -28,9 +69,9 @@ const Utils = {
     }, $.isPlainObject(url) && url))
   },
   /**
-     * 时间格式化
-     * @param {*} time
-     */
+   * 时间格式化
+   * @param {*} time
+   */
   formatDate(date, fmt = 'yyyy-MM-dd') {
     date = new Date(date)
     if (/(y+)/.test(fmt)) {
@@ -143,7 +184,7 @@ const Utils = {
               ? err.responseJSON.title
               : '请求失败'
             : '请求失败'
-          if(!noErrorTip) {
+          if (!noErrorTip) {
             Qmsg.error(errMsg)
           }
           reject(errMsg)
@@ -152,10 +193,10 @@ const Utils = {
     })
   },
   /**
-     * 初始化喜欢按钮
-     * @param buttonSelect 喜欢按钮的选择器
-     * @param type 喜欢的类型
-     */
+   * 初始化喜欢按钮
+   * @param buttonSelect 喜欢按钮的选择器
+   * @param type 喜欢的类型
+   */
   initLikeButton(buttonSelect, type) {
     const name = encrypt('agree-' + type)
     let agrees = localStorage.getItem(name)
@@ -168,8 +209,8 @@ const Utils = {
     })
   },
   /**
-     * 初始化喜欢按钮点击事件
-     */
+   * 初始化喜欢按钮点击事件
+   */
   initLikeEvent(buttonSelect, type, likeNumFunc) {
     let name = encrypt('agree-' + type)
     $('body').on('click', buttonSelect, function (e) {
@@ -220,10 +261,10 @@ const Utils = {
     }
   },
   /**
-     * 删除元素的 class，可根据前缀来删除
-     * @param {*} el 需要删除的 dom 元素
-     * @param {*} prefix 需要删除的 class，可以仅为前缀
-     */
+   * 删除元素的 class，可根据前缀来删除
+   * @param {*} el 需要删除的 dom 元素
+   * @param {*} prefix 需要删除的 class，可以仅为前缀
+   */
   removeClassByPrefix(el, prefix) {
     const classes = el.className.split(' ').filter(function (c) {
       return c.lastIndexOf(prefix, 0) !== 0
@@ -233,12 +274,12 @@ const Utils = {
   },
 
   /**
-     * 滚动到指定控件
-     * @param element 需要被跳转到的控件
-     * @param time 跳转时间
-     * @param headingsOffset 控件距离页面顶部的距离
-     * @param callback 跳转完成后执行的函数
-     */
+   * 滚动到指定控件
+   * @param element 需要被跳转到的控件
+   * @param time 跳转时间
+   * @param headingsOffset 控件距离页面顶部的距离
+   * @param callback 跳转完成后执行的函数
+   */
   animateScroll(element, time, headingsOffset, callback) {
     let rect = element.getBoundingClientRect()
     let currentY = window.scrollY
@@ -246,6 +287,7 @@ const Utils = {
     let speed = (targetY - currentY) / time
     let offset = currentY > targetY ? -1 : 1
     let requestId
+
     function step() {
       currentY += speed
       if (currentY * offset < targetY * offset) {
@@ -257,6 +299,7 @@ const Utils = {
         callback && callback()
       }
     }
+
     requestId = window.requestAnimationFrame(step)
   },
 }
