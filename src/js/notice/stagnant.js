@@ -3,7 +3,7 @@ const notice_read_key = 'notice_read_key'
 
 function shouldShowNotice() {
   // 示例条件：检查cookie或localStorage判断是否已读
-  return Utils.secureCompressHTML(DreamConfig.pop_notice_stagnant_content) !== localStorage.getItem(notice_read_key)
+  return `stagnant-${Utils.secureCompressHTML(DreamConfig.pop_notice_stagnant_content)}` !== localStorage.getItem(notice_read_key)
 }
 
 // 创建公告弹窗
@@ -80,6 +80,7 @@ function createNoticePopup() {
       margin-top: 5px;
       margin-bottom: 25px;
       padding: 20px;
+      font-size: 1rem;
       border-radius: 12px;
       border: 2px solid rgba(255, 255, 255, 0.3);
       background: rgba(255, 255, 255, 0.6);
@@ -116,7 +117,7 @@ function createNoticePopup() {
       border-radius: 16px;
       border: none;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 1rem;
       text-align: center;
       text-decoration: none;
       background-color: var(--theme);
@@ -159,7 +160,7 @@ function createNoticePopup() {
     document.body.classList.remove('body-no-scroll')
     window.scrollTo(0, document.body.dataset.scrollY || 0)
     // 可选：设置标记表示用户已关闭
-    localStorage.setItem(notice_read_key, Utils.secureCompressHTML(DreamConfig.pop_notice_stagnant_content))
+    localStorage.setItem(notice_read_key, `stagnant-${Utils.secureCompressHTML(DreamConfig.pop_notice_stagnant_content)}`)
   })
 }
 
