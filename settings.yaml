@@ -1053,7 +1053,7 @@ spec:
         - $formkit: group
           name: search
           label: 搜索页面
-          help: 使用新版搜索需要 halo >= 2.17.0 & 搜索插件 >= 1.5.0。
+          help: 使用非经典风格需要搜索插件 >= 1.5.0。
           value:
             search_style: 'box'
             search_target: '_self'
@@ -1178,7 +1178,7 @@ spec:
           name: enable_sw
           label: "启用 Service Worker 优化"
           value: "false"
-          help: "需要在 Nginx 中添加代理配置方可启用，配置方法见：https://www.hcjike.com/archives/slrrTp6c"
+          help: "需要在 Nginx 中添加代理配置方可启用，配置方法见：https://www.hcjike.com/archives/slrrTp6c，未正确配置会导致404（文件未找到）。"
           options:
             - value: "false"
               label: 关闭
@@ -1543,7 +1543,7 @@ spec:
           label: manifest.json 文件路径
           validation: required
           placeholder: '请输入/选择 manifest.json 文件'
-          help: '请输入或选择一个 manifest.json 文件。该文件的创建方法可参考 https://www.hcjike.com/archives/MNdz7kZ6 页面的相关说明。'
+          help: '请输入或选择一个 manifest.json 文件。'
         - $formkit: color
           name: theme_color
           if: $get(enable_pwa).value
