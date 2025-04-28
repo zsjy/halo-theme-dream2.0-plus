@@ -87,7 +87,7 @@ function createNoticePopup() {
     .others-end {
         padding: 15px 20px;
         text-align: center;
-        border-top: 1px solid #cacaca;
+        border-top: 1px solid var(--light-x);
     }
     
     .others-end button {
