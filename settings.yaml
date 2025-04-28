@@ -1580,23 +1580,35 @@ spec:
           id: show_pop_notice
           label: 显示弹窗通知
           value: 'false'
-          help: '控制是否显示弹窗通知。'
+          help: '控制是否显示弹窗通知，切换风格会重新触发显示通知内容。'
           options:
+            - value: 'side'
+              label: 侧边通知
             - value: 'stagnant'
               label: 凝滞通知
             - value: 'false'
               label: 不显示
         - $formkit: group
-          name: stagnant
+          name: side
           if: $get(show_pop_notice).value !== 'false'
-          label: '凝滞通知'
-          help: '凝滞通知配置项。'
+          label: '侧边通知 配置项'
           children:
+            - $formkit: radio
+              name: pop_notice_orientation
+              label: 侧边通知弹出方向
+              validation: required
+              help: '控制侧边通知的弹出方向。'
+              value: 'right'
+              options:
+                - value: 'right'
+                  label: 右侧
+                - value: 'left'
+                  label: 左侧
             - $formkit: text
               name: pop_notice_title
-              label: 弹窗标题
+              label: 侧边通知标题
               validation: required
-              help: '显示弹窗通知的标题信息。'
+              help: '显示侧边通知的标题信息。'
               value: '重要通知'
             - $formkit: code
               name: pop_notice_content
@@ -1604,13 +1616,38 @@ spec:
               validation: required
               height: 180px
               value: '通知'
-              label: 弹窗通知的内容，支持html
-              help: '显示弹窗通知的内容，支持html，若内容发生变更则重新显示。'
+              label: 侧边通知的内容，支持html
+              help: '显示侧边通知的内容，支持html，若内容发生变更则重新显示。'
             - $formkit: text
               name: pop_notice_btn
-              label: 弹窗按钮内容
+              label: 侧边通知按钮内容
               validation: required
-              help: '显示弹窗通知的按钮内容。'
+              help: '显示侧边通知的按钮内容。'
+              value: '我知道了'
+        - $formkit: group
+          name: stagnant
+          if: $get(show_pop_notice).value !== 'false'
+          label: '凝滞通知 配置项'
+          children:
+            - $formkit: text
+              name: pop_notice_title
+              label: 凝滞通知的标题
+              validation: required
+              help: '显示凝滞通知的标题信息。'
+              value: '重要通知'
+            - $formkit: code
+              name: pop_notice_content
+              language: html
+              validation: required
+              height: 180px
+              value: '通知'
+              label: 凝滞通知的内容，支持html
+              help: '显示凝滞通知的内容，支持html，若内容发生变更则重新显示。'
+            - $formkit: text
+              name: pop_notice_btn
+              label: 凝滞通知按钮内容
+              validation: required
+              help: '显示凝滞通知的按钮内容。'
               value: '我知道了'
     - group: custom
       label: '定制主题'
