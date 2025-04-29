@@ -2,14 +2,13 @@
 const notice_read_key = 'notice_read_key'
 
 function shouldShowNotice() {
-  // 示例条件：检查cookie或localStorage判断是否已读
   return `side-${Utils.secureCompressHTML(DreamConfig.pop_notice_side_content)}` !== localStorage.getItem(notice_read_key)
 }
 
 // 创建公告弹窗
 function createNoticePopup() {
   const noticeHTML = `
-   <div class="notice-content ` + DreamConfig.pop_notice_side_orientation + `">
+   <div class="notice-content ` + DreamConfig.pop_notice_side_orientation + ' ' + DreamConfig.pop_notice_side_vertical + `">
       <div class="content-title">
           <span>` + DreamConfig.pop_notice_side_title + `</span>
       </div>
@@ -22,7 +21,6 @@ function createNoticePopup() {
    <style>
     .notice-content {
         position: fixed;
-        top: 80px;
         width: 350px;
         height: auto;
         max-height: 400px;
@@ -42,6 +40,19 @@ function createNoticePopup() {
     .notice-content.right {
         right: -400px !important;
         transition: right 0.3s ease-out !important;
+    }
+    
+    .notice-content.top {
+      top: 60px;
+    }
+    
+    .notice-content.center {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    
+    .notice-content.bottom {
+      bottom: 2rem;
     }
 
     @media (max-width: 768px) {
@@ -113,11 +124,9 @@ function createNoticePopup() {
   document.querySelector('.notice-close-btn').addEventListener('click', function () {
     var popup = document.querySelector('.notice-content')
     popup.classList.remove('show')
-    // 动画结束后移除元素（可选）
     setTimeout(function () {
       popup.remove()
     }, 300)
-    // 可选：设置标记表示用户已关闭
     localStorage.setItem(notice_read_key, `side-${Utils.secureCompressHTML(DreamConfig.pop_notice_side_content)}`)
   })
 }
@@ -128,6 +137,6 @@ document.addEventListener('DOMContentLoaded', function () {
     createNoticePopup()
     setTimeout(function () {
       document.querySelector('.notice-content').classList.add('show')
-    }, 100)
+    }, 30)
   }
 })

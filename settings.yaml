@@ -1595,15 +1595,28 @@ spec:
           children:
             - $formkit: radio
               name: pop_notice_orientation
-              label: 侧边通知弹出方向
+              label: 侧边通知弹出方向-水平方向
               validation: required
-              help: '控制侧边通知的弹出方向。'
+              help: '控制侧边通知的弹出方向-水平方向。'
               value: 'right'
               options:
                 - value: 'right'
                   label: 右侧
                 - value: 'left'
                   label: 左侧
+            - $formkit: radio
+              name: pop_notice_vertical
+              label: 侧边通知弹出方向-垂直方向
+              validation: required
+              help: '控制侧边通知的弹出方向-垂直方向。'
+              value: 'top'
+              options:
+                - value: 'top'
+                  label: 顶部
+                - value: 'center'
+                  label: 居中
+                - value: 'bottom'
+                  label: 底部
             - $formkit: text
               name: pop_notice_title
               label: 侧边通知标题
