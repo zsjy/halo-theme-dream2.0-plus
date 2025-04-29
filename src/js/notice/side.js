@@ -8,7 +8,7 @@ function shouldShowNotice() {
 // 创建公告弹窗
 function createNoticePopup() {
   const noticeHTML = `
-   <div class="notice-content ` + DreamConfig.pop_notice_side_orientation + ' ' +DreamConfig.pop_notice_side_vertical+ `">
+   <div class="notice-content ` + DreamConfig.pop_notice_side_orientation + ' ' + DreamConfig.pop_notice_side_vertical + `">
       <div class="content-title">
           <span>` + DreamConfig.pop_notice_side_title + `</span>
       </div>
