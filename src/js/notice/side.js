@@ -106,13 +106,17 @@ function createNoticePopup() {
         background-color: var(--theme);
         color: #f8f8f8;
         border: none;
-        border-radius: 4px;
+        border-radius: 16px;
         cursor: pointer;
         font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(var(--theme), 0.2);
     }
     
     .others-end button:hover {
         background-color: var(--theme);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(var(--theme), 0.3);
     }
   </style>
   `
