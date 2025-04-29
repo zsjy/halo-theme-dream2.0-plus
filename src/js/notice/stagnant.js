@@ -164,9 +164,7 @@ function createNoticePopup() {
 // 页面加载时检查并显示公告
 document.addEventListener('DOMContentLoaded', function () {
   if (shouldShowNotice()) {
-    setTimeout(function () {
-      document.body.classList.add('body-no-scroll')
-      createNoticePopup()
-    }, 100)
+    document.body.classList.add('body-no-scroll')
+    createNoticePopup()
   }
 })
