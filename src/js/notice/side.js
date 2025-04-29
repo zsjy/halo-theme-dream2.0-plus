@@ -2,7 +2,6 @@
 const notice_read_key = 'notice_read_key'
 
 function shouldShowNotice() {
-  // 示例条件：检查cookie或localStorage判断是否已读
   return `side-${Utils.secureCompressHTML(DreamConfig.pop_notice_side_content)}` !== localStorage.getItem(notice_read_key)
 }
 
@@ -113,11 +112,9 @@ function createNoticePopup() {
   document.querySelector('.notice-close-btn').addEventListener('click', function () {
     var popup = document.querySelector('.notice-content')
     popup.classList.remove('show')
-    // 动画结束后移除元素（可选）
     setTimeout(function () {
       popup.remove()
     }, 300)
-    // 可选：设置标记表示用户已关闭
     localStorage.setItem(notice_read_key, `side-${Utils.secureCompressHTML(DreamConfig.pop_notice_side_content)}`)
   })
 }

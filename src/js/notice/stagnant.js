@@ -2,7 +2,6 @@
 const notice_read_key = 'notice_read_key'
 
 function shouldShowNotice() {
-  // 示例条件：检查cookie或localStorage判断是否已读
   return `stagnant-${Utils.secureCompressHTML(DreamConfig.pop_notice_stagnant_content)}` !== localStorage.getItem(notice_read_key)
 }
 
@@ -158,8 +157,6 @@ function createNoticePopup() {
     // 隐藏弹窗
     document.querySelector('.notice-parent').remove()
     document.body.classList.remove('body-no-scroll')
-    window.scrollTo(0, document.body.dataset.scrollY || 0)
-    // 可选：设置标记表示用户已关闭
     localStorage.setItem(notice_read_key, `stagnant-${Utils.secureCompressHTML(DreamConfig.pop_notice_stagnant_content)}`)
   })
 }
@@ -167,9 +164,9 @@ function createNoticePopup() {
 // 页面加载时检查并显示公告
 document.addEventListener('DOMContentLoaded', function () {
   if (shouldShowNotice()) {
-    // 记录当前滚动位置（可选）
-    document.body.dataset.scrollY = window.scrollY
-    document.body.classList.add('body-no-scroll')
-    createNoticePopup()
+    setTimeout(function () {
+      document.body.classList.add('body-no-scroll')
+      createNoticePopup()
+    }, 100)
   }
 })
