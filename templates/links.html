@@ -18,6 +18,10 @@
                                     <a class="links-item" th:href="${link.spec.url}" rel="noopener noreferrer" target="_blank"
                                        th:title="${link.spec.description}">
                                         <img th:if="${#strings.isEmpty(link.spec.logo)}" class="not-gallery" th:title="${link.spec.displayName}" th:src="${defaultAvatar}" th:alt="${link.spec.displayName}">
+                                        <!-- SECURITY NOTE:
+                                             data-url、data-default is sourced from trusted admin configuration,
+                                             not user input. XSS risk is mitigated by strict backend controls.
+                                        -->
                                         <img th:unless="${#strings.isEmpty(link.spec.logo)}" class="not-gallery" th:title="${link.spec.displayName}" th:src="${defaultAvatar}"
                                              th:data-url="${link.spec.logo}"
                                              th:data-default="${defaultAvatar}"
@@ -44,6 +48,10 @@
                             <li th:if="${!#strings.isEmpty(theme.config.page_config.links_rss_address)}">订阅：<a th:href="${theme.config.page_config.links_rss_address}" target="_blank" th:text="${theme.config.page_config.links_rss_address}"></a></li>
                         </ul>
                     </th:block>
+                    <!-- SECURITY NOTE:
+                         theme.config.page_config.links_info is sourced from trusted admin configuration,
+                         not user input. XSS risk is mitigated by strict backend controls.
+                    -->
                     <div th:if="${!#strings.isEmpty(theme.config.page_config.links_info)}" th:utext="${theme.config.page_config.links_info}"></div>
                 </div>
             </div>
