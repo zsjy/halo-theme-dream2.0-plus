@@ -155,11 +155,15 @@ const postContext = {
     // 代码块展开和关闭点击事件
     $body.on('click', 'figure>figcaption .ri-arrow-down-s-line', function () {
       let $this = $(this)
+      let dataCode = $this.attr('data-code')
+      if (!/^#[a-zA-Z0-9_-]+$/.test(dataCode)) {
+        return
+      }
       if ($this.is('.close')) {
-        $($this.attr('data-code')).parent().slideDown(200)
+        $(dataCode).parent().slideDown(200)
         $this.removeClass('close')
       } else {
-        $($this.attr('data-code')).parent().slideUp(200)
+        $(dataCode).parent().slideUp(200)
         $this.addClass('close')
       }
     })
