@@ -455,7 +455,8 @@ document.addEventListener('DOMContentLoaded', () => {
             MewPhotos.prototype.load = true
             MewPhotos.prototype.await = []
             new Promise((resolve) => {
-              Utils.cachedScript('https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js')
+              // Utils.cachedScript('https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js')
+              Utils.cachedScript('/themes/theme-dream2-plus/assets/lib/justifiedGallery@3.8.1/jquery.justifiedGallery.min.js')
                 .done(() => resolve())
                 .fail(() => resolve())
             }).then(() => {
@@ -476,7 +477,14 @@ document.addEventListener('DOMContentLoaded', () => {
           margins: this.getAttribute('margins') || '4'
         }
         $(this).find('img').each((i, elem) => {
-          $(elem).wrap(`<div data-fancybox="gallery" data-options='{"hash": false}' ${elem.alt ? 'data-caption="' + elem.alt + '"' : ''} href="${elem.src}"></div>`)
+          var wrapper = document.createElement('div')
+          wrapper.setAttribute('data-fancybox', 'gallery')
+          wrapper.setAttribute('data-options', JSON.stringify({ hash: false }))
+          if (elem.alt) {
+            wrapper.setAttribute('data-caption', elem.alt)
+          }
+          wrapper.setAttribute('href', elem.src)
+          $(elem).wrap(wrapper)
         })
         $(this).justifiedGallery({captions: this.options.captions, margins: this.options.margins})
         this.drawComplete()
