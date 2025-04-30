@@ -8,7 +8,7 @@
           function setSafeSrc(element, url) {
             // 允许：http/https/data:image 协议 或 相对路径（以/开头）
             var isSafe = /^(https?|data:image\/[a-z]+;base64|\/)/i.test(url);
-            element.src = isSafe ? url : ''; // 不安全则清空
+            element.src = isSafe ? encodeURI(url) : ''; // 不安全则清空
           }
         </script>
         <div class="card">
