@@ -302,6 +302,42 @@ const Utils = {
 
     requestId = window.requestAnimationFrame(step)
   },
+  /**
+   * 校验 URL 是否安全（允许 http/https/base64图片/相对路径/blob图片）
+   * @param {string} url - 待校验的 URL
+   * @returns {string} 安全则返回原URL，否则返回空字符串 ''
+   */
+  isSafeUrl(url) {
+    if (!url) return ''
+
+    // 允许相对路径（以 / 开头）
+    if (url.startsWith('/')) {
+      return url.includes('://') ? '' : url // 禁止伪相对路径
+    }
+
+    // 允许 Base64 图片（仅限 image/* 类型）
+    if (url.startsWith('data:image/')) {
+      const parts = url.split(',')
+      if (parts.length < 2) return ''
+      const meta = parts[0].toLowerCase()
+      return (meta.includes('base64') &&
+        (meta.includes('png') || meta.includes('jpeg') || meta.includes('gif')))
+        ? url : ''
+    }
+
+    // 允许 Blob URL（图片原始数据）
+    if (url.startsWith('blob:')) {
+      return url
+    }
+
+    // 校验 HTTP/HTTPS 协议
+    try {
+      const {protocol} = new URL(url)
+      return (protocol === 'http:' || protocol === 'https:') ? url : ''
+    } catch {
+      return '' // 非合法 URL
+    }
+  }
 }
 
 window.Utils = Utils
