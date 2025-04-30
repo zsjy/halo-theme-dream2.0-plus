@@ -455,7 +455,6 @@ document.addEventListener('DOMContentLoaded', () => {
             MewPhotos.prototype.load = true
             MewPhotos.prototype.await = []
             new Promise((resolve) => {
-              // Utils.cachedScript('https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js')
               Utils.cachedScript('/themes/theme-dream2-plus/assets/lib/justifiedGallery@3.8.1/jquery.justifiedGallery.min.js')
                 .done(() => resolve())
                 .fail(() => resolve())
