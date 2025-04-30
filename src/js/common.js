@@ -374,7 +374,7 @@ const commonContext = {
     if ($elem.length === 0) return
     let loveTime = $elem.attr('data-time')
     if (!/^\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}$/.test(loveTime)) {
-      $elem.html(loveTime)
+      $elem.text(loveTime)
       return
     }
     const grt = new Date(loveTime)
