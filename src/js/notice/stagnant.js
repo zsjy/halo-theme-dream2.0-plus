@@ -13,13 +13,9 @@ function createNoticePopup() {
       <div class="content-title">
         <span>` + DreamConfig.pop_notice_stagnant_title + `</span>
       </div>
-      <div class="others">
-        <div class="others-tip">` +
-    DreamConfig.pop_notice_stagnant_content +
-    `</div>
-        <div class="others-end">
+      <div class="others-tip">` + DreamConfig.pop_notice_stagnant_content + `</div>
+      <div class="others-end">
           <button class="notice-close-btn">` + DreamConfig.pop_notice_stagnant_btn + `</button>
-        </div>
       </div>
     </div>
   </div>
@@ -29,10 +25,8 @@ function createNoticePopup() {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      width: 100vw;
-      top: 0;
-      left: 0;
+      height: 100%;
+      width: 100%;
       background-color: rgba(0,0,0,0.5); 
       z-index: 10000;
       overscroll-behavior: contain;
@@ -45,6 +39,8 @@ function createNoticePopup() {
       animation: fadein 0.3s ease-out;
       width: 400px;
       max-width: 60%;
+      height: auto;
+      max-height: 400px;
       border: 2px solid rgba(255, 255, 255, 0.4);
       background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(25px);
@@ -52,6 +48,8 @@ function createNoticePopup() {
       box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
       position: relative;
       margin: 20px 0; /* 添加上下边距 */
+      display: flex;
+      flex-direction: column;
     }
     
     .night .notice-content {
@@ -77,7 +75,7 @@ function createNoticePopup() {
     .others-tip {
       display: block;
       margin-top: 5px;
-      margin-bottom: 25px;
+      margin-bottom: 10px;
       padding: 20px;
       font-size: 1rem;
       border-radius: 12px;
@@ -86,8 +84,7 @@ function createNoticePopup() {
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       color: var(--main);
-      max-height: 50vh;
-      overflow: auto;
+      overflow-y: auto; /* 允许垂直滚动 */
       word-wrap: break-word;
     }
     
