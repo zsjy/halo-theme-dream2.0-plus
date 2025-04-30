@@ -4,77 +4,28 @@
           th:with="baseEnableComment = ${theme.config.page_config.link_enable_comment == true || (!#strings.isEmpty(theme.config.page_config.link_comment_id) && theme.config.page_config.link_enable_comment == 'custom')}">
     <th:block th:fragment="content"
               th:with="defaultAvatar = ${#strings.defaultString(theme.config.page_config.links_default_avatar, #theme.assets('/img/avatar.svg'))}">
-        <script>
-          /**
-           * 校验 URL 是否安全（允许 http/https/base64图片/相对路径/blob图片）
-           * @param {string} url - 待校验的 URL
-           * @returns {string} 安全则返回原URL，否则返回空字符串 ''
-           */
-          function isSafeUrl(url) {
-            if (!url) return ''
-
-            // 允许相对路径（以 / 开头）
-            if (url.startsWith('/')) {
-              return url.includes('://') ? '' : url // 禁止伪相对路径
-            }
-
-            // 允许 Base64 图片（仅限 image/* 类型）
-            if (url.startsWith('data:image/')) {
-              const parts = url.split(',')
-              if (parts.length < 2) return ''
-              const meta = parts[0].toLowerCase()
-              return (meta.includes('base64') &&
-                (meta.includes('png') || meta.includes('jpeg') || meta.includes('gif')))
-                ? url : ''
-            }
-
-            // 允许 Blob URL（图片原始数据）
-            if (url.startsWith('blob:')) {
-              return url
-            }
-
-            // 校验 HTTP/HTTPS 协议
-            try {
-              const {protocol} = new URL(url)
-              return (protocol === 'http:' || protocol === 'https:') ? url : ''
-            } catch {
-              return '' // 非合法 URL
-            }
-          }
-        </script>
         <div class="card">
-            <div th:if="${!#strings.isEmpty(theme.config.page_config.links_thumbnail)}" class="card-image cover-image"
-                 th:style="'background-image: url(' + ${theme.config.page_config.links_thumbnail} + ')'">
+            <div th:if="${!#strings.isEmpty(theme.config.page_config.links_thumbnail)}" class="card-image cover-image" th:style="'background-image: url(' + ${theme.config.page_config.links_thumbnail} + ')'">
             </div>
             <div class="card-content main">
-                <h1 class="title"
-                    th:text="${#strings.defaultString(linksTitle, '友链')} + ' - ' + ${contributor.displayName} + '的小伙伴们'"></h1>
+                <h1 class="title" th:text="${#strings.defaultString(linksTitle, '友链')} + ' - ' + ${contributor.displayName} + '的小伙伴们'"></h1>
                 <div class="main-content">
-                    <th:block th:each="group : ${groups}"
-                              th:if="${#annotations.getOrDefault(group, 'hide','false') == 'false'}">
+                    <th:block th:each="group : ${groups}" th:if="${#annotations.getOrDefault(group, 'hide','false') == 'false'}">
                         <div th:if="${!#lists.isEmpty(group.links)}" class="links">
-                            <h3 class="link-title"
-                                th:text="${#strings.defaultString(group.spec.displayName, '小伙伴们')}"
-                                th:id="'toc' + ${groupStat.index}"></h3>
+                            <h3 class="link-title" th:text="${#strings.defaultString(group.spec.displayName, '小伙伴们')}" th:id="'toc' + ${groupStat.index}"></h3>
                             <ul class="link-items">
-                                <li th:each="link : ${group.links}"
-                                    th:if="${#annotations.getOrDefault(link, 'hide','false') == 'false'}">
-                                    <a class="links-item" th:href="${link.spec.url}" rel="noopener noreferrer"
-                                       target="_blank"
+                                <li th:each="link : ${group.links}" th:if="${#annotations.getOrDefault(link, 'hide','false') == 'false'}">
+                                    <a class="links-item" th:href="${link.spec.url}" rel="noopener noreferrer" target="_blank"
                                        th:title="${link.spec.description}">
-                                        <img th:if="${#strings.isEmpty(link.spec.logo)}" class="not-gallery"
-                                             th:title="${link.spec.displayName}" th:src="${defaultAvatar}"
-                                             th:alt="${link.spec.displayName}">
-                                        <img th:unless="${#strings.isEmpty(link.spec.logo)}" class="not-gallery"
-                                             th:title="${link.spec.displayName}" th:src="${defaultAvatar}"
+                                        <img th:if="${#strings.isEmpty(link.spec.logo)}" class="not-gallery" th:title="${link.spec.displayName}" th:src="${defaultAvatar}" th:alt="${link.spec.displayName}">
+                                        <img th:unless="${#strings.isEmpty(link.spec.logo)}" class="not-gallery" th:title="${link.spec.displayName}" th:src="${defaultAvatar}"
                                              th:data-url="${link.spec.logo}"
                                              th:data-default="${defaultAvatar}"
-                                             onload="if(!this.finish){this.finish=true;this.src=isSafeUrl(this.getAttribute('data-url'))}"
-                                             onerror="this.onerror='';if (this.finish) {this.src=isSafeUrl(this.getAttribute('data-default'))} else {this.finish=true;this.src=isSafeUrl(this.getAttribute('data-url'))}"
+                                             onload="if(!this.finish){this.finish=true;this.src=this.getAttribute('data-url')}"
+                                             onerror="this.onerror='';if (this.finish) {this.src=this.getAttribute('data-default')} else {this.finish=true;this.src=this.getAttribute('data-url')}"
                                              th:alt="${link.spec.displayName}">
                                         <span class="link-name" th:text="${link.spec.displayName}"></span>
-                                        <div class="link-desc"
-                                             th:text="${#strings.defaultString(link.spec.description, '他还没有自我介绍呢')}"></div>
+                                        <div class="link-desc" th:text="${#strings.defaultString(link.spec.description, '他还没有自我介绍呢')}"></div>
                                     </a>
                                 </li>
                             </ul>
@@ -90,13 +41,10 @@
                             <li>地址：<a th:href="${site.url}" target="_blank" th:text="${site.url}"></a></li>
                             <li>图标：<a th:href="${bloggerAvatar}" target="_blank" th:text="${bloggerAvatar}"></a></li>
                             <li>描述：[[${descriptive}]]</li>
-                            <li th:if="${!#strings.isEmpty(theme.config.page_config.links_rss_address)}">订阅：<a
-                                    th:href="${theme.config.page_config.links_rss_address}" target="_blank"
-                                    th:text="${theme.config.page_config.links_rss_address}"></a></li>
+                            <li th:if="${!#strings.isEmpty(theme.config.page_config.links_rss_address)}">订阅：<a th:href="${theme.config.page_config.links_rss_address}" target="_blank" th:text="${theme.config.page_config.links_rss_address}"></a></li>
                         </ul>
                     </th:block>
-                    <div th:if="${!#strings.isEmpty(theme.config.page_config.links_info)}"
-                         th:utext="${theme.config.page_config.links_info}"></div>
+                    <div th:if="${!#strings.isEmpty(theme.config.page_config.links_info)}" th:utext="${theme.config.page_config.links_info}"></div>
                 </div>
             </div>
         </div>
