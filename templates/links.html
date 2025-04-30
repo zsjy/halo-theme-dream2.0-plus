@@ -4,6 +4,13 @@
           th:with="baseEnableComment = ${theme.config.page_config.link_enable_comment == true || (!#strings.isEmpty(theme.config.page_config.link_comment_id) && theme.config.page_config.link_enable_comment == 'custom')}">
     <th:block th:fragment="content"
               th:with="defaultAvatar = ${#strings.defaultString(theme.config.page_config.links_default_avatar, #theme.assets('/img/avatar.svg'))}">
+        <script>
+          function setSafeSrc(element, url) {
+            // 允许：http/https/data:image 协议 或 相对路径（以/开头）
+            var isSafe = /^(https?|data:image\/[a-z]+;base64|\/)/i.test(url);
+            element.src = isSafe ? url : ''; // 不安全则清空
+          }
+        </script>
         <div class="card">
             <div th:if="${!#strings.isEmpty(theme.config.page_config.links_thumbnail)}" class="card-image cover-image" th:style="'background-image: url(' + ${theme.config.page_config.links_thumbnail} + ')'">
             </div>
@@ -21,8 +28,8 @@
                                         <img th:unless="${#strings.isEmpty(link.spec.logo)}" class="not-gallery" th:title="${link.spec.displayName}" th:src="${defaultAvatar}"
                                              th:data-url="${link.spec.logo}"
                                              th:data-default="${defaultAvatar}"
-                                             onload="if(!this.finish){this.finish=true;this.src=this.getAttribute('data-url')}"
-                                             onerror="this.onerror='';if (this.finish) {this.src=this.getAttribute('data-default')} else {this.finish=true;this.src=this.getAttribute('data-url')}"
+                                             onload="if(!this.finish){this.finish=true;setSafeSrc(this, this.getAttribute('data-url'))}"
+                                             onerror="this.onerror='';if (this.finish) {setSafeSrc(this, this.getAttribute('data-default'))} else {this.finish=true;setSafeSrc(this, this.getAttribute('data-url'))}"
                                              th:alt="${link.spec.displayName}">
                                         <span class="link-name" th:text="${link.spec.displayName}"></span>
                                         <div class="link-desc" th:text="${#strings.defaultString(link.spec.description, '他还没有自我介绍呢')}"></div>
