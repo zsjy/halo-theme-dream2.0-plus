@@ -1455,6 +1455,12 @@ spec:
               label: 开启
             - value: false
               label: 关闭
+        - $formkit: singlePageSelect
+          name: security_link_single_page
+          label: 安全链接页面
+          if: $get(enable_security_link).value
+          validation: required
+          help: '请选择使用”安全链接页面模版“创建的页面。'
         - $formkit: attachment
           name: security_link_site_img
           if: $get(enable_security_link).value
@@ -1482,13 +1488,6 @@ spec:
           value: '{title}'
           placeholder: '请输入安全链接页面站点的标题'
           help: '请输入安全链接页面站点的标题，留空不显示，“ {title} ”表示站点主标题，位置为图标下方。'
-        - $formkit: text
-          name: security_link_url
-          label: 安全链接页面-URL
-          if: $get(enable_security_link).value
-          validation: required
-          placeholder: '请输入使用“安全链接页面模版”创建的页面访问路径'
-          help: '请输入使用”安全链接页面模版“创建的页面访问路径，不能省略’/‘。'
         - $formkit: code
           name: security_link_tip_desc
           if: $get(enable_security_link).value
