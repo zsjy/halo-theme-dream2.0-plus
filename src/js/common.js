@@ -679,17 +679,22 @@ const commonContext = {
     window.logger(`%c页面加载耗时：${Math.round(performance.now())}ms | Theme By Dream2 Plus ${DreamConfig.theme_version}`,
       'color:#fff; background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3); padding: 8px 15px; border-radius: 0 15px 0 15px')
   },
-  /* 自动滚动到内容区域 */
-  autoScrollToContent() {
-    const {pathname} = location
-    if (pathname !== '/' && window.scrollY === 0) {
-      const bannerElement = document.querySelector('.banner')
-      if (bannerElement) {
-        const targetTop = bannerElement.offsetHeight || 0
-        window.scrollTo({
-          top: targetTop,
-          behavior: 'auto' // 直接滚动，不需要动画
-        })
+  /* 控制是否显示Banner */
+  showBanner() {
+    const { pathname } = location
+    const bannerElement = document.querySelector('.banner')
+    const sectionElement = document.querySelector('.section')
+    if (bannerElement) {
+      if (pathname !== '/') {
+        bannerElement.classList.add('hidden')
+        if (sectionElement && DreamConfig.header_fixed) {
+          sectionElement.style.paddingTop = '2.5rem'
+        }
+      } else {
+        bannerElement.classList.remove('hidden')
+        if (sectionElement && DreamConfig.header_fixed) {
+          sectionElement.style.paddingTop = ''
+        }
       }
     }
   },
@@ -699,7 +704,7 @@ window.commonContext = commonContext
 let timeLifeHour = -1
 
 !(function () {
-  const loads = ['initCarousel', 'sparkInput', 'websiteTime', 'autoScrollToContent']
+  const loads = ['initCarousel', 'sparkInput', 'websiteTime', 'showBanner']
   const omits = ['initEffects', 'showThemeVersion', 'iniTaskItemDisabled']
 
   Object.keys(commonContext).forEach(
