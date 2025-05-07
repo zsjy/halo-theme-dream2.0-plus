@@ -12,7 +12,7 @@
     <th:block th:if="${theme.config.basic_style.enable_banner != 'false'}">
       <th:block th:replace="~{common/banner :: banner}"/>
     </th:block>
-    <section class="section" th:style="${theme.config.basic_info.header_fixed && theme.config.basic_style.enable_banner == 'false' ? 'padding-top: 2.5rem;' : ''}">
+    <section class="section" th:style="${theme.config.basic_info.header_fixed && !theme.config.basic_style.banner_full_screen ? 'padding-top: 2.5rem;' : ''}">
       <div th:class="${theme.config.basic_style.sidebar_column != 'all' ? 'container two-column' : 'container' }">
         <div class="columns">
           <div class="column column-main pjax">
