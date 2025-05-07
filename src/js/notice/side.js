@@ -64,12 +64,12 @@ function createNoticePopup() {
     
     /* 弹窗显示时的位置 */
     .notice-content.left.show {
-        left:0 !important;
+        left:10px !important;
     }
 
     /* 弹窗显示时的位置 */
     .notice-content.right.show {
-        right: 0 !important;
+        right: 10px !important;
     }
     
     /* 标题样式 */
