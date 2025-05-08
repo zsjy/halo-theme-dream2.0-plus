@@ -688,12 +688,12 @@ const commonContext = {
       if (pathname !== '/') {
         bannerElement.classList.add('hidden')
         if (sectionElement && DreamConfig.header_fixed) {
-          sectionElement.style.paddingTop = '2.5rem'
+          sectionElement.classList.add('section-top')
         }
       } else {
         bannerElement.classList.remove('hidden')
         if (sectionElement && DreamConfig.header_fixed) {
-          sectionElement.style.paddingTop = ''
+          sectionElement.classList.remove('section-top')
         }
       }
     }
