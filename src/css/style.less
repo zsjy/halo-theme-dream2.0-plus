@@ -836,6 +836,11 @@ table td, table th {
       display: flex;
       align-items: center;
 
+      &.menu-center {
+        justify-content: center;
+        flex: 1;
+      }
+
       .item {
         cursor: pointer;
         display: flex;
@@ -5512,7 +5517,7 @@ text-diagram[data-type="mermaid"] {
         i {
           color: var(--title);
           font-size: 18px;
-          margin-right: 2px;
+          margin-right: 4px;
         }
       }
     }

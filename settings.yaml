@@ -84,6 +84,16 @@ spec:
             - label: 固定
               value: true
         - $formkit: radio
+          name: menu_center
+          label: 菜单栏对齐方式
+          value: false
+          help: 在非移动设备下改变菜单栏对齐方式。
+          options:
+            - label: 默认
+              value: false
+            - label: 居中
+              value: true
+        - $formkit: radio
           name: footer_center
           label: 页脚对齐方式
           value: false
@@ -115,6 +125,7 @@ spec:
           label: 登录组件样式
           value:
             console_post_class: 'ri-book-read-line'
+            console_single_pages_class: 'ri-pages-line'
             console_moment_class: 'ri-camera-lens-line'
             console_login_class: 'ri-fingerprint-line'
             console_person_class: 'ri-account-circle-line'
@@ -125,6 +136,10 @@ spec:
               name: console_post_class
               label: 新建文章图标
               help: '输入新建文章图标class，清空不显示图标。此菜单仅限管理员可见。'
+            - $formkit: text
+              name: console_single_pages_class
+              label: 新建页面图标
+              help: '输入新建页面图标class，清空不显示图标。此菜单仅限管理员可见。'
             - $formkit: text
               name: console_moment_class
               label: 发布瞬间图标
