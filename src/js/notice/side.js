@@ -126,13 +126,18 @@ function createNoticePopup() {
 
   // 添加关闭事件
   document.querySelector('.notice-close-btn').addEventListener('click', function () {
-    var popup = document.querySelector('.notice-content')
-    popup.classList.remove('show')
-    setTimeout(function () {
-      popup.remove()
-    }, 300)
-    localStorage.setItem(notice_read_key, `side-${Utils.secureCompressHTML(DreamConfig.pop_notice_side_content)}`)
+    closePopupNotice()
   })
+
+}
+
+window.closePopupNotice = function () {
+  var popup = document.querySelector('.notice-content')
+  popup.classList.remove('show')
+  setTimeout(function () {
+    popup.remove()
+  }, 300)
+  localStorage.setItem(notice_read_key, `side-${Utils.secureCompressHTML(DreamConfig.pop_notice_side_content)}`)
 }
 
 // 页面加载时检查并显示公告
@@ -142,5 +147,10 @@ document.addEventListener('DOMContentLoaded', function () {
     setTimeout(function () {
       document.querySelector('.notice-content').classList.add('show')
     }, 30)
+
+    //单次显示时，直接记录
+    if (DreamConfig.pop_notice_side_show_mode) {
+      localStorage.setItem(notice_read_key, `side-${Utils.secureCompressHTML(DreamConfig.pop_notice_side_content)}`)
+    }
   }
 })

@@ -151,11 +151,15 @@ function createNoticePopup() {
 
   // 添加关闭事件
   document.querySelector('.notice-close-btn').addEventListener('click', function () {
-    // 隐藏弹窗
-    document.querySelector('.notice-parent').remove()
-    document.body.classList.remove('body-no-scroll')
-    localStorage.setItem(notice_read_key, `stagnant-${Utils.secureCompressHTML(DreamConfig.pop_notice_stagnant_content)}`)
+    closePopupNotice()
   })
+}
+
+window.closePopupNotice = function () {
+  // 隐藏弹窗
+  document.querySelector('.notice-parent').remove()
+  document.body.classList.remove('body-no-scroll')
+  localStorage.setItem(notice_read_key, `stagnant-${Utils.secureCompressHTML(DreamConfig.pop_notice_stagnant_content)}`)
 }
 
 // 页面加载时检查并显示公告
@@ -163,5 +167,9 @@ document.addEventListener('DOMContentLoaded', function () {
   if (shouldShowNotice()) {
     document.body.classList.add('body-no-scroll')
     createNoticePopup()
+    //单次显示时，直接记录
+    if (DreamConfig.pop_notice_stagnant_show_mode) {
+      localStorage.setItem(notice_read_key, `stagnant-${Utils.secureCompressHTML(DreamConfig.pop_notice_stagnant_content)}`)
+    }
   }
 })

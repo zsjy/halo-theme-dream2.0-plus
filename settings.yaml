@@ -1629,13 +1629,24 @@ spec:
               height: 180px
               value: '通知'
               label: 侧边通知的内容，支持html
-              help: '显示侧边通知的内容，支持html，若内容发生变更则重新显示。'
+              help: '显示侧边通知的内容，支持html，若内容发生变更则重新显示。注：支持设置属性 onclick="closePopupNotice();" 关闭通知。'
             - $formkit: text
               name: pop_notice_btn
               label: 侧边通知按钮内容
               validation: required
               help: '显示侧边通知的按钮内容。'
               value: '我知道了'
+            - $formkit: radio
+              name: pop_notice_show_mode
+              label: 侧边通知显示模式
+              validation: required
+              help: '单次显示：通知仅首次访问时显示，反之需主动点击“侧边通知按钮”后才会消失。'
+              value: false
+              options:
+                - value: true
+                  label: 单次显示
+                - value: false
+                  label: 手动关闭
         - $formkit: group
           name: stagnant
           if: $get(show_pop_notice).value !== 'false'
@@ -1654,13 +1665,24 @@ spec:
               height: 180px
               value: '通知'
               label: 凝滞通知的内容，支持html
-              help: '显示凝滞通知的内容，支持html，若内容发生变更则重新显示。'
+              help: '显示凝滞通知的内容，支持html，若内容发生变更则重新显示。注：支持设置属性 onclick="closePopupNotice();" 关闭通知。'
             - $formkit: text
               name: pop_notice_btn
               label: 凝滞通知按钮内容
               validation: required
               help: '显示凝滞通知的按钮内容。'
               value: '我知道了'
+            - $formkit: radio
+              name: pop_notice_show_mode
+              label: 凝滞通知显示模式
+              validation: required
+              help: '单次显示：通知仅首次访问时显示，反之需主动点击“侧边通知按钮”后才会消失。'
+              value: false
+              options:
+                - value: true
+                  label: 单次显示
+                - value: false
+                  label: 手动关闭
     - group: custom
       label: '定制主题'
       formSchema:
