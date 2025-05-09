@@ -97,25 +97,25 @@
                 </div>
                 <ul class="navbar-logon-group">
                     <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
-                        <a href="/console/posts/editor" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_post_class)}" th:class="${theme.config.basic_style.logon.console_post_class}"></i> 新建文章</a>
+                        <a href="/console/posts/editor" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_post_class)}" th:class="${theme.config.basic_style.logon.console_post_class}"></i>新建文章</a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
-                        <a href="/console/single-pages/editor" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_single_pages_class)}" th:class="${theme.config.basic_style.logon.console_single_pages_class}"></i> 新建页面</a>
+                        <a href="/console/single-pages/editor" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_single_pages_class)}" th:class="${theme.config.basic_style.logon.console_single_pages_class}"></i>新建页面</a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
-                        <a href="/console/moments" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_moment_class)}" th:class="${theme.config.basic_style.logon.console_moment_class}"></i> 发布瞬间</a>
+                        <a href="/console/moments" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_moment_class)}" th:class="${theme.config.basic_style.logon.console_moment_class}"></i>发布瞬间</a>
                     </li>
                     <li th:if="${!#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">
-                        <a href="/uc" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_person_class)}" th:class="${theme.config.basic_style.logon.console_person_class}"></i> 个人中心</a>
+                        <a href="/uc" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_person_class)}" th:class="${theme.config.basic_style.logon.console_person_class}"></i>个人中心</a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
-                        <a href="/console" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_manage_class)}" th:class="${theme.config.basic_style.logon.console_manage_class}"></i> 后台管理</a>
+                        <a href="/console" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_manage_class)}" th:class="${theme.config.basic_style.logon.console_manage_class}"></i>后台管理</a>
                     </li>
                     <li th:if="${!#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">
-                        <a href="/logout" data-not-pjax onclick="this.href = '/logout?redirect_uri=' + encodeURIComponent(window.location.href)"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_logout_class)}" th:class="${theme.config.basic_style.logon.console_logout_class}"></i> 退出登录</a>
+                        <a href="/logout" data-not-pjax onclick="this.href = '/logout?redirect_uri=' + encodeURIComponent(window.location.href)"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_logout_class)}" th:class="${theme.config.basic_style.logon.console_logout_class}"></i>退出登录</a>
                     </li>
                     <li th:if="${#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">
-                        <a href="/login" data-not-pjax onclick="this.href = '/login?redirect_uri=' + encodeURIComponent(window.location.href)"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_login_class)}" th:class="${theme.config.basic_style.logon.console_login_class}"></i> 登录</a>
+                        <a href="/login" data-not-pjax onclick="this.href = '/login?redirect_uri=' + encodeURIComponent(window.location.href)"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_login_class)}" th:class="${theme.config.basic_style.logon.console_login_class}"></i>登录</a>
                     </li>
                 </ul>
             </div>
