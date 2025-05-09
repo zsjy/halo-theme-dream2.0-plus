@@ -10,7 +10,7 @@
                     <img class="logo-img-dark" th:src="${#strings.defaultString(theme.config.basic_info.night_logo, site.logo)}" th:alt="${site.title}" height="28">
                 </th:block>
             </a>
-            <nav class="navbar-nav active-animate">
+            <nav class="navbar-nav active-animate" th:classappend="${theme.config.basic_info.menu_center ? 'menu-center' : ''}">
                 <th:block th:each="menuItem : ${menuFinder.getPrimary().menuItems}">
                     <a th:if="${#lists.isEmpty(menuItem.children)}"
                        class="item"
@@ -97,10 +97,13 @@
                 </div>
                 <ul class="navbar-logon-group">
                     <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
-                        <a href="/console/posts/editor" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_person_class)}" th:class="${theme.config.basic_style.logon.console_post_class}"></i> 新建文章</a>
+                        <a href="/console/posts/editor" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_post_class)}" th:class="${theme.config.basic_style.logon.console_post_class}"></i> 新建文章</a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
-                        <a href="/console/moments" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_person_class)}" th:class="${theme.config.basic_style.logon.console_moment_class}"></i> 发布瞬间</a>
+                        <a href="/console/single-pages/editor" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_single_pages_class)}" th:class="${theme.config.basic_style.logon.console_single_pages_class}"></i> 新建页面</a>
+                    </li>
+                    <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
+                        <a href="/console/moments" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_moment_class)}" th:class="${theme.config.basic_style.logon.console_moment_class}"></i> 发布瞬间</a>
                     </li>
                     <li th:if="${!#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">
                         <a href="/uc" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_person_class)}" th:class="${theme.config.basic_style.logon.console_person_class}"></i> 个人中心</a>

@@ -8,18 +8,18 @@ function shouldShowNotice() {
 // 创建公告弹窗
 function createNoticePopup() {
   const noticeHTML = `
-   <div class="notice-content ` + DreamConfig.pop_notice_side_orientation + ' ' + DreamConfig.pop_notice_side_vertical + `">
+  <div class="popup-notice">
+    <div class="notice-content ` + DreamConfig.pop_notice_side_orientation + ' ' + DreamConfig.pop_notice_side_vertical + `">
       <div class="content-title">
-          <span>` + DreamConfig.pop_notice_side_title + `</span>
+        <span>` + DreamConfig.pop_notice_side_title + `</span>
       </div>
       <div class="others">` + DreamConfig.pop_notice_side_content + `</div>
       <div class="others-end">
-              <button class="notice-close-btn">` + DreamConfig.pop_notice_side_btn + `</button>
+        <button class="notice-close-btn">` + DreamConfig.pop_notice_side_btn + `</button>
       </div>
-   </div>
-
-   <style>
-    .notice-content {
+    </div>
+    <style>
+    .popup-notice .notice-content {
         position: fixed;
         width: 350px;
         height: auto;
@@ -31,49 +31,49 @@ function createNoticePopup() {
         flex-direction: column;
         z-index: 10000;
     }
-
-    .notice-content.left {
+    
+    .popup-notice .notice-content.left {
         left: -400px !important;
         transition: left 0.3s ease-out !important;
     }
-
-    .notice-content.right {
+    
+    .popup-notice .notice-content.right {
         right: -400px !important;
         transition: right 0.3s ease-out !important;
     }
     
-    .notice-content.top {
+    .popup-notice .notice-content.top {
       top: 60px;
     }
     
-    .notice-content.center {
+    .popup-notice .notice-content.center {
       top: 50%;
       transform: translateY(-50%);
     }
     
-    .notice-content.bottom {
+    .popup-notice .notice-content.bottom {
       bottom: 2rem;
     }
-
+    
     @media (max-width: 768px) {
-        .notice-content {
+        .popup-notice .notice-content {
             width: 80% !important;
             max-width: 350px !important;
         }
     }
     
     /* 弹窗显示时的位置 */
-    .notice-content.left.show {
+    .popup-notice .notice-content.left.show {
         left:10px !important;
     }
-
+    
     /* 弹窗显示时的位置 */
-    .notice-content.right.show {
+    .popup-notice .notice-content.right.show {
         right: 10px !important;
     }
     
     /* 标题样式 */
-    .content-title {
+    .popup-notice .content-title {
         padding: 15px 20px;
         background-color: var(--theme);
         color: #f8f8f8;
@@ -84,7 +84,7 @@ function createNoticePopup() {
     }
     
     /* 内容区域 - 可滚动 */
-    .others {
+    .popup-notice .others {
         flex: 1;
         padding: 20px;
         font-size: 1rem;
@@ -95,13 +95,13 @@ function createNoticePopup() {
     }
           
     /* 底部按钮区域 */
-    .others-end {
+    .popup-notice .others-end {
         padding: 15px 20px;
         text-align: center;
         border-top: 1px solid var(--light-x);
     }
     
-    .others-end button {
+    .popup-notice .others-end button {
         padding: 8px 25px;
         background-color: var(--theme);
         color: #f8f8f8;
@@ -113,12 +113,13 @@ function createNoticePopup() {
         box-shadow: 0 4px 15px rgba(var(--theme), 0.2);
     }
     
-    .others-end button:hover {
+    .popup-notice .others-end button:hover {
         background-color: var(--theme);
         transform: translateY(-2px);
         box-shadow: 0 6px 20px rgba(var(--theme), 0.3);
     }
-  </style>
+    </style>
+  </div>
   `
 
   // 注入到body末尾
@@ -135,7 +136,7 @@ window.closePopupNotice = function () {
   var popup = document.querySelector('.notice-content')
   popup.classList.remove('show')
   setTimeout(function () {
-    popup.remove()
+    document.querySelector('.popup-notice').remove()
   }, 300)
   localStorage.setItem(notice_read_key, `side-${Utils.secureCompressHTML(DreamConfig.pop_notice_side_content)}`)
 }
