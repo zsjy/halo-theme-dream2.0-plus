@@ -1655,13 +1655,15 @@ spec:
               name: pop_notice_show_mode
               label: 侧边通知显示模式
               validation: required
-              help: '单次显示：通知仅首次访问时显示，反之需主动点击“侧边通知按钮”后才会消失。'
-              value: false
+              help: '首次显示：仅首次访问时弹出通知；会话级关闭：用户关闭后当前窗口不再显示；永久关闭：用户关闭后不再显示该通知。'
+              value: 'forever'
               options:
-                - value: true
-                  label: 单次显示
-                - value: false
-                  label: 手动关闭
+                - value: 'first'
+                  label: 首次显示
+                - value: 'session'
+                  label: 会话级关闭
+                - value: 'forever'
+                  label: 永久关闭
         - $formkit: group
           name: stagnant
           if: $get(show_pop_notice).value !== 'false'
@@ -1691,13 +1693,15 @@ spec:
               name: pop_notice_show_mode
               label: 凝滞通知显示模式
               validation: required
-              help: '单次显示：通知仅首次访问时显示，反之需主动点击“侧边通知按钮”后才会消失。'
-              value: false
+              help: '首次显示：仅首次访问时弹出通知；会话级关闭：用户关闭后当前窗口不再显示；永久关闭：用户关闭后不再显示该通知。'
+              value: 'forever'
               options:
-                - value: true
-                  label: 单次显示
-                - value: false
-                  label: 手动关闭
+                - value: 'first'
+                  label: 首次显示
+                - value: 'session'
+                  label: 会话级关闭
+                - value: 'forever'
+                  label: 永久关闭
     - group: custom
       label: '定制主题'
       formSchema:
