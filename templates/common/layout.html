@@ -33,8 +33,7 @@
     <th:block th:replace="~{common/footer}"/>
     <th:block th:replace="~{common/scripts}"/>
     <th:block th:utext="${theme.config.custom.inline_body_html}"></th:block>
-    <th:block th:if="${theme.config.pop_notice?.show_pop_notice != 'false'}"
-               th:replace="~{'notice/' + ${theme.config.pop_notice.show_pop_notice}}"/>
+    <th:block th:replace="~{'notice/' + ${theme.config.pop_notice.show_pop_notice}}"/>
     </body>
   </th:block>
 </th:block>

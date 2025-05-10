@@ -1,0 +1,8 @@
+<div class="popup-notice hidden" xmlns:th="https://www.thymeleaf.org">
+    <script th:inline="javascript">
+      // 页面加载时检查并显示通知
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('.popup-notice').remove()
+      })
+    </script>
+</div>
