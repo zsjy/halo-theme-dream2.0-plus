@@ -75,6 +75,8 @@ $(document).on('pjax:beforeSend', function (event, xhr, options) {
 
 $(document).on('pjax:start', function (event, xhr, options) {
   console.log(`pjax:start sn = ${options.serialNumber}`)
+  /* 处理banner显示 */
+  commonContext.showBanner()
   window.DProgress && DProgress.start()
   $('.pjax-close').remove()
 })
@@ -187,8 +189,6 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
   commonContext.initCarousel()
   /** 关闭画廊 **/
   commonContext.closeFancybox()
-  /* 处理banner显示 */
-  commonContext.showBanner()
   window.DProgress && DProgress.done()
 })
 
@@ -242,8 +242,6 @@ $(document).on('pjax:end', function (event, xhr, options) {
     commonContext.iniTaskItemDisabled()
     /** 关闭画廊 **/
     commonContext.closeFancybox()
-    /* 处理banner显示 */
-    commonContext.showBanner()
     window.DProgress && DProgress.done()
     // 应该是由于浏览器缓存失效，有时候浏览器前后退还是会执行pjax:beforeSend
     $('html').removeClass('pjax-loading')

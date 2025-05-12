@@ -680,8 +680,7 @@ const commonContext = {
       'color:#fff; background: linear-gradient(270deg, #986fee, #8695e6, #68b7dd, #18d7d3); padding: 8px 15px; border-radius: 0 15px 0 15px')
   },
   /* 控制是否显示Banner */
-  showBanner() {
-    const { pathname } = location
+  showBanner(pathname = location.pathname) {
     const bannerElement = document.querySelector('.banner')
     const sectionElement = document.querySelector('.section')
     if (bannerElement) {
