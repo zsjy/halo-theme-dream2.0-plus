@@ -75,8 +75,6 @@ $(document).on('pjax:beforeSend', function (event, xhr, options) {
 
 $(document).on('pjax:start', function (event, xhr, options) {
   console.log(`pjax:start sn = ${options.serialNumber}`)
-  /* 处理banner显示 */
-  commonContext.showBanner()
   window.DProgress && DProgress.start()
   $('.pjax-close').remove()
 })
@@ -98,6 +96,8 @@ $(document).on('pjax:beforeReplace', function (event, contents, options) {
   /* 重新初始化导航条高亮 */
   $('.navbar-nav .current,.panel-side-menu .current').removeClass('current')
   commonContext.initNavbar()
+  /* 处理banner显示 */
+  commonContext.showBanner()
   /* 移动端关闭抽屉弹窗 */
   $('html.disable-scroll').length > 0 && $('.navbar-mask').trigger('click')
 })
