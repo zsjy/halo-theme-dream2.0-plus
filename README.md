@@ -93,4 +93,4 @@
 
 感谢您对本项目的喜爱，您的打赏是对本项目最好的支持！
 
-![打赏项目](https://www.hcjike.com/upload/str/20250513195028.png)
+![爱发电](https://afdian.com/a/org-hcjike)
