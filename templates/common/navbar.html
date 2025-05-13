@@ -95,7 +95,7 @@
             <div th:if="${theme.config.basic_style.show_console == 'logon'}" class="navbar-logon" trigger="hover"
                  th:with="currentUser = ${contributorFinder.getContributor(#authentication.name)}">
                 <div class="navbar-logon-head">
-                    <img th:src="${currentUser.avatar ?: #theme.assets('/img/avatar.svg')}"
+                    <img width="100%" height="100%" th:src="${currentUser.avatar ?: #theme.assets('/img/avatar.svg')}"
                          th:alt="${currentUser.displayName}"
                     />
                 </div>
