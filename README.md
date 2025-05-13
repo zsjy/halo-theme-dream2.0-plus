@@ -93,4 +93,4 @@
 
 感谢您对本项目的喜爱，您的打赏是对本项目最好的支持！
 
-![爱发电](https://afdian.com/a/org-hcjike)
+[爱发电](https://afdian.com/a/org-hcjike)
