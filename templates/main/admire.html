@@ -7,9 +7,9 @@
                 <span>打赏</span>
                 <div class="donate-list" style="display: none;" th:if="${theme.config.post.post_donate_style == 'donate_style_poster'}">
                     <ol>
-                        <li th:if="${!#strings.isEmpty(theme.config.post.donate_wechat)}"><img
+                        <li th:if="${!#strings.isEmpty(theme.config.post.donate_wechat)}"><img width="auto" height="auto"
                                 th:src="${theme.config.post.donate_wechat}" alt="微信捐赠"></li>
-                        <li th:if="${!#strings.isEmpty(theme.config.post.donate_alipay)}"><img
+                        <li th:if="${!#strings.isEmpty(theme.config.post.donate_alipay)}"><img width="auto" height="auto"
                                 th:src="${theme.config.post.donate_alipay}" alt="支付宝捐赠"></li>
                     </ol>
                 </div>
@@ -18,7 +18,7 @@
                     <ol>
                         <li th:if="${!#strings.isEmpty(theme.config.post.donate_wechat)}">
                             <div class="qr-code">
-                                <img
+                                <img width="auto" height="auto"
                                         th:src="${theme.config.post.donate_wechat}" alt="微信捐赠">
                             </div>
                             <div class="qr-type">
@@ -28,7 +28,7 @@
                         </li>
                         <li th:if="${!#strings.isEmpty(theme.config.post.donate_alipay)}">
                             <div class="qr-code">
-                                <img
+                                <img  width="auto" height="auto"
                                         th:src="${theme.config.post.donate_alipay}" alt="支付宝捐赠">
                             </div>
                             <div class="qr-type">
