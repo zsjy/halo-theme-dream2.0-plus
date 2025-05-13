@@ -6,7 +6,8 @@
     <div class="card-title">
         <i th:class="${#strings.defaultString(sidebar.icon, 'ri-apps-line') + ' card-title-label'}"></i><span
             th:text="${#strings.defaultString(sidebar.title, '分类')}"></span>
-        <a th:if="${theme.config.sidebar.categories_more}" class="card-more" th:href="@{/categories}">更多<i
+        <a th:if="${theme.config.sidebar.categories_more}" class="card-more" th:href="@{/categories}"
+           aria-label="更多" title="更多">更多<i
                 class="ri-arrow-right-double-line"></i></a>
     </div>
     <div th:if="${isEmpty}" class="card-empty">暂无分类</div>
@@ -28,7 +29,7 @@
             return con
           }
           con += '          <li>\n' +
-            '            <a class="level is-marginless" href="' + category.status.permalink + '">\n' +
+            `            <a class="level is-marginless" aria-label="${category.spec.displayName}" title="${category.spec.displayName}" href="` + category.status.permalink + '">\n' +
             '              <span class="level-item">'+category.spec.displayName+'</span>\n' +
             '              <span class="level-item tag">'+(category.status.postCount === null ? 0 : category.status.postCount)+'</span>\n' +
             '            </a>\n'

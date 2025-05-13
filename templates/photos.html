@@ -6,8 +6,8 @@
         <div class="card card-content photos">
             <div class="card-tab"><div>[[${#strings.replace(title, ' - ' + site.title, '')}]]</div></div>
             <div class="photos-teams">
-                <a th:class="${#strings.isEmpty(param.group)? 'item active' : 'item'}" th:href="@{/photos}">全部</a>
-                <a th:each="group : ${groups}" th:class="${#strings.equals(param.group, group.metadata.name)? 'item active' : 'item'}" th:href="@{/photos(group=${group.metadata.name})}" th:text="${group.spec.displayName}"></a>
+                <a th:class="${#strings.isEmpty(param.group)? 'item active' : 'item'}" th:href="@{/photos}" aria-label="全部" title="全部">全部</a>
+                <a th:each="group : ${groups}" th:aria-label="${group.spec.displayName}" th:title="${group.spec.displayName}" th:class="${#strings.equals(param.group, group.metadata.name)? 'item active' : 'item'}" th:href="@{/photos(group=${group.metadata.name})}" th:text="${group.spec.displayName}"></a>
             </div>
         </div>
         <div class="photos-gallery load-block loading">

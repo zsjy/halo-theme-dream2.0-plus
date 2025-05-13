@@ -4,7 +4,7 @@
             th:with="thumbnail = ${#strings.isEmpty(post.spec.cover) ? #strings.isEmpty(theme.config.post.default_thumbnail) ? '' : theme.config.post.default_thumbnail + (#strings.contains(theme.config.post.default_thumbnail, '?') ? '&' : '?') + 'id=' + post.metadata.name : thumbnail.gen(post.spec.cover, 'xl')},
             thumbnail_mode = ${(theme.config.post.top_thumbnail_mode == 'grid' || (!post.spec.pinned && theme.config.post.thumbnail_mode == 'grid'))? 'grid' : (!#strings.isEmpty(post.metadata.annotations.get('thumbnail_mode')) && post.metadata.annotations.get('thumbnail_mode') != 'none')? post.metadata.annotations.get('thumbnail_mode') : post.spec.pinned ? theme.config.post.top_thumbnail_mode : theme.config.post.thumbnail_mode}">
     <div th:if="${!#strings.isEmpty(thumbnail) && thumbnail_mode == 'back'}" class="card widget card-cover">
-      <a th:href="${post.status.permalink}">
+      <a th:href="${post.status.permalink}" th:aria-label="${post.spec.title}" th:title="${post.spec.title}">
         <div class="cover-image" th:style="'background-image: url(' + ${thumbnail} + ')'"></div>
         <div class="details">
           <h2 class="title"><span class="top" th:if="${post.spec.pinned}">置顶</span>[[${post.spec.title}]]</h2>
@@ -22,19 +22,19 @@
         </div>
       </a>
       <div th:if="${!#lists.isEmpty(post.categories)}" class="category">
-        <a th:each="cy : ${post.categories}" th:href="${cy.status.permalink}" th:text="${cy.spec.displayName}"></a>&nbsp;
+        <a th:each="cy : ${post.categories}" th:href="${cy.status.permalink}" th:aria-label="${cy.spec.displayName}" th:title="${cy.spec.displayName}" th:text="${cy.spec.displayName}"></a>&nbsp;
       </div>
     </div>
 
     <div
       th:if="${!#strings.isEmpty(thumbnail) && (thumbnail_mode == 'small' || (thumbnail_mode == 'small-alter' && postStat.index % 2 == 0))}"
       class="card widget card-small">
-      <a th:href="${post.status.permalink}">
+      <a th:href="${post.status.permalink}" th:aria-label="${post.spec.title}" th:title="${post.spec.title}">
         <div class="small-image" th:style="'background-image: url(' + ${thumbnail} + ')'"></div>
       </a>
       <div class="card-content main">
         <h2 class="title">
-          <span class="top" th:if="${post.spec.pinned}">置顶</span><a
+          <span class="top" th:if="${post.spec.pinned}">置顶</span><a th:aria-label="${post.spec.title}" th:title="${post.spec.title}"
           th:href="${post.status.permalink}" th:text="${post.spec.title}"></a>
         </h2>
         <div class="main-content" th:text="${post.status.excerpt}"></div>
@@ -52,7 +52,7 @@
             </li>
           </ul>
           <div th:if="${!#lists.isEmpty(post.categories)}" class="level-item is-hidden-mobile">
-            <a th:each="cy : ${post.categories}" th:href="${cy.status.permalink}" th:text="${cy.spec.displayName}"></a>&nbsp;
+            <a th:each="cy : ${post.categories}" th:href="${cy.status.permalink}" th:aria-label="${cy.spec.displayName}" th:title="${cy.spec.displayName}" th:text="${cy.spec.displayName}"></a>&nbsp;
           </div>
         </div>
       </div>
@@ -63,7 +63,7 @@
       class="card widget card-small">
       <div class="card-content main">
         <h2 class="title">
-          <span class="top" th:if="${post.spec.pinned}">置顶</span><a
+          <span class="top" th:if="${post.spec.pinned}">置顶</span><a th:aria-label="${post.spec.title}" th:title="${post.spec.title}"
           th:href="${post.status.permalink}" th:text="${post.spec.title}"></a>
         </h2>
         <div class="main-content" th:text="${post.status.excerpt}"></div>
@@ -81,16 +81,17 @@
             </li>
           </ul>
           <div th:if="${!#lists.isEmpty(post.categories)}" class="level-item is-hidden-mobile">
-            <a th:each="cy : ${post.categories}" th:href="${cy.status.permalink}" th:text="${cy.spec.displayName}"></a>&nbsp;
+            <a th:each="cy : ${post.categories}" th:href="${cy.status.permalink}" th:aria-label="${cy.spec.displayName}" th:title="${cy.spec.displayName}" th:text="${cy.spec.displayName}"></a>&nbsp;
           </div>
         </div>
       </div>
-      <a th:href="${post.status.permalink}">
+      <a th:href="${post.status.permalink}" th:aria-label="${post.spec.title}" th:title="${post.spec.title}">
         <div class="small-image" th:style="'background-image: url(' + ${thumbnail} + ')'"></div>
       </a>
     </div>
 
     <a th:if="${post.spec.pinned && thumbnail_mode == 'fold'}" class="card widget card-fold"
+       th:aria-label="${post.spec.title}" th:title="${post.spec.title}"
        th:href="${post.status.permalink}">
       <h2 class="title"><span class="top">置顶</span>
         <p th:text="${post.spec.title}"></p></h2>
@@ -99,13 +100,15 @@
 
     <div th:if="${(#strings.isEmpty(thumbnail) && thumbnail_mode != 'fold') || thumbnail_mode == 'default'}"
       class="card widget">
-      <a th:if="${!#strings.isEmpty(thumbnail)}" class="thumbnail" th:href="${post.status.permalink}">
+      <a th:if="${!#strings.isEmpty(thumbnail)}" class="thumbnail"
+         th:aria-label="${post.spec.title}" th:title="${post.spec.title}"
+         th:href="${post.status.permalink}">
         <div class="thumbnail-image" th:style="'background-image: url(' + ${thumbnail} + ')'">
         </div>
       </a>
       <div class="card-content main">
         <h2 class="title">
-          <span class="top" th:if="${post.spec.pinned}">置顶</span><a
+          <span class="top" th:if="${post.spec.pinned}">置顶</span><a th:aria-label="${post.spec.title}" th:title="${post.spec.title}"
           th:href="${post.status.permalink}" th:text="${post.spec.title}"></a>
         </h2>
         <div class="meta">
@@ -121,7 +124,8 @@
             </li>
           </ul>
           <div th:if="${!#lists.isEmpty(post.categories)}" class="level-item">
-            <a th:each="cy : ${post.categories}" th:href="${cy.status.permalink}" th:text="${cy.spec.displayName}"></a>&nbsp;
+            <a th:each="cy : ${post.categories}" th:href="${cy.status.permalink}" th:aria-label="${cy.spec.displayName}" th:title="${cy.spec.displayName}"
+               th:text="${cy.spec.displayName}"></a>&nbsp;
           </div>
         </div>
         <hr/>
@@ -136,7 +140,7 @@
       <div
         th:if="${(theme.config.post.top_thumbnail_mode == 'grid' || (!post.spec.pinned && theme.config.post.thumbnail_mode == 'grid'))}"
         class="card widget">
-        <a class="thumbnail" th:href="${post.status.permalink}">
+        <a class="thumbnail" th:href="${post.status.permalink}" th:aria-label="${post.spec.title}" th:title="${post.spec.title}">
           <div class="thumbnail-image" th:style="'background-image: url(' + ${thumbnail} + ')'"></div>
         </a>
         <ul class="breadcrumb">
@@ -152,7 +156,7 @@
         </ul>
         <h2 class="title">
           <span class="top" th:if="${post.spec.pinned}">置顶</span>
-          <a
+          <a th:aria-label="${post.spec.title}" th:title="${post.spec.title}"
             th:href="${post.status.permalink}" th:text="${post.spec.title}"></a>
         </h2>
       </div>

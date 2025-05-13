@@ -5,12 +5,12 @@
   <th:block th:fragment="content" th:with="isEmpty = ${#lists.isEmpty(posts)}">
     <div th:if="${isEmpty}" class="card card-empty">
       <i class="ri-inbox-2-fill"></i>
-      该标签下没有文章，回<a th:href="${site.url}">主页</a>看看吧
+      该标签下没有文章，回<a th:href="${site.url}" aria-label="主页" title="主页">主页</a>看看吧
     </div>
     <th:block th:unless="${isEmpty}">
       <div class="card card-content main-title">
         <ul class="breadcrumb">
-          <li><a th:href="@{/tags}"><i class="ri-price-tag-3-line"></i>标签</a></li>
+          <li><a th:href="@{/tags}" th:aria-label="标签" th:title="标签"><i class="ri-price-tag-3-line"></i>标签</a></li>
           <li th:text="${tag.spec.displayName}"></li>
         </ul>
       </div>

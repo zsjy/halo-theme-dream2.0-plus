@@ -10,6 +10,7 @@
         <div class="cover-image" th:style="'background-image: url(' + ${thumbnail} + ')'">
             <div th:if="${isPost && !#lists.isEmpty(post.categories)}" class="category">
                 <a th:each="cy : ${post.categories}" th:href="${cy.status.permalink}"
+                   th:aria-label="${cy.spec.displayName}" th:title="${cy.spec.displayName}"
                    th:text="${cy.spec.displayName}"></a>&nbsp;
             </div>
             <div class="details">
@@ -22,7 +23,7 @@
                     <li><i class="ri-thumb-up-line"></i>[[${post.stats.upvote}]]</li>
                     <li><i class="ri-time-line"></i>[[${wordCountTimeStr}]]</li>
                     <li sec:authorize="hasRole('ROLE_super-role')" class="is-hidden-laptop">
-                        <a target="_blank" title="编辑" th:href="@{|/console/${isPost ? 'posts' : 'single-pages'}/editor?name=${post.metadata.name}|}"><i class="ri-edit-2-line"></i>编辑</a></li>
+                        <a target="_blank" title="编辑" aria-label="编辑" th:href="@{|/console/${isPost ? 'posts' : 'single-pages'}/editor?name=${post.metadata.name}|}"><i class="ri-edit-2-line"></i>编辑</a></li>
                 </ul>
             </div>
         </div>
@@ -51,10 +52,11 @@
                         <li><i class="ri-thumb-up-line"></i>[[${post.stats.upvote}]]</li>
                         <li><i class="ri-time-line"></i>[[${wordCountTimeStr}]]</li>
                         <li sec:authorize="hasRole('ROLE_super-role')" class="is-hidden-laptop">
-                            <a target="_blank" title="编辑"  th:href="@{|/console/${isPost ? 'posts' : 'single-pages'}/editor?name=${post.metadata.name}|}"><i class="ri-edit-2-line"></i>编辑</a></li>
+                            <a target="_blank" title="编辑" aria-label="编辑" th:href="@{|/console/${isPost ? 'posts' : 'single-pages'}/editor?name=${post.metadata.name}|}"><i class="ri-edit-2-line"></i>编辑</a></li>
                     </ul>
                     <div th:if="${isPost && !#lists.isEmpty(post.categories)}" class="level-item">
                         <a th:each="cy : ${post.categories}" th:href="${cy.status.permalink}"
+                           th:aria-label="${cy.spec.displayName}" th:title="${cy.spec.displayName}"
                            th:text="${cy.spec.displayName}"></a>&nbsp;
                     </div>
                 </div>
@@ -70,6 +72,7 @@
             <div th:if="${isPost && !#lists.isEmpty(post.tags)}" class="article-operation">
                 <div class="level-item">
                     <a th:each=" tag : ${post.tags}" th:href="${tag.status.permalink}"
+                       th:aria-label="${tag.spec.displayName}" th:title="${tag.spec.displayName}"
                        th:text="${tag.spec.displayName}"></a>&nbsp;
                 </div>
             </div>
@@ -87,10 +90,11 @@
         <div th:if="${postCursor.hasPrevious() || postCursor.hasNext()}" class="card">
             <div class="level post-navigation card-content">
                 <a th:if="${postCursor.hasPrevious()}" class="level-item"
-                   th:href="@{${postCursor.previous.status.permalink}}">
+                   th:href="@{${postCursor.previous.status.permalink}}" th:aria-label="${postCursor.previous.spec.title}" th:title="${postCursor.previous.spec.title}">
                     <i class="ri-arrow-left-s-line"></i><span th:text="${postCursor.previous.spec.title}"></span>
                 </a>
-                <a th:if="${postCursor.hasNext()}" class="level-item" th:href="@{${postCursor.next.status.permalink}}">
+                <a th:if="${postCursor.hasNext()}" class="level-item"
+                   th:href="@{${postCursor.next.status.permalink}}" th:aria-label="${postCursor.next.spec.title}" th:title="${postCursor.next.spec.title}">
                     <span th:text="${postCursor.next.spec.title}"></span><i class="ri-arrow-right-s-line"></i>
                 </a>
             </div>

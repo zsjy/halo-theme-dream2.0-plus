@@ -1,7 +1,10 @@
 <div xmlns:th="https://www.thymeleaf.org" class="copyright">
     <div class="copyright-title">
         <p th:text="${post.spec.title}"></p>
-        <a th:href="${post.status.permalink}" th:text="${(#strings.startsWith(post.status.permalink, '/')? (#strings.endsWith(site.url, '/') ? #strings.substring(site.url, 0, #strings.length(site.url) - 1) : site.url) : '') + post.status.permalink}"></a>
+        <a th:href="${post.status.permalink}"
+           th:with="link = ${(#strings.startsWith(post.status.permalink, '/')? (#strings.endsWith(site.url, '/') ? #strings.substring(site.url, 0, #strings.length(site.url) - 1) : site.url) : '') + post.status.permalink}"
+           th:aria-label="${link}" th:title="${link}"
+           th:text="${link}"></a>
     </div>
     <div class="copyright-meta level">
         <div class="level-item">
@@ -18,7 +21,7 @@
         </div>
         <div class="level-item">
             <h6>许可协议</h6>
-            <a rel="noopener" target="_blank" title="CC BY 4.0"
+            <a rel="noopener" target="_blank" title="CC BY 4.0" aria-label="CC BY 4.0"
                href="https://creativecommons.org/licenses/by/4.0/deed.zh"><i class="icon ri-creative-commons-line"></i>CC BY 4.0</a>
         </div>
     </div>

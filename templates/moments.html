@@ -11,8 +11,8 @@
         </div>
       </div>
       <div class="journal-teams">
-        <a th:class="${#strings.isEmpty(param.tag)? 'item active' : 'item'}" th:href="@{/moments}">全部</a>
-        <a th:each="tag : ${tags}" th:class="${#strings.equals(param.tag, tag.name)? 'item active' : 'item'}" th:href="@{/moments(tag=${tag.name})}" th:text="${tag.name}"></a>
+        <a th:class="${#strings.isEmpty(param.tag)? 'item active' : 'item'}" th:href="@{/moments}" aria-label="全部" title="全部">全部</a>
+        <a th:each="tag : ${tags}" th:class="${#strings.equals(param.tag, tag.name)? 'item active' : 'item'}" th:title="${tag.name}" th:aria-label="${tag.name}" th:href="@{/moments(tag=${tag.name})}" th:text="${tag.name}"></a>
       </div>
     </div>
     <div class="card card-content journal" th:each="moment : ${moments.items}">
@@ -45,19 +45,21 @@
       </div>
       <div class="journal-operation">
         <span class="journal-operation-item">
-          <a class="like" th:data-id="${moment.metadata.name}" data-type="Moments" th:data-likes="${moment.stats.upvote}">
+          <a class="like" th:data-id="${moment.metadata.name}" data-type="Moments" th:aria-label="${(moment.stats.upvote != 0)? moment.stats.upvote : '喜欢'}"
+             th:title="${(moment.stats.upvote != 0)? moment.stats.upvote : '喜欢'}" th:data-likes="${moment.stats.upvote}">
             <i class="ri-heart-3-line"></i>
             <em th:text="${(moment.stats.upvote != 0)? moment.stats.upvote : '喜欢'}"></em>
           </a>
         </span>
         <span class="journal-operation-item" th:if="${enableComment}">
-          <a class="comment">
+          <a class="comment" th:aria-label="${(moment.stats.totalComment != 0)? moment.stats.totalComment : '评论'}"
+             th:title="${(moment.stats.totalComment != 0)? moment.stats.totalComment : '评论'}">
             <i class="ri-message-3-line"></i>
             <em th:text="${(moment.stats.totalComment != 0)? moment.stats.totalComment : '评论'}"></em>
           </a>
         </span>
         <span class="journal-operation-item" th:if="${enableShare}">
-          <a class="share"><i class="ri-share-forward-line"></i><em>分享</em></a>
+          <a class="share" aria-label="分享" title="分享"><i class="ri-share-forward-line"></i><em>分享</em></a>
         </span>
         <div th:if="${theme.config.page_config.enable_journals_owner}" class="journal-operation-owner" th:title="${moment.owner.displayName}">
           <img th:unless="${#strings.isEmpty(moment.owner.avatar)}" class="avatar" th:src="${moment.owner.avatar}"

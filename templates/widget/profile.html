@@ -45,7 +45,7 @@
     </nav>
     <div th:if="${!#strings.isEmpty(theme.config.sidebar.profile_theme_button)}" class="level"
          th:with="content = ${#strings.arraySplit(theme.config.sidebar.profile_theme_button,'|')}">
-      <a class="level-item button is-link is-rounded"
+      <a class="level-item button is-link is-rounded" th:aria-label="${content[0]}" th:title="${content[0]}"
          th:href="${content.length>=2?content[1]:''}" target="_blank" rel="nofollow noopener noreferrer"
          th:text="${content[0]}"></a>
     </div>
@@ -53,6 +53,7 @@
       <a th:each="option :${theme.config.sidebar.custom_options}"
          class="level-item button is-transparent"
          target="_blank"
+         th:aria-label="${option.name}"
          th:title="${option.name}"
          th:href="${option.url}"
          rel="nofollow noopener noreferrer">
