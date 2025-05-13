@@ -5,7 +5,7 @@
   <th:block th:fragment="content" th:with="isEmpty = ${#lists.isEmpty(archives)}">
     <div th:if="${isEmpty}" class="card card-empty">
       <i class="ri-inbox-2-fill"></i>
-      还没有发表过文章，回<a th:href="${site.url}">主页</a>看看吧
+      还没有发表过文章，回<a th:href="${site.url}" aria-label="主页" title="主页">主页</a>看看吧
     </div>
     <th:block th:unless="${isEmpty}">
       <div th:each="archive : ${archives.items}" class="card card-content">
@@ -14,16 +14,18 @@
           <th:block th:each="months : ${archive.months}">
             <article th:each="post : ${months.posts}" class="media"
                      th:with="thumbnail = ${#strings.isEmpty(post.spec.cover) ? #strings.isEmpty(theme.config.post.default_thumbnail) ? '' : theme.config.post.default_thumbnail + (#strings.contains(theme.config.post.default_thumbnail, '?') ? '&' : '?') + 'id=' + post.metadata.name : thumbnail.gen(post.spec.cover, 's')}">
-              <a th:if="${!#strings.isEmpty(thumbnail)}" th:href="${post.status.permalink}" class="media-left">
+              <a th:if="${!#strings.isEmpty(thumbnail)}" th:href="${post.status.permalink}" th:aria-label="${post.spec.title}" th:title="${post.spec.title}" class="media-left">
                 <img class="not-gallery" th:src="${thumbnail}" th:alt="${post.spec.title}">
               </a>
               <div class="media-content">
                 <time th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"></time>
-                <a th:href="${post.status.permalink}" class="title has-link-grey" th:text="${post.spec.title}"></a>
+                <a th:href="${post.status.permalink}" class="title has-link-grey" th:text="${post.spec.title}" th:aria-label="${post.spec.title}" th:title="${post.spec.title}"></a>
                 <p th:if="${!#lists.isEmpty(post.categories)}">
                   <a class="has-link-grey"
                      th:each="cy : ${post.categories}"
                      th:href="${cy.status.permalink}"
+                     th:aria-label="${cy.spec.displayName}"
+                     th:title="${cy.spec.displayName}"
                      th:text="${cy.spec.displayName}"></a>&nbsp;
                 </p>
               </div>

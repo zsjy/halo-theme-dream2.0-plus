@@ -5,7 +5,7 @@
             th:with="isEmpty = ${#lists.isEmpty(tags)}, enableTagsColor = ${theme.config.page_config.enable_tags_tag_color}">
     <div th:if="${isEmpty}" class="card card-empty">
       <i class="ri-inbox-2-fill"></i>
-      还没有创建过标签，回<a th:href="${site.url}">主页</a>看看吧
+      还没有创建过标签，回<a th:href="${site.url}" aria-label="主页" title="主页">主页</a>看看吧
     </div>
     <th:block th:unless="${isEmpty}">
       <div class="card card-content">
@@ -13,7 +13,7 @@
           <div>文章标签</div>
         </div>
         <div class="tags-field">
-          <a th:each="tag : ${tags}" class="tags" th:href="${tag.status.permalink}">
+          <a th:each="tag : ${tags}" class="tags" th:href="${tag.status.permalink}" th:aria-label="${tag.spec.displayName}" th:title="${tag.spec.displayName}">
           <span class="tag" th:text="${tag.spec.displayName}"
                 th:style="${(enableTagsColor && tag.spec.color != '#ffffff')? 'color: ' + tag.spec.color +'; background: ' + tag.spec.color +'20' : ''}"></span>
             <span class="tag is-grey" th:text="${tag.postCount == null ? 0 : tag.postCount}"

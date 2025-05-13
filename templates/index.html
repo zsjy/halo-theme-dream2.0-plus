@@ -27,7 +27,7 @@
       <div class="swiper-wrapper">
         <a th:each="option :${theme.config.basic_style.carousel_options}" class="swiper-slide bg-shadow cover-image"
            th:style="'background-image: url(' + ${option.image} + ')'" th:target="${option.target}"
-           th:href="${option.url}">
+           th:href="${option.url}" th:aria-label="${option.title}" th:title="${option.title}">
           <div class="swiper-slide-details" data-swiper-parallax="200" data-swiper-parallax-duration="600">
             <p class="swiper-slide-details-title" th:text="${option.title}"></p>
           </div>

@@ -3,11 +3,11 @@
     <div class="navbar-above" th:classappend="${!theme.config.basic_info.header_fixed}? 'animation'">
         <div th:class="${theme.config.basic_style.sidebar_column != 'all' ? 'container two-column' : 'container' }">
             <i class="ri-list-unordered navbar-slideicon"></i>
-            <a class="navbar-item logo-title" th:href="${site.url}">
+            <a class="navbar-item logo-title" th:href="${site.url}" th:aria-label="${site.title}" th:title="${site.title}">
                 <th:block th:if="${#strings.isEmpty(site.logo)}" th:text="${site.title}"/>
                 <th:block th:unless="${#strings.isEmpty(site.logo)}">
-                    <img class="logo-img" th:src="${site.logo}" th:alt="${site.title}" height="28">
-                    <img class="logo-img-dark" th:src="${#strings.defaultString(theme.config.basic_info.night_logo, site.logo)}" th:alt="${site.title}" height="28">
+                    <img class="logo-img" th:src="${site.logo}" th:alt="${site.title}" height="28" width="auto">
+                    <img class="logo-img-dark" th:src="${#strings.defaultString(theme.config.basic_info.night_logo, site.logo)}" th:alt="${site.title}" height="28" width="auto">
                 </th:block>
             </a>
             <nav class="navbar-nav active-animate" th:classappend="${theme.config.basic_info.menu_center ? 'menu-center' : ''}">
@@ -15,6 +15,7 @@
                     <a th:if="${#lists.isEmpty(menuItem.children)}"
                        class="item"
                        th:href="${menuItem.status.href}"
+                       th:aria-label="${menuItem.status.displayName}"
                        th:target="${menuItem.spec.target?.value}"
                        th:with="desc = ${#annotations.getOrDefault(menuItem, 'desc', menuItem.status.displayName)}"
                        th:title="${#strings.isEmpty(desc) ? menuItem.status.displayName : desc}">
@@ -27,6 +28,7 @@
                             <a class="item"
                                th:href="${#strings.defaultString(menuItem.status.href, 'javascript:')}"
                                th:target="${menuItem.spec.target?.value}"
+                               th:aria-label="${menuItem.status.displayName}"
                                th:with="desc = ${#annotations.getOrDefault(menuItem, 'desc', menuItem.status.displayName)}"
                                th:title="${#strings.isEmpty(desc) ? menuItem.status.displayName : desc}">
                                 <i th:if="${!#strings.isEmpty(#annotations.getOrDefault(menuItem, 'icon', ''))}"
@@ -40,6 +42,7 @@
                                 <a class="item"
                                    th:href="${#strings.defaultString(dropdown.status.href, 'javascript:')}"
                                    th:target="${dropdown.spec.target?.value}"
+                                   th:aria-label="${dropdown.status.displayName}"
                                    th:with="desc = ${#annotations.getOrDefault(dropdown, 'desc', dropdown.status.displayName)}"
                                    th:title="${#strings.isEmpty(desc) ? dropdown.status.displayName : desc}">
                                     <i th:if="${!#strings.isEmpty(#annotations.getOrDefault(dropdown, 'icon', ''))}"
@@ -51,6 +54,7 @@
                                         <a class="item"
                                            th:href="${dropdownChild.status.href}"
                                            th:target="${dropdownChild.spec.target?.value}"
+                                           th:aria-label="${dropdownChild.status.displayName}"
                                            th:with="desc = ${#annotations.getOrDefault(dropdownChild, 'desc', dropdownChild.status.displayName)}"
                                            th:title="${#strings.isEmpty(desc) ? dropdownChild.status.displayName : desc}">
                                             <i th:if="${!#strings.isEmpty(#annotations.getOrDefault(dropdownChild, 'icon', ''))}"
@@ -65,14 +69,14 @@
                 </th:block>
             </nav>
             <div th:if="${pluginFinder.available('PluginSearchWidget')}" class="navbar-search">
-                <button th:if="${theme.config.page_config.search.search_style == 'basic'}" onclick="javascript:SearchWidget.open();" class="submit" aria-label="搜索按钮" style="border-radius: 17px;"><i class="ri-search-line"></i></button>
-                <a th:if="${theme.config.page_config.search.search_style == 'form'}" target="_self" href="/search" class="submit" aria-label="搜索按钮" style="border-radius: 17px;display: flex;align-items: center;justify-content: center;"><i class="ri-search-line"></i></a>
+                <button th:if="${theme.config.page_config.search.search_style == 'basic'}" onclick="javascript:SearchWidget.open();" class="submit" aria-label="搜索" title="搜索" style="border-radius: 17px;"><i class="ri-search-line"></i></button>
+                <a th:if="${theme.config.page_config.search.search_style == 'form'}" target="_self" href="/search" class="submit" aria-label="搜索" title="搜索" style="border-radius: 17px;display: flex;align-items: center;justify-content: center;"><i class="ri-search-line"></i></a>
                 <form data-pjax class="navbar-search" method="get" action="/search" th:if="${theme.config.page_config.search.search_style == 'box'}">
                     <input id="box-search-content-input" autocomplete="off" placeholder="搜索内容..." name="keyword" value="" class="input" type="text"/>
-                    <button type="submit" class="submit" title="搜索" aria-label="搜索按钮"><i class="ri-search-line"></i></button>
+                    <button type="submit" class="submit" title="搜索" aria-label="搜索"><i class="ri-search-line"></i></button>
                     <span class="icon"></span>
                     <nav class="result" th:with="searchPosts = ${postFinder.list({page: 1,size: 5,sort: {'stats.visit,desc'}})}">
-                        <a th:each="postData,pIndex : ${searchPosts}" th:href="@{${postData.status.permalink}}"
+                        <a th:each="postData,pIndex : ${searchPosts}" th:href="@{${postData.status.permalink}}" th:aria-label="${postData.spec.title}"
                            th:title="${postData.spec.title}" th:target="${theme.config.page_config.search.search_target}"
                            class="item">
                             <span class="sort">[[${pIndex.count}]]</span>
@@ -85,7 +89,7 @@
             <a th:if="${theme.config.page_config.search.search_style == 'form' || theme.config.page_config.search.search_style == 'box'}" target="_self" href="/search" class="submit navbar-searchicon" aria-label="搜索按钮"><i class="ri-search-line"></i></a>
             <a data-not-pjax th:if="${theme.config.basic_style.show_console == 'console'}" class="navbar-console" th:href="${!#strings.isEmpty(logonUserName) ? theme.config.basic_style.console.console_logon_url : theme.config.basic_style.console.console_url}"
                th:target="${!#strings.isEmpty(logonUserName) ? theme.config.basic_style.console.console_logon_target : theme.config.basic_style.console.console_target}"
-               th:title="${theme.config.basic_style.console.console_title}">
+               th:title="${theme.config.basic_style.console.console_title}" th:aria-label="${theme.config.basic_style.console.console_title}">
                 <i th:class="${#strings.defaultString(theme.config.basic_style.console.console_icon, 'ri-equalizer-line')}"></i>
             </a>
             <div th:if="${theme.config.basic_style.show_console == 'logon'}" class="navbar-logon" trigger="hover"
@@ -97,25 +101,25 @@
                 </div>
                 <ul class="navbar-logon-group">
                     <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
-                        <a href="/console/posts/editor" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_post_class)}" th:class="${theme.config.basic_style.logon.console_post_class}"></i>新建文章</a>
+                        <a href="/console/posts/editor" data-not-pjax target="_blank" aria-label="新建文章" title="新建文章"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_post_class)}" th:class="${theme.config.basic_style.logon.console_post_class}"></i>新建文章</a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
-                        <a href="/console/single-pages/editor" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_single_pages_class)}" th:class="${theme.config.basic_style.logon.console_single_pages_class}"></i>新建页面</a>
+                        <a href="/console/single-pages/editor" data-not-pjax target="_blank" aria-label="新建页面" title="新建页面"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_single_pages_class)}" th:class="${theme.config.basic_style.logon.console_single_pages_class}"></i>新建页面</a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
-                        <a href="/console/moments" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_moment_class)}" th:class="${theme.config.basic_style.logon.console_moment_class}"></i>发布瞬间</a>
+                        <a href="/console/moments" data-not-pjax target="_blank" aria-label="发布瞬间" title="发布瞬间"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_moment_class)}" th:class="${theme.config.basic_style.logon.console_moment_class}"></i>发布瞬间</a>
                     </li>
                     <li th:if="${!#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">
-                        <a href="/uc" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_person_class)}" th:class="${theme.config.basic_style.logon.console_person_class}"></i>个人中心</a>
+                        <a href="/uc" data-not-pjax target="_blank" aria-label="个人中心" title="个人中心"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_person_class)}" th:class="${theme.config.basic_style.logon.console_person_class}"></i>个人中心</a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
-                        <a href="/console" data-not-pjax target="_blank"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_manage_class)}" th:class="${theme.config.basic_style.logon.console_manage_class}"></i>后台管理</a>
+                        <a href="/console" data-not-pjax target="_blank" aria-label="后台管理" title="后台管理"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_manage_class)}" th:class="${theme.config.basic_style.logon.console_manage_class}"></i>后台管理</a>
                     </li>
                     <li th:if="${!#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">
-                        <a href="/logout" data-not-pjax onclick="this.href = '/logout?redirect_uri=' + encodeURIComponent(window.location.href)"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_logout_class)}" th:class="${theme.config.basic_style.logon.console_logout_class}"></i>退出登录</a>
+                        <a href="/logout" data-not-pjax onclick="this.href = '/logout?redirect_uri=' + encodeURIComponent(window.location.href)" aria-label="退出登录" title="退出登录"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_logout_class)}" th:class="${theme.config.basic_style.logon.console_logout_class}"></i>退出登录</a>
                     </li>
                     <li th:if="${#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">
-                        <a href="/login" data-not-pjax onclick="this.href = '/login?redirect_uri=' + encodeURIComponent(window.location.href)"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_login_class)}" th:class="${theme.config.basic_style.logon.console_login_class}"></i>登录</a>
+                        <a href="/login" data-not-pjax onclick="this.href = '/login?redirect_uri=' + encodeURIComponent(window.location.href)" aria-label="登录" title="登录"><i th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_login_class)}" th:class="${theme.config.basic_style.logon.console_login_class}"></i>登录</a>
                     </li>
                 </ul>
             </div>
@@ -161,7 +165,7 @@
             </ul>
             <ul class="navbar-slideout-menu not-toc">
                 <li>
-                    <a class="link panel" href="#" rel="nofollow">
+                    <a class="link panel" href="#" rel="nofollow" aria-label="导航" title="导航">
                         <span>导航</span>
                         <i class="ri-arrow-right-s-line"></i>
                     </a>
@@ -169,6 +173,7 @@
                         <li th:each="menuItem : ${menuFinder.getPrimary().menuItems}">
                             <a class="link"
                                th:if="${#lists.isEmpty(menuItem.children)}"
+                               th:aria-label="${menuItem.status.displayName}"
                                th:href="${menuItem.status.href}"
                                th:title="${menuItem.status.displayName}"
                                th:text="${menuItem.status.displayName}"></a>
@@ -176,6 +181,7 @@
                                 <div class="link panel">
                                     <a th:href="${menuItem.status.href}"
                                        th:title="${menuItem.status.displayName}"
+                                       th:aria-label="${menuItem.status.displayName}"
                                        th:text="${menuItem.status.displayName}"></a>
                                     <i class="ri-arrow-right-s-line"></i>
                                 </div>
@@ -184,12 +190,14 @@
                                         <a class="link"
                                            th:if="${#lists.isEmpty(dropdown.children)}"
                                            th:href="${dropdown.status.href}"
+                                           th:aria-label="${dropdown.status.displayName}"
                                            th:title="${dropdown.status.displayName}"
                                            th:text="${dropdown.status.displayName}"></a>
                                         <th:block th:unless="${#lists.isEmpty(dropdown.children)}">
                                             <div class="link panel">
                                                 <a th:href="${dropdown.status.href}"
                                                    th:title="${dropdown.status.displayName}"
+                                                   th:aria-label="${dropdown.status.displayName}"
                                                    th:text="${dropdown.status.displayName}"></a>
                                                 <i class="ri-arrow-right-s-line"></i>
                                             </div>
@@ -198,6 +206,7 @@
                                                     <a class="link"
                                                        th:href="${dropdownChild.status.href}"
                                                        th:title="${dropdownChild.status.displayName}"
+                                                       th:aria-label="${dropdownChild.status.displayName}"
                                                        th:text="${dropdownChild.status.displayName}"></a>
                                                 </li>
                                             </ul>
@@ -210,7 +219,7 @@
                 </li>
             </ul>
             <ul th:if="${theme.config.basic_style.drawer_toc}" class="navbar-slideout-menu is-toc">
-                <a class="link in" href="#" rel="nofollow"><span>目录</span></a>
+                <a class="link in" href="#" rel="nofollow" aria-label="目录" title="目录"><span>目录</span></a>
                 <div class="toc-content">
                 </div>
             </ul>

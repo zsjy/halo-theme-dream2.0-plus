@@ -135,7 +135,7 @@
             <p th:if="${error.status >= 500 && error.status < 600}">围观群众太过热情，服务器繁忙，请稍后访问。</p>
             <p th:if="${error.status >= 400 && error.status < 500}">抱歉，您请求的页面不存在。</p>
             <p th:if="${error.status >= 400 && error.status < 500}">可能是输入的网址有误，或者该页面已被移动或删除。</p>
-            <a th:if="${error.status >= 400 && error.status < 500}" href="/" class="back-link">手动返回首页</a></p>
+            <a th:if="${error.status >= 400 && error.status < 500}" href="/" class="back-link" aria-label="手动返回首页" title="手动返回首页">手动返回首页</a></p>
             <div th:if="${error.status >= 400 && error.status < 500}" class="loading-bar">
                 <div class="loading-bar-inner"></div>
             </div>

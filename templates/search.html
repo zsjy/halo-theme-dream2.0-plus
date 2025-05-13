@@ -77,7 +77,7 @@
 
                                 searchResult.append('<div class="widget card search-page">\n' +
                                   '<div class="card-content main">\n' +
-                                  '<a href="' + hit.permalink + '" ' + ' target="' + target + '">\n' +
+                                  `<a aria-label="${title}" title="${title}" href="` + hit.permalink + '" ' + ' target="' + target + '">\n' +
                                   '<h2 class="title">' + title + '</h2>\n' +
                                   '</a>\n' +
                                   (description ?

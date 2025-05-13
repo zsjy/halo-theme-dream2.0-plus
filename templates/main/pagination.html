@@ -5,15 +5,15 @@
      th:with="urlParamStr = ${#strings.substringAfter(data.prevUrl,'?')},
               urlParams = ${urlParamStr == null ? '' : ('?' + urlParamStr)}">
   <nav class="pagination" aria-label="pagination">
-    <a th:href="${data.prevUrl}"
+    <a th:href="${data.prevUrl}" aria-label="上一页" title="上一页"
        th:class="'pagination-previous' + ${data.hasPrevious()?'':' is-invisible is-hidden-mobile'}">上一页</a>
-    <a th:href="${data.nextUrl}"
+    <a th:href="${data.nextUrl}" aria-label="下一页" title="下一页"
        th:class="'pagination-next' + ${data.hasNext()?'':' is-invisible is-hidden-mobile'}">下一页</a>
     <ul class="pagination-list is-hidden-mobile"
         th:with="p=${T(java.lang.Math).ceil(T(java.lang.Double).parseDouble(data.page) / 5.0) },start = ${(p * 5) - 5  +1 }, end=${p * 5}">
       <th:block th:if="${data.totalPages <= 9}">
         <li th:each="index : ${#numbers.sequence(1, data.totalPages)}">
-          <a
+          <a th:aria-label="|第 ${index} 页|" th:title="|第 ${index} 页|"
             th:class="'pagination-link' + ${data.page == index ? ' is-current': ''}"
             th:href="@{${path+'/page/'}  + ${index} + ${urlParams}}" th:text="${index}"></a>
         </li>
@@ -22,17 +22,17 @@
       th:with="start = ${(data.page > 5) ? data.page - 2 : 1},
                end = ${start + ((data.page > 5) ? ((data.page < data.totalPages - 4) ? 4 : 6) :  ((data.page < data.totalPages - 4) ? 6 : 8))}">
         <th:block th:if="${data.page > 5}">
-          <li><a class="pagination-link" th:href="@{${path+'/page/1' + urlParams}}" th:text="1"></a></li>
+          <li><a class="pagination-link" th:href="@{${path+'/page/1' + urlParams}}" th:text="1" aria-label="第 1 页" title="第 1 页"></a></li>
           <li><span class="pagination-ellipsis">…</span></li>
         </th:block>
 
         <li th:each="index : ${#numbers.sequence((end > data.totalPages) ? start - end + data.totalPages : start, (end > data.totalPages) ? data.totalPages : end)}"><a
-          th:class="'pagination-link' + ${data.page == index ? ' is-current': ''}"
+          th:class="'pagination-link' + ${data.page == index ? ' is-current': ''}" th:aria-label="|第 ${index} 页|" th:title="|第 ${index} 页|"
           th:href="@{${path+'/page/'}  + ${index} + ${urlParams}}" th:text="${index}"></a></li>
 
         <th:block th:if="${data.page < data.totalPages - 4}">
           <li><span class="pagination-ellipsis">…</span></li>
-          <li><a class="pagination-link" th:href="@{${path+'/page/'} + ${data.totalPages} + ${urlParams}}" th:text="${data.totalPages}"></a></li>
+          <li><a class="pagination-link" th:href="@{${path+'/page/'} + ${data.totalPages} + ${urlParams}}" th:aria-label="|第 ${data.totalPages} 页|" th:title="|第 ${data.totalPages} 页|" th:text="${data.totalPages}"></a></li>
         </th:block>
       </th:block>
     </ul>

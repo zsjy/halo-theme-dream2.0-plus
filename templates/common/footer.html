@@ -2,7 +2,7 @@
     <div class="container">
         <ul th:class="${theme.config.basic_info.footer_center} ? 'footer-container footer-center' : 'footer-container'">
             <li>
-              <a class="logo-title" th:href="${site.url}">
+              <a class="logo-title" th:href="${site.url}" th:aria-label="${site.title}" th:title="${site.title}">
                 <th:block th:if="${#strings.isEmpty(site.logo)}" th:text="${site.title}"/>
                 <th:block th:unless="${#strings.isEmpty(site.logo)}">
                   <img class="logo-img" th:src="${site.logo}" th:alt="${site.title}" height="28">
@@ -13,13 +13,13 @@
             <li>
               <p class="icon-spot">
                 <span id="webCopyright" th:text="'&copy; '+${#dates.format(#dates.createNow(), 'yyyy')}+' '"></span><a class="record"
-                        th:href="${site.url}" rel="noopener noreferrer nofollow"
-                        th:text="${site.title}"></a><span class="footer-truncation">Powered by <span class="footer-copyright"><a class="powered footer-copyright-halo" href="https://halo.run/" target="_blank">Halo</a> & <a class="powered" href="https://github.com/zsjy/halo-theme-dream2.0-plus" target="_blank">Dream2.0 Plus</a></span></span></p>
+                        th:href="${site.url}" rel="noopener noreferrer nofollow" th:aria-label="${site.title}" th:title="${site.title}"
+                        th:text="${site.title}"></a><span class="footer-truncation">Powered by <span class="footer-copyright"><a class="powered footer-copyright-halo" href="https://halo.run/" target="_blank" aria-label="Halo">Halo</a> & <a class="powered" href="https://github.com/zsjy/halo-theme-dream2.0-plus" target="_blank" aria-label="Dream2.0 Plus">Dream2.0 Plus</a></span></span></p>
                 <p class="icon-spot" th:if="${!#strings.isEmpty(theme.config.basic_info.record_number_ps) || !#strings.isEmpty(theme.config.basic_info.record_number)}">
-                    <a th:if="${!#strings.isEmpty(theme.config.basic_info.record_number)}" class="record"
+                    <a th:if="${!#strings.isEmpty(theme.config.basic_info.record_number)}" class="record" th:aria-label="${theme.config.basic_info.record_number}" th:title="${theme.config.basic_info.record_number}"
                         href="http://beian.miit.gov.cn/publish/query/indexFirst.action" target="_blank" rel="noopener noreferrer nofollow"><img
                         th:src="${#theme.assets('/img/ba.webp')}" height="auto" width="auto" alt="备案" style="vertical-align: text-top; width: 1.2em; margin-right: 4px;"/>[[${theme.config.basic_info.record_number}]]</a>
-                    <a th:if="${!#strings.isEmpty(theme.config.basic_info.record_number_ps)}" class="record footer-truncation" th:href="'https://beian.mps.gov.cn/#/query/webSearch?code=' + ${theme.config.basic_info.record_number_ps.replaceAll('[^\d]', '')}" target="_blank" rel="noopener noreferrer nofollow"><img
+                    <a th:if="${!#strings.isEmpty(theme.config.basic_info.record_number_ps)}" class="record footer-truncation" th:href="'https://beian.mps.gov.cn/#/query/webSearch?code=' + ${theme.config.basic_info.record_number_ps.replaceAll('[^\d]', '')}" target="_blank" rel="noopener noreferrer nofollow" th:aria-label="${theme.config.basic_info.record_number_ps}" th:title="${theme.config.basic_info.record_number_ps}"><img
                         th:src="${#theme.assets('/img/ga.webp')}" height="auto" width="auto" alt="公网安备" style="vertical-align: text-top; width: 1.2em; margin-right: 4px;"/>[[${theme.config.basic_info.record_number_ps}]]</a></p>
                 <p th:if="${!#strings.isEmpty(theme.config.basic_info.custom_text)}" th:utext="${theme.config.basic_info.custom_text}"></p>
                 <p class="icon-spot" th:if="${!#strings.isEmpty(theme.config.basic_info.website_time) || theme.config.enhance.enable_busuanzi == true}">
@@ -36,7 +36,7 @@
                 <p th:if="${!#strings.isEmpty(theme.config.basic_info.cloud_by_logo)}" class="icon-spot">
                   <span>
                   本站由<a class="cloud-driven" target="_blank" rel="noopener noreferrer nofollow"
-                           th:href="${theme.config.basic_info.cloud_by_url}">
+                           th:href="${theme.config.basic_info.cloud_by_url}" aria-label="云服务商" title="云服务商">
                       <img height="auto" width="auto"
                            alt="云服务商"
                            th:src="${theme.config.basic_info.cloud_by_logo}"/>
@@ -45,7 +45,7 @@
                     <th:block th:if="${!#strings.isEmpty(theme.config.basic_info.cdn_by_logo)}">
                         <span class="footer-truncation"> 由
                         <a class="cloud-driven" target="_blank" rel="noopener noreferrer nofollow"
-                           th:href="${theme.config.basic_info.cdn_by_url}">
+                           th:href="${theme.config.basic_info.cdn_by_url}" aria-label="CDN服务商" title="CDN服务商">
                             <img height="auto" width="auto"
                                  alt="CDN服务商"
                                  th:src="${theme.config.basic_info.cdn_by_logo}"/></a>提供CDN服务

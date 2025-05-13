@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						<div class="mew-cloud-desc-title">${this.options.title}</div>
 						<div class="mew-cloud-desc-type">来源：${type[this.options.type] || '网络来源'}${this.options.password ? ' | 提取码：' + this.options.password : ''}</div>
 					</div>
-					<a class="mew-cloud-link" href="${this.options.url}" target="_blank" rel="noopener noreferrer nofollow">
+					<a class="mew-cloud-link" href="${this.options.url}" target="_blank" aria-label="${this.options.title}" title="${this.options.title}" rel="noopener noreferrer nofollow">
 						<i class="ri-download-line"></i>
 					</a>
 				`
@@ -366,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
           target: this.getAttribute('target') || '_blank',
           icon: this.getAttribute('icon'),
         }
-        this.innerHTML = `<a class="mew-btn">${this.options.icon ? `<i class="${this.options.icon}"></i>` : ''}${this.innerHTML}</a>`
+        this.innerHTML = `<a class="mew-btn" aria-label="${this.options.href}">${this.options.icon ? `<i class="${this.options.icon}"></i>` : ''}${this.innerHTML}</a>`
         const btn = this.querySelector('a.mew-btn')
         this.options.href && (btn.href = this.options.href, btn.target = this.options.target)
         this.drawComplete()
@@ -382,8 +382,8 @@ document.addEventListener('DOMContentLoaded', () => {
           href: this.getAttribute('href'),
           name: this.getAttribute('name'),
         }
-        const avatarElem = this.options.avatar ? `<a class="mew-quote-href" target="_blank" ${this.options.href ? `href="${this.options.href}"` : ''}><img class="quote-avatar-hexagon not-gallery" src="${this.options.avatar}"/></a>` : ''
-        const nameElem = this.options.name ? `<a class="mew-quote-name" target="_blank" ${this.options.href ? `href="${this.options.href}"` : ''}>${this.options.name}</a>` : ''
+        const avatarElem = this.options.avatar ? `<a class="mew-quote-href" aria-label="${this.options.name}" title="${this.options.name}" target="_blank" ${this.options.href ? `href="${this.options.href}"` : ''}><img class="quote-avatar-hexagon not-gallery" src="${this.options.avatar}"/></a>` : ''
+        const nameElem = this.options.name ? `<a class="mew-quote-name" aria-label="${this.options.name}" title="${this.options.name}" target="_blank" ${this.options.href ? `href="${this.options.href}"` : ''}>${this.options.name}</a>` : ''
         this.innerHTML = `<div class="mew-quote"><div class="quote-container">${avatarElem}<div class="mew-quote-info"><p class="mew-quote-content">${this.innerHTML}</p>${nameElem}</div></div></div>`
         this.drawComplete()
       }
@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const imageElem = this.options.img ? `<span class="mew-link-image"><img class="link-image not-gallery" src="${this.options.img}"/></span>` : ''
         const descElem = this.options.desc ? `<span class="info-desc">${this.options.desc}</span>` : `<span class="mew-link-href info-desc">${this.options.href}</span>`
-        this.innerHTML = `<a class="mew-link" target="_blank" href="${this.options.href}"><span class="mew-link-info"><p class="info-title">${this.options.title || '我分享了一个网站'}</p>${descElem}</span>${imageElem}</a>`
+        this.innerHTML = `<a class="mew-link" target="_blank" href="${this.options.href}" aria-label="${this.options.title || '我分享了一个网站'}" title="${this.options.title || '我分享了一个网站'}"><span class="mew-link-info"><p class="info-title">${this.options.title || '我分享了一个网站'}</p>${descElem}</span>${imageElem}</a>`
         this.drawComplete()
       }
     })

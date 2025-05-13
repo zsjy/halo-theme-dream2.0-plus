@@ -4,7 +4,7 @@
   <th:block th:fragment="content" th:with="isEmpty = ${#lists.isEmpty(categories)}">
     <div th:if="${isEmpty}" class="card card-empty">
       <i class="ri-inbox-2-fill"></i>
-      还没有创建过分类，回<a th:href="${site.url}">主页</a>看看吧
+      还没有创建过分类，回<a th:href="${site.url}" aria-label="主页" title="主页">主页</a>看看吧
     </div>
     <th:block th:unless="${isEmpty}">
       <div class="card card-content">
@@ -19,7 +19,7 @@
   </th:block>
   <th:block th:fragment="categories (categories)">
     <li th:each="category : ${categories}">
-      <a class="level is-marginless" th:href="${category.status.permalink}">
+      <a class="level is-marginless" th:href="${category.status.permalink}" th:aria-label="${category.spec.displayName}" th:title="${category.spec.displayName}">
         <span class="level-item" th:text="${category.spec.displayName}"></span>
         <span class="level-item tag" th:text="${category.status.postCount == null ? 0 : category.status.postCount}"></span>
       </a>

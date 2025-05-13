@@ -10,7 +10,7 @@
         <div class="main-content not-toc" th:text="${spec.description}"></div>
         <hr/>
         <div class="meta">
-          <a class="has-link-grey" th:href="${spec.authorUrl}" target="_blank">
+          <a class="has-link-grey" th:href="${spec.authorUrl}" target="_blank" th:aria-label="${spec.author}" th:title="${spec.author}">
             <img th:if="${!#strings.isEmpty(spec.logo)}" th:src="${spec.logo}" alt="avatar">
             <span th:text="${spec.author}"></span>
           </a>

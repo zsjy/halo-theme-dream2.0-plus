@@ -7,13 +7,13 @@
      isEmpty = ${#lists.isEmpty(posts)}">
     <div class="card-title">
         <i th:class="${#strings.defaultString(sidebar.icon, 'ri-history-line') + ' card-title-label'}"></i><span th:text="${#strings.defaultString(sidebar.title, '最新文章')}"></span>
-        <a th:if="${theme.config.sidebar.recent_posts_more}" class="card-more" th:href="@{/archives}">更多<i class="ri-arrow-right-double-line"></i></a>
+        <a th:if="${theme.config.sidebar.recent_posts_more}" class="card-more" th:href="@{/archives}" aria-label="更多" title="更多">更多<i class="ri-arrow-right-double-line"></i></a>
     </div>
     <div th:if="${isEmpty}" class="card-empty">暂无文章</div>
     <div th:unless="${isEmpty}" class="card-content">
         <ul class="list">
             <li class="item" th:each="post : ${posts}">
-                <a class="link" th:href="@{${post.status.permalink}}" th:title="${post.spec.title}"><span class="top" th:if="${post.spec.pinned && theme.config.sidebar.recent_posts_pinned}">置顶</span>[[${post.spec.title}]]</a>
+                <a class="link" th:href="@{${post.status.permalink}}" th:aria-label="${post.spec.title}" th:title="${post.spec.title}"><span class="top" th:if="${post.spec.pinned && theme.config.sidebar.recent_posts_pinned}">置顶</span>[[${post.spec.title}]]</a>
                 <i class="ri-link"></i>
             </li>
         </ul>

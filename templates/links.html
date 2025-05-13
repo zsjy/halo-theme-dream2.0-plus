@@ -22,7 +22,7 @@
                             <h3 class="link-title" th:text="${#strings.defaultString(group.spec.displayName, '小伙伴们')}" th:id="'toc' + ${groupStat.index}"></h3>
                             <ul class="link-items">
                                 <li th:each="link : ${group.links}" th:if="${#annotations.getOrDefault(link, 'hide','false') == 'false'}">
-                                    <a class="links-item" th:href="${link.spec.url}" rel="noopener noreferrer" target="_blank"
+                                    <a class="links-item" th:href="${link.spec.url}" rel="noopener noreferrer" target="_blank" th:aria-label="${link.spec.description}"
                                        th:title="${link.spec.description}">
                                         <img th:if="${#strings.isEmpty(link.spec.logo)}" class="not-gallery" th:title="${link.spec.displayName}" th:src="${defaultAvatar}" th:alt="${link.spec.displayName}">
                                         <img th:unless="${#strings.isEmpty(link.spec.logo)}" class="not-gallery" th:title="${link.spec.displayName}" th:src="${defaultAvatar}"
@@ -45,10 +45,10 @@
                         <p style="margin-bottom: 4px">申请友链的方法：</p>
                         <ul>
                             <li>名称：[[${site.title}]]</li>
-                            <li>地址：<a th:href="${site.url}" target="_blank" th:text="${site.url}"></a></li>
-                            <li>图标：<a th:href="${bloggerAvatar}" target="_blank" th:text="${bloggerAvatar}"></a></li>
+                            <li>地址：<a th:href="${site.url}" target="_blank" th:text="${site.url}" th:aria-label="${site.url}" th:title="${site.url}"></a></li>
+                            <li>图标：<a th:href="${bloggerAvatar}" target="_blank" th:text="${bloggerAvatar}" th:aria-label="${bloggerAvatar}" th:title="${bloggerAvatar}"></a></li>
                             <li>描述：[[${descriptive}]]</li>
-                            <li th:if="${!#strings.isEmpty(theme.config.page_config.links_rss_address)}">订阅：<a th:href="${theme.config.page_config.links_rss_address}" target="_blank" th:text="${theme.config.page_config.links_rss_address}"></a></li>
+                            <li th:if="${!#strings.isEmpty(theme.config.page_config.links_rss_address)}">订阅：<a th:href="${theme.config.page_config.links_rss_address}" th:aria-label="${theme.config.page_config.links_rss_address}" th:title="${theme.config.page_config.links_rss_address}" target="_blank" th:text="${theme.config.page_config.links_rss_address}"></a></li>
                         </ul>
                     </th:block>
                     <div th:if="${!#strings.isEmpty(theme.config.page_config.links_info)}" th:utext="${theme.config.page_config.links_info}"></div>
