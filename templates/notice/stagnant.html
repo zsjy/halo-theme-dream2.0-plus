@@ -1,11 +1,11 @@
 <div class="popup-notice hidden" xmlns:th="https://www.thymeleaf.org">
     <div class="notice-content">
-        <div class="content-title">
-            <span>[[${theme.config.pop_notice.stagnant.pop_notice_title}]]</span>
+        <div class="content-title" th:if="${!#strings.isEmpty(theme.config.pop_notice.pop_notice_title)}">
+            <span>[[${theme.config.pop_notice.pop_notice_title}]]</span>
         </div>
-        <div class="others-tip">[(${theme.config.pop_notice.stagnant.pop_notice_content})]</div>
-        <div class="others-end">
-            <button class="notice-close-btn">[[${theme.config.pop_notice.stagnant.pop_notice_btn}]]</button>
+        <div class="others-tip">[(${theme.config.pop_notice.pop_notice_content})]</div>
+        <div class="others-end" th:if="${!#strings.isEmpty(theme.config.pop_notice.pop_notice_btn)}">
+            <button class="notice-close-btn" onclick="closePopupNotice();">[[${theme.config.pop_notice.pop_notice_btn}]]</button>
         </div>
     </div>
 
@@ -68,8 +68,6 @@
 
         .popup-notice .others-tip {
             display: block;
-            margin-top: 5px;
-            margin-bottom: 10px;
             padding: 20px;
             font-size: 1rem;
             border-radius: 12px;
@@ -88,7 +86,7 @@
         }
 
         .popup-notice .content-title {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-size: 1.2rem;
             font-weight: bold;
             word-wrap: break-word;
@@ -99,7 +97,7 @@
             display: flex;
             justify-content: center;
             gap: 20%;
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         .popup-notice .others-end button {
@@ -146,22 +144,18 @@
 
     <script th:inline="javascript">
       const notice_read_key = 'notice_read_key'
-      let notice_stagnant_content = 'stagnant-' + Utils.secureCompressHTML(`[[${#strings.defaultString(theme.config.pop_notice.stagnant.pop_notice_content, '')}]]`)
+      let notice_stagnant_content = 'stagnant-' + Utils.secureCompressHTML(`[[${#strings.defaultString(theme.config.pop_notice.pop_notice_content, '')}]]`)
 
       function shouldShowNotice() {
         return `${notice_stagnant_content}` !== localStorage.getItem(notice_read_key) && `${notice_stagnant_content}` !== sessionStorage.getItem(notice_read_key)
       }
-
-      document.querySelector('.notice-close-btn').addEventListener('click', function () {
-        closePopupNotice()
-      })
 
       window.closePopupNotice = function () {
         // 隐藏弹窗
         document.querySelector('.popup-notice').remove()
         document.body.classList.remove('body-no-scroll')
 
-        if ([[${theme.config.pop_notice.stagnant.pop_notice_show_mode != 'session'}]]) {
+        if ([[${theme.config.pop_notice.pop_notice_show_mode != 'session'}]]) {
           localStorage.setItem(notice_read_key, `${notice_stagnant_content}`)
         } else {
           sessionStorage.setItem(notice_read_key, `${notice_stagnant_content}`)
@@ -175,7 +169,7 @@
           //显示
           document.querySelector('.popup-notice').classList.remove('hidden')
           //单次显示时，直接记录
-          if ([[${theme.config.pop_notice.stagnant.pop_notice_show_mode == 'first'}]]) {
+          if ([[${theme.config.pop_notice.pop_notice_show_mode == 'first'}]]) {
             localStorage.setItem(notice_read_key, `${notice_stagnant_content}`)
           }
         } else {
