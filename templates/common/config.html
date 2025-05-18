@@ -161,12 +161,14 @@
       let isNight = hasNightInLocal() ? localStorage.getItem('night') : getNightInConfig();
       if (isNight.toString() === 'true') {
         localStorage.setItem('night', 'true');
+        localStorage.setItem('color-scheme', 'dark')
         document.documentElement.classList.add('night');
         document.documentElement.setAttribute('night', 'true');
         document.documentElement.classList.add('color-scheme-dark');
       } else {
         document.documentElement.classList.add('color-scheme-light');
         document.documentElement.removeAttribute('night');
+        localStorage.setItem('color-scheme', 'light')
       }
     })();
   </script>
