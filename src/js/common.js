@@ -67,6 +67,7 @@ const commonContext = {
         $('html').addClass('color-scheme-light').removeClass('color-scheme-dark').removeClass('night').removeAttr('night')
       }
       localStorage.setItem('night', isNightValue)
+      localStorage.setItem('color-scheme', isNightValue ? 'dark' : 'light')
       isNight = isNightValue
     }
     //切换按钮
