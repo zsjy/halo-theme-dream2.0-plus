@@ -1,0 +1,40 @@
+<div class="popup-notice hidden" xmlns:th="https://www.thymeleaf.org">
+    [(${theme.config.pop_notice.pop_notice_content})]
+
+    <style>
+        .popup-notice.hidden {
+            display: none !important;
+        }
+    </style>
+    <script th:inline="javascript">
+      const notice_read_key = 'notice_read_key'
+      let notice_stagnant_content = 'custom-' + Utils.secureCompressHTML(`[[${#strings.defaultString(theme.config.pop_notice.pop_notice_content, '')}]]`)
+
+      function shouldShowNotice() {
+        return `${notice_stagnant_content}` !== localStorage.getItem(notice_read_key) && `${notice_stagnant_content}` !== sessionStorage.getItem(notice_read_key)
+      }
+
+      window.closePopupNotice = function () {
+        window.dispatchEvent(new Event('onNoticeHide'))
+        if ([[${theme.config.pop_notice.pop_notice_show_mode != 'session'}]]) {
+          localStorage.setItem(notice_read_key, `${notice_stagnant_content}`)
+        } else {
+          sessionStorage.setItem(notice_read_key, `${notice_stagnant_content}`)
+        }
+      }
+
+      // 页面加载时检查并显示通知
+      document.addEventListener('DOMContentLoaded', function () {
+        if (shouldShowNotice()) {
+          window.dispatchEvent(new Event('onNoticeShow'))
+          document.querySelector('.popup-notice').classList.remove('hidden')
+          //单次显示时，直接记录
+          if ([[${theme.config.pop_notice.pop_notice_show_mode == 'first'}]]) {
+            localStorage.setItem(notice_read_key, `${notice_stagnant_content}`)
+          }
+        } else {
+          closePopupNotice()
+        }
+      })
+    </script>
+</div>

@@ -1594,7 +1594,7 @@ spec:
           id: show_pop_notice
           label: 显示弹窗通知
           value: 'false'
-          help: '控制是否显示弹窗通知，切换风格会重新触发显示通知内容。'
+          help: '控制是否显示弹窗通知，切换风格会重新触发显示通知内容。使用“自定义通知”请参考文档中“弹窗通知 - 自定义通知”部分书写html内容。'
           options:
             - value: 'side'
               label: 侧边通知
@@ -1602,12 +1602,8 @@ spec:
               label: 凝滞通知
             - value: 'false'
               label: 不显示
-        - $formkit: text
-          name: pop_notice_title
-          if: $get(show_pop_notice).value !== 'false'
-          label: 通知标题
-          help: '显示侧知的标题信息，留空时隐藏。'
-          value: '通知'
+            - value: 'custom'
+              label: 自定义通知
         - $formkit: code
           name: pop_notice_content
           if: $get(show_pop_notice).value !== 'false'
@@ -1617,12 +1613,6 @@ spec:
           value: '通知'
           label: 通知的内容，支持html
           help: '显示通知的内容，支持html，若内容发生变更则重新显示。注：支持设置属性 onclick="closePopupNotice();" 关闭通知。'
-        - $formkit: text
-          name: pop_notice_btn
-          if: $get(show_pop_notice).value !== 'false'
-          label: 通知按键内容
-          help: '显示通知的按键内容，留空时隐藏，隐藏后必须在通知内容中设置属性 onclick="closePopupNotice();" 关闭通知或者设置“通知显示时间”来自动关闭通知。'
-          value: '我知道了'
         - $formkit: radio
           if: $get(show_pop_notice).value !== 'false'
           name: pop_notice_show_mode
@@ -1636,9 +1626,21 @@ spec:
               label: 会话级关闭
             - value: 'forever'
               label: 永久关闭
+        - $formkit: text
+          name: pop_notice_title
+          if: $get(show_pop_notice).value !== 'false' && $get(show_pop_notice).value !== 'custom'
+          label: 通知标题
+          help: '显示侧知的标题信息，留空时隐藏。'
+          value: '通知'
+        - $formkit: text
+          name: pop_notice_btn
+          if: $get(show_pop_notice).value !== 'false' && $get(show_pop_notice).value !== 'custom'
+          label: 通知按键内容
+          help: '显示通知的按键内容，留空时隐藏，隐藏后必须在通知内容中设置属性 onclick="closePopupNotice();" 关闭通知或者设置“通知显示时间”来自动关闭通知。'
+          value: '我知道了'
         - $formkit: number
           name: pop_notice_show_time
-          if: $get(show_pop_notice).value !== 'false'
+          if: $get(show_pop_notice).value !== 'false' && $get(show_pop_notice).value !== 'custom'
           label: 通知显示时间
           help: '控制通知显示时间，单位：秒。小于等于 0 不启用。'
         - $formkit: radio
