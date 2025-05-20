@@ -5,7 +5,7 @@
         </div>
         <div class="others">[(${theme.config.pop_notice.pop_notice_content})]</div>
         <div th:class="|countdown ${#strings.isEmpty(theme.config.pop_notice.pop_notice_btn) ? 'padding' : ''}|">
-            <i class="ri-flashlight-fill"></i>通知将在 <span id="countdown">[[${theme.config.pop_notice.pop_notice_show_time}]]</span> 秒后自动关闭
+            <i class="ri-flashlight-fill"></i>本通知将在 <span id="countdown">[[${theme.config.pop_notice.pop_notice_show_time}]]</span> 秒后自动消失
         </div>
         <div class="others-end" th:if="${!#strings.isEmpty(theme.config.pop_notice.pop_notice_btn)}">
             <button class="notice-close-btn" onclick="closePopupNotice();">
