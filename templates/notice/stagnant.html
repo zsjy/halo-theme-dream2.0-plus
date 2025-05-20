@@ -15,7 +15,7 @@
     <link rel="preload stylesheet" as="style" th:href="@{/assets/css/notice/stagnant.min.css(mew=${theme.spec.version})}">
     <script th:inline="javascript">
       const notice_read_key = 'notice_read_key'
-      let notice_stagnant_content = 'stagnant-' + Utils.secureCompressHTML(`[[${#strings.defaultString(theme.config.pop_notice.pop_notice_content, '')}]]`)
+      let notice_stagnant_content = 'stagnant-' + Utils.djb2Hash(`[[${#strings.defaultString(theme.config.pop_notice.pop_notice_content, '')}]]`)
 
       function shouldShowNotice() {
         return `${notice_stagnant_content}` !== localStorage.getItem(notice_read_key) && `${notice_stagnant_content}` !== sessionStorage.getItem(notice_read_key)

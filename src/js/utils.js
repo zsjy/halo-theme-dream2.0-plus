@@ -302,6 +302,17 @@ const Utils = {
 
     requestId = window.requestAnimationFrame(step)
   },
+  /**
+   * djb2哈希算法
+   */
+  djb2Hash(str) {
+    let hash = 5381 // 初始种子
+    for (let i = 0; i < str.length; i++) {
+      hash = (hash * 33) ^ str.charCodeAt(i) // djb2 算法
+    }
+    return (hash >>> 0).toString()
+  },
+
 }
 
 window.Utils = Utils

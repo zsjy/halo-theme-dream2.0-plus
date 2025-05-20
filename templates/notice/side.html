@@ -17,7 +17,7 @@
     <link rel="preload stylesheet" as="style" th:href="@{/assets/css/notice/side.min.css(mew=${theme.spec.version})}">
     <script th:inline="javascript">
       const notice_read_key = 'notice_read_key'
-      let notice_side_content = 'side-' + Utils.secureCompressHTML(`[[${#strings.defaultString(theme.config.pop_notice.pop_notice_content, '')}]]`)
+      let notice_side_content = 'side-' + Utils.djb2Hash(`[[${#strings.defaultString(theme.config.pop_notice.pop_notice_content, '')}]]`)
 
       function shouldShowNotice() {
         return `${notice_side_content}` !== localStorage.getItem(notice_read_key) && `${notice_side_content}` !== sessionStorage.getItem(notice_read_key)
