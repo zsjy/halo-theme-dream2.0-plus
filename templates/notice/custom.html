@@ -1,11 +1,6 @@
 <div class="popup-notice hidden" xmlns:th="https://www.thymeleaf.org">
     [(${theme.config.pop_notice.pop_notice_content})]
 
-    <style>
-        .popup-notice.hidden {
-            display: none !important;
-        }
-    </style>
     <script th:inline="javascript">
       const notice_read_key = 'notice_read_key'
       let notice_stagnant_content = 'custom-' + Utils.djb2Hash(`[[${#strings.defaultString(theme.config.pop_notice.pop_notice_content, '')}]]`)
