@@ -16,6 +16,7 @@
     t1 = ${#strings.replace(t, '{title}', site.title)}"
     th:text="${#strings.isEmpty(t) ? site.title + '-安全中心' : t1}">
     </title>
+    <link rel="preload stylesheet" as="style" th:href="@{/assets/lib/remixicon@4.6.0/remixicon.min.css}">
     <style type="text/css">
         html {
             --back-img-url: url([[${#strings.defaultString(theme.config.security_link_config.security_link_site_img_background, '')}]]);
@@ -335,6 +336,16 @@
             margin-top: 12px;
             font-size: 12px;
             color: #333;
+            text-align: center;
+            white-space: normal;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            align-items: baseline;
+        }
+
+        .countdown-text i {
+            font-size: 1.15em;
+            color: #FF9800;
         }
 
         html.dark .countdown-text {
@@ -373,7 +384,7 @@
                 <div class="progress"></div>
             </div>
             <div class="countdown-text">
-                ⚡将在 <span id="countdown">[[${theme.config.security_link_config.security_link_auto_jump_time}]]</span> 秒后跳转，请自行确认链接安全性
+                <i class="ri-flashlight-fill"></i>将在 <span id="countdown">[[${theme.config.security_link_config.security_link_auto_jump_time}]]</span> 秒后跳转，请自行确认链接安全性
             </div>
             <div class="others-end">
                 <a target="_self" href="/" aria-label="继续访问" title="继续访问">继续访问</a>
