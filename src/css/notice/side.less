@@ -1,0 +1,134 @@
+.popup-notice {
+
+  &.hidden {
+    display: none !important;
+  }
+
+  .notice-content {
+    position: fixed;
+    width: 350px;
+    height: auto;
+    max-height: 400px;
+    border-radius: var(--radius-wrap);
+    background-color: var(--background);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    z-index: 10000;
+
+    &.left {
+      left: -400px !important;
+      transition: left 0.3s ease-out !important;
+
+      &.show {
+        left: 10px !important;
+      }
+    }
+
+    &.right {
+      right: -400px !important;
+      transition: right 0.3s ease-out !important;
+
+      &.show {
+        right: 10px !important;
+      }
+    }
+
+    &.top {
+      top: 60px;
+    }
+
+    &.center {
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &.bottom {
+      bottom: 2rem;
+    }
+  }
+
+  .countdown {
+    padding: 0.5rem;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    align-items: baseline;
+    font-weight: unset;
+    color: var(--main);
+    border-top: 1px solid var(--light-x);
+
+    &.padding {
+      padding: 1rem !important;
+    }
+
+    #countdown {
+      color: var(--theme);
+      font-weight: bold;
+    }
+
+    i {
+      color: #FF9800;
+      font-size: 1.15rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .notice-content {
+      width: 80% !important;
+      max-width: 350px !important;
+    }
+  }
+
+  /* 标题样式 */
+
+  .content-title {
+    padding: 15px 20px;
+    background-color: var(--theme);
+    color: #f8f8f8;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: var(--radius-wrap) var(--radius-wrap) 0 0;
+    text-align: center;
+  }
+
+  /* 内容区域 - 可滚动 */
+
+  .others {
+    flex: 1;
+    padding: 20px;
+    font-size: 1rem;
+    overflow-y: auto; /* 允许垂直滚动 */
+    line-height: 1.3em;
+    text-align: center;
+    color: var(--main);
+  }
+
+  /* 底部按钮区域 */
+
+  .others-end {
+    padding: 15px 20px;
+    text-align: center;
+    border-top: 1px solid var(--light-x);
+
+    button {
+      padding: 8px 25px;
+      background-color: var(--theme);
+      color: #f8f8f8;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(var(--theme), 0.2);
+
+      &:hover {
+        background-color: var(--theme);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(var(--theme), 0.3);
+      }
+    }
+
+  }
+}

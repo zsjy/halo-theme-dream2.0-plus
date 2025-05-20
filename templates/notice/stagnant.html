@@ -4,144 +4,15 @@
             <span>[[${theme.config.pop_notice.pop_notice_title}]]</span>
         </div>
         <div class="others-tip">[(${theme.config.pop_notice.pop_notice_content})]</div>
+        <div th:class="|countdown ${#strings.isEmpty(theme.config.pop_notice.pop_notice_btn) ? 'padding' : ''}|">
+            <i class="ri-flashlight-fill"></i>通知将在 <span id="countdown">[[${theme.config.pop_notice.pop_notice_show_time}]]</span> 秒后自动关闭
+        </div>
         <div class="others-end" th:if="${!#strings.isEmpty(theme.config.pop_notice.pop_notice_btn)}">
             <button class="notice-close-btn" onclick="closePopupNotice();">[[${theme.config.pop_notice.pop_notice_btn}]]</button>
         </div>
     </div>
 
-    <style>
-        .popup-notice {
-            position: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 10000;
-            overscroll-behavior: contain;
-        }
-
-        .popup-notice.hidden {
-            display: none !important;
-        }
-
-        .popup-notice .notice-content {
-            text-align: center;
-            padding: 25px;
-            border-radius: 10px;
-            animation: fadein 0.3s ease-out;
-            width: 400px;
-            max-width: 60%;
-            height: auto;
-            max-height: 400px;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
-            position: relative;
-            margin: 20px 0; /* 添加上下边距 */
-            display: flex;
-            flex-direction: column;
-        }
-
-        .night .popup-notice .notice-content {
-            background: rgba(57, 62, 70, 0.6);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .popup-notice .notice-content::before {
-            content: '';
-            position: absolute;
-            top: -6px;
-            left: -6px;
-            right: -6px;
-            bottom: -6px;
-            border-radius: 10px;
-            background: linear-gradient(145deg,
-            rgba(255, 255, 255, 0.3) 0%,
-            rgba(255, 255, 255, 0.1) 100%);
-            z-index: -1;
-        }
-
-        .popup-notice .others-tip {
-            display: block;
-            padding: 20px;
-            font-size: 1rem;
-            border-radius: 12px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            color: var(--main);
-            overflow-y: auto; /* 允许垂直滚动 */
-            word-wrap: break-word;
-        }
-
-        .night .popup-notice .others-tip {
-            background: rgba(51, 51, 51, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .popup-notice .content-title {
-            margin-bottom: 25px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            word-wrap: break-word;
-            color: var(--dark-c);
-        }
-
-        .popup-notice .others-end {
-            display: flex;
-            justify-content: center;
-            gap: 20%;
-            margin-top: 30px;
-        }
-
-        .popup-notice .others-end button {
-            padding: 10px 20px;
-            border-radius: 16px;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            text-align: center;
-            text-decoration: none;
-            background-color: var(--theme);
-            color: #f8f8f8;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(var(--theme), 0.2);
-            line-height: 1em;
-        }
-
-        .popup-notice .others-end button:hover {
-            background: var(--theme);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(var(--theme), 0.3);
-        }
-
-        @keyframes fadein {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .popup-notice .notice-content {
-                width: 75% !important;
-                max-width: 400px !important;
-            }
-        }
-    </style>
-
+    <link rel="preload stylesheet" as="style" th:href="@{/assets/css/notice/stagnant.min.css(mew=${theme.spec.version})}">
     <script th:inline="javascript">
       const notice_read_key = 'notice_read_key'
       let notice_stagnant_content = 'stagnant-' + Utils.secureCompressHTML(`[[${#strings.defaultString(theme.config.pop_notice.pop_notice_content, '')}]]`)
@@ -160,8 +31,12 @@
         } else {
           sessionStorage.setItem(notice_read_key, `${notice_stagnant_content}`)
         }
-      }
 
+        if (interval) {
+          clearInterval(interval)
+        }
+      }
+      let interval
       // 页面加载时检查并显示通知
       document.addEventListener('DOMContentLoaded', function () {
         if (shouldShowNotice()) {
@@ -171,6 +46,19 @@
           //单次显示时，直接记录
           if ([[${theme.config.pop_notice.pop_notice_show_mode == 'first'}]]) {
             localStorage.setItem(notice_read_key, `${notice_stagnant_content}`)
+          }
+
+          let countdown = [[${theme.config.pop_notice.pop_notice_show_time}]]
+          if (countdown && countdown > 0) {
+            interval = setInterval(function () {
+              countdown--
+              document.querySelector('.popup-notice #countdown').innerText = countdown
+              if (countdown === 0) {
+                closePopupNotice()
+              }
+            }, 1000)
+          } else {
+            document.querySelector('.popup-notice .countdown').remove()
           }
         } else {
           closePopupNotice()

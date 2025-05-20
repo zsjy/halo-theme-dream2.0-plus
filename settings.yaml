@@ -1621,7 +1621,7 @@ spec:
           name: pop_notice_btn
           if: $get(show_pop_notice).value !== 'false'
           label: 通知按键内容
-          help: '显示通知的按键内容，留空时隐藏，隐藏后必须在通知内容中设置属性 onclick="closePopupNotice();" 关闭通知。'
+          help: '显示通知的按键内容，留空时隐藏，隐藏后必须在通知内容中设置属性 onclick="closePopupNotice();" 关闭通知或者设置“通知显示时间”来自动关闭通知。'
           value: '我知道了'
         - $formkit: radio
           if: $get(show_pop_notice).value !== 'false'
@@ -1636,11 +1636,15 @@ spec:
               label: 会话级关闭
             - value: 'forever'
               label: 永久关闭
+        - $formkit: number
+          name: pop_notice_show_time
+          if: $get(show_pop_notice).value !== 'false'
+          label: 通知显示时间
+          help: '控制通知显示时间，单位：秒。小于等于 0 不启用。'
         - $formkit: radio
           name: pop_notice_orientation
           if: $get(show_pop_notice).value === 'side'
           label: 侧边通知弹出方向-水平方向
-          help: '控制侧边通知的弹出方向-水平方向。'
           value: 'right'
           options:
             - value: 'right'
@@ -1651,7 +1655,6 @@ spec:
           if: $get(show_pop_notice).value === 'side'
           name: pop_notice_vertical
           label: 侧边通知弹出方向-垂直方向
-          help: '控制侧边通知的弹出方向-垂直方向。'
           value: 'top'
           options:
             - value: 'top'
