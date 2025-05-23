@@ -17,6 +17,7 @@
 - [侧边栏组件](https://www.hcjike.com/docs/halo-theme-dream2.0/theme/sidebar-assembly)
 - [使用iconfont替换主题部分功能图标](https://www.hcjike.com/archives/TsR84KYw)
 - [邮件模板配置](https://www.hcjike.com/docs/halo-theme-dream2.0/theme/email)
+- [自定义通知配置](https://www.hcjike.com/docs/halo-theme-dream2.0/theme/setting/notice#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%80%9A%E7%9F%A5)
 
 ## 插件相关
 ### KaTeX
