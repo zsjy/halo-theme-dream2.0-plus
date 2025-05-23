@@ -1,5 +1,5 @@
 <div class="popup-notice hidden" xmlns:th="https://www.thymeleaf.org">
-    <div th:class="|notice-content ${theme.config.pop_notice.side.pop_notice_orientation} ${theme.config.pop_notice.side.pop_notice_vertical}|">
+    <div th:class="|notice-content ${theme.config.pop_notice.pop_notice_orientation} ${theme.config.pop_notice.pop_notice_vertical}|">
         <div class="content-title" th:if="${!#strings.isEmpty(theme.config.pop_notice.pop_notice_title)}">
             <span>[[${theme.config.pop_notice.pop_notice_title}]]</span>
         </div>
