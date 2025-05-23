@@ -119,7 +119,8 @@
     } else {
       DreamConfig['security_link_whitelist'] = [hostname]
     }
-
+    /** 配置主题模式 */
+    DreamConfig["default_theme"] = [[${theme.config.basic_style.default_theme}]];
     DreamConfig["theme_version"] = [[${theme.spec.version}]];
     DreamConfig["site_comment"] = [[${site.comment.enable}]];
     DreamConfig["theme_base"] = "[(${#theme.assets('/')})]";
@@ -143,33 +144,5 @@
       [(${theme.config.basic_style.load_progress != 'none'?'DreamConfig["load_progress"] = "' + theme.config.basic_style.load_progress + '";': ''})]
       [(${!#strings.isEmpty(theme.config.page_config.journals_share_image)?'DreamConfig["journals_share_image"] = "' + theme.config.page_config.journals_share_image + '";': ''})]
       [(${!#strings.isEmpty(theme.config.sidebar.meting_api)?'var meting_api = "' + theme.config.sidebar.meting_api + '";': ''})]
-
-    /** 配置主题模式 */
-    DreamConfig["default_theme"] = '[(${theme.config.basic_style.default_theme})]';
-    (function(){
-      const hasNightInLocal = () => localStorage.getItem('night') !== null;
-      const getNightInConfig = () => {
-        if (DreamConfig.default_theme === 'night') {
-          return true;
-        }
-        if (DreamConfig.default_theme === 'system') {
-          return  matchMedia('(prefers-color-scheme: dark)').matches;
-        }
-        return false;
-      }
-
-      let isNight = hasNightInLocal() ? localStorage.getItem('night') : getNightInConfig();
-      if (isNight.toString() === 'true') {
-        localStorage.setItem('night', 'true');
-        localStorage.setItem('color-scheme', 'dark')
-        document.documentElement.classList.add('night');
-        document.documentElement.setAttribute('night', 'true');
-        document.documentElement.classList.add('color-scheme-dark');
-      } else {
-        document.documentElement.classList.add('color-scheme-light');
-        document.documentElement.removeAttribute('night');
-        localStorage.setItem('color-scheme', 'light')
-      }
-    })();
   </script>
 </th:block>
