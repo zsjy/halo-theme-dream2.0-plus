@@ -57,28 +57,45 @@ const commonContext = {
   },
   /* 初始化主题模式（仅用户模式） */
   initMode() {
-    let isNight = localStorage.getItem('night') || false
+    //检查是否将暗黑模式保存到 localStorage
+    const hasNightInLocal = () => {
+      const value = localStorage.getItem('night')
+      return value === 'true' || value === 'false'
+    }
+    //根据配置读取默认模式
+    const getNightInConfig = () => {
+      if (DreamConfig.default_theme === 'night') {
+        return true
+      }
+      if (DreamConfig.default_theme === 'system') {
+        return matchMedia('(prefers-color-scheme: dark)').matches
+      }
+      return false
+    }
+    //是否是暗黑模式
+    let isNight = hasNightInLocal()
+      ? localStorage.getItem('night') === 'true' // 检查 localStorage
+      : getNightInConfig() // 否则走配置逻辑
+
     const applyNight = (isNightValue) => {
       if (isNightValue) {
-        // 配色方案
         $('html').addClass('color-scheme-dark').removeClass('color-scheme-light').addClass('night').attr('night', true)
       } else {
-        // 配色方案
         $('html').addClass('color-scheme-light').removeClass('color-scheme-dark').removeClass('night').removeAttr('night')
       }
-      localStorage.setItem('night', isNightValue)
+      //doc文档的配色方案
       localStorage.setItem('color-scheme', isNightValue ? 'dark' : 'light')
       isNight = isNightValue
     }
     //切换按钮
-    $('#toggle-mode').on('click', () => applyNight(isNight.toString() !== 'true'))
-    //加载后首选的配色
-    if (DreamConfig.default_theme === 'system') {
-      window.matchMedia('(prefers-color-scheme: dark)')
-        .addListener((event) => applyNight(event.matches))
-    } else {
-      applyNight(isNight.toString() === 'true')
-    }
+    $('#toggle-mode').on('click', () =>{
+      //应用配色方案，并切换isNight的状态
+      applyNight(!isNight)
+      //只有点击了切换才需要保存到localStorage
+      localStorage.setItem('night', isNight)
+    })
+    //应用初始配色方案
+    applyNight(isNight)
   },
   /* 导航条高亮 */
   initNavbar() {
