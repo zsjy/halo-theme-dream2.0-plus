@@ -444,6 +444,16 @@ spec:
               label: 小图模式（交替）
             - value: grid
               label: 网格模式（强优先）
+        - $formkit: radio
+          name: show_edit_content
+          label: 显示文章/页面编辑按键
+          value: true
+          help: '当登录用户为超级管理员时，是否显示文章/页面编辑按键，未登录用户始终不显示此按键。'
+          options:
+            - value: true
+              label: 显示
+            - value: false
+              label: 不显示
         - $formkit: number
           name: code_fold_line
           label: 代码块折叠
@@ -885,11 +895,16 @@ spec:
               label: 显示
             - value: false
               label: 不显示
-        - $formkit: number
-          name: categories_num
-          label: 侧边栏分类-展示分类数量
-          placeholder: 请输入数量数值
-          value: 10
+        - $formkit: list
+          name: categories_names
+          label: 侧边栏分类-展示的分类
+          addLabel: 添加分类
+          help: '默认树形展示全部分类，配置后仅显示选定分类（单层显示）。'
+          itemType: string
+          children:
+            - $formkit: categorySelect
+              index: "$index"
+              validation: required
         - $formkit: radio
           name: tags_more
           label: 侧边栏标签-显示”更多”按钮
