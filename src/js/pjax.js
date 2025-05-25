@@ -64,27 +64,37 @@ $(document).on('submit', 'form[data-pjax]', function (event) {
 })
 
 $(document).on('pjax:click', function (event, options) {
+  if (!options) return
   console.log('------------------------')
   console.log(`pjax:click sn = ${options.serialNumber}`)
+  document.dispatchEvent(new Event('pjax:click', { bubbles: true }))
 })
 
 $(document).on('pjax:beforeSend', function (event, xhr, options) {
+  if (!options) return
   console.log(`pjax:beforeSend sn = ${options.serialNumber}`)
   $('html').addClass('pjax-loading')
+  document.dispatchEvent(new Event('pjax:beforeSend', { bubbles: true }))
 })
 
 $(document).on('pjax:start', function (event, xhr, options) {
+  if (!options) return
   console.log(`pjax:start sn = ${options.serialNumber}`)
   window.DProgress && DProgress.start()
   $('.pjax-close').remove()
+  document.dispatchEvent(new Event('pjax:start', { bubbles: true }))
 })
 
 $(document).on('pjax:send', function (event, xhr, options) {
+  if (!options) return
   console.log(`pjax:send sn = ${options.serialNumber}`)
+  document.dispatchEvent(new Event('pjax:send', { bubbles: true }))
 })
 
 $(document).on('pjax:clicked', function (event, options) {
+  if (!options) return
   console.log(`pjax:clicked sn = ${options.serialNumber}`)
+  document.dispatchEvent(new Event('pjax:clicked', { bubbles: true }))
 })
 
 /**
@@ -92,6 +102,7 @@ $(document).on('pjax:clicked', function (event, options) {
  * 在此处需要进行一些未进行pjax也需要执行的程序
  */
 $(document).on('pjax:beforeReplace', function (event, contents, options) {
+  if (!options) return
   console.log(`pjax:beforeReplace sn = ${options.serialNumber}`)
   /* 重新初始化导航条高亮 */
   $('.navbar-nav .current,.panel-side-menu .current').removeClass('current')
@@ -100,6 +111,7 @@ $(document).on('pjax:beforeReplace', function (event, contents, options) {
   commonContext.showBanner()
   /* 移动端关闭抽屉弹窗 */
   $('html.disable-scroll').length > 0 && $('.navbar-mask').trigger('click')
+  document.dispatchEvent(new Event('pjax:beforeReplace', { bubbles: true }))
 })
 
 /**
@@ -107,6 +119,7 @@ $(document).on('pjax:beforeReplace', function (event, contents, options) {
  * 浏览器前进后退时不会执行
  */
 $(document).on('pjax:success', async function (event, data, status, xhr, options) {
+  if (!options) return
   const serialNumber = options.serialNumber
   console.log(`pjax:success sn = ${serialNumber}`)
   if (window.pjaxSerialNumber !== serialNumber) return
@@ -176,6 +189,7 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
     })
   }
   console.log('全部处理完成')
+  document.dispatchEvent(new Event('pjax:success', { bubbles: true }))
   if (window.pjaxSerialNumber !== serialNumber) return
   /* 初始化日志界面 */
   window.journalPjax && window.journalPjax(serialNumber)
@@ -193,15 +207,20 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
 })
 
 $(document).on('pjax:timeout', function (event, xhr, options) {
+  if (!options) return
   console.log(`pjax:timeout sn = ${options.serialNumber}`)
+  document.dispatchEvent(new Event('pjax:timeout', { bubbles: true }))
 })
 
 $(document).on('pjax:error', function (event, xhr, textStatus, error, options) {
+  if (!options) return
   console.log(`pjax:error sn = ${options.serialNumber} error ${error}`)
+  document.dispatchEvent(new Event('pjax:error', { bubbles: true }))
 })
 
 // pjax结束
 $(document).on('pjax:complete', function (event, xhr, textStatus, options) {
+  if (!options) return
   console.log(`pjax:complete sn = ${options.serialNumber}`)
 
   //启用全局评论
@@ -220,6 +239,7 @@ $(document).on('pjax:complete', function (event, xhr, textStatus, options) {
       )
     }
   }
+  document.dispatchEvent(new Event('pjax:complete', { bubbles: true }))
 })
 
 /**
@@ -227,6 +247,7 @@ $(document).on('pjax:complete', function (event, xhr, textStatus, options) {
  *    浏览器前进后退时，唯一一个在渲染后被调用的方法
  */
 $(document).on('pjax:end', function (event, xhr, options) {
+  if (!options) return
   console.log(`pjax:end sn = ${options.serialNumber}`)
   // 如果是浏览器前进后退
   if (xhr == null) {
@@ -246,6 +267,7 @@ $(document).on('pjax:end', function (event, xhr, options) {
     // 应该是由于浏览器缓存失效，有时候浏览器前后退还是会执行pjax:beforeSend
     $('html').removeClass('pjax-loading')
   }
+  document.dispatchEvent(new Event('pjax:end', { bubbles: true }))
 })
 
 $(document).on('pjax:popstate', function (event) {
