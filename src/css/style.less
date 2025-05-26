@@ -4337,10 +4337,6 @@ button.swiper-pagination-bullet {
     margin-top: 1.0rem !important;
   }
 
-  .container:not(.two-column) .column-right {
-    display: block !important;
-  }
-
   .pagination-next, .pagination-previous {
     flex-grow: 1;
     flex-shrink: 1;
@@ -4348,6 +4344,7 @@ button.swiper-pagination-bullet {
 
   .section {
     padding-top: 5rem;
+    padding-bottom: 2rem;
 
     &.section-top {
       padding-top: 1rem !important;
@@ -4372,6 +4369,10 @@ button.swiper-pagination-bullet {
       .thumbnail-image {
         height: 32vw;
         min-height: 95px;
+      }
+
+      & + .column-right-shadow {
+        margin-top: 1rem;
       }
     }
   }
@@ -5489,7 +5490,7 @@ text-diagram[data-type="mermaid"] {
     visibility: hidden;
     position: absolute;
     width: auto;
-    min-width: 8rem;
+    min-width: 7rem;
     left: 50%;
     top: 52px;
     z-index: 5;

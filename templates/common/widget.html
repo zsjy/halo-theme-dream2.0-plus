@@ -7,4 +7,6 @@
       <th:block th:replace="~{${'/widget/' + sidebar.type} :: widget ( sidebar = ${sidebar})}" />
     </th:block>
   </th:block>
+  <div th:if="${position == 'left'}" class="column-right-shadow is-hidden-desktop">
+  </div>
 </aside>
