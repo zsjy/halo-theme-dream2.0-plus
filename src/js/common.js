@@ -11,7 +11,7 @@ const commonContext = {
     if (!$rightCol.length || !$shadowCol.length) return
     const $window = $(window)
     // 监听窗口大小变化（使用防抖优化性能）
-    $(window).on('resize', debounce(checkWidgetPosition, 100))
+    $(window).on('resize', debounce(checkWidgetPosition, 50))
     function checkWidgetPosition() {
       const windowWidth = $window.width()
       const isMoved = $shadowCol.children().length > 0
