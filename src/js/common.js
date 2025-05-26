@@ -2,6 +2,46 @@ window.encrypt = (str) => window.btoa(unescape(encodeURIComponent(str)))
 window.decrypt = (str) => decodeURIComponent(escape(window.atob(str)))
 
 const commonContext = {
+  /* 初始化widget */
+  initWidget() {
+    const BREAKPOINT = 1216
+    const $rightCol = $('.column-right')
+    const $shadowCol = $('.column-right-shadow')
+    // 检查元素是否存在
+    if (!$rightCol.length || !$shadowCol.length) return
+    const $window = $(window)
+    // 监听窗口大小变化（使用防抖优化性能）
+    $(window).on('resize', debounce(checkWidgetPosition, 100))
+    function checkWidgetPosition() {
+      const windowWidth = $window.width()
+      const isMoved = $shadowCol.children().length > 0
+
+      // 移动到左侧的条件
+      if (windowWidth < BREAKPOINT && !isMoved) {
+        $rightCol.children().detach().appendTo($shadowCol)
+        $shadowCol.addClass('is-active')
+      }
+      // 移回右侧的条件
+      else if (windowWidth >= BREAKPOINT && isMoved) {
+        $shadowCol.children().detach().appendTo($rightCol)
+        $shadowCol.removeClass('is-active')
+      }
+    }
+    // 防抖函数
+    function debounce(func, wait) {
+      let timeout
+      return function() {
+        const context = this
+        const args = arguments
+        clearTimeout(timeout)
+        timeout = setTimeout(function() {
+          func.apply(context, args)
+        }, wait)
+      }
+    }
+    // 初始检查窗口大小
+    checkWidgetPosition()
+  },
   /* 初始化目录和公告模块 */
   initTocAndNotice() {
     const {pathname} = location
