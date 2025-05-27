@@ -5490,7 +5490,6 @@ text-diagram[data-type="mermaid"] {
     visibility: hidden;
     position: absolute;
     width: auto;
-    min-width: 7rem;
     left: 50%;
     top: 52px;
     z-index: 5;
@@ -5503,10 +5502,12 @@ text-diagram[data-type="mermaid"] {
     padding: 10px 0;
     transform: translateX(-50%) perspective(600px) rotateX(-45deg);
     transition: opacity .35s, visibility .35s, transform .35s, -webkit-transform .35s;
+    white-space: nowrap;
 
     &-menu {
       text-align: center;
       line-height: 2rem;
+      padding: 0 10px;
 
       & > a {
         padding: 5px 0;
