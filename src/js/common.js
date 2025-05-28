@@ -128,6 +128,7 @@ const commonContext = {
       }
       //doc文档的配色方案
       localStorage.setItem('color-scheme', isNightValue ? 'dark' : 'light')
+      localStorage.setItem('special-efficacy-scheme', isNightValue ? 'dark' : 'light')
       isNight = isNightValue
     }
     //切换按钮
