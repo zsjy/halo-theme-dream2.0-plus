@@ -10,7 +10,11 @@
 
   // 获取颜色的函数
   function getDynamicColor(alpha) {
-    return `rgba(128,128,128, ${Math.min(alpha + 0.2, 1)})`
+    let specialEfficacyScheme = localStorage.getItem('special-efficacy-scheme')
+    let isDarkMode = specialEfficacyScheme ? specialEfficacyScheme === 'dark' : false
+    return isDarkMode
+      ? `rgba(200, 200, 200, ${Math.min(alpha + 0.2, 1)})`
+      : `rgba(100, 100, 100, ${Math.min(alpha + 0.2, 1)})`
   }
 
   // 调整画布大小
