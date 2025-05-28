@@ -12,6 +12,7 @@ const commonContext = {
     const $window = $(window)
     // 监听窗口大小变化（使用防抖优化性能）
     $(window).on('resize', debounce(checkWidgetPosition, 50))
+
     function checkWidgetPosition() {
       const windowWidth = $window.width()
       const isMoved = $shadowCol.children().length > 0
@@ -27,18 +28,20 @@ const commonContext = {
         $shadowCol.removeClass('is-active')
       }
     }
+
     // 防抖函数
     function debounce(func, wait) {
       let timeout
-      return function() {
+      return function () {
         const context = this
         const args = arguments
         clearTimeout(timeout)
-        timeout = setTimeout(function() {
+        timeout = setTimeout(function () {
           func.apply(context, args)
         }, wait)
       }
     }
+
     // 初始检查窗口大小
     checkWidgetPosition()
   },
@@ -128,7 +131,7 @@ const commonContext = {
       isNight = isNightValue
     }
     //切换按钮
-    $('#toggle-mode').on('click', () =>{
+    $('#toggle-mode').on('click', () => {
       //应用配色方案，并切换isNight的状态
       applyNight(!isNight)
       //只有点击了切换才需要保存到localStorage
@@ -366,7 +369,6 @@ const commonContext = {
   /* 离屏提示 */
   offscreenTip() {
     if (Utils.isMobile() || (!DreamConfig.document_hidden_title && !DreamConfig.document_visible_title)) return
-    // const originTitle = document.title
     let originTitle = document.title
     let timer = null
     document.addEventListener('visibilitychange', function () {
@@ -374,7 +376,7 @@ const commonContext = {
         if (!DreamConfig.document_visible_title || document.title !== DreamConfig.document_visible_title) {
           originTitle = document.title
         }
-        DreamConfig.document_hidden_title && (document.title = DreamConfig.document_hidden_title)
+        document.title = DreamConfig.document_hidden_title || originTitle
         clearTimeout(timer)
       } else {
         document.title = DreamConfig.document_visible_title || originTitle
