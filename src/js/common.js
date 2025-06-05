@@ -758,13 +758,73 @@ const commonContext = {
       }
     }
   },
+  /* 自动播放Banner视频 */
+  playBannerVideo() {
+    var videoElement = document.querySelector('.banner video')
+    if (!videoElement) {
+      return
+    }
+
+    // 设置循环播放相关属性
+    videoElement.loop = true // 关键属性：启用循环
+    videoElement.muted = true // 静音更易自动播放
+    videoElement.setAttribute('playsinline', '') // iOS内联播放
+    videoElement.setAttribute('webkit-playsinline', '') // 旧版iOS支持
+    
+    function playVideo() {
+      try {
+        if (videoElement.paused) {
+          var playPromise = videoElement.play()
+          // 处理可能返回的Promise
+          if (playPromise !== undefined) {
+            playPromise.catch(function (error) {
+              console.log('视频播放失败:', error)
+            })
+          }
+        }
+      } catch (e) {
+        console.log('播放错误:', e)
+      }
+    }
+
+    // 确保循环播放正常工作
+    videoElement.addEventListener('ended', function() {
+      videoElement.currentTime = 0 // 重置播放位置
+      playVideo() // 重新播放
+    }, false)
+    
+    // 兼容IE11的事件监听
+    function addOneTimeEventListener(element, event, callback) {
+      var handler = function () {
+        callback()
+        // IE11不支持removeEventListener的useCapture参数
+        if (element.removeEventListener) {
+          element.removeEventListener(event, handler)
+        } else if (element.detachEvent) { // 兼容IE8及更早版本
+          element.detachEvent('on' + event, handler)
+        }
+      }
+
+      if (element.addEventListener) {
+        element.addEventListener(event, handler)
+      } else if (element.attachEvent) { // 兼容IE8及更早版本
+        element.attachEvent('on' + event, handler)
+      }
+    }
+    // 添加点击/触摸事件监听
+    addOneTimeEventListener(document, 'click', playVideo)
+    // 为移动设备添加触摸事件支持
+    addOneTimeEventListener(document, 'touchend', playVideo)
+    // 尝试自动播放
+    playVideo()
+  },
 }
 
 window.commonContext = commonContext
 let timeLifeHour = -1
 
 !(function () {
-  const loads = ['initCarousel', 'sparkInput', 'websiteTime']
+  const loads = ['initCarousel', 'sparkInput', 'websiteTime', 'playBannerVideo']
   const omits = ['initEffects', 'showThemeVersion', 'iniTaskItemDisabled']
 
   Object.keys(commonContext).forEach(
