@@ -54,15 +54,16 @@
                         return
                       }
                       Utils.request({
-                        url: '/apis/api.halo.run/v1alpha1/indices/post',
-                        contentType: 'application/json;charset=UTF-8',
+                        url: '/apis/api.halo.run/v1alpha1/indices/-/search',
                         returnRaw: true,
-                        data: {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        data: JSON.stringify({
                           keyword,
                           limit: (searchResultLimit && searchResultLimit !== '') ? searchResultLimit : 10,
                           highlightPreTag: '<B>',
                           highlightPostTag: '</B>'
-                        },
+                        }),
                         noErrorTip: true
                       })
                         .then((_res) => {
