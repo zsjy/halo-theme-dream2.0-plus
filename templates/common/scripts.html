@@ -1,4 +1,5 @@
 <th:block xmlns:th="https://www.thymeleaf.org">
+    <script th:if="${theme.config.enhance.disable_debug}" th:src="@{/assets/js/ban-debug.min.js(mew=${theme.spec.version})}"></script>
     <script th:src="@{/assets/js/utils.min.js(mew=${theme.spec.version})}"></script>
     <script th:src="@{/assets/js/btoc.min.js(mew=${theme.spec.version})}"></script>
     <script th:if="${isFirstIndex == true && !#lists.isEmpty(theme.config.basic_style.carousel_options)}" data-pjax
@@ -24,7 +25,6 @@
 
     <script th:if="${isPost == true || isPhotos == true}" data-pjax async th:src="@{/assets/lib/fancybox@5.3.7/jquery.fancybox.min.js}"></script>
 
-    <script th:if="${theme.config.enhance.disable_debug}" th:src="@{/assets/js/ban-debug.min.js(mew=${theme.spec.version})}"></script>
     <script th:if="${theme.config.enhance.busuanzi_group.enable_busuanzi != false}" async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
     [(${theme.config.custom.external_js_body})]

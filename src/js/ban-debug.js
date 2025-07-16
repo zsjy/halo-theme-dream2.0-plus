@@ -1,12 +1,19 @@
 !(function () {
-  // 方法1：无限 debugger
-  setInterval(function () {
+
+  function checkDebug() {
     const startTime = performance.now()
     eval('debugger')
     const endTime = performance.now()
     if (endTime - startTime > 300) {
       showBlockMessage()
     }
+  }
+
+  checkDebug()
+
+  // 方法1：无限 debugger
+  setInterval(function () {
+    checkDebug()
   }, 1000)
 
   // 方法2：键盘监听
