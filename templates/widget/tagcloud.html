@@ -24,18 +24,5 @@
 
     <th:block th:if="${theme.config.sidebar.show_tagcloud_style}">
         <script th:src="@{/assets/js/tagcloud.min.js(mew=${theme.spec.version})}"></script>
-        <script>
-          $(function () {
-            tagcloud({
-              selector: '.tagcloud .card-content',
-              fontsize: 18,
-              radius: 75,
-              mspeed: 'slow',
-              ispeed: 'slow',
-              direction: 45,
-              keep: false
-            })
-          })
-        </script>
     </th:block>
 </div>
