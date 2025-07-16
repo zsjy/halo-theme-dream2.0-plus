@@ -11,7 +11,6 @@
         <script th:if="${enableShare}" data-pjax th:src="@{/assets/js/dshare.min.js(mew=${theme.spec.version})}"></script>
         <script th:if="${isPost}" data-pjax th:src="@{/assets/js/post.min.js(mew=${theme.spec.version})}"></script>
         <script th:if="${isJournals}" data-pjax th:src="@{/assets/js/journals.min.js(mew=${theme.spec.version})}"></script>
-        <script th:if="${pluginFinder.available('plugin-katex')}" data-pjax src="/plugins/plugin-katex/assets/static/katex.min.js"></script>
     </th:block>
     <script th:if="${isPhotos}" data-pjax th:src="@{/assets/lib/justifiedGallery@3.8.1/jquery.justifiedGallery.min.js}"></script>
 
