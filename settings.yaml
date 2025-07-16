@@ -1462,6 +1462,16 @@ spec:
             - value: false
               label: 关闭
         - $formkit: radio
+          name: disable_debug
+          label: 禁止打开控制台
+          value: false
+          help: '开启后，禁止通过快捷键打开控制台，其他方式打开时禁止调试操作。'
+          options:
+            - value: true
+              label: 开启
+            - value: false
+              label: 关闭
+        - $formkit: radio
           name: enable_debug
           label: 开启 DEBUG 日志
           value: false

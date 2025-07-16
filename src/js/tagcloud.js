@@ -297,3 +297,15 @@ window.tagcloud = (function (win, doc) { // ns
   }
 
 })(window, document)
+
+!(function () {
+  tagcloud({
+    selector: '.tagcloud .card-content',
+    fontsize: 18,
+    radius: 75,
+    mspeed: 'slow',
+    ispeed: 'slow',
+    direction: 45,
+    keep: false
+  })
+})()
