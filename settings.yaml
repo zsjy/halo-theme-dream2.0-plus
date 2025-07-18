@@ -73,6 +73,28 @@ spec:
           name: cdn_by_url
           label: 'CDN提供商 URL'
           placeholder: '请输入链接地址'
+        - $formkit: select
+          name: referrer_policy
+          label: 全局 Referrer 策略
+          value: 'no-referrer-when-downgrade'
+          help: 全局 Referrer 策略，会被元素级策略覆盖
+          options:
+            - label: 完全不发送Referer头
+              value: 'no-referrer'
+            - label: 浏览器默认值，HTTPS→HTTP时不发送，其他情况发送完整URL
+              value: 'no-referrer-when-downgrade'
+            - label: 只发送源(协议+域名+端口)
+              value: 'origin'
+            - label: 同源时发送完整URL，跨域时只发送源
+              value: 'origin-when-cross-origin'
+            - label: 同源时发送完整URL，跨域时不发送
+              value: 'same-origin'
+            - label: 只发送源，HTTPS→HTTP时不发送
+              value: 'strict-origin'
+            - label: 同源时发送完整URL，跨域时只发送源，HTTPS→HTTP时不发送
+              value: 'strict-origin-when-cross-origin'
+            - label: 总是发送完整URL(即使HTTPS→HTTP)
+              value: 'unsafe-url'
         - $formkit: radio
           name: header_fixed
           label: 固定标题栏
