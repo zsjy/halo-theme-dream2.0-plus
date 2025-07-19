@@ -76,8 +76,8 @@ spec:
         - $formkit: select
           name: referrer_policy
           label: 全局 Referrer 策略
-          value: 'no-referrer-when-downgrade'
-          help: 全局 Referrer 策略，会被元素级策略覆盖
+          value: 'strict-origin-when-cross-origin'
+          help: 全局 Referrer 策略，会被http头和元素策略覆盖，用于后备方案。
           options:
             - label: 完全不发送Referer头
               value: 'no-referrer'
