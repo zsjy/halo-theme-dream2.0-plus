@@ -33,7 +33,7 @@
       '感谢您的理解与配合！' +
       '</div>' +
       '<br/>' +
-      '<a style="display: flex; justify-content: center;cursor: pointer;" data-not-pjax href="/">返回首页</a>' +
+      '<a style="display: flex; justify-content: center;" data-not-pjax href="/">返回首页</a>' +
       '</div>' +
       '</div>'
   }
