@@ -482,7 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (elem.alt) {
             wrapper.setAttribute('data-caption', elem.alt)
           }
-          wrapper.setAttribute('href', elem.src)
+          wrapper.setAttribute('href', elem.src ? elem.src : elem.getAttribute('data-src'))
           $(elem).wrap(wrapper)
         })
         $(this).justifiedGallery({captions: this.options.captions, margins: this.options.margins})
