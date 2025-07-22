@@ -92,8 +92,19 @@ const commonContext = {
   initGallery() {
     // 用链接和标题包装图像
     $('.main-content img:not(.not-gallery)').each(function () {
+      const $img = $(this)
+      const src = $img.attr('src')
+      const alt = $img.attr('alt')
+      const srcset = $img.attr('srcset')
+
+      // 关键修改：移除 src 并用 data-src 替代（避免立即加载）
+      $img.removeAttr('src')
+      $img.removeAttr('srcset')
+      $img.attr('data-src', src)
+      $img.attr('data-srcset', srcset)
+      $img.addClass('lazyload')
       if ($(this).parents('[data-fancybox],mew-photos').length === 0) {
-        $(this).wrap(`<div class="gallery-item"><div data-fancybox="gallery" data-options='{"hash": false}' ${this.alt ? `data-caption="${this.alt}"` : ''} href="${$(this).attr('src')
+        $(this).wrap(`<div class="gallery-item"><div data-fancybox="gallery" data-options='{"hash": false}' ${this.alt ? `data-caption="${this.alt}"` : ''} href="${src
         }"></div>${(this.alt && DreamConfig.show_img_name) ? `<p>${this.alt}</p>` : ''}</div>`)
       }
     })
@@ -770,7 +781,7 @@ const commonContext = {
     videoElement.muted = true // 静音更易自动播放
     videoElement.setAttribute('playsinline', '') // iOS内联播放
     videoElement.setAttribute('webkit-playsinline', '') // 旧版iOS支持
-    
+
     function playVideo() {
       try {
         if (videoElement.paused) {
@@ -788,11 +799,11 @@ const commonContext = {
     }
 
     // 确保循环播放正常工作
-    videoElement.addEventListener('ended', function() {
+    videoElement.addEventListener('ended', function () {
       videoElement.currentTime = 0 // 重置播放位置
       playVideo() // 重新播放
     }, false)
-    
+
     // 兼容IE11的事件监听
     function addOneTimeEventListener(element, event, callback) {
       var handler = function () {
@@ -811,6 +822,7 @@ const commonContext = {
         element.attachEvent('on' + event, handler)
       }
     }
+
     // 添加点击/触摸事件监听
     addOneTimeEventListener(document, 'click', playVideo)
     // 为移动设备添加触摸事件支持
