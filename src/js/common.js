@@ -97,13 +97,18 @@ const commonContext = {
       const alt = $img.attr('alt')
       const srcset = $img.attr('srcset')
 
-      if ($(this).parents('[data-fancybox],mew-photos').length === 0) {
-        // 移除 src 并用 data-src 替代（避免立即加载）
-        $img.removeAttr('src')
-        $img.removeAttr('srcset')
+      if (DreamConfig.lazy_enable) {
         $img.attr('data-src', src)
         $img.attr('data-srcset', srcset)
         $img.addClass('lazyload')
+      }
+
+      if ($(this).parents('[data-fancybox],mew-photos').length === 0) {
+        if (DreamConfig.lazy_enable) {
+          // 移除 src 并用 data-src 替代（避免立即加载）
+          $img.removeAttr('src')
+          $img.removeAttr('srcset')
+        }
 
         $(this).wrap(`<div class="gallery-item"><div data-fancybox="gallery" data-options='{"hash": false}' ${this.alt ? `data-caption="${this.alt}"` : ''} href="${src
         }"></div>${(this.alt && DreamConfig.show_img_name) ? `<p>${this.alt}</p>` : ''}</div>`)

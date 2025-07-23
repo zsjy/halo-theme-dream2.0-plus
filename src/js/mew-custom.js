@@ -478,7 +478,7 @@ document.addEventListener('DOMContentLoaded', () => {
         $(this).find('img').each((i, elem) => {
           var wrapper = document.createElement('div')
           wrapper.setAttribute('data-fancybox', 'gallery')
-          wrapper.setAttribute('data-options', JSON.stringify({ hash: false }))
+          wrapper.setAttribute('data-options', JSON.stringify({hash: false}))
           if (elem.alt) {
             wrapper.setAttribute('data-caption', elem.alt)
           }
@@ -486,6 +486,13 @@ document.addEventListener('DOMContentLoaded', () => {
           $(elem).wrap(wrapper)
         })
         $(this).justifiedGallery({captions: this.options.captions, margins: this.options.margins})
+        // 懒加载
+        if (this.hasAttribute('lazy') && this.getAttribute('lazy') !== 'false') {
+          $(this).find('img').each((i, elem) => {
+            $(elem).removeAttr('src')
+            $(elem).removeAttr('srcset')
+          })
+        }
         this.drawComplete()
       }
     })
