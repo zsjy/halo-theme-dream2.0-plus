@@ -2198,6 +2198,54 @@ button.swiper-pagination-bullet {
   }
 }
 
+//折叠块
+
+details {
+  padding: 0.5em;
+  border: 1px solid var(--light-b);
+  border-radius: var(--radius-wrap);
+  margin-bottom: 14px;
+
+  summary {
+    cursor: var(--cursor-pointer);
+    font-weight: bold;
+    padding: 0.5rem;
+    margin: -0.5rem;
+    outline: none;
+    list-style: none;
+  }
+
+  & > div {
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border-top: 1px dashed var(--light-b);
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  details {
+    margin-left: 1.5rem;
+    background-color: var(--bg-k);
+  }
+
+  /* 箭头图标样式 */
+  summary::before {
+    content: "▶";
+    display: inline-block;
+    margin-right: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--theme);
+    transition: transform 0.2s;
+  }
+
+}
+
+details[open] > summary::before {
+  transform: rotate(90deg);
+}
+
 .banner {
   width: 100%;
   height: 54vh;
@@ -5469,6 +5517,10 @@ text-diagram[data-type="mermaid"] {
   b, mark {
     color: var(--light-z);
     background: var(--theme);
+  }
+
+  h2 {
+    cursor: var(--cursor-pointer);
   }
 }
 
