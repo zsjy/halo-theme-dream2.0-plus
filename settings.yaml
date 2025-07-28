@@ -99,7 +99,7 @@ spec:
           name: lazy_enable
           label: 懒加载
           value: false
-          help: 对文章图片启用懒加载，pjax加载的页面无效。
+          help: 对文章列表图片、归档页图片和文章图片启用懒加载，pjax加载的页面无效。
           options:
             - label: 开启
               value: true
