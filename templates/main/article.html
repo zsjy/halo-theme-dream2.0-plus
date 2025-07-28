@@ -2,12 +2,19 @@
      th:fragment="article (post, type)"
      th:with="updateInterval = ${T(java.lang.Math).floor((#dates.createNow().getTime()/1000.0 - post.status.lastModifyTime.getEpochSecond())/86400.0).intValue()},
      isPost = ${type == 'Post'},
-     thumbnail = ${#strings.isEmpty(post.spec.cover) ? #strings.isEmpty(theme.config.post.default_thumbnail) ? '' : theme.config.post.default_thumbnail + (#strings.contains(theme.config.post.default_thumbnail, '?') ? '&' : '?') + 'id=' + post.metadata.name : thumbnail.gen(post.spec.cover, 'xl')},
+     thumbnail_img = ${#strings.isEmpty(post.spec.cover) ? #strings.isEmpty(theme.config.post.default_thumbnail) ? '' : theme.config.post.default_thumbnail + (#strings.contains(theme.config.post.default_thumbnail, '?') ? '&' : '?') + 'id=' + post.metadata.name : post.spec.cover},
      wordCountTime = ${#strings.length(#strings.trim(post.content.raw)) / 400},
      wordCountTimeStr = ${wordCountTime == 0 ? '小于1分钟' : (wordCountTime + '分钟')}">
 
-    <div th:if="${!#strings.isEmpty(thumbnail)}" class="card widget">
-        <div class="cover-image" th:style="'background-image: url(' + ${thumbnail} + ')'">
+    <div th:if="${!#strings.isEmpty(thumbnail_img)}" class="card widget">
+        <div class="cover-image" th:style="'background-image: url(' + ${thumbnail_img} + ')'">
+            <img class="cover-image" alt="文章封面"
+                 th:srcset="${!theme.config.basic_info.lazy_enable} ? |${thumbnail.gen(thumbnail_img, 's')} 400w,
+              ${thumbnail.gen(thumbnail_img, 'm')} 800w,
+              ${thumbnail.gen(thumbnail_img, 'l')} 1200w,
+              ${thumbnail.gen(thumbnail_img, 'xl')} 1600w| : ''"
+                 sizes="(max-width: 400px) 400px, (max-width: 800px) 800px, (max-width: 1200px) 1200px, (max-width: 1600px) 1600px"
+                 th:src="${thumbnail_img}"/>
             <div th:if="${isPost && !#lists.isEmpty(post.categories)}" class="category">
                 <a th:each="cy : ${post.categories}" th:href="${cy.status.permalink}"
                    th:aria-label="${cy.spec.displayName}" th:title="${cy.spec.displayName}"
@@ -39,9 +46,12 @@
       class="ri-close-line click-close" data-close=".tips"></i>[[${post.metadata.annotations.tips}]]
     </div>
 
+    <div th:if="${!#strings.isEmpty(thumbnail_img)}" class="card summary summary-thumbnail">
+    </div>
+
     <div class="card">
         <div class="card-content main">
-            <th:block th:if="${#strings.isEmpty(thumbnail)}">
+            <th:block th:if="${#strings.isEmpty(thumbnail_img)}">
                 <h1 class="title" th:text="${post.spec.title}"></h1>
                 <div class="meta">
                     <ul class="breadcrumb">
@@ -61,6 +71,8 @@
                     </div>
                 </div>
                 <hr/>
+                <div class="card summary summary-not-thumbnail">
+                </div>
             </th:block>
 
             <div th:data-id="${post.metadata.name}" th:data-target="${type}" class="main-content article"
