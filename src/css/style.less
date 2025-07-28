@@ -2564,18 +2564,20 @@ details[open] > summary::before {
       overflow: hidden;
 
       &-image {
-        min-height: 280px;
+        height: 280px;
         width: 100%;
         margin: auto;
         display: block;
         background-position: 50% 50%;
         background-size: cover;
         transition: all 0.5s;
+        object-fit: cover;
+        object-position: center;
       }
     }
 
     .cover-image {
-      min-height: 360px;
+      height: 360px;
       width: 100%;
       margin: auto;
       position: relative;
@@ -2583,6 +2585,8 @@ details[open] > summary::before {
       background-position: 50% 50%;
       background-size: cover;
       transition: all 0.5s;
+      object-position:center;
+      object-fit:cover;
     }
 
     &.card-cover, .cover-image {
@@ -2679,6 +2683,7 @@ details[open] > summary::before {
       & > a {
         width: 34%;
         overflow: hidden;
+        position: relative;
 
         &:first-child {
           clip-path: polygon(0 0, 90% 0, 100% 100%, 0 100%)
@@ -2696,6 +2701,9 @@ details[open] > summary::before {
         background-position: 50% 50%;
         background-size: cover;
         transition: all 0.5s;
+        position:absolute;
+        object-position:center;
+        object-fit:cover;
       }
 
       .card-content {
@@ -4289,11 +4297,11 @@ details[open] > summary::before {
 @media (max-width: (@laptop-min-width - 1)) {
   .section .card {
     .cover-image {
-      min-height: 24vw;
+      height: 24vw;
     }
 
     .thumbnail-image {
-      min-height: 20vw;
+      height: 20vw;
     }
   }
 
@@ -4526,11 +4534,11 @@ details[open] > summary::before {
 @media (min-width: @laptop-min-width) {
   .section .card {
     .cover-image {
-      min-height: 250px;
+      height: 250px;
     }
 
     .thumbnail-image {
-      min-height: 195px;
+      height: 195px;
     }
   }
 
@@ -4555,11 +4563,11 @@ details[open] > summary::before {
 @media (min-width: @desktop-min-width) {
   .section .card {
     .cover-image {
-      min-height: 240px;
+      height: 240px;
     }
 
     .thumbnail-image {
-      min-height: 185px;
+      height: 185px;
     }
   }
 
@@ -4615,11 +4623,11 @@ details[open] > summary::before {
     }
 
     .cover-image {
-      min-height: 260px;
+      height: 260px;
     }
 
     .thumbnail-image {
-      min-height: 210px;
+      height: 210px;
     }
   }
 
@@ -4660,11 +4668,11 @@ details[open] > summary::before {
 @media (min-width: @display-min-width) {
   .section .card {
     .cover-image {
-      min-height: 320px;
+      height: 320px;
     }
 
     .thumbnail-image {
-      min-height: 240px;
+      height: 240px;
     }
   }
 
@@ -4710,11 +4718,11 @@ details[open] > summary::before {
 
   .section .card {
     .cover-image {
-      min-height: 340px;
+      height: 340px;
     }
 
     .thumbnail-image {
-      min-height: 260px;
+      height: 260px;
     }
   }
 
