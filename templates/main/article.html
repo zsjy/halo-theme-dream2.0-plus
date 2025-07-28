@@ -46,8 +46,7 @@
       class="ri-close-line click-close" data-close=".tips"></i>[[${post.metadata.annotations.tips}]]
     </div>
 
-    <div th:if="${!#strings.isEmpty(thumbnail_img)}" class="card summary summary-thumbnail">
-    </div>
+    <div th:if="${!#strings.isEmpty(thumbnail_img)}" class="card summary summary-thumbnail"></div>
 
     <div class="card">
         <div class="card-content main">
@@ -71,8 +70,7 @@
                     </div>
                 </div>
                 <hr/>
-                <div class="card summary summary-not-thumbnail">
-                </div>
+                <div class="card summary summary-not-thumbnail"></div>
             </th:block>
 
             <div th:data-id="${post.metadata.name}" th:data-target="${type}" class="main-content article"
