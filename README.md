@@ -95,3 +95,7 @@
 感谢您对本项目的喜爱，您的打赏是对本项目最好的支持！
 
 [爱发电](https://afdian.com/a/org-hcjike)
+
+## Star 历史
+
+[![Star History Chart](https://api.star-history.com/svg?repos=zsjy/halo-theme-dream2.0-plus&type=Date)](https://www.star-history.com/#zsjy/halo-theme-dream2.0-plus&Date)
