@@ -105,8 +105,7 @@ const postContext = {
    */
   initShare() {
     if (!window.DShare) return
-    let imageUrl = $('.cover-image').css('background-image')
-    imageUrl && (imageUrl = imageUrl.substring(5, imageUrl.length - 2))
+    let imageUrl = $('img.cover-image').attr('src')
     DShare.create('.dshare', {image: imageUrl, imageSelector: '.main-content'})
   },
   /* 代码块复制 */
