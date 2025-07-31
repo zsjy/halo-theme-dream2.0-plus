@@ -3,7 +3,7 @@
   <th:block th:each="post : ${posts}"
             th:with="thumbnail_img = ${#strings.isEmpty(post.spec.cover) ? #strings.isEmpty(theme.config.post.default_thumbnail) ? '' : theme.config.post.default_thumbnail + (#strings.contains(theme.config.post.default_thumbnail, '?') ? '&' : '?') + 'id=' + post.metadata.name : post.spec.cover},
             thumbnail_mode = ${(theme.config.post.top_thumbnail_mode == 'grid' || (!post.spec.pinned && theme.config.post.thumbnail_mode == 'grid'))? 'grid' : (!#strings.isEmpty(post.metadata.annotations.get('thumbnail_mode')) && post.metadata.annotations.get('thumbnail_mode') != 'none')? post.metadata.annotations.get('thumbnail_mode') : post.spec.pinned ? theme.config.post.top_thumbnail_mode : theme.config.post.thumbnail_mode}">
-    <div th:if="${!#strings.isEmpty(thumbnail) && thumbnail_mode == 'back'}" class="card widget card-cover">
+    <div th:if="${!#strings.isEmpty(thumbnail_img) && thumbnail_mode == 'back'}" class="card widget card-cover">
       <a th:href="${post.status.permalink}" th:aria-label="${post.spec.title}" th:title="${post.spec.title}">
         <img class="cover-image" alt="文章封面" th:classappend="${theme.config.basic_info.lazy_enable} ? 'lazyload'"
              th:data-srcset="${theme.config.basic_info.lazy_enable} ? |${thumbnail.gen(thumbnail_img, 's')} 400w,
@@ -131,7 +131,7 @@
       <p th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"></p>
     </a>
 
-    <div th:if="${(#strings.isEmpty(thumbnail_img) && thumbnail_mode != 'fold') || thumbnail_mode == 'default'}"
+    <div th:if="${(#strings.isEmpty(thumbnail_img) && thumbnail_mode != 'fold' && thumbnail_mode != 'grid') || thumbnail_mode == 'default'}"
       class="card widget">
       <a th:if="${!#strings.isEmpty(thumbnail_img)}" class="thumbnail"
          th:aria-label="${post.spec.title}" th:title="${post.spec.title}"
