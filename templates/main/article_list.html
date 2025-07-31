@@ -123,10 +123,10 @@
       </a>
     </div>
 
-    <a th:if="${post.spec.pinned && thumbnail_mode == 'fold'}" class="card widget card-fold"
+    <a th:if="${thumbnail_mode == 'fold'}" class="card widget card-fold"
        th:aria-label="${post.spec.title}" th:title="${post.spec.title}"
        th:href="${post.status.permalink}">
-      <h2 class="title"><span class="top">置顶</span>
+      <h2 class="title"><span th:if="${post.spec.pinned}" class="top">置顶</span>
         <p th:text="${post.spec.title}"></p></h2>
       <p th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"></p>
     </a>
