@@ -15,7 +15,7 @@
             <article th:each="post : ${months.posts}" class="media"
                      th:with="thumbnail_img = ${#strings.isEmpty(post.spec.cover) ? #strings.isEmpty(theme.config.post.default_thumbnail) ? '' : theme.config.post.default_thumbnail + (#strings.contains(theme.config.post.default_thumbnail, '?') ? '&' : '?') + 'id=' + post.metadata.name : post.spec.cover}">
               <a th:if="${!#strings.isEmpty(thumbnail_img)}" th:href="${post.status.permalink}" th:aria-label="${post.spec.title}" th:title="${post.spec.title}" class="media-left">
-                <img class="not-gallery" alt="文章封面" th:classappend="${theme.config.basic_info.lazy_enable} ? 'lazyload'"
+                <img class="not-gallery" alt="文章封面" th:classappend="${theme.config.basic_info.lazy_enable} ? 'lazyload'" width="auto" height="auto"
                      th:data-srcset="${theme.config.basic_info.lazy_enable} ? |${thumbnail.gen(thumbnail_img, 's')} 400w,
               ${thumbnail.gen(thumbnail_img, 'm')} 800w| : ''"
                      th:srcset="${!theme.config.basic_info.lazy_enable} ? |${thumbnail.gen(thumbnail_img, 's')} 400w,

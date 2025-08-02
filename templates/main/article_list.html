@@ -5,7 +5,7 @@
             thumbnail_mode = ${(theme.config.post.top_thumbnail_mode == 'grid' || (!post.spec.pinned && theme.config.post.thumbnail_mode == 'grid'))? 'grid' : (!#strings.isEmpty(post.metadata.annotations.get('thumbnail_mode')) && post.metadata.annotations.get('thumbnail_mode') != 'none')? post.metadata.annotations.get('thumbnail_mode') : post.spec.pinned ? theme.config.post.top_thumbnail_mode : theme.config.post.thumbnail_mode}">
     <div th:if="${!#strings.isEmpty(thumbnail_img) && thumbnail_mode == 'back'}" class="card widget card-cover">
       <a th:href="${post.status.permalink}" th:aria-label="${post.spec.title}" th:title="${post.spec.title}">
-        <img class="cover-image" alt="文章封面" th:classappend="${theme.config.basic_info.lazy_enable} ? 'lazyload'"
+        <img class="cover-image" alt="文章封面" th:classappend="${theme.config.basic_info.lazy_enable} ? 'lazyload'" width="auto" height="auto"
              th:data-srcset="${theme.config.basic_info.lazy_enable} ? |${thumbnail.gen(thumbnail_img, 's')} 400w,
               ${thumbnail.gen(thumbnail_img, 'm')} 800w,
               ${thumbnail.gen(thumbnail_img, 'l')} 1200w,
@@ -41,7 +41,7 @@
       th:if="${!#strings.isEmpty(thumbnail_img) && (thumbnail_mode == 'small' || (thumbnail_mode == 'small-alter' && postStat.index % 2 == 0))}"
       class="card widget card-small">
       <a th:href="${post.status.permalink}" th:aria-label="${post.spec.title}" th:title="${post.spec.title}">
-        <img class="small-image" alt="文章封面" th:classappend="${theme.config.basic_info.lazy_enable} ? 'lazyload'"
+        <img class="small-image" alt="文章封面" th:classappend="${theme.config.basic_info.lazy_enable} ? 'lazyload'" width="auto" height="auto"
              th:data-srcset="${theme.config.basic_info.lazy_enable} ? |${thumbnail.gen(thumbnail_img, 's')} 400w,
               ${thumbnail.gen(thumbnail_img, 'm')} 800w,
               ${thumbnail.gen(thumbnail_img, 'l')} 1200w,
@@ -108,7 +108,7 @@
         </div>
       </div>
       <a th:href="${post.status.permalink}" th:aria-label="${post.spec.title}" th:title="${post.spec.title}">
-        <img class="small-image" alt="文章封面" th:classappend="${theme.config.basic_info.lazy_enable} ? 'lazyload'"
+        <img class="small-image" alt="文章封面" th:classappend="${theme.config.basic_info.lazy_enable} ? 'lazyload'" width="auto" height="auto"
              th:data-srcset="${theme.config.basic_info.lazy_enable} ? |${thumbnail.gen(thumbnail_img, 's')} 400w,
               ${thumbnail.gen(thumbnail_img, 'm')} 800w,
               ${thumbnail.gen(thumbnail_img, 'l')} 1200w,
@@ -136,7 +136,7 @@
       <a th:if="${!#strings.isEmpty(thumbnail_img)}" class="thumbnail"
          th:aria-label="${post.spec.title}" th:title="${post.spec.title}"
          th:href="${post.status.permalink}">
-        <img class="thumbnail-image" alt="文章封面" th:classappend="${theme.config.basic_info.lazy_enable} ? 'lazyload'"
+        <img class="thumbnail-image" alt="文章封面" th:classappend="${theme.config.basic_info.lazy_enable} ? 'lazyload'" width="auto" height="auto"
              th:data-srcset="${theme.config.basic_info.lazy_enable} ? |${thumbnail.gen(thumbnail_img, 's')} 400w,
               ${thumbnail.gen(thumbnail_img, 'm')} 800w,
               ${thumbnail.gen(thumbnail_img, 'l')} 1200w,
@@ -184,7 +184,7 @@
         th:if="${(theme.config.post.top_thumbnail_mode == 'grid' || (!post.spec.pinned && theme.config.post.thumbnail_mode == 'grid'))}"
         class="card widget">
         <a class="thumbnail" th:href="${post.status.permalink}" th:aria-label="${post.spec.title}" th:title="${post.spec.title}">
-          <img class="thumbnail-image" alt="文章封面" th:classappend="${theme.config.basic_info.lazy_enable} ? 'lazyload'"
+          <img class="thumbnail-image" alt="文章封面" th:classappend="${theme.config.basic_info.lazy_enable} ? 'lazyload'" width="auto" height="auto"
                th:data-srcset="${theme.config.basic_info.lazy_enable} ? |${thumbnail.gen(thumbnail_img, 's')} 400w,
               ${thumbnail.gen(thumbnail_img, 'm')} 800w,
               ${thumbnail.gen(thumbnail_img, 'l')} 1200w,
