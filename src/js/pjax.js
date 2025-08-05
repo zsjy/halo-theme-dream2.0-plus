@@ -141,8 +141,7 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
   $currentTarget.filter('link').filter(function () {
     const isDataPjax = $(this).is('[data-pjax]')
     const href = $(this).attr('href')
-    const isStaticPath = href && (href.startsWith('/plugins/PluginHighlightJS/') ||
-      href.startsWith('/plugins/plugin-katex/'))
+    const isStaticPath = href && (href.startsWith('/plugins/PluginHighlightJS/'))
     return isDataPjax || isStaticPath
   }).each(function () {
     let href = $(this).attr('href')
