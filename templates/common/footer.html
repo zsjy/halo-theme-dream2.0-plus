@@ -2,7 +2,7 @@
     <div class="container">
         <ul th:class="${theme.config.basic_info.footer_center} ? 'footer-container footer-center' : 'footer-container'">
             <li>
-              <a class="logo-title" th:href="${site.url}" th:aria-label="${site.title}" th:title="${site.title}">
+              <a class="logo-title" href="/" th:aria-label="${site.title}" th:title="${site.title}">
                 <th:block th:if="${#strings.isEmpty(site.logo)}" th:text="${site.title}"/>
                 <th:block th:unless="${#strings.isEmpty(site.logo)}">
                   <img class="logo-img" th:src="${site.logo}" th:alt="${site.title}" height="28">
@@ -13,7 +13,7 @@
             <li>
               <p class="icon-spot">
                 <span id="webCopyright" th:text="'&copy; '+${#dates.format(#dates.createNow(), 'yyyy')}+' '"></span><a class="record"
-                        th:href="${site.url}" rel="noopener noreferrer nofollow" th:aria-label="${site.title}" th:title="${site.title}"
+                        href="/" rel="noopener noreferrer nofollow" th:aria-label="${site.title}" th:title="${site.title}"
                         th:text="${site.title}"></a><span class="footer-truncation">Powered by <span class="footer-copyright"><a class="powered footer-copyright-halo" href="https://halo.run/" target="_blank" aria-label="Halo">Halo</a> & <a class="powered" href="https://github.com/zsjy/halo-theme-dream2.0-plus" target="_blank" aria-label="Dream2.0 Plus">Dream2.0 Plus</a></span></span></p>
                 <p class="icon-spot" th:if="${!#strings.isEmpty(theme.config.basic_info.record_number_ps) || !#strings.isEmpty(theme.config.basic_info.record_number)}">
                     <a th:if="${!#strings.isEmpty(theme.config.basic_info.record_number)}" class="record" th:aria-label="${theme.config.basic_info.record_number}" th:title="${theme.config.basic_info.record_number}"
