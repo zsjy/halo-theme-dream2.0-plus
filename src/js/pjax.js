@@ -67,14 +67,14 @@ $(document).on('pjax:click', function (event, options) {
   if (!options) return
   console.log('------------------------')
   console.log(`pjax:click sn = ${options.serialNumber}`)
-  document.dispatchEvent(new Event('pjax:click', { bubbles: true }))
+  document.dispatchEvent(new Event('pjax:click', {bubbles: true}))
 })
 
 $(document).on('pjax:beforeSend', function (event, xhr, options) {
   if (!options) return
   console.log(`pjax:beforeSend sn = ${options.serialNumber}`)
   $('html').addClass('pjax-loading')
-  document.dispatchEvent(new Event('pjax:beforeSend', { bubbles: true }))
+  document.dispatchEvent(new Event('pjax:beforeSend', {bubbles: true}))
 })
 
 $(document).on('pjax:start', function (event, xhr, options) {
@@ -82,19 +82,19 @@ $(document).on('pjax:start', function (event, xhr, options) {
   console.log(`pjax:start sn = ${options.serialNumber}`)
   window.DProgress && DProgress.start()
   $('.pjax-close').remove()
-  document.dispatchEvent(new Event('pjax:start', { bubbles: true }))
+  document.dispatchEvent(new Event('pjax:start', {bubbles: true}))
 })
 
 $(document).on('pjax:send', function (event, xhr, options) {
   if (!options) return
   console.log(`pjax:send sn = ${options.serialNumber}`)
-  document.dispatchEvent(new Event('pjax:send', { bubbles: true }))
+  document.dispatchEvent(new Event('pjax:send', {bubbles: true}))
 })
 
 $(document).on('pjax:clicked', function (event, options) {
   if (!options) return
   console.log(`pjax:clicked sn = ${options.serialNumber}`)
-  document.dispatchEvent(new Event('pjax:clicked', { bubbles: true }))
+  document.dispatchEvent(new Event('pjax:clicked', {bubbles: true}))
 })
 
 /**
@@ -111,7 +111,7 @@ $(document).on('pjax:beforeReplace', function (event, contents, options) {
   commonContext.showBanner()
   /* 移动端关闭抽屉弹窗 */
   $('html.disable-scroll').length > 0 && $('.navbar-mask').trigger('click')
-  document.dispatchEvent(new Event('pjax:beforeReplace', { bubbles: true }))
+  document.dispatchEvent(new Event('pjax:beforeReplace', {bubbles: true}))
 })
 
 /**
@@ -141,8 +141,7 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
   $currentTarget.filter('link').filter(function () {
     const isDataPjax = $(this).is('[data-pjax]')
     const href = $(this).attr('href')
-    const isStaticPath = href && (href.startsWith('/plugins/PluginHighlightJS/') ||
-      href.startsWith('/plugins/plugin-katex/'))
+    const isStaticPath = href && (href.startsWith('/plugins/PluginHighlightJS/'))
     return isDataPjax || isStaticPath
   }).each(function () {
     let href = $(this).attr('href')
@@ -189,7 +188,7 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
     })
   }
   console.log('全部处理完成')
-  document.dispatchEvent(new Event('pjax:success', { bubbles: true }))
+  document.dispatchEvent(new Event('pjax:success', {bubbles: true}))
   if (window.pjaxSerialNumber !== serialNumber) return
   /* 初始化日志界面 */
   window.journalPjax && window.journalPjax(serialNumber)
@@ -209,13 +208,13 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
 $(document).on('pjax:timeout', function (event, xhr, options) {
   if (!options) return
   console.log(`pjax:timeout sn = ${options.serialNumber}`)
-  document.dispatchEvent(new Event('pjax:timeout', { bubbles: true }))
+  document.dispatchEvent(new Event('pjax:timeout', {bubbles: true}))
 })
 
 $(document).on('pjax:error', function (event, xhr, textStatus, error, options) {
   if (!options) return
   console.log(`pjax:error sn = ${options.serialNumber} error ${error}`)
-  document.dispatchEvent(new Event('pjax:error', { bubbles: true }))
+  document.dispatchEvent(new Event('pjax:error', {bubbles: true}))
 })
 
 // pjax结束
@@ -223,23 +222,21 @@ $(document).on('pjax:complete', function (event, xhr, textStatus, options) {
   if (!options) return
   console.log(`pjax:complete sn = ${options.serialNumber}`)
 
-  //启用全局评论
-  if (DreamConfig.site_comment) {
-    // 获取当前页面的标题、路径和 URL
-    const currentTitle = document.title
-    const currentPath = window.location.pathname
-    const currentUrl = window.location.href
+  // 获取当前页面的标题、路径和 URL
+  const currentTitle = document.title
+  const currentPath = window.location.pathname
+  const currentUrl = window.location.href
 
-    if (window.history && window.history.replaceState) {
-      // 更新历史记录状态
-      window.history.replaceState(
-        {url: currentUrl, title: currentTitle, path: currentPath},
-        currentTitle,
-        currentUrl
-      )
-    }
+  if (window.history && window.history.replaceState) {
+    // 更新历史记录状态
+    window.history.replaceState(
+      {url: currentUrl, title: currentTitle, path: currentPath},
+      currentTitle,
+      currentUrl
+    )
   }
-  document.dispatchEvent(new Event('pjax:complete', { bubbles: true }))
+
+  document.dispatchEvent(new Event('pjax:complete', {bubbles: true}))
 })
 
 /**
@@ -267,7 +264,7 @@ $(document).on('pjax:end', function (event, xhr, options) {
     // 应该是由于浏览器缓存失效，有时候浏览器前后退还是会执行pjax:beforeSend
     $('html').removeClass('pjax-loading')
   }
-  document.dispatchEvent(new Event('pjax:end', { bubbles: true }))
+  document.dispatchEvent(new Event('pjax:end', {bubbles: true}))
 })
 
 $(document).on('pjax:popstate', function (event) {
@@ -277,18 +274,13 @@ $(document).on('pjax:popstate', function (event) {
 // 监听 popstate 事件
 window.addEventListener('popstate', function (event) {
   console.log('popstate event triggered')
-  //启用全局评论时
-  if (DreamConfig.site_comment && event.state) {
-    // console.log('State:', event.state)
-
-    const currentUrl = window.location.href
-    $.pjax.reload('.column-main', {
-      container: '.column-main', // 指定要重新加载的内容容器，默认为 document.body
-      push: false,
-      url: currentUrl,
-      fragment: '.column-main', // 加载的文本中被选中的目标内容
-      serialNumber: createSerialNumber(), // 创建序列号
-      timeout: 8000, // 设置超时时间（毫秒）
-    })
-  }
+  const currentUrl = window.location.href
+  $.pjax.reload('.column-main', {
+    container: '.column-main', // 指定要重新加载的内容容器，默认为 document.body
+    push: false,
+    url: currentUrl,
+    fragment: '.column-main', // 加载的文本中被选中的目标内容
+    serialNumber: createSerialNumber(), // 创建序列号
+    timeout: 8000, // 设置超时时间（毫秒）
+  })
 })
