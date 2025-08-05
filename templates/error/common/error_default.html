@@ -13,7 +13,7 @@
                 <div class="main-content">
                     <div style="margin: 20px 0; text-align: center; ">
                         <i style="font-size: 7rem" th:text="${error.status}"></i>
-                        <p th:if="${error.status == 404}" style="font-size: 1.4em;text-indent: 2em;">找不到网页，可能已被删除，去<a th:href='${site.url}' aria-label="首页" title="首页">首页</a>看看吧。</p>
+                        <p th:if="${error.status == 404}" style="font-size: 1.4em;text-indent: 2em;">找不到网页，可能已被删除，去<a href='/' aria-label="首页" title="首页">首页</a>看看吧。</p>
                         <p th:unless="${error.status == 404}" style="font-size: 1.4em;text-indent: 2em;">围观群众太过热情，服务器繁忙，请稍后访问。</p>
                     </div>
                 </div>

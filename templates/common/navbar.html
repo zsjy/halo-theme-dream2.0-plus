@@ -3,7 +3,7 @@
     <div class="navbar-above" th:classappend="${!theme.config.basic_info.header_fixed}? 'animation'">
         <div th:class="${theme.config.basic_style.sidebar_column != 'all' ? 'container two-column' : 'container' }">
             <i class="ri-list-unordered navbar-slideicon"></i>
-            <a class="navbar-item logo-title" th:href="${site.url}" th:aria-label="${site.title}" th:title="${site.title}">
+            <a class="navbar-item logo-title" href="/" th:aria-label="${site.title}" th:title="${site.title}">
                 <th:block th:if="${#strings.isEmpty(site.logo)}" th:text="${site.title}"/>
                 <th:block th:unless="${#strings.isEmpty(site.logo)}">
                     <img class="logo-img" th:src="${site.logo}" th:alt="${site.title}" height="28" width="auto">
