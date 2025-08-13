@@ -21,7 +21,7 @@
                     </div>
                     <div class="info">
                         <div class="author">[[${comment.owner.displayName}]]</div>
-                        <span class="date">[[${#temporals.format(comment.spec.creationTime, 'yyyy-MM-dd')}]]</span>
+                        <span class="date">[[${#temporals.format(comment.spec.creationTime, theme.config.basic_info.global_time_format)}]]</span>
                     </div>
                 </div>
                 <div class="reply"

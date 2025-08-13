@@ -38,6 +38,27 @@ spec:
           label: '黑暗模式 Logo'
           placeholder: '请输入/选择 Logo 路径'
           help: '在黑暗模式时显示的 Logo，放空默认为网站 Logo。'
+        - $formkit: select
+          name: global_time_format
+          label: 全局时间显示格式
+          value: 'yyyy-MM-dd'
+          help: 全局时间显示格式，控制“文章、页面、瞬间、朋友圈和侧边栏-最近评论模块”的时间显示格式。支持自定义，自定义时请遵守时间格式语法。
+          searchable: true
+          allowCreate: true
+          validation: required
+          options:
+            - label: yyyy-MM-dd
+              value: 'yyyy-MM-dd'
+            - label: yyyy-MM-dd HH:mm
+              value: 'yyyy-MM-dd HH:mm'
+            - label: yyyy/MM/dd
+              value: 'yyyy/MM/dd'
+            - label: yyyy/MM/dd HH:mm
+              value: 'yyyy/MM/dd HH:mm'
+            - label: yyyy年MM月dd日
+              value: 'yyyy年MM月dd日'
+            - label: yyyy年MM月dd日 HH时mm分
+              value: 'yyyy年MM月dd日 HH时mm分'
         - $formkit: text
           name: record_number
           label: 备案号

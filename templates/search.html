@@ -22,6 +22,7 @@
                     var searchResult = $('#dream-search-result')
                     var searchResultEmpty = $('#dream-search-result-empty')
                     var searchResultLimit = $('#halo-search-form-limit').val()
+                    var timeFormat = [[${theme.config.basic_info.global_time_format}]]
                     searchForm.addEventListener('submit', function (event) {
                       event.preventDefault()
                       findResult(searchInput.value)
@@ -87,7 +88,7 @@
                                   '<hr/>\n' +
                                   '<div class="meta">\n' +
                                   '<div></div>\n' +
-                                  '<em>' + '最后更新于 ' + Utils.formatDate(hit.updateTimestamp, 'yyyy年MM月dd日') + '</em>\n' +
+                                  '<em>' + '最后更新于 ' + Utils.formatDate(hit.updateTimestamp, timeFormat) + '</em>\n' +
                                   '</div>\n' +
                                   '</div>\n')
                                 // eslint-disable-next-line no-empty

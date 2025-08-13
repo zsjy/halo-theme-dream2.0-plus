@@ -7,7 +7,7 @@
     <div class="card card-content journal">
       <p class="journal-date">
         <i class="ri-send-plane-line"></i>
-        <em th:text="${#dates.format(moment.spec.releaseTime,'yyyy年MM月dd日 HH:mm:ss')}"></em>
+        <em th:text="${#dates.format(moment.spec.releaseTime,theme.config.basic_info.global_time_format)}"></em>
       </p>
       <div class="journal-content fold">
         <div class="main-content not-toc" data-target="Moment" th:data-id="${moment.metadata.name}">

@@ -25,7 +25,7 @@
                      th:data-src="${!theme.config.basic_info.lazy_enable ? '' : thumbnail_img}"/>
               </a>
               <div class="media-content">
-                <time th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"></time>
+                <time th:text="${#dates.format(post.spec.publishTime, theme.config.basic_info.global_time_format)}"></time>
                 <a th:href="${post.status.permalink}" class="title has-link-grey" th:text="${post.spec.title}" th:aria-label="${post.spec.title}" th:title="${post.spec.title}"></a>
                 <p th:if="${!#lists.isEmpty(post.categories)}">
                   <a class="has-link-grey"
