@@ -24,10 +24,10 @@
                 <h1 class="title" th:text="${post.spec.title}"></h1>
                 <ul class="breadcrumb">
                     <li th:text="${#dates.format(post.spec.publishTime, theme.config.basic_info.global_time_format)}"></li>
-                    <li><i class="ri-eye-line"></i>[[${post.stats.visit}]]</li>
+                    <li th:if="${theme.config.basic_info.show_visit}"><i class="ri-eye-line"></i>[[${post.stats.visit}]]</li>
                     <li th:if="${post.spec.allowComment && site.comment.enable}" class="is-hidden-mobile"><i class="ri-question-answer-line"></i>[[${post.stats.comment}]]
                     </li>
-                    <li><i class="ri-thumb-up-line"></i>[[${post.stats.upvote}]]</li>
+                    <li th:if="${theme.config.basic_info.show_upvote && isPost}"><i class="ri-thumb-up-line"></i>[[${post.stats.upvote}]]</li>
                     <li><i class="ri-time-line"></i>[[${wordCountTimeStr}]]</li>
                     <li sec:authorize="hasRole('ROLE_super-role')" th:if="${theme.config.post.show_edit_content}" class="is-hidden-laptop">
                         <a target="_blank" title="编辑" aria-label="编辑" th:href="@{|/console/${isPost ? 'posts' : 'single-pages'}/editor?name=${post.metadata.name}|}"><i class="ri-edit-2-line"></i>编辑</a></li>
@@ -55,10 +55,10 @@
                 <div class="meta">
                     <ul class="breadcrumb">
                         <li th:text="${#dates.format(post.spec.publishTime, theme.config.basic_info.global_time_format)}"></li>
-                        <li><i class="ri-eye-line"></i>[[${post.stats.visit}]]</li>
+                        <li th:if="${theme.config.basic_info.show_visit}"><i class="ri-eye-line"></i>[[${post.stats.visit}]]</li>
                         <li th:if="${post.spec.allowComment && site.comment.enable}" class="is-hidden-mobile"><i class="ri-question-answer-line"></i>[[${post.stats.comment}]]
                         </li>
-                        <li><i class="ri-thumb-up-line"></i>[[${post.stats.upvote}]]</li>
+                        <li th:if="${theme.config.basic_info.show_upvote && isPost}"><i class="ri-thumb-up-line"></i>[[${post.stats.upvote}]]</li>
                         <li><i class="ri-time-line"></i>[[${wordCountTimeStr}]]</li>
                         <li sec:authorize="hasRole('ROLE_super-role')" th:if="${theme.config.post.show_edit_content}" class="is-hidden-laptop">
                             <a target="_blank" title="编辑" aria-label="编辑" th:href="@{|/console/${isPost ? 'posts' : 'single-pages'}/editor?name=${post.metadata.name}|}"><i class="ri-edit-2-line"></i>编辑</a></li>

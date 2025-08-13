@@ -94,6 +94,26 @@ spec:
           name: cdn_by_url
           label: 'CDN提供商 URL'
           placeholder: '请输入链接地址'
+        - $formkit: radio
+          name: show_visit
+          label: 文章阅读量
+          value: true
+          help: 控制文章阅读量数据的显示与隐藏。
+          options:
+            - label: 显示
+              value: true
+            - label: 隐藏
+              value: false
+        - $formkit: radio
+          name: show_upvote
+          label: 点赞量
+          value: true
+          help: 控制点赞量数据的显示与隐藏。
+          options:
+            - label: 显示
+              value: true
+            - label: 隐藏
+              value: false
         - $formkit: select
           name: referrer_policy
           label: 全局 Referrer 策略
