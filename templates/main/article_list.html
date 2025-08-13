@@ -20,7 +20,7 @@
         <div class="details">
           <h2 class="title"><span class="top" th:if="${post.spec.pinned}">置顶</span>[[${post.spec.title}]]</h2>
           <ul class="breadcrumb">
-            <li th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd HH:mm')}"></li>
+            <li th:text="${#dates.format(post.spec.publishTime, theme.config.basic_info.global_time_format)}"></li>
             <li><i class="ri-eye-line"></i>[[${post.stats.visit}]]</li>
             <li th:if="${post.spec.allowComment && site.comment.enable}" class="is-hidden-mobile"><i class="ri-question-answer-line"></i>[[${post.stats.comment}]]
             </li>
@@ -63,7 +63,7 @@
         <hr/>
         <div class="meta">
           <ul class="breadcrumb">
-            <li th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd HH:mm')}"></li>
+            <li th:text="${#dates.format(post.spec.publishTime, theme.config.basic_info.global_time_format)}"></li>
             <li><i class="ri-eye-line"></i>[[${post.stats.visit}]]</li>
             <li th:if="${post.spec.allowComment && site.comment.enable}" class="is-hidden-mobile"><i class="ri-question-answer-line"></i>[[${post.stats.comment}]]
             </li>
@@ -92,7 +92,7 @@
         <hr/>
         <div class="meta">
           <ul class="breadcrumb">
-            <li th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd HH:mm')}"></li>
+            <li th:text="${#dates.format(post.spec.publishTime, theme.config.basic_info.global_time_format)}"></li>
             <li><i class="ri-eye-line"></i>[[${post.stats.visit}]]</li>
             <li th:if="${post.spec.allowComment && site.comment.enable}" class="is-hidden-mobile"><i class="ri-question-answer-line"></i>[[${post.stats.comment}]]
             </li>
@@ -128,7 +128,7 @@
        th:href="${post.status.permalink}">
       <h2 class="title"><span th:if="${post.spec.pinned}" class="top">置顶</span>
         <p th:text="${post.spec.title}"></p></h2>
-      <p th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}"></p>
+      <p th:text="${#dates.format(post.spec.publishTime, theme.config.basic_info.global_time_format)}"></p>
     </a>
 
     <div th:if="${(#strings.isEmpty(thumbnail_img) && thumbnail_mode != 'fold' && thumbnail_mode != 'grid') || thumbnail_mode == 'default'}"
@@ -156,7 +156,7 @@
         </h2>
         <div class="meta">
           <ul class="breadcrumb">
-            <li th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd HH:mm')}"></li>
+            <li th:text="${#dates.format(post.spec.publishTime, theme.config.basic_info.global_time_format)}"></li>
             <li><i class="ri-eye-line"></i>[[${post.stats.visit}]]</li>
             <li th:if="${post.spec.allowComment && site.comment.enable}" class="is-hidden-mobile"><i class="ri-question-answer-line"></i>[[${post.stats.comment}]]
             </li>
@@ -198,7 +198,7 @@
                th:data-src="${!theme.config.basic_info.lazy_enable ? '' : thumbnail_img}"/>
         </a>
         <ul class="breadcrumb">
-          <li th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd HH:mm')}"></li>
+          <li th:text="${#dates.format(post.spec.publishTime, theme.config.basic_info.global_time_format)}"></li>
           <li><i class="ri-eye-line"></i>[[${post.stats.visit}]]</li>
           <li th:if="${post.spec.allowComment && site.comment.enable}" class="is-hidden-mobile"><i class="ri-question-answer-line"></i>[[${post.stats.comment}]]
           </li>

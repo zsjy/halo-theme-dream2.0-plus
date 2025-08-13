@@ -14,7 +14,7 @@
             <img th:if="${!#strings.isEmpty(spec.logo)}" th:src="${spec.logo}" alt="avatar">
             <span th:text="${spec.author}"></span>
           </a>
-          <em th:text="'发表于 ' + ${#dates.format(spec.pubDate,'yyyy年MM月dd日 HH:mm:ss')}"></em>
+          <em th:text="'发表于 ' + ${#dates.format(spec.pubDate, theme.config.basic_info.global_time_format)}"></em>
         </div>
       </div>
     </div>

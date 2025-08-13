@@ -25,7 +25,7 @@
                     </div>
                     <div>
                         <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M512.7 959.8c-247 0-448-201-448-448s201-448 448-448 448 201 448 448-200.9 448-448 448z m0-806.4c-197.6 0-358.4 160.8-358.4 358.4s160.8 358.4 358.4 358.4 358.4-160.8 358.4-358.4-160.7-358.4-358.4-358.4z"></path><path d="M700 576.8H512.7c-24.6 0-44.6-19.9-44.8-44.5L466 254.5c-0.2-24.7 19.8-44.9 44.5-45.1h0.3c24.6 0 44.6 19.9 44.8 44.5l1.6 233.3H700c24.7 0 44.8 20.1 44.8 44.8 0 24.7-20.1 44.8-44.8 44.8z"></path></svg>
-                        <p th:text="${#dates.format(photo.metadata.creationTimestamp,'yyyy-MM-dd')}"></p>
+                        <p th:text="${#dates.format(photo.metadata.creationTimestamp,theme.config.basic_info.global_time_format)}"></p>
                     </div>
                     [[${photo.spec.description}]]
                 </div>
