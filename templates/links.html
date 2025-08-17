@@ -42,7 +42,7 @@
                     <th:block th:if="${theme.config.page_config.show_exchange_info}"
                               th:with="bloggerAvatar= ${#strings.defaultString(theme.config.page_config.links_blogger_avatar, contributor.avatar)},
                                        descriptive= ${#strings.defaultString(theme.config.page_config.links_descriptive, contributor.bio)}">
-                        <p style="margin-bottom: 4px">申请友链的方法：</p>
+                        <h3 style="margin-bottom: 4px">本站友链信息：</h3>
                         <ul>
                             <li>名称：[[${site.title}]]</li>
                             <li>地址：<a th:href="${site.url}" target="_blank" th:text="${site.url}" th:aria-label="${site.url}" th:title="${site.url}"></a></li>
