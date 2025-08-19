@@ -43,9 +43,24 @@
                       }, 150)
                     })
 
-                    function removeHTMLTags(str) {
-                      const regex = /<(?!\/?B\b)[^>]*>/g
-                      return str.replace(regex, '')
+                    function removeHTMLTags(html) {
+                      const doc = new DOMParser().parseFromString(html, 'text/html');
+                      function processNode(node) {
+                        let result = '';
+                        for (const child of node.childNodes) {
+                          if (child.nodeType === Node.TEXT_NODE) {
+                            result += child.textContent;
+                          } else if (child.nodeType === Node.ELEMENT_NODE) {
+                            if (child.tagName.toLowerCase() === 'mark') {
+                              result += child.outerHTML;
+                            } else {
+                              result += processNode(child);
+                            }
+                          }
+                        }
+                        return result;
+                      }
+                      return processNode(doc.body);
                     }
 
                     function findResult(keyword) {
@@ -62,8 +77,8 @@
                         data: JSON.stringify({
                           keyword,
                           limit: (searchResultLimit && searchResultLimit !== '') ? searchResultLimit : 10,
-                          highlightPreTag: '<B>',
-                          highlightPostTag: '</B>'
+                          highlightPreTag: '<mark>',
+                          highlightPostTag: '</mark>'
                         }),
                         noErrorTip: true
                       })
