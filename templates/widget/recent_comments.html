@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="reply"
-                     th:attr="data-raw=${comment.spec.content}"
+                     th:attr="data-content=${comment.spec.content}"
                      th:with="url = ${comment.spec.subjectRef.kind == 'SinglePage'?(comment.spec.subjectRef.name == theme.config.page_config.link_comment_id?'/links':singlePageFinder.getByName(comment.spec.subjectRef.name).status.permalink):(comment.spec.subjectRef.kind == 'Post'?postFinder.getByName(comment.spec.subjectRef.name).status.permalink:comment.spec.subjectRef.kind == 'Moment'?'/moments':'')}">
                     <a th:href="@{${url}}+'#comment-wrapper'" class="link"></a>
                 </div>
@@ -36,14 +36,11 @@
     <script>
       document.querySelectorAll('.recent-comments .reply').forEach(reply => {
         try {
-          const rawHtml = reply.getAttribute('data-raw')
+          const contentHtml = reply.getAttribute('data-content')
           const link = reply.querySelector('a')
-          const temp = document.createElement('div');
-          temp.textContent = rawHtml; // 自动转义HTML标签
-          const plainText = new DOMParser()
-            .parseFromString(temp.textContent.trim(), 'text/html')
-            .body.textContent
-            .trim()
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(contentHtml, 'text/html');
+          const plainText = doc.body.textContent.trim(); // 自动移除所有标签，只保留文本
 
           link.setAttribute('aria-label', plainText)
           link.setAttribute('title', plainText)
