@@ -3,7 +3,8 @@
      th:class="'card widget recent-comments ' + ${sidebar.hide}"
      th:with="num = ${#strings.isEmpty(theme.config.sidebar.recent_comments_num)? 5 : T(java.lang.Integer).parseInt(theme.config.sidebar.recent_comments_num)}, comments = ${commentFinder.list(null,1,num)}, isEmpty = ${#lists.isEmpty(comments)}">
     <div class="card-title">
-        <i th:class="${#strings.defaultString(sidebar.icon, 'ri-message-2-line') + ' card-title-label'}"></i><span th:text="${#strings.defaultString(sidebar.title, '最新评论')}"></span>
+        <i th:class="${#strings.defaultString(sidebar.icon, 'ri-message-2-line') + ' card-title-label'}"></i><span
+            th:text="${#strings.defaultString(sidebar.title, '最新评论')}"></span>
     </div>
     <div th:if="${isEmpty}" class="card-empty">暂无评论</div>
     <div th:unless="${isEmpty}" class="card-content">
@@ -25,10 +26,29 @@
                     </div>
                 </div>
                 <div class="reply"
+                     th:attr="data-raw=${comment.spec.raw}"
                      th:with="url = ${comment.spec.subjectRef.kind == 'SinglePage'?(comment.spec.subjectRef.name == theme.config.page_config.link_comment_id?'/links':singlePageFinder.getByName(comment.spec.subjectRef.name).status.permalink):(comment.spec.subjectRef.kind == 'Post'?postFinder.getByName(comment.spec.subjectRef.name).status.permalink:comment.spec.subjectRef.kind == 'Moment'?'/moments':'')}">
-                    <a th:href="@{${url}}+'#comment-wrapper'" th:aria-label="${comment.spec.content}" th:title="${comment.spec.content}" class="link">[[${comment.spec.content}]]</a>
+                    <a th:href="@{${url}}+'#comment-wrapper'" class="link"></a>
                 </div>
             </li>
         </ul>
     </div>
+    <script>
+      document.querySelectorAll('.recent-comments .reply').forEach(reply => {
+        try {
+          const rawHtml = reply.getAttribute('data-raw')
+          const link = reply.querySelector('a')
+          const plainText = new DOMParser()
+            .parseFromString(rawHtml, 'text/html')
+            .body.textContent
+            .trim()
+
+          link.setAttribute('aria-label', plainText)
+          link.setAttribute('title', plainText)
+          link.textContent = plainText
+        } catch (e) {
+          console.error('Error processing HTML:', e)
+        }
+      })
+    </script>
 </div>
