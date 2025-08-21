@@ -1,5 +1,10 @@
 name: Sync to Gitee
 
+# 显式声明最小化权限
+permissions:
+  contents: write  # 必须的写入权限（用于push）
+  actions: read    # 可选监控权限
+
 on:
   schedule:
     - cron: '0 0 * * *'
@@ -16,6 +21,10 @@ env:
 jobs:
   mirror:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write  # 仅保留必要的写入权限
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
