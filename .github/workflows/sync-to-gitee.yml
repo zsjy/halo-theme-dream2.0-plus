@@ -19,7 +19,7 @@ env:
   GITEE_REPO: "https://${{ secrets.GITEE_USERNAME }}:${{ secrets.GITEE_TOKEN }}@gitee.com/hcjike/halo-theme-dream2.0-plus.git"
 
 jobs:
-  mirror:
+  sync-to-gitee:
     runs-on: ubuntu-latest
 
     permissions:
