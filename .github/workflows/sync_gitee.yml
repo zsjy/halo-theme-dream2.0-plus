@@ -1,0 +1,29 @@
+name: Sync to Gitee
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  push:
+    branches: [ master ]
+  pull_request:
+    types: [ closed ]
+    branches: [ master ]
+  workflow_dispatch:
+
+env:
+  GITEE_REPO: "https://${{ secrets.GITEE_USERNAME }}:${{ secrets.GITEE_TOKEN }}@gitee.com/hcjike/halo-theme-dream2.0-plus.git"
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Mirror to Gitee
+        uses: rubjo/gitea-mirror-action@v2
+        with:
+          target-repo: ${{ env.GITEE_REPO }}
+          force: true
