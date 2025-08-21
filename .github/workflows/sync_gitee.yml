@@ -23,7 +23,6 @@ jobs:
           fetch-depth: 0
 
       - name: Mirror to Gitee
-        uses: rubjo/gitea-mirror-action@v2
-        with:
-          target-repo: ${{ env.GITEE_REPO }}
-          force: true
+        run: |
+          git remote add gitee ${{ env.GITEE_REPO }}
+          git push --mirror --force gitee
