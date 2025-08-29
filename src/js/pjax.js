@@ -138,10 +138,10 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
   $head.find('link[rel="canonical"]').remove()
   $head.append($currentTarget.filter('meta'))
   $head.append($currentTarget.filter('link[rel="canonical"]'))
-  $currentTarget.filter('link').filter(function () {
+  $currentTarget.find('link[href]').addBack('link[href]').filter(function () {
     const isDataPjax = $(this).is('[data-pjax]')
     const href = $(this).attr('href')
-    const isStaticPath = href && (href.startsWith('/plugins/PluginHighlightJS/'))
+    const isStaticPath = href && (href.startsWith('/plugins'))
     return isDataPjax || isStaticPath
   }).each(function () {
     let href = $(this).attr('href')
@@ -155,11 +155,10 @@ $(document).on('pjax:success', async function (event, data, status, xhr, options
       }
     }
   })
-  let $scripts = $currentTarget.filter('script').filter(function () {
+  let $scripts = $currentTarget.find('script[src]').addBack('script[src]').filter(function () {
     const isDataPjax = $(this).is('[data-pjax]')
     const src = $(this).attr('src')
-    const isStaticPath = src && (src.startsWith('/plugins/PluginHighlightJS/') ||
-      src.startsWith('/plugins/text-diagram/'))
+    const isStaticPath = src && (src.startsWith('/plugins'))
     return isDataPjax || isStaticPath
   })
   if ($scripts.length > 0) {
