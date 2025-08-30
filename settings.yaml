@@ -194,7 +194,6 @@ spec:
               value: 'false'
         - $formkit: group
           name: logon
-          if: $get(show_console).value != 'false'
           label: 登录组件样式
           value:
             console_post_class: 'ri-book-read-line'
@@ -235,7 +234,6 @@ spec:
               help: '输入退出登录按钮图标class，清空不显示图标。'
         - $formkit: group
           name: console
-          if: $get(show_console).value != 'false'
           label: 控制台按钮样式
           value:
             console_icon: 'ri-equalizer-line'
