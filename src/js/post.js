@@ -206,11 +206,25 @@ const postContext = {
     if (typeof mermaid === 'undefined' || mermaid === null) {
       return
     }
-    mermaid.initialize({ startOnLoad: true })
+    mermaid.initialize({startOnLoad: true})
     mermaid.run({
       querySelector: 'text-diagram[data-type=mermaid]',
     })
-  }
+  },
+  /* 初始化AI总结位置 */
+  initAiSummaryLocation() {
+    if (!DreamConfig.show_ai_summary) {
+      return
+    }
+    // 获取目标元素和父元素
+    const aiSummaryWidget = document.querySelector('ai-summary-widget')
+    const summaryContainer = document.querySelector('.summary')
+    // 检查元素是否存在
+    if (aiSummaryWidget && summaryContainer) {
+      // 将元素移动到新位置
+      summaryContainer.appendChild(aiSummaryWidget)
+    }
+  },
 }
 
 window.postPjax = function (serialNumber) {
@@ -220,7 +234,7 @@ window.postPjax = function (serialNumber) {
   )
 }
 !(function () {
-  const advances = ['initEvent', 'initCodeBlock', 'initLiterature', 'initLike', 'foldImage', 'initMermaid']
+  const advances = ['initEvent', 'initCodeBlock', 'initLiterature', 'initLike', 'foldImage', 'initMermaid', 'initAiSummaryLocation']
   Object.keys(postContext).forEach(
     (c) => !window.pjaxSerialNumber && advances.includes(c) && postContext[c]()
   )
