@@ -32,6 +32,14 @@ lit-toast-container, halo-contact-form-toast-container {
   z-index: 100;
 }
 
+ai-summary-widget {
+  display: none;
+
+  &.show {
+    display: block !important;
+  }
+}
+
 .gray-mode {
   filter: grayscale(1) !important;
 }
@@ -2232,6 +2240,7 @@ details {
   }
 
   /* 箭头图标样式 */
+
   summary::before {
     content: "▶";
     display: inline-block;
