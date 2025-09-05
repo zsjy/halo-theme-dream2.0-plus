@@ -213,17 +213,13 @@ const postContext = {
   },
   /* 初始化AI总结位置 */
   initAiSummaryLocation() {
-    // 获取目标元素和父元素
     const aiSummaryWidget = document.querySelector('ai-summary-widget')
     const summaryContainer = document.querySelector('.summary')
-    if (!DreamConfig.show_ai_summary) {
-      aiSummaryWidget.classList.add('show')
-      return
-    }
-    // 检查元素是否存在
-    if (aiSummaryWidget && summaryContainer) {
-      // 将元素移动到新位置
-      summaryContainer.appendChild(aiSummaryWidget)
+    if (aiSummaryWidget) {
+      if (DreamConfig.show_ai_summary && summaryContainer) {
+        // 将元素移动到新位置
+        summaryContainer.appendChild(aiSummaryWidget)
+      }
       aiSummaryWidget.classList.add('show')
     }
   },
