@@ -1,17 +1,12 @@
-name: Sync to Gitee
+name: Sync to Gitee (Mirror)
 
-# 显式声明最小化权限
 permissions:
-  contents: write  # 必须的写入权限（用于push）
-  actions: read    # 可选监控权限
+  contents: write
 
 on:
   schedule:
     - cron: '0 0 * * *'
   push:
-    branches: [ master ]
-  pull_request:
-    types: [ closed ]
     branches: [ master ]
   workflow_dispatch:
 
@@ -19,19 +14,25 @@ env:
   GITEE_REPO: "https://${{ secrets.GITEE_USERNAME }}:${{ secrets.GITEE_TOKEN }}@gitee.com/hcjike/halo-theme-dream2.0-plus.git"
 
 jobs:
-  sync-to-gitee:
+  mirror-to-gitee:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write  # 仅保留必要的写入权限
-
     steps:
-      - name: Checkout code
+      - name: Checkout code (full history)
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # 获取完整提交历史
 
-      - name: Mirror to Gitee
+      - name: Setup Git config
         run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Force mirror to Gitee
+        run: |
+          # 删除所有现有的远程引用（避免引用冲突）
+          git ls-remote --heads ${{ env.GITEE_REPO }} | awk '{print ":"$2}' | xargs -r git push ${{ env.GITEE_REPO }} --delete || true
+          
+          # 添加远程并强制推送所有内容
           git remote add gitee ${{ env.GITEE_REPO }}
-          git push --mirror --force gitee
+          git push gitee --mirror --force
