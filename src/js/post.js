@@ -232,7 +232,7 @@ window.postPjax = function (serialNumber) {
   )
 }
 !(function () {
-  const advances = ['initEvent', 'initCodeBlock', 'initLiterature', 'initLike', 'foldImage', 'initMermaid', 'initAiSummaryLocation']
+  const advances = ['initAiSummaryLocation', 'initEvent', 'initCodeBlock', 'initLiterature', 'initLike', 'foldImage', 'initMermaid']
   Object.keys(postContext).forEach(
     (c) => !window.pjaxSerialNumber && advances.includes(c) && postContext[c]()
   )
