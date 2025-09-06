@@ -146,5 +146,29 @@
       [(${theme.config.basic_style.load_progress != 'none'?'DreamConfig["load_progress"] = "' + theme.config.basic_style.load_progress + '";': ''})]
       [(${!#strings.isEmpty(theme.config.page_config.journals_share_image)?'DreamConfig["journals_share_image"] = "' + theme.config.page_config.journals_share_image + '";': ''})]
       [(${!#strings.isEmpty(theme.config.sidebar.meting_api)?'var meting_api = "' + theme.config.sidebar.meting_api + '";': ''})]
+
+    (function () {
+      const hasNightInLocal = () => localStorage.getItem('night') !== null
+      const getNightInConfig = () => {
+        if (DreamConfig.default_theme === 'night') {
+          return true
+        }
+        if (DreamConfig.default_theme === 'system') {
+          return matchMedia('(prefers-color-scheme: dark)').matches
+        }
+        return false
+      }
+
+      let isNight = hasNightInLocal() ? localStorage.getItem('night') : getNightInConfig()
+      if (isNight.toString() === 'true') {
+        localStorage.setItem('night', 'true')
+        document.documentElement.classList.add('night')
+        document.documentElement.setAttribute('night', 'true')
+        document.documentElement.classList.add('color-scheme-dark')
+      } else {
+        document.documentElement.classList.add('color-scheme-light')
+        document.documentElement.removeAttribute('night')
+      }
+    })()
   </script>
 </th:block>
