@@ -130,6 +130,8 @@ html {
     opacity: 0.8;
     transform: scale(0.8);
     transform-origin: center top;
+    will-change: transform, opacity; /* 添加这行 */
+    backface-visibility: hidden; /* 也可以尝试添加这行 */
   }
 
   &.disable-scroll {
