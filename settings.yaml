@@ -1526,12 +1526,21 @@ spec:
               value: true
               help: '隐藏时不显示统计信息，但依旧会请求 busuanzi 统计访客信息。'
               options:
+                - value: custom
+                  label: 自建服务
                 - value: true
                   label: 开启
                 - value: hide
                   label: 隐藏
                 - value: false
                   label: 关闭
+            - $formkit: text
+              name: busuanzi_custom_url
+              if: $get(enable_busuanzi).value == 'custom'
+              label: 自建 busuanzi 服务-js地址
+              validation: required
+              value: ""
+              placeholder: '请输入自建 busuanzi 服务js地址'
         - $formkit: radio
           name: enable_console_version_info
           label: 控制台打印版本信息
