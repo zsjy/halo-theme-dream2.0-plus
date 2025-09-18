@@ -16,10 +16,15 @@
     t1 = ${#strings.replace(t, '{title}', site.title)}"
     th:text="${#strings.isEmpty(t) ? site.title + '-安全中心' : t1}">
     </title>
+    <th:block th:replace="~{common/config}"/>
     <link rel="preload stylesheet" as="style" th:href="@{/assets/lib/remixicon@4.6.0/remixicon.min.css}">
     <style type="text/css">
         html {
             --back-img-url: url([[${#strings.defaultString(theme.config.security_link_config.security_link_site_img_background, '')}]]);
+        }
+
+        .gray-mode {
+            filter: grayscale(1) !important;
         }
 
         body {
@@ -393,8 +398,43 @@
     </div>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
+        if (DreamConfig.gray_mode === true) {
+          document.documentElement.classList.add('gray-mode')
+        } else if (DreamConfig.gray_mode === 'custom' && DreamConfig.gray_mode_time_list) {
+          const now = new Date()
+          const month = now.getMonth() + 1
+          const day = now.getDate()
+          const isDateInRange = (currentMonth, currentDay, timeRange) => {
+            let find = false
+            const [startDate, endDate] = timeRange.time.split('|').map(part => part.trim())
+            if (!startDate || !endDate) {
+              return find
+            }
+            const [startMonth, startDay] = startDate.split('/').map(part => part.trim()).map(Number)
+            const [endMonth, endDay] = endDate.split('/').map(part => part.trim()).map(Number)
+            if (!startMonth || !startDay || !endMonth || !endDay) {
+              return find
+            }
+            const start = new Date(now.getFullYear(), startMonth - 1, startDay)
+            const end = new Date(now.getFullYear(), endMonth - 1, endDay)
+            const current = new Date(now.getFullYear(), currentMonth - 1, currentDay)
+            find = current >= start && current <= end
+            return find
+          }
+
+          for (const timeRange of DreamConfig.gray_mode_time_list) {
+            try {
+              if (isDateInRange(month, day, timeRange)) {
+                document.documentElement.classList.add('gray-mode')
+                break
+              }
+            } catch (e) {
+              console.log(e)
+            }
+          }
+        }
+
         //处理跳转链接，若链接不合法则跳转到首页
-        const siteTitle = '[[${site.title}]]'
         let link_jump_desc = '[(${theme.config.security_link_config.security_link_jump_desc})]'
         let targetUrl = '[[${url}]]'
         //校验链接是否合法
@@ -405,7 +445,7 @@
           targetUrl = '/'
         }
         // 使用正则表达式进行全局替换
-        link_jump_desc = link_jump_desc.replace(new RegExp('{title}', 'g'), siteTitle);
+        link_jump_desc = link_jump_desc.replace(new RegExp('{title}', 'g'), DreamConfig.site_title);
         link_jump_desc = link_jump_desc.replace(new RegExp('{url}', 'g'), targetUrl);
         document.querySelector('.others-topic').innerHTML = link_jump_desc
         document.querySelector('.others-end a').setAttribute('href', targetUrl);
