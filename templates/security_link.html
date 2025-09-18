@@ -41,17 +41,17 @@
             background-repeat: no-repeat;
         }
 
-        html.light body {
+        html body {
             background-image: linear-gradient(135deg, #a0a0a0 0%, #8c8c8c 100%), var(--back-img-url);
             background-blend-mode: overlay;
         }
 
-        html.dark body {
+        html.night body {
             background-image: linear-gradient(135deg, #364f6b 0%, #222831 100%), var(--back-img-url);
             background-blend-mode: overlay;
         }
 
-        html.light .loading {
+        html .loading {
             background: rgba(255, 255, 255, 0.7);
             box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.18);
@@ -59,14 +59,14 @@
             -webkit-backdrop-filter: blur(10px);
         }
 
-        html.light .others-tip {
+        html .others-tip {
             background: rgba(255, 255, 255, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.3);
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
         }
 
-        html.dark .loading {
+        html.night .loading {
             background: rgba(57, 62, 70, 0.6);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -74,7 +74,7 @@
             -webkit-backdrop-filter: blur(10px);
         }
 
-        html.dark .others-tip {
+        html.night .others-tip {
             background: rgba(51, 51, 51, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
@@ -117,18 +117,18 @@
             animation: fadein 0.3s ease-out;
         }
 
-        html.light .others-topic,
-        html.light .others-tip,
-        html.light .content-title span {
+        html .others-topic,
+        html .others-tip,
+        html .content-title span {
             color: #333;
         }
 
-        html.light .others-tip {
+        html .others-tip {
             border: 1px solid #ccc;
             background-color: #F7F9FE;
         }
 
-        html.light .progress {
+        html .progress {
             background-color: #abedd8;
         }
 
@@ -136,27 +136,27 @@
             color: #abedd8;
         }
 
-        html.dark .loading {
+        html.night .loading {
             background: #393e46;
             box-shadow: 0 4px 8px rgba(100, 100, 100, 0.1);
         }
 
-        html.dark .others-topic,
-        html.dark .others-tip,
-        html.dark .content-title span {
+        html.night .others-topic,
+        html.night .others-tip,
+        html.night .content-title span {
             color: #EFEFEF;
         }
 
-        html.dark .others-tip {
+        html.night .others-tip {
             border: 1px solid #777;
             background-color: #333;
         }
 
-        html.dark .progress {
+        html.night .progress {
             background-color: #888;
         }
 
-        html.dark .progress-bar {
+        html.night .progress-bar {
             background-color: #444;
         }
 
@@ -196,12 +196,12 @@
             z-index: -1;
         }
 
-        html.dark .loading {
+        html.night .loading {
             border-color: rgba(255, 255, 255, 0.15);
             background: rgba(57, 62, 70, 0.85);
         }
 
-        html.dark .loading::before {
+        html.night .loading::before {
             background: linear-gradient(145deg,
                 rgba(255,255,255,0.1) 0%,
                 rgba(255,255,255,0.05) 100%);
@@ -236,7 +236,7 @@
             color: #333;
         }
 
-        html.dark .others-tip {
+        html.night .others-tip {
             border-color: rgba(255, 255, 255, 0.15);
             background: rgba(51, 51, 51, 0.6);
             color: #EFEFEF;
@@ -353,7 +353,7 @@
             color: #FF9800;
         }
 
-        html.dark .countdown-text {
+        html.night .countdown-text {
             color: #EFEFEF;
         }
 
@@ -361,11 +361,11 @@
           font-weight: bold;
         }
 
-        html.dark #countdown {
+        html.night #countdown {
             color: #3fc1c9;
         }
 
-        html.light #countdown {
+        html #countdown {
             color: #26a1a6;
         }
 
@@ -398,42 +398,6 @@
     </div>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        if (DreamConfig.gray_mode === true) {
-          document.documentElement.classList.add('gray-mode')
-        } else if (DreamConfig.gray_mode === 'custom' && DreamConfig.gray_mode_time_list) {
-          const now = new Date()
-          const month = now.getMonth() + 1
-          const day = now.getDate()
-          const isDateInRange = (currentMonth, currentDay, timeRange) => {
-            let find = false
-            const [startDate, endDate] = timeRange.time.split('|').map(part => part.trim())
-            if (!startDate || !endDate) {
-              return find
-            }
-            const [startMonth, startDay] = startDate.split('/').map(part => part.trim()).map(Number)
-            const [endMonth, endDay] = endDate.split('/').map(part => part.trim()).map(Number)
-            if (!startMonth || !startDay || !endMonth || !endDay) {
-              return find
-            }
-            const start = new Date(now.getFullYear(), startMonth - 1, startDay)
-            const end = new Date(now.getFullYear(), endMonth - 1, endDay)
-            const current = new Date(now.getFullYear(), currentMonth - 1, currentDay)
-            find = current >= start && current <= end
-            return find
-          }
-
-          for (const timeRange of DreamConfig.gray_mode_time_list) {
-            try {
-              if (isDateInRange(month, day, timeRange)) {
-                document.documentElement.classList.add('gray-mode')
-                break
-              }
-            } catch (e) {
-              console.log(e)
-            }
-          }
-        }
-
         //处理跳转链接，若链接不合法则跳转到首页
         let link_jump_desc = '[(${theme.config.security_link_config.security_link_jump_desc})]'
         let targetUrl = '[[${url}]]'
@@ -484,20 +448,6 @@
           }
           document.querySelector('.progress-bar > .progress').classList.add('progress-end')
         })
-        /* 配置主题模式 */
-        let default_theme = '[[${theme.config.basic_style.default_theme}]]';
-        const hasNightInLocal = () => localStorage.getItem('night') !== null;
-        const getNightInConfig = () => {
-          if (default_theme === 'night') {
-            return true;
-          }
-          if (default_theme === 'system') {
-            return matchMedia('(prefers-color-scheme: dark)').matches;
-          }
-          return false;
-        }
-        let isNight = hasNightInLocal() ? localStorage.getItem('night') : getNightInConfig();
-        document.documentElement.classList.add(isNight.toString() === 'true' ? 'dark' : 'light');
       });
     </script>
 </body>
