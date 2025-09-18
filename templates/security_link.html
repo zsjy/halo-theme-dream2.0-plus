@@ -18,6 +18,7 @@
     </title>
     <th:block th:replace="~{common/config}"/>
     <link rel="preload stylesheet" as="style" th:href="@{/assets/lib/remixicon@4.6.0/remixicon.min.css}">
+    <link th:if="${theme.config.enhance.cursor_style != 'none'}" rel="stylesheet" th:href="@{/assets/css/cursor.min.css(mew=${theme.spec.version})}">
     <style type="text/css">
         html {
             --back-img-url: url([[${#strings.defaultString(theme.config.security_link_config.security_link_site_img_background, '')}]]);
