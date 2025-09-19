@@ -155,8 +155,6 @@ const commonContext = {
       //只有点击了切换才需要保存到localStorage
       localStorage.setItem('night', isNight)
     })
-    //应用初始配色方案
-    applyNight(isNight)
   },
   /* 导航条高亮 */
   initNavbar() {
@@ -697,43 +695,13 @@ const commonContext = {
   },
   /* 灰色模式 */
   initGrayMode() {
-    if (DreamConfig.gray_mode === true) {
-      $('html').addClass('gray-mode')
-    } else if (DreamConfig.gray_mode === 'custom' && DreamConfig.gray_mode_time_list) {
-      const now = new Date()
-      const month = now.getMonth() + 1
-      const day = now.getDate()
-      const isDateInRange = (currentMonth, currentDay, timeRange) => {
-        let find = false
-        const [startDate, endDate] = timeRange.time.split('|').map(part => part.trim())
-        if (!startDate || !endDate) {
-          return find
-        }
-        const [startMonth, startDay] = startDate.split('/').map(part => part.trim()).map(Number)
-        const [endMonth, endDay] = endDate.split('/').map(part => part.trim()).map(Number)
-        if (!startMonth || !startDay || !endMonth || !endDay) {
-          return find
-        }
-        const start = new Date(now.getFullYear(), startMonth - 1, startDay)
-        const end = new Date(now.getFullYear(), endMonth - 1, endDay)
-        const current = new Date(now.getFullYear(), currentMonth - 1, currentDay)
-        find = current >= start && current <= end
-        if (find && timeRange.desc) {
-          Qmsg.info(timeRange.desc)
-        }
-        return find
-      }
-
-      for (const timeRange of DreamConfig.gray_mode_time_list) {
-        try {
-          if (isDateInRange(month, day, timeRange)) {
-            $('html').addClass('gray-mode')
-            break
-          }
-        } catch (e) {
-          console.log(e)
-        }
-      }
+    const grayMode = sessionStorage.getItem('gray-mode')
+    const grayModeMessage = sessionStorage.getItem('gray-mode-message')
+    const hasShownPopup = sessionStorage.getItem('gray-mode-show')
+    if (grayMode === 'true' && grayModeMessage && grayModeMessage.trim() !== '' && !hasShownPopup && Qmsg) {
+      Qmsg.info(grayModeMessage)
+      // 标记为已显示，防止重复弹出
+      sessionStorage.setItem('gray-mode-show', 'true')
     }
   },
   /* 初始化特效，只需要初始化一次，移动端设备不初始化 */

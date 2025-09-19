@@ -161,7 +161,6 @@
 
       let isNight = hasNightInLocal() ? localStorage.getItem('night') : getNightInConfig()
       if (isNight.toString() === 'true') {
-        localStorage.setItem('night', 'true')
         document.documentElement.classList.add('night')
         document.documentElement.setAttribute('night', 'true')
         document.documentElement.classList.add('color-scheme-dark')
@@ -171,8 +170,11 @@
       }
 
       //初始化灰色模式
+      sessionStorage.removeItem('gray-mode')
+      sessionStorage.removeItem('gray-mode-message')
       if (DreamConfig.gray_mode === true) {
         document.documentElement.classList.add('gray-mode')
+        sessionStorage.setItem('gray-mode', 'true')
       } else if (DreamConfig.gray_mode === 'custom' && DreamConfig.gray_mode_time_list) {
         const now = new Date()
         const month = now.getMonth() + 1
@@ -192,6 +194,10 @@
           const end = new Date(now.getFullYear(), endMonth - 1, endDay)
           const current = new Date(now.getFullYear(), currentMonth - 1, currentDay)
           find = current >= start && current <= end
+          if (find) {
+            sessionStorage.setItem('gray-mode', 'true')
+            sessionStorage.setItem('gray-mode-message', timeRange.desc)
+          }
           return find
         }
 
