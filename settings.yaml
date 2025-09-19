@@ -1650,6 +1650,25 @@ spec:
           placeholder: '请输入域名，每行一个。使用泛域名：*.example.com 换行 example.com'
           if: $get(enable_security_link).value
           help: '列入白名单的域名将实现直接跳转，不会显示安全提示页面。每行一个域名，并支持泛域名设置。请注意，泛域名不包含主域名，无需输入“http://”或“https://”。'
+        - $formkit: select
+          name: custom_effects_show
+          label: 特效显示
+          multiple: true
+          clearable: true
+          searchable: false
+          value:
+            - 'click'
+            - 'move'
+            - 'effects'
+          help: '配置支持的特效风格，相关设置位于“增强功能”中。'
+          if: $get(enable_security_link).value
+          options:
+            - value: 'click'
+              label: 鼠标点击特效
+            - value: 'move'
+              label: 鼠标移动特效
+            - value: 'effects'
+              label: 动画特效
     - group: pwa
       label: 'PWA配置'
       formSchema:

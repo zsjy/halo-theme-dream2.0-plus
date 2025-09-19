@@ -24,7 +24,7 @@
   })
 
   function showBlockMessage() {
-    document.body.innerHTML = '<div style="position: fixed; width: 100%; height: 100%;display: flex;justify-content: center;align-items: center;font-size: 1.5rem;">\n' +
+    document.body.innerHTML = '<div style="position: fixed; width: 100%; height: 100%;top: 0;left: 0;display: flex;justify-content: center;align-items: center;font-size: 1.5rem;">\n' +
       '<div>' +
       '<div style="text-align: center;">' +
       '系统已关闭调试功能！<br/>' +
