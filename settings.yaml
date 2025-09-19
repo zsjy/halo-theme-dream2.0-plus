@@ -1502,13 +1502,13 @@ spec:
               if: $get(enable_gray_mode).value == 'custom'
               label: 灰色模式时间段
               validation: required
-              help: '请输入时间段，格式: 01/01|01/07 或 1/1|1/7，表示每年的1月1日00时00分00秒至1月7日23时59分59秒，持续7天。'
+              help: '请按格式输入时间段（如：“01/01|01/07、1/1|1/7” 或 “01/01、1/1”），表示从起始日00:00:00至结束日23:59:59（或单日全天）。'
               children:
                 - $formkit: text
                   name: time_span
                   label: 时间段
                   value: ""
-                  placeholder: '请输入时间段，必须包含“|”分割开始和结束时间'
+                  placeholder: '请输入时间段，使用“|”分割开始和结束时间或输入单日日期'
                 - $formkit: textarea
                   name: time_span_desc
                   label: 描述
