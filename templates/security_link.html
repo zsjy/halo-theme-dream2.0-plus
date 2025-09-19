@@ -385,6 +385,7 @@
         }
 
     </style>
+    <style th:if="${!#strings.isEmpty(theme.config.security_link_config.inline_css)}" type="text/css" th:utext="${theme.config.security_link_config.inline_css}"></style>
 </head>
 <body>
     <div class="content">
@@ -484,5 +485,6 @@
         })
       });
     </script>
+    <script th:if="${!#strings.isEmpty(theme.config.security_link_config.inline_js_body)}" type="text/javascript" th:utext="${theme.config.security_link_config.inline_js_body}"></script>
 </body>
 </html>
