@@ -181,7 +181,8 @@
         const day = now.getDate()
         const isDateInRange = (currentMonth, currentDay, timeRange) => {
           let find = false
-          const [startDate, endDate] = timeRange.time.split('|').map(part => part.trim())
+          const timeParts = timeRange.time.split('|').map(part => part.trim());
+          const [startDate, endDate] = timeParts.length >= 2 ? timeParts : [timeParts[0], timeParts[0]];
           if (!startDate || !endDate) {
             return find
           }
