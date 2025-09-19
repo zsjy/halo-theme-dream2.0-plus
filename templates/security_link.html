@@ -16,8 +16,12 @@
     t1 = ${#strings.replace(t, '{title}', site.title)}"
     th:text="${#strings.isEmpty(t) ? site.title + '-安全中心' : t1}">
     </title>
+    <script th:src="@{/assets/lib/jquery@3.5.1/jquery.min.js}"></script>
+    <script th:src="@{/assets/js/utils.min.js(mew=${theme.spec.version})}"></script>
+    <script th:if="${theme.config.enhance.disable_debug}" th:src="@{/assets/js/ban-debug.min.js(mew=${theme.spec.version})}"></script>
     <th:block th:replace="~{common/config}"/>
     <link rel="preload stylesheet" as="style" th:href="@{/assets/lib/remixicon@4.6.0/remixicon.min.css}">
+    <link th:if="${theme.config.enhance.cursor_style != 'none'}" rel="stylesheet" th:href="@{/assets/css/cursor.min.css(mew=${theme.spec.version})}">
     <style type="text/css">
         html {
             --back-img-url: url([[${#strings.defaultString(theme.config.security_link_config.security_link_site_img_background, '')}]]);
@@ -28,17 +32,28 @@
         }
 
         body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
+            padding: 0;
             overflow: hidden;
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            font-family: Arial, sans-serif;
             flex-direction: column;
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
+        }
+
+        .content {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         html body {
@@ -307,7 +322,6 @@
             padding: 10px 20px;
             border-radius: 16px;
             border: none;
-            cursor: pointer;
             font-size: 16px;
             width: 70px;
             height: 20px;
@@ -372,32 +386,51 @@
     </style>
 </head>
 <body>
-    <div class="loading">
-        <div class="content-title">
-            <img th:src="${#strings.isEmpty(theme.config.security_link_config.security_link_site_img) ? site.favicon : theme.config.security_link_config.security_link_site_img}" alt="favicon">
-            <span th:if="${!#strings.isEmpty(theme.config.security_link_config.security_link_site_title)}"
-                  th:with="t = ${theme.config.security_link_config.security_link_site_title},
+    <div class="content">
+        <div class="loading">
+            <div class="content-title">
+                <img th:src="${#strings.isEmpty(theme.config.security_link_config.security_link_site_img) ? site.favicon : theme.config.security_link_config.security_link_site_img}" alt="favicon">
+                <span th:if="${!#strings.isEmpty(theme.config.security_link_config.security_link_site_title)}"
+                      th:with="t = ${theme.config.security_link_config.security_link_site_title},
                            t1 = ${#strings.replace(t, '{title}', site.title)}"
-                  th:text="${t1}"></span>
-        </div>
-        <div class="others">
-            <div class="others-tip" th:utext="${#strings.defaultString(theme.config.security_link_config.security_link_tip_desc, '请注意您的账号和财产安全！')}">
+                      th:text="${t1}"></span>
             </div>
-            <div class="others-topic">
-            </div>
-            <div class="progress-bar">
-                <div class="progress"></div>
-            </div>
-            <div class="countdown-text">
-                <i class="ri-flashlight-fill"></i>将在 <span id="countdown">[[${theme.config.security_link_config.security_link_auto_jump_time}]]</span> 秒后跳转，请自行确认链接安全性
-            </div>
-            <div class="others-end">
-                <a target="_self" href="/" aria-label="继续访问" title="继续访问">继续访问</a>
+            <div class="others">
+                <div class="others-tip" th:utext="${#strings.defaultString(theme.config.security_link_config.security_link_tip_desc, '请注意您的账号和财产安全！')}">
+                </div>
+                <div class="others-topic">
+                </div>
+                <div class="progress-bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="countdown-text">
+                    <i class="ri-flashlight-fill"></i>将在 <span id="countdown">[[${theme.config.security_link_config.security_link_auto_jump_time}]]</span> 秒后跳转，请自行确认链接安全性
+                </div>
+                <div class="others-end">
+                    <a target="_self" href="/" aria-label="继续访问" title="继续访问">继续访问</a>
+                </div>
             </div>
         </div>
     </div>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
+        var effects_show = '[(${theme.config.security_link_config.custom_effects_show})]'
+        //非移动端加载特效
+        if (!Utils.isMobile()) {
+          var click = effects_show.includes('click')
+          var move = effects_show.includes('move')
+          var effects = effects_show.includes('effects')
+
+          move && DreamConfig.cursor_move && Utils.cachedScript(`${DreamConfig.theme_base}/js/cursor/move/${DreamConfig.cursor_move}.min.js?mew=${DreamConfig.theme_version}`)
+          click && DreamConfig.cursor_click && Utils.cachedScript(`${DreamConfig.theme_base}/js/cursor/click/${DreamConfig.cursor_click}.min.js?mew=${DreamConfig.theme_version}`)
+          effects && DreamConfig.effects_lantern_mode && Utils.cachedScript(`${DreamConfig.theme_base}/js/effects/lantern.min.js?mew=${DreamConfig.theme_version}`)
+          effects && DreamConfig.effects_sakura_mode && Utils.cachedScript(`${DreamConfig.theme_base}/js/effects/sakura.min.js?mew=${DreamConfig.theme_version}`)
+          effects && DreamConfig.effects_snowflake_mode && Utils.cachedScript(`${DreamConfig.theme_base}/js/effects/snowflake.min.js?mew=${DreamConfig.theme_version}`)
+          effects && DreamConfig.effects_universe_mode && Utils.cachedScript(`${DreamConfig.theme_base}/js/effects/universe.min.js?mew=${DreamConfig.theme_version}`)
+          effects && DreamConfig.effects_circle_magic_mode && Utils.cachedScript(`${DreamConfig.theme_base}/js/effects/circleMagic.min.js?mew=${DreamConfig.theme_version}`)
+          effects && DreamConfig.effects_quantum_silk_thread_mode && Utils.cachedScript(`${DreamConfig.theme_base}/js/effects/quantum.min.js?mew=${DreamConfig.theme_version}`)
+        }
+
         //处理跳转链接，若链接不合法则跳转到首页
         let link_jump_desc = '[(${theme.config.security_link_config.security_link_jump_desc})]'
         let targetUrl = '[[${url}]]'
