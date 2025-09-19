@@ -1588,39 +1588,33 @@ spec:
         - $formkit: singlePageSelect
           name: security_link_single_page
           label: 安全链接页面
-          if: $get(enable_security_link).value
           validation: required
           help: '请选择使用”安全链接页面模版“创建的页面。'
         - $formkit: attachment
           name: security_link_site_img
-          if: $get(enable_security_link).value
           label: 安全链接页面-图标
           placeholder: '请输入/选择安全链接页面站点的图标'
           help: '请输入/选择安全链接页面站点的图标，留空使用站点的favicon。'
         - $formkit: attachment
           name: security_link_site_img_background
-          if: $get(enable_security_link).value
           label: 安全链接页面-背景图片
           value: 'https://bing.ee123.net/img/'
           placeholder: '请输入/选择安全链接页面的背景图片'
           help: '请输入/选择安全链接页面的背景图片，留空不显示背景'
         - $formkit: text
           name: security_link_page_title
-          if: $get(enable_security_link).value
           label: 安全链接页面-页面标题
           value: '{title}-安全中心'
           placeholder: '请输入安全链接页面的页面标题'
           help: '请输入安全链接页面的页面标题，留空显示：“{title}-安全中心”，“ {title} ”表示站点主标题，位置为浏览器显示的标题。'
         - $formkit: text
           name: security_link_site_title
-          if: $get(enable_security_link).value
           label: 安全链接页面-站点标题
           value: '{title}'
           placeholder: '请输入安全链接页面站点的标题'
           help: '请输入安全链接页面站点的标题，留空不显示，“ {title} ”表示站点主标题，位置为图标下方。'
         - $formkit: code
           name: security_link_tip_desc
-          if: $get(enable_security_link).value
           label: 安全链接页面-提示区域文本描述
           language: html
           height: 45px
@@ -1628,7 +1622,6 @@ spec:
           help: '请输入安全链接页面提示区域的文本描述，留空使用默认：“请注意您的账号和财产安全！”。'
         - $formkit: number
           name: security_link_auto_jump_time
-          if: $get(enable_security_link).value
           label: 安全链接页面-自动跳转时间
           value: 5
           validation: required
@@ -1636,7 +1629,6 @@ spec:
           help: '输入安全链接页面自动跳转时间(秒)，默认5秒，小于等于0时关闭自动跳转。'
         - $formkit: code
           name: security_link_jump_desc
-          if: $get(enable_security_link).value
           validation: required
           label: 安全链接页面-跳转提示区域文本描述
           language: html
@@ -1648,7 +1640,6 @@ spec:
           name: whitelist_domains
           label: 域名白名单
           placeholder: '请输入域名，每行一个。使用泛域名：*.example.com 换行 example.com'
-          if: $get(enable_security_link).value
           help: '列入白名单的域名将实现直接跳转，不会显示安全提示页面。每行一个域名，并支持泛域名设置。请注意，泛域名不包含主域名，无需输入“http://”或“https://”。'
         - $formkit: select
           name: custom_effects_show
@@ -1661,7 +1652,6 @@ spec:
             - 'move'
             - 'effects'
           help: '配置支持的特效风格，相关设置位于“增强功能”中。'
-          if: $get(enable_security_link).value
           options:
             - value: 'click'
               label: 鼠标点击特效
@@ -1669,6 +1659,20 @@ spec:
               label: 鼠标移动特效
             - value: 'effects'
               label: 动画特效
+        - $formkit: code
+          name: inline_css
+          language: css
+          height: 45px
+          label: "内嵌 CSS"
+          placeholder: 请输入 CSS 样式内容
+          help: '填入CSS代码，无需style标签，将插入head标签尾部。'
+        - $formkit: code
+          language: javascript
+          height: 45px
+          name: inline_js_body
+          label: "内嵌JS（body）"
+          placeholder: 请输入 JS 代码内容
+          help: '填入JS代码，无需script标签，将插入body标签尾部。'
     - group: pwa
       label: 'PWA配置'
       formSchema:
