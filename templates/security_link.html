@@ -16,6 +16,7 @@
     t1 = ${#strings.replace(t, '{title}', site.title)}"
     th:text="${#strings.isEmpty(t) ? site.title + '-安全中心' : t1}">
     </title>
+    <link rel="preload stylesheet" as="style" th:href="@{/assets/css/theme.min.css(mew=${theme.spec.version})}">
     <script th:src="@{/assets/lib/jquery@3.5.1/jquery.min.js}"></script>
     <script th:src="@{/assets/js/utils.min.js(mew=${theme.spec.version})}"></script>
     <script th:if="${theme.config.enhance.disable_debug}" th:src="@{/assets/js/ban-debug.min.js(mew=${theme.spec.version})}"></script>
