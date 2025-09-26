@@ -259,15 +259,21 @@
         }
 
         .others-end a {
-            padding: 12px 24px;
-            border-radius: 20px;
-            font-size: 16px;
-            width: auto;
-            height: auto;
             background: linear-gradient(135deg, #3fc1c9, #45b7d1);
-            color: white;
             box-shadow: 0 4px 15px rgba(63, 193, 201, 0.3);
             transition: all 0.3s ease;
+            will-change: transform, opacity;
+
+            padding: 10px 20px;
+            border-radius: 16px;
+            border: none;
+            font-size: 16px;
+            width: 70px;
+            height: 20px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #3fc1c9;
+            color: white;
         }
 
         .others-end a:hover {
@@ -317,19 +323,6 @@
             justify-content: center;
             gap: 20%;
             margin-top: 20px;
-        }
-
-        .others-end a {
-            padding: 10px 20px;
-            border-radius: 16px;
-            border: none;
-            font-size: 16px;
-            width: 70px;
-            height: 20px;
-            text-align: center;
-            text-decoration: none;
-            background-color: #3fc1c9;
-            color: white;
         }
 
         .progress-bar {
