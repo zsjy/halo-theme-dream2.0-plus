@@ -1588,8 +1588,8 @@ spec:
         - $formkit: singlePageSelect
           name: security_link_single_page
           label: 安全链接页面
-          validation: required
-          help: '请选择使用”安全链接页面模版“创建的页面。'
+          clearable:  true
+          help: '请选择一个“安全链接页面模版”创建的页面以启用功能。若已配置页面被删除，需重选新页面保存，否则会引起主题异常。'
         - $formkit: attachment
           name: security_link_site_img
           label: 安全链接页面-图标
