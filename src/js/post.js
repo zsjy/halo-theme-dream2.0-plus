@@ -2,7 +2,7 @@ let postContextInitial = false
 const postContext = {
   /* 初始化代码块 */
   initCodeBlock() {
-    if ($('shiki-code')) return
+    if ($('shiki-code') || DreamConfig.shiki_enable) return
     const $code = $('*:not(figure) > pre > code')
     if ($code.length === 0) return
     $code.each(function (index) {

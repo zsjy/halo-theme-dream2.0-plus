@@ -14,32 +14,11 @@
 ## [主题预览](https://www.hcjike.com/?preview-theme=theme-dream2-plus)
 
 - [主题文档](https://www.hcjike.com/docs/halo-theme-dream2.0) 
+- [插件相关配置](https://www.hcjike.com/docs/halo-theme-dream2.0/theme/setting/plugins)
 - [侧边栏组件](https://www.hcjike.com/docs/halo-theme-dream2.0/theme/sidebar-assembly)
 - [使用iconfont替换主题部分功能图标](https://www.hcjike.com/archives/TsR84KYw)
 - [邮件模板配置](https://www.hcjike.com/docs/halo-theme-dream2.0/theme/email)
 - [自定义通知配置](https://www.hcjike.com/docs/halo-theme-dream2.0/theme/setting/notice#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%80%9A%E7%9F%A5)
-
-## 插件相关
-### KaTeX
-- 安装并启用`KaTeX插件`，插件配置如下；
-  - 行内公式 CSS 选择器：`[math-inline],.math-inline,.katex--inline`；
-  - 块级公式 CSS 选择器：`[math-display],.math-display,.katex--display`。
-
-### highlight.js 代码高亮
-- 安装并启用`highlight.js 代码高亮`插件，插件配置如下；
-  - **开启**`启用主题侧渲染`；
-  - 页面规则添加`/**`，匹配所有页面；
-  - **不开启**`显示复制按钮`，主题端已提供复制按钮，不需要额外开启。
-
-### 智阅GPT-智能AI摘要
-- 关闭`开启主题适配`
-- 文章选择器：1.7.3及以上版本建议使用`.summary`，反之使用 `.article`
-- 文章路由：`/archives/*`
-- 样式选择器：`night`
-- 模型人设：
-``` text
-你是专业摘要助手，要求输入文章后，直接输出中文摘要，严格控制在150字之内，仅返回纯文本不包含任何格式或说明。摘要需准确概括核心内容，剔除冗余信息，保持语言简洁连贯，避免主观评价。若原文信息量不足则适当补充背景说明，但不得超出字数限制。输出时首尾不加引号、不换行、不带编号或标题。
-```
 
 ## 主题功能配置
 ### 开启ServiceWorker配置
