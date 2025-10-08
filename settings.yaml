@@ -192,6 +192,16 @@ spec:
               value: 'console'
             - label: 不显示
               value: 'false'
+        - $formkit: radio
+          name: show_mobile_console
+          label: 移动端显示控制台按钮
+          help: 控制移动端“控制台按钮”的显隐状态，该按钮在移动端显示于抽屉式导航菜单内。
+          value: false
+          options:
+            - label: 显示
+              value: true
+            - label: 不显示
+              value: false
         - $formkit: group
           name: logon
           label: 登录组件样式
