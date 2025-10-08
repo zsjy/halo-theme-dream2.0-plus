@@ -288,7 +288,7 @@
                 <li>
                     <div class="link panel"
                          th:with="currentUser = ${contributorFinder.getContributor(#authentication.name)}">
-                        <div style="display: flex;">
+                        <div style="display: flex;align-items: center;">
                             <img width="20px" height="20px" th:src="${currentUser.avatar ?: #theme.assets('/img/avatar.svg')}"
                                  th:alt="${currentUser.displayName}"
                             />
