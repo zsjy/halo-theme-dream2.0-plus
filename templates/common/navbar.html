@@ -211,10 +211,10 @@
             </ul>
             <ul class="navbar-slideout-menu not-toc">
                 <li>
-                    <a class="link panel" href="#" rel="nofollow" aria-label="导航" title="导航">
+                    <div class="link panel">
                         <span>导航</span>
                         <i class="ri-arrow-right-s-line"></i>
-                    </a>
+                    </div>
                     <ul class="slides panel-body panel-side-menu">
                         <li th:each="menuItem : ${menuFinder.getPrimary().menuItems}">
                             <a class="link"
@@ -273,6 +273,73 @@
                 <a class="link in" href="#" rel="nofollow" aria-label="目录" title="目录"><span>目录</span></a>
                 <div class="toc-content">
                 </div>
+            </ul>
+            <ul th:if="${theme.config.basic_style.show_console == 'console' && theme.config.basic_style.show_mobile_console}" class="navbar-slideout-menu">
+                <a data-not-pjax class="navbar-console"
+                   th:href="${!#strings.isEmpty(logonUserName) ? theme.config.basic_style.console.console_logon_url : theme.config.basic_style.console.console_url}"
+                   th:target="${!#strings.isEmpty(logonUserName) ? theme.config.basic_style.console.console_logon_target : theme.config.basic_style.console.console_target}"
+                   th:title="${theme.config.basic_style.console.console_title}"
+                   th:aria-label="${theme.config.basic_style.console.console_title}">
+                    <i th:class="${#strings.defaultString(theme.config.basic_style.console.console_icon, 'ri-equalizer-line')}"></i>
+                    <span style="margin-left: 5px;" th:text="${theme.config.basic_style.console.console_title}"></span>
+                </a>
+            </ul>
+            <ul class="navbar-slideout-menu" th:if="${theme.config.basic_style.show_console == 'logon' && theme.config.basic_style.show_mobile_console}">
+                <li>
+                    <div class="link panel"
+                         th:with="currentUser = ${contributorFinder.getContributor(#authentication.name)}">
+                        <div style="display: flex;align-items: center;">
+                            <img width="20px" height="20px" th:src="${currentUser.avatar ?: #theme.assets('/img/avatar.svg')}"
+                                 th:alt="${currentUser.displayName}"
+                            />
+                            <span style="margin-left: 5px;">[[${!#strings.isEmpty(logonUserName) ? currentUser.displayName : '游客'}]]</span>
+                        </div>
+                        <i class="ri-arrow-right-s-line"></i>
+                    </div>
+                    <ul class="slides panel-body panel-side-menu">
+                        <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
+                            <a href="/console/posts/editor" data-not-pjax target="_blank" aria-label="新建文章"
+                               title="新建文章"><i
+                                    th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_post_class)}"
+                                    th:class="${theme.config.basic_style.logon.console_post_class}"></i>新建文章</a>
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
+                            <a href="/console/single-pages/editor" data-not-pjax target="_blank" aria-label="新建页面"
+                               title="新建页面"><i
+                                    th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_single_pages_class)}"
+                                    th:class="${theme.config.basic_style.logon.console_single_pages_class}"></i>新建页面</a>
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
+                            <a href="/console/moments" data-not-pjax target="_blank" aria-label="发布瞬间" title="发布瞬间"><i
+                                    th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_moment_class)}"
+                                    th:class="${theme.config.basic_style.logon.console_moment_class}"></i>发布瞬间</a>
+                        </li>
+                        <li th:if="${!#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">
+                            <a href="/uc" data-not-pjax target="_blank" aria-label="个人中心" title="个人中心"><i
+                                    th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_person_class)}"
+                                    th:class="${theme.config.basic_style.logon.console_person_class}"></i>个人中心</a>
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_super-role')" class="navbar-logon-group-menu">
+                            <a href="/console" data-not-pjax target="_blank" aria-label="后台管理" title="后台管理"><i
+                                    th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_manage_class)}"
+                                    th:class="${theme.config.basic_style.logon.console_manage_class}"></i>后台管理</a>
+                        </li>
+                        <li th:if="${!#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">
+                            <a href="/logout" data-not-pjax
+                               onclick="this.href = '/logout?redirect_uri=' + encodeURIComponent(window.location.href)"
+                               aria-label="退出登录" title="退出登录"><i
+                                    th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_logout_class)}"
+                                    th:class="${theme.config.basic_style.logon.console_logout_class}"></i>退出登录</a>
+                        </li>
+                        <li th:if="${#strings.isEmpty(logonUserName)}" class="navbar-logon-group-menu">
+                            <a href="/login" data-not-pjax
+                               onclick="this.href = '/login?redirect_uri=' + encodeURIComponent(window.location.href)"
+                               aria-label="登录" title="登录"><i
+                                    th:if="${!#strings.isEmpty(theme.config.basic_style.logon.console_login_class)}"
+                                    th:class="${theme.config.basic_style.logon.console_login_class}"></i>登录</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

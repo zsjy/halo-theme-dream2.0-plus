@@ -4361,11 +4361,29 @@ details[open] > summary::before {
     }
 
     .navbar-console {
-      display: none !important;
+      width: 23px;
+      height: 23px;
+      background: none;
+
+      &>i {
+        font-size: 23px !important;
+        color: var(--main);
+      }
     }
 
-    .navbar-logon {
-      display: none !important;
+    .navbar-logon-head {
+      &>img {
+        width: 23px;
+        height: 23px;
+      }
+    }
+
+    .navbar-logon-group {
+      left: -100% !important;
+      top: 46px !important;
+      &::before {
+        left: 82.5% !important;
+      }
     }
   }
 }
@@ -4404,6 +4422,39 @@ details[open] > summary::before {
 
     .navbar-searchicon {
       margin-left: 0;
+    }
+
+    .navbar-console {
+      display: none !important;
+    }
+
+    .navbar-logon {
+      display: none !important;
+    }
+
+  }
+
+  .navbar .navbar-slideout {
+
+    .navbar-console {
+      display: block !important;
+      width: 100%;
+      color: var(--main);
+    }
+
+    .navbar-logon-group-menu {
+      text-align: left;
+      padding: 0;
+
+      &>a{
+        font-size: inherit;
+        color: var(--main);
+
+        i {
+          font-size: 16px;
+          margin-right: 5px;
+        }
+      }
     }
 
   }
