@@ -27,7 +27,7 @@
                 </div>
                 <div class="reply"
                      th:attr="data-content=${comment.spec.content}"
-                     th:with="url = ${comment.spec.subjectRef.kind == 'SinglePage'?(comment.spec.subjectRef.name == theme.config.page_config.link_comment_id?'/links':singlePageFinder.getByName(comment.spec.subjectRef.name).status.permalink):(comment.spec.subjectRef.kind == 'Post'?postFinder.getByName(comment.spec.subjectRef.name).status.permalink:comment.spec.subjectRef.kind == 'Moment'?'/moments':'')}">
+                     th:with="url = ${comment.spec.subjectRef.kind == 'SinglePage'?(comment.spec.subjectRef.name == theme.config.page_config.link_comment_id?'/links':singlePageFinder.getByName(comment.spec.subjectRef.name).status.permalink):(comment.spec.subjectRef.kind == 'Post'?postFinder.getByName(comment.spec.subjectRef.name).status.permalink:comment.spec.subjectRef.kind == 'Moment'?'/moments':(comment.spec.subjectRef.kind == 'Plugin'? (comment.spec.subjectRef.name == 'PluginLinks' ? '/links':'') : ''))}">
                     <a th:href="@{${url}}+'#comment-wrapper'" class="link"></a>
                 </div>
             </li>
@@ -37,6 +37,7 @@
       document.querySelectorAll('.recent-comments .reply').forEach(reply => {
         try {
           const contentHtml = reply.getAttribute('data-content')
+          reply.removeAttribute('data-content')
           const link = reply.querySelector('a')
           const parser = new DOMParser();
           const doc = parser.parseFromString(contentHtml, 'text/html');
