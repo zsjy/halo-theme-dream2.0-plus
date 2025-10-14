@@ -34,15 +34,31 @@
         </ul>
     </div>
     <script>
+      function safeParseHtml(html) {
+        // 现代浏览器使用 createContextualFragment
+        if (typeof document.createRange === 'function') {
+          const range = document.createRange()
+          return range.createContextualFragment(html)
+        }
+        // 兼容方案
+        const container = document.createElement('div')
+        container.innerHTML = html
+        const fragment = document.createDocumentFragment()
+        while (container.firstChild) {
+          fragment.appendChild(container.firstChild)
+        }
+        return fragment
+      }
+
       document.querySelectorAll('.recent-comments .reply').forEach(reply => {
         try {
           const contentHtml = reply.getAttribute('data-content')
           reply.removeAttribute('data-content')
           const link = reply.querySelector('a')
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(contentHtml, 'text/html');
-          const plainText = doc.body.textContent.trim(); // 自动移除所有标签，只保留文本
-
+          // 1. 创建 DocumentFragment（不解析为完整 DOM）
+          const fragment = safeParseHtml(contentHtml)
+          // 2. 提取纯文本（自动去除所有标签）
+          const plainText = fragment.textContent.trim()
           link.setAttribute('aria-label', plainText)
           link.setAttribute('title', plainText)
           link.textContent = plainText
