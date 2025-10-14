@@ -37,6 +37,7 @@
       document.querySelectorAll('.recent-comments .reply').forEach(reply => {
         try {
           const contentHtml = reply.getAttribute('data-content')
+          reply.removeAttribute('data-content')
           const link = reply.querySelector('a')
           const parser = new DOMParser();
           const doc = parser.parseFromString(contentHtml, 'text/html');
