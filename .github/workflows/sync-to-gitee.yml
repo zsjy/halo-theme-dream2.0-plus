@@ -12,6 +12,7 @@ on:
 
 env:
   GITEE_REPO: "https://${{ secrets.GITEE_USERNAME }}:${{ secrets.GITEE_TOKEN }}@gitee.com/hcjike/halo-theme-dream2.0-plus.git"
+  GITEA_REPO: "https://${{ secrets.GITEA_USERNAME }}:${{ secrets.GITEA_TOKEN }}@code.hcjike.com/hcjike/halo-theme-dream2.0-plus.git"
 
 jobs:
   mirror-to-gitee:
@@ -35,4 +36,13 @@ jobs:
           
           # 添加远程并强制推送所有内容
           git remote add gitee ${{ env.GITEE_REPO }}
+          git push gitee --mirror --force
+
+      - name: Force mirror to Gitea
+        run: |
+          # 删除所有现有的远程引用（避免引用冲突）
+          git ls-remote --heads ${{ env.GITEA_REPO }} | awk '{print ":"$2}' | xargs -r git push ${{ env.GITEA_REPO }} --delete || true
+          
+          # 添加远程并强制推送所有内容
+          git remote add gitee ${{ env.GITEA_REPO }}
           git push gitee --mirror --force
