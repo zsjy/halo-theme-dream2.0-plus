@@ -40,9 +40,20 @@ jobs:
 
       - name: Force mirror to Gitea
         run: |
-          # 删除所有现有的远程引用（避免引用冲突）
-          git ls-remote --heads ${{ env.GITEA_REPO }} | awk '{print ":"$2}' | xargs -r git push ${{ env.GITEA_REPO }} --delete || true
+          # 设置变量
+          GITEA_REPO_URL="${{ env.GITEA_REPO }}"
+          REMOTE_NAME="gitea"  # 使用更具描述性的远程名称
           
-          # 添加远程并强制推送所有内容
-          git remote add gitee ${{ env.GITEA_REPO }}
-          git push gitee --mirror --force
+          # 移除可能已存在的远程
+          git remote remove $REMOTE_NAME 2>/dev/null || true
+          
+          # 添加Gitea远程仓库
+          git remote add $REMOTE_NAME $GITEA_REPO_URL
+          
+          # 删除远程已有的引用（避免冲突）
+          git ls-remote --heads $REMOTE_NAME | awk '{print ":"$2}' | xargs -r git push $REMOTE_NAME --delete 2>/dev/null || true
+          
+          # 强制推送所有内容（镜像推送）
+          git push $REMOTE_NAME --mirror --force
+          
+          echo "Successfully mirrored to Gitea repository"
