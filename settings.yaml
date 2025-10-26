@@ -360,7 +360,7 @@ spec:
           accepts:
             - "video/*"
           placeholder: '请输入/选择视频路径'
-          help: '输入/选择视频路径，视频支持mp4格式，不支持声音播放。仅在“博客横幅大图”设置为“视频”时有效'
+          help: '输入/选择视频路径，视频支持mp4格式，不支持声音播放。仅在“博客横幅大图”设置为“视频”时有效。'
         - $formkit: text
           name: banner_description
           label: 横幅文字描述
