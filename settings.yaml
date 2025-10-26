@@ -349,9 +349,18 @@ spec:
               value: 'false'
         - $formkit: attachment
           name: banner_image
-          label: 横幅背景图/视频
-          placeholder: '请输入/选择图片/视频路径'
-          help: '输入/选择图片/视频路径，视频支持mp4格式，不支持声音播放。'
+          label: 横幅背景图
+          accepts:
+            - "image/*"
+          placeholder: '请输入/选择图片路径'
+          help: '输入/选择图片路径。当“博客横幅大图”设置为“视频”时，可设置视频封面/预览图。确保在微信等限制环境中，用户能看到预设图片，实现优雅降级。'
+        - $formkit: attachment
+          name: banner_video
+          label: 横幅背景视频
+          accepts:
+            - "video/*"
+          placeholder: '请输入/选择视频路径'
+          help: '输入/选择视频路径，视频支持mp4格式，不支持声音播放。仅在“博客横幅大图”设置为“视频”时有效'
         - $formkit: text
           name: banner_description
           label: 横幅文字描述

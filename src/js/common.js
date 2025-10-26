@@ -745,8 +745,9 @@ const commonContext = {
   },
   /* 自动播放Banner视频 */
   playBannerVideo() {
+    var bannerElement = document.querySelector('.banner')
     var videoElement = document.querySelector('.banner video')
-    if (!videoElement) {
+    if (!videoElement && !bannerElement) {
       return
     }
 
@@ -764,6 +765,7 @@ const commonContext = {
           if (playPromise !== undefined) {
             playPromise.catch(function (error) {
               console.log('视频播放失败:', error)
+              bannerElement.style.backgroundImage = `url(${DreamConfig.banner_image})`
             })
           }
         }
