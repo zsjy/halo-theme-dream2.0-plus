@@ -4232,6 +4232,10 @@ details[open] > summary::before {
         vertical-align: 0.2em;
       }
 
+      & > .exclusive::before {
+        display: none !important;
+      }
+
       i {
         font-size: 1.1em;
       }
@@ -4515,6 +4519,10 @@ details[open] > summary::before {
   .footer-container {
     text-align: center;
 
+    .logo-title {
+      margin: 15px 0;
+    }
+
     & > li {
       display: block;
 
@@ -4527,6 +4535,10 @@ details[open] > summary::before {
 
         &:before {
           content: none !important;
+        }
+
+        & + *::before {
+          display: none !important;
         }
       }
     }

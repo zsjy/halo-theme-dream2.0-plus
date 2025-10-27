@@ -1,0 +1,6 @@
+<span xmlns:th="https://www.thymeleaf.org"
+      th:fragment="footer (footer)"
+      th:if="${!#strings.isEmpty(footer.content)}"
+      th:classappend="|${footer.mobile_line ? 'footer-truncation' : ''} ${footer.hide_separator ? 'exclusive' : ''}|"
+      th:utext="${footer.content}">
+</span>

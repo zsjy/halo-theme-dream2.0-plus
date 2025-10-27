@@ -59,6 +59,97 @@ spec:
               value: 'yyyy年MM月dd日'
             - label: yyyy年MM月dd日 HH时mm分
               value: 'yyyy年MM月dd日 HH时mm分'
+        - $formkit: repeater
+          name: footer_layout
+          validation: required
+          label: 页脚内容布局
+          help: 配置页脚内容区域的布局。
+          value:
+            - line:
+                - type: 'copyright'
+                  mobile_line: false
+                - type: 'site_name'
+                  mobile_line: false
+                - type: 'theme_copyright'
+                  mobile_line: true
+            - line:
+                - type: 'icp'
+                  mobile_line: false
+                - type: 'security'
+                  mobile_line: true
+            - line:
+                - type: 'site_time'
+                  mobile_line: false
+                - type: 'busuanzi'
+                  mobile_line: true
+            - line:
+                - type: 'cloud'
+                  mobile_line: false
+                - type: 'speed'
+                  mobile_line: true
+          children:
+            - $formkit: repeater
+              name: line
+              validation: required
+              label: 内容画布
+              help: '当前画布将会显示在一行。'
+              children:
+                - $formkit: select
+                  name: type
+                  id: type
+                  label: 模块类型
+                  value: "copyright"
+                  help: '重复添加“不可重复添加”模块将导致渲染失败，请留意。'
+                  options:
+                    - value: 'copyright'
+                      label: 站点版权 (不可重复添加)
+                    - value: 'site_name'
+                      label: 站点名称
+                    - value: 'theme_copyright'
+                      label: 主题版权
+                    - value: 'icp'
+                      label: ICP备案
+                    - value: 'security'
+                      label: 公安备案
+                    - value: 'site_time'
+                      label: 建站时间 (不可重复添加)
+                    - value: 'busuanzi'
+                      label: 卜蒜子访客统计 (不可重复添加)
+                    - value: 'cloud'
+                      label: 云服务提供商
+                    - value: 'speed'
+                      label: 加速服务提供商
+                    - value: 'custom'
+                      label: 自定义模块
+                - $formkit: select
+                  name: mobile_line
+                  label: 手机端独占一行
+                  help: 开启后该组件在移动端独占一行，其后的内容将置于下行位置。
+                  value: false
+                  options:
+                    - value: true
+                      label: 是
+                    - value: false
+                      label: 否
+                - $formkit: select
+                  name: hide_separator
+                  label: 隐藏间隔符
+                  help: 组件之间隐藏间隔符，开启后此组件与上个组件间将无间隔符。
+                  value: false
+                  options:
+                    - value: true
+                      label: 隐藏
+                    - value: false
+                      label: 显示
+                - $formkit: code
+                  name: content
+                  if: $value.type === 'custom'
+                  language: html
+                  height: 45px
+                  validation: required
+                  label: 内容
+                  placeholder: 请输入 HTML 内容
+                  help: '注意：父级元素为span，需遵守HTML语法。'
         - $formkit: text
           name: record_number
           label: 备案号
@@ -67,13 +158,6 @@ spec:
           name: record_number_ps
           label: 公安部备案
           placeholder: 'X公网安备 XXXXXXXXXXXXXX号'
-        - $formkit: code
-          name: custom_text
-          language: html
-          height: 45px
-          label: 自定义内容
-          placeholder: '自定义内容，支持html'
-          help: '在网站页脚建站时间上方显示自定义内容。'
         - $formkit: datetime-local
           name: website_time
           label: 建站时间
