@@ -135,6 +135,7 @@ spec:
                   name: mobile_line
                   label: 手机端独占一行
                   help: 开启后该组件在移动端独占一行，其后的内容将置于下行位置。
+                  value: false
                   options:
                     - value: true
                       label: 是
@@ -143,6 +144,7 @@ spec:
                 - $formkit: select
                   name: hide_separator
                   label: 隐藏间隔符
+                  value: false
                   help: 组件之间隐藏间隔符，开启后此组件与上个组件间将无间隔符。
                   options:
                     - value: true
