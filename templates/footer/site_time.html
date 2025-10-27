@@ -2,7 +2,7 @@
       id="websiteDate"
       th:fragment="footer (footer)" class="record"
       th:if="${!#strings.isEmpty(theme.config.basic_info.website_time)}"
-      th:classappend="|${footer.mobile_line ? 'footer-truncation' : ''} ${footer.hide_separator ? 'exclusive' : ''}|">
+      th:classappend="|${#objects.nullSafe(footer.mobile_line, false) ? 'footer-truncation' : ''} ${#objects.nullSafe(footer.hide_separator, false) ? 'exclusive' : ''}|">
     建站<span class="stand">00</span>天<span class="stand">0</span>时<span class="stand">0</span>分<span
         class="stand">0</span>秒
 </span>

@@ -1,6 +1,6 @@
 <span xmlns:th="https://www.thymeleaf.org"
       th:fragment="footer (footer)"
       id="webCopyright"
-      th:classappend="|${footer.mobile_line ? 'footer-truncation' : ''} ${footer.hide_separator ? 'exclusive' : ''}|"
+      th:classappend="|${#objects.nullSafe(footer.mobile_line, false) ? 'footer-truncation' : ''} ${#objects.nullSafe(footer.hide_separator, false) ? 'exclusive' : ''}|"
       th:text="'&copy; '+${#dates.format(#dates.createNow(), 'yyyy')}+' '">
 </span>

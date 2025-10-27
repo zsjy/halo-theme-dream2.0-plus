@@ -1,6 +1,6 @@
 <span xmlns:th="https://www.thymeleaf.org"
       th:fragment="footer (footer)"
       th:if="${!#strings.isEmpty(footer.content)}"
-      th:classappend="|${footer.mobile_line ? 'footer-truncation' : ''} ${footer.hide_separator ? 'exclusive' : ''}|"
+      th:classappend="|${#objects.nullSafe(footer.mobile_line, false) ? 'footer-truncation' : ''} ${#objects.nullSafe(footer.hide_separator, false) ? 'exclusive' : ''}|"
       th:utext="${footer.content}">
 </span>

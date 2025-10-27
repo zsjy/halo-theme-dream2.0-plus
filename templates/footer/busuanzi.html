@@ -1,7 +1,7 @@
 <span xmlns:th="https://www.thymeleaf.org"
       th:fragment="footer (footer)" class="record"
       th:if="${theme.config.enhance.busuanzi_group.enable_busuanzi == true || theme.config.enhance.busuanzi_group.enable_busuanzi == 'custom'}"
-      th:classappend="|${footer.mobile_line ? 'footer-truncation' : ''} ${footer.hide_separator ? 'exclusive' : ''}|">
+      th:classappend="|${#objects.nullSafe(footer.mobile_line, false) ? 'footer-truncation' : ''} ${#objects.nullSafe(footer.hide_separator, false) ? 'exclusive' : ''}|">
     <span id="busuanzi_container_site_uv"
           th:style="${theme.config.enhance.busuanzi_group.enable_busuanzi == true} ? 'display: none;' : ''">
                               <i class="ri-account-circle-line" aria-hidden="true"></i><span class="stand"
