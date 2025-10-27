@@ -750,7 +750,7 @@ const commonContext = {
   playBannerVideo() {
     var bannerElement = document.querySelector('.banner')
     var videoElement = document.querySelector('.banner video')
-    if (!videoElement && !bannerElement) {
+    if (!videoElement || !bannerElement) {
       return
     }
 

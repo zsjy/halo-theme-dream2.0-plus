@@ -67,25 +67,34 @@ spec:
           value:
             - line:
                 - type: 'copyright'
+                  hide_separator: false
                   mobile_line: false
                 - type: 'site_name'
+                  hide_separator: false
                   mobile_line: false
                 - type: 'theme_copyright'
+                  hide_separator: false
                   mobile_line: true
             - line:
                 - type: 'icp'
+                  hide_separator: false
                   mobile_line: false
                 - type: 'security'
+                  hide_separator: false
                   mobile_line: true
             - line:
                 - type: 'site_time'
+                  hide_separator: false
                   mobile_line: false
                 - type: 'busuanzi'
+                  hide_separator: false
                   mobile_line: true
             - line:
                 - type: 'cloud'
+                  hide_separator: false
                   mobile_line: false
                 - type: 'speed'
+                  hide_separator: false
                   mobile_line: true
           children:
             - $formkit: repeater
@@ -98,6 +107,7 @@ spec:
                   name: type
                   id: type
                   label: 模块类型
+                  validation: required
                   value: "copyright"
                   help: '重复添加“不可重复添加”模块将导致渲染失败，请留意。'
                   options:
@@ -125,7 +135,6 @@ spec:
                   name: mobile_line
                   label: 手机端独占一行
                   help: 开启后该组件在移动端独占一行，其后的内容将置于下行位置。
-                  value: false
                   options:
                     - value: true
                       label: 是
@@ -135,7 +144,6 @@ spec:
                   name: hide_separator
                   label: 隐藏间隔符
                   help: 组件之间隐藏间隔符，开启后此组件与上个组件间将无间隔符。
-                  value: false
                   options:
                     - value: true
                       label: 隐藏
