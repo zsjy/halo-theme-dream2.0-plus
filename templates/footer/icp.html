@@ -3,7 +3,7 @@
    th:if="${!#strings.isEmpty(theme.config.basic_info.record_number)}"
    th:classappend="|${#objects.nullSafe(footer.mobile_line, false) ? 'footer-truncation' : ''} ${#objects.nullSafe(footer.hide_separator, false) ? 'exclusive' : ''}|"
    th:aria-label="${theme.config.basic_info.record_number}" th:title="${theme.config.basic_info.record_number}"
-   href="http://beian.miit.gov.cn/publish/query/indexFirst.action" target="_blank" rel="noopener noreferrer nofollow">
+   href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener noreferrer nofollow">
     <img
             th:src="${#theme.assets('/img/ba.webp')}" height="auto" width="auto" alt="备案"
             style="vertical-align: text-top; width: 1.2em; margin-right: 4px;"/>[[${theme.config.basic_info.record_number}]]
