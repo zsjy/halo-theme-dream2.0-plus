@@ -1,0 +1,15 @@
+<span xmlns:th="https://www.thymeleaf.org"
+      th:fragment="footer (footer)" class="record"
+      th:if="${theme.config.enhance.busuanzi_group.enable_busuanzi == true || theme.config.enhance.busuanzi_group.enable_busuanzi == 'custom'}"
+      th:classappend="|${#objects.nullSafe(footer.mobile_line, false) ? 'footer-truncation' : ''} ${#objects.nullSafe(footer.hide_separator, false) ? 'exclusive' : ''}|">
+    <span id="busuanzi_container_site_uv"
+          th:style="${theme.config.enhance.busuanzi_group.enable_busuanzi == true} ? 'display: none;' : ''">
+                              <i class="ri-account-circle-line" aria-hidden="true"></i><span class="stand"
+                                                                                             th:id="${theme.config.enhance.busuanzi_group.enable_busuanzi == 'custom'} ? 'busuanzi_site_uv' : 'busuanzi_value_site_uv'">0</span>访客
+                            </span>
+                            <span id="busuanzi_container_site_pv"
+                                  th:style="${theme.config.enhance.busuanzi_group.enable_busuanzi == true} ? 'display: none;' : ''">
+                              <i class="ri-pie-chart-line" aria-hidden="true"></i><span class="stand"
+                                                                                        th:id="${theme.config.enhance.busuanzi_group.enable_busuanzi == 'custom'} ? 'busuanzi_site_pv' : 'busuanzi_value_site_pv'">0</span>访问
+                            </span>
+</span>

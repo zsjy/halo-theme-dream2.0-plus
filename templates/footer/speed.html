@@ -1,0 +1,11 @@
+<span xmlns:th="https://www.thymeleaf.org"
+      th:fragment="footer (footer)"
+      th:if="${!#strings.isEmpty(theme.config.basic_info.cdn_by_logo)}"
+      th:classappend="|${#objects.nullSafe(footer.mobile_line, false) ? 'footer-truncation' : ''} ${#objects.nullSafe(footer.hide_separator, false) ? 'exclusive' : ''}|">
+   本站由<a class="cloud-driven" target="_blank" rel="noopener noreferrer nofollow"
+            th:href="${theme.config.basic_info.cdn_by_url}" aria-label="加速服务" title="加速服务">
+                      <img height="auto" width="auto"
+                           alt="加速服务"
+                           th:src="${theme.config.basic_info.cdn_by_logo}"/>
+                  </a>提供加速服务
+</span>

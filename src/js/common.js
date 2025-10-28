@@ -494,7 +494,7 @@ const commonContext = {
       return
     }
     const websiteDate = document.getElementById('websiteDate')
-    if (DreamConfig.website_time === '') {
+    if (DreamConfig.website_time === '' || !websiteDate) {
       return
     }
     const grt = new Date(DreamConfig.website_time).getTime()
@@ -527,6 +527,9 @@ const commonContext = {
       return
     }
     const webCopyright = document.getElementById('webCopyright')
+    if(!webCopyright) {
+      return
+    }
     const now = new Date()
     let nowYear = now.getFullYear()
     const grt = new Date(DreamConfig.website_time)
@@ -747,7 +750,7 @@ const commonContext = {
   playBannerVideo() {
     var bannerElement = document.querySelector('.banner')
     var videoElement = document.querySelector('.banner video')
-    if (!videoElement && !bannerElement) {
+    if (!videoElement || !bannerElement) {
       return
     }
 

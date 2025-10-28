@@ -1,0 +1,10 @@
+<a xmlns:th="https://www.thymeleaf.org"
+   th:fragment="footer (footer)" class="record"
+   th:if="${!#strings.isEmpty(theme.config.basic_info.record_number_ps)}"
+   th:classappend="|${#objects.nullSafe(footer.mobile_line, false) ? 'footer-truncation' : ''} ${#objects.nullSafe(footer.hide_separator, false) ? 'exclusive' : ''}|"
+   th:aria-label="${theme.config.basic_info.record_number_ps}" th:title="${theme.config.basic_info.record_number_ps}"
+   th:href="'https://beian.mps.gov.cn/#/query/webSearch?code=' + ${theme.config.basic_info.record_number_ps.replaceAll('[^\d]', '')}" target="_blank" rel="noopener noreferrer nofollow">
+    <img
+            th:src="${#theme.assets('/img/ga.webp')}" height="auto" width="auto" alt="公网安备"
+            style="vertical-align: text-top; width: 1.2em; margin-right: 4px;"/>[[${theme.config.basic_info.record_number_ps}]]
+</a>

@@ -1,0 +1,6 @@
+<a xmlns:th="https://www.thymeleaf.org"
+   th:fragment="footer (footer)" class="record"
+   th:classappend="|${#objects.nullSafe(footer.mobile_line, false) ? 'footer-truncation' : ''} ${#objects.nullSafe(footer.hide_separator, false) ? 'exclusive' : ''}|"
+   href="/" rel="noopener noreferrer nofollow" th:aria-label="${site.title}" th:title="${site.title}"
+   th:text="${site.title}">
+</a>
