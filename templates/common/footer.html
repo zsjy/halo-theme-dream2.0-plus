@@ -13,11 +13,11 @@
                 </a>
             </li>
             <li>
-                <p th:each="footer_line :${theme.config.basic_info.footer_layout}" class="icon-spot">
+                <div th:each="footer_line :${theme.config.basic_info.footer_layout}" class="icon-spot">
                     <th:block th:each="footer :${footer_line.line}">
                         <th:block th:replace="~{${'/footer/' + footer.type} :: footer ( footer = ${footer})}"></th:block>
                     </th:block>
-                </p>
+                </div>
             </li>
             <li>
                 <halo:footer/>

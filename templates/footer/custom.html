@@ -1,6 +1,9 @@
-<span xmlns:th="https://www.thymeleaf.org"
-      th:fragment="footer (footer)"
-      th:if="${!#strings.isEmpty(footer.content)}"
-      th:classappend="|${#objects.nullSafe(footer.mobile_line, false) ? 'footer-truncation' : ''} ${#objects.nullSafe(footer.hide_separator, false) ? 'exclusive' : ''}|"
-      th:utext="${footer.content}">
-</span>
+<div xmlns:th="https://www.thymeleaf.org"
+     class="custom"
+     th:fragment="footer (footer)"
+     th:if="${!#strings.isEmpty(footer.content)}"
+     th:with="mobileLine = ${footer != null and not #lists.isEmpty(footer.show_style) and #lists.contains(footer.show_style, 'mobile_line')},
+               hideSeparator = ${footer != null and not #lists.isEmpty(footer.show_style) and #lists.contains(footer.show_style, 'hide_separator')}"
+     th:classappend="|${mobileLine ? 'footer-truncation' : ''}${mobileLine and hideSeparator ? ' ' : ''}${hideSeparator ? 'exclusive' : ''}|"
+     th:utext="${footer.content}">
+</div>
