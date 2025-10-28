@@ -1,6 +1,8 @@
 <span xmlns:th="https://www.thymeleaf.org"
       th:fragment="footer (footer)"
       id="webCopyright"
-      th:classappend="|${#objects.nullSafe(footer.mobile_line, false) ? 'footer-truncation' : ''} ${#objects.nullSafe(footer.hide_separator, false) ? 'exclusive' : ''}|"
+      th:with="mobileLine = ${footer != null and not #lists.isEmpty(footer.show_style) and #lists.contains(footer.show_style, 'mobile_line')},
+               hideSeparator = ${footer != null and not #lists.isEmpty(footer.show_style) and #lists.contains(footer.show_style, 'hide_separator')}"
+      th:classappend="|${mobileLine ? 'footer-truncation' : ''}${mobileLine and hideSeparator ? ' ' : ''}${hideSeparator ? 'exclusive' : ''}|"
       th:text="'&copy; '+${#dates.format(#dates.createNow(), 'yyyy')}+' '">
 </span>

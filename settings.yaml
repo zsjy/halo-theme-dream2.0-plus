@@ -67,41 +67,36 @@ spec:
           value:
             - line:
                 - type: 'copyright'
-                  hide_separator: false
-                  mobile_line: false
+                  show_style:
                 - type: 'site_name'
-                  hide_separator: false
-                  mobile_line: false
+                  show_style:
                 - type: 'theme_copyright'
-                  hide_separator: false
-                  mobile_line: true
+                  show_style:
+                    - 'mobile_line'
             - line:
                 - type: 'icp'
-                  hide_separator: false
-                  mobile_line: false
+                  show_style:
                 - type: 'security'
-                  hide_separator: false
-                  mobile_line: true
+                  show_style:
+                    - 'mobile_line'
             - line:
                 - type: 'site_time'
-                  hide_separator: false
-                  mobile_line: false
+                  show_style:
                 - type: 'busuanzi'
-                  hide_separator: false
-                  mobile_line: true
+                  show_style:
+                    - 'mobile_line'
             - line:
                 - type: 'cloud'
-                  hide_separator: false
-                  mobile_line: false
+                  show_style:
                 - type: 'speed'
-                  hide_separator: false
-                  mobile_line: true
+                  show_style:
+                    - 'mobile_line'
           children:
             - $formkit: repeater
               name: line
               validation: required
               label: 内容画布
-              help: '当前画布将会显示在一行。'
+              help: '当前画布将会显示在一行。注意：不建议一行显示过多内容。'
               children:
                 - $formkit: select
                   name: type
@@ -109,10 +104,10 @@ spec:
                   label: 模块类型
                   validation: required
                   value: "copyright"
-                  help: '重复添加“不可重复添加”模块将导致渲染失败，请留意。'
+                  help: '重复添加标记“唯一”的模块将导致渲染失败，请留意。'
                   options:
                     - value: 'copyright'
-                      label: 站点版权 (不可重复添加)
+                      label: 站点版权 (唯一)
                     - value: 'site_name'
                       label: 站点名称
                     - value: 'theme_copyright'
@@ -122,9 +117,9 @@ spec:
                     - value: 'security'
                       label: 公安备案
                     - value: 'site_time'
-                      label: 建站时间 (不可重复添加)
+                      label: 建站时间 (唯一)
                     - value: 'busuanzi'
-                      label: 卜蒜子访客统计 (不可重复添加)
+                      label: 卜蒜子访客统计 (唯一)
                     - value: 'cloud'
                       label: 云服务提供商
                     - value: 'speed'
@@ -132,25 +127,18 @@ spec:
                     - value: 'custom'
                       label: 自定义模块
                 - $formkit: select
-                  name: mobile_line
-                  label: 手机端独占一行
-                  help: 开启后该组件在移动端独占一行，其后的内容将置于下行位置。
-                  value: false
+                  name: show_style
+                  sortable: false
+                  multiple: true
+                  clearable: true
+                  searchable: false
+                  label: 显示风格
+                  help: 手机端独占一行：该组件在移动端独占一行，其后的内容将置于下行位置。隐藏间隔符：该组件将隐藏间隔符，与前一组件更紧凑。
                   options:
-                    - value: true
-                      label: 是
-                    - value: false
-                      label: 否
-                - $formkit: select
-                  name: hide_separator
-                  label: 隐藏间隔符
-                  value: false
-                  help: 组件之间隐藏间隔符，开启后此组件与上个组件间将无间隔符。
-                  options:
-                    - value: true
-                      label: 隐藏
-                    - value: false
-                      label: 显示
+                    - value: 'mobile_line'
+                      label: 手机端独占一行
+                    - value: 'hide_separator'
+                      label: 隐藏间隔符
                 - $formkit: code
                   name: content
                   if: $value.type === 'custom'
@@ -159,7 +147,7 @@ spec:
                   validation: required
                   label: 内容
                   placeholder: 请输入 HTML 内容
-                  help: '注意：父级元素为span，需遵守HTML语法。'
+                  help: '注意：父级元素为行内块div，需遵守HTML语法。'
         - $formkit: text
           name: record_number
           label: 备案号
