@@ -330,7 +330,6 @@ const commonContext = {
         $('.navbar-slideout').removeClass('active slideout-toc')
         $('.navbar-above').removeClass('solid')
       })
-      .on('touchmove', (e) => e.preventDefault)
     $('.navbar .toc-content')
       .on('click', function (e) {
         e.stopPropagation()
