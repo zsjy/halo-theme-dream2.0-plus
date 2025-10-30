@@ -4,6 +4,7 @@
 * 说明：
 * */
 window.tagcloud = (function (win, doc) { // ns
+
   // 判断对象
   function isObject(obj) {
     return Object.prototype.toString.call(obj) === '[object Object]'
@@ -83,8 +84,14 @@ window.tagcloud = (function (win, doc) { // ns
       self.items[j2].element.style.position = 'absolute'
       self.items[j2].element.style.zIndex = j2 + 1
     }
+    self.isUpdating = false
     self.up = setInterval(function () {
+      if (self.isUpdating) {
+        return
+      }
+      self.isUpdating = true
       self.update(self)
+      self.isUpdating = false
     }, 30)
   }
 
@@ -199,6 +206,10 @@ window.tagcloud = (function (win, doc) { // ns
 
       var sc = TagCloud._getSc(a, b)
 
+      // ✅ 缓存 box 尺寸
+      const boxWidth = self.box.offsetWidth
+      const boxHeight = self.box.offsetHeight
+
       for (var j = 0, len = self.items.length; j < len; j++) {
 
         var rx1 = self.items[j].x,
@@ -226,8 +237,8 @@ window.tagcloud = (function (win, doc) { // ns
           self.items[j].element.style.zIndex = Math.ceil(per * 10 - 5)
         }
         self.items[j].element.style.fontSize = self.items[j].fontsize + 'px'
-        self.items[j].element.style.left = self.items[j].x + (self.box.offsetWidth - self.items[j].offsetWidth / 2) / 2 + 'px'
-        self.items[j].element.style.top = self.items[j].y + (self.box.offsetHeight - self.items[j].offsetHeight) / 2 + 'px'
+        self.items[j].element.style.left = self.items[j].x + (boxWidth - self.items[j].offsetWidth / 2) / 2 + 'px'
+        self.items[j].element.style.top = self.items[j].y + (boxHeight - self.items[j].offsetHeight) / 2 + 'px'
         self.items[j].element.style.filter = 'alpha(opacity=' + 100 * self.items[j].alpha + ')'
         self.items[j].element.style.opacity = self.items[j].alpha
       }
@@ -240,6 +251,10 @@ window.tagcloud = (function (win, doc) { // ns
         length = element.length,
         item
 
+      // ✅ 缓存 box 尺寸
+      const boxWidth = self.box.offsetWidth
+      const boxHeight = self.box.offsetHeight
+
       for (var i = 0; i < length; i++) {
         item = {}
         item.angle = {}
@@ -251,8 +266,8 @@ window.tagcloud = (function (win, doc) { // ns
         item.x = self.radius * 1.5 * Math.cos(item.angle.theta) * Math.sin(item.angle.phi)
         item.y = self.radius * 1.5 * Math.sin(item.angle.theta) * Math.sin(item.angle.phi)
         item.z = self.radius * 1.5 * Math.cos(item.angle.phi)
-        item.element.style.left = item.x + (self.box.offsetWidth - item.offsetWidth / 2) / 2 + 'px'
-        item.element.style.top = item.y + (self.box.offsetHeight - item.offsetHeight) / 2 + 'px'
+        item.element.style.left = item.x + (boxWidth - item.offsetWidth / 2) / 2 + 'px'
+        item.element.style.top = item.y + (boxHeight - item.offsetHeight) / 2 + 'px'
         items.push(item)
       }
 
