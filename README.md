@@ -13,24 +13,8 @@
 
 ## [主题预览](https://www.hcjike.com/?preview-theme=theme-dream2-plus)
 
-- [主题文档](https://www.hcjike.com/docs/halo-theme-dream2.0) 
-- [插件相关配置](https://www.hcjike.com/docs/halo-theme-dream2.0/theme/setting/plugins)
-- [侧边栏组件](https://www.hcjike.com/docs/halo-theme-dream2.0/theme/sidebar-assembly)
-- [使用iconfont替换主题部分功能图标](https://www.hcjike.com/archives/TsR84KYw)
-- [邮件模板配置](https://www.hcjike.com/docs/halo-theme-dream2.0/theme/email)
-- [自定义通知配置](https://www.hcjike.com/docs/halo-theme-dream2.0/theme/setting/notice#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%80%9A%E7%9F%A5)
-
-## 主题功能配置
-### 开启ServiceWorker配置
-[Deam2 Plus主题开启ServiceWorker配置的方法](https://www.hcjike.com/archives/slrrTp6c)
-
-### 网站添加 PWA 配置
-[网站添加 PWA 配置，使网站支持像应用一样安装](https://www.hcjike.com/archives/MNdz7kZ6)
-
-### 主题附加功能
-[Dream Plus主题使用HTML代码段插入附加功能](https://www.hcjike.com/archives/9bEclqkL)
-
-**注意：仅在本主题下，此功能方可被识别并生效。**
+## [主题文档](https://www.hcjike.com/docs/halo-theme-dream2.0)
+**温馨提示：若您遇到问题，请首先查阅相关文档。对于文档中已明确说明的事项，将不再另行答复。**
 
 ## 开发中功能
 - 开发中功能已发布为[预发行版](https://github.com/zsjy/halo-theme-dream2.0-plus/releases)，开发中的功能不保证留存到正式版，包括但不限于：主题配置位置、配置方式、页面样式等等。
@@ -77,7 +61,7 @@
 
 感谢您对本项目的喜爱，您的打赏是对本项目最好的支持！
 
-[爱发电](https://afdian.com/a/org-hcjike)
+[爱发电(唯一赞助)](https://afdian.com/a/org-hcjike)
 
 ## Star 历史
 
