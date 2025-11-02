@@ -1643,16 +1643,6 @@ spec:
               value: ""
               placeholder: '请输入自建 busuanzi 服务js地址'
         - $formkit: radio
-          name: enable_console_version_info
-          label: 控制台打印版本信息
-          value: true
-          help: '控制台打印版本信息包括：主题名、主题版本、网站页面加载耗时。'
-          options:
-            - value: true
-              label: 开启
-            - value: false
-              label: 关闭
-        - $formkit: radio
           name: disable_debug
           label: 禁止打开控制台
           value: false

@@ -108,8 +108,6 @@
     DreamConfig["show_ai_summary"] = [[${theme.config.post.show_ai_summary}]];
     /** 懒加载模式 */
     DreamConfig["lazy_enable"] = [[${theme.config.basic_info.lazy_enable}]];
-    /** 控制台主题信息 */
-    DreamConfig["enable_console_version_info"] = [[${theme.config.enhance.enable_console_version_info}]];
     /** 安全链接配置 */
     DreamConfig["enable_security_link"] = [[${theme.config.security_link_config.enable_security_link}]];
     DreamConfig['security_link_url'] = [[${!#strings.isEmpty(theme.config.security_link_config.security_link_single_page) ? singlePageFinder.getByName(theme.config.security_link_config.security_link_single_page)?.status?.permalink : ''}]]
