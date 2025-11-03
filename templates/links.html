@@ -34,8 +34,7 @@
                                         <span class="link-name" th:text="${link.spec.displayName}"></span>
                                         <div class="link-desc" th:text="${#strings.defaultString(link.spec.description, '他还没有自我介绍呢')}"></div>
                                     </a>
-                                    <span th:if="${false}"
-                                          th:classappend="${#annotations.getOrDefault(link, 'link_status', 'false') == 'true'} ? 'online' : 'offline'" class="status"></span>
+                                    <span class="status"></span>
                                 </li>
                             </ul>
                         </div>
