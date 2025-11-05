@@ -1275,11 +1275,13 @@ table td, table th {
 
   &-mask {
     position: fixed;
+    width: 100vw;
+    height: 100vh;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 4;
+    z-index: 100;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
     opacity: 0;
@@ -1292,7 +1294,7 @@ table td, table th {
     }
 
     &.slideout {
-      z-index: 6;
+      z-index: 101;
     }
   }
 
