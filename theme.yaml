@@ -24,9 +24,9 @@ spec:
   # 主题地址
   website: https://www.hcjike.com/docs/halo-theme-dream2.0
   # 主题github开源地址
-  repo: https://github.com/zsjy/halo-theme-dream2.0-plus.git
+  repo: https://github.com/hcjike/halo-theme-dream2.0-plus.git
   # 提交问题地址
-  issues: https://github.com/zsjy/halo-theme-dream2.0-plus/issues
+  issues: https://github.com/hcjike/halo-theme-dream2.0-plus/issues
   settingName: theme-dream2-plus-setting
   configMapName: theme-dream2-plus-configMap
   # 版本号
@@ -36,4 +36,4 @@ spec:
   # 许可
   license:
     - name: "MIT"
-      url: "https://github.com/zsjy/halo-theme-dream2.0-plus?tab=MIT-1-ov-file"
+      url: "https://github.com/hcjike/halo-theme-dream2.0-plus?tab=MIT-1-ov-file"
