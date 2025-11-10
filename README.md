@@ -2,10 +2,10 @@
 
 <p align="center">
 <a href="https://github.com/halo-dev/halo"><img alt="Halo version" src="https://img.shields.io/badge/halo-2.21.0%2B-brightgreen?style=flat-square" /></a>
-<a href="https://github.com/zsjy/halo-theme-dream2.0-plus/releases"><img alt="releases" src="https://img.shields.io/github/release/zsjy/halo-theme-dream2.0-plus.svg?style=flat-square"/></a>
-<a href="https://github.com/zsjy/halo-theme-dream2.0-plus/blob/master/LICENSE"><img alt="license" src="https://img.shields.io/github/license/zsjy/halo-theme-dream2.0-plus?style=flat-square"/></a>
-<a href="https://github.com/zsjy/halo-theme-dream2.0-plus/releases"><img alt="downloads" src="https://img.shields.io/github/downloads/zsjy/halo-theme-dream2.0-plus/total.svg?style=flat-square"/></a>
-<a href="https://github.com/zsjy/halo-theme-dream2.0-plus/commits"><img alt="commits" src="https://img.shields.io/github/last-commit/zsjy/halo-theme-dream2.0-plus.svg?style=flat-square"/></a>
+<a href="https://github.com/hcjike/halo-theme-dream2.0-plus/releases"><img alt="releases" src="https://img.shields.io/github/release/hcjike/halo-theme-dream2.0-plus.svg?style=flat-square"/></a>
+<a href="https://github.com/hcjike/halo-theme-dream2.0-plus/blob/master/LICENSE"><img alt="license" src="https://img.shields.io/github/license/hcjike/halo-theme-dream2.0-plus?style=flat-square"/></a>
+<a href="https://github.com/hcjike/halo-theme-dream2.0-plus/releases"><img alt="downloads" src="https://img.shields.io/github/downloads/hcjike/halo-theme-dream2.0-plus/total.svg?style=flat-square"/></a>
+<a href="https://github.com/hcjike/halo-theme-dream2.0-plus/commits"><img alt="commits" src="https://img.shields.io/github/last-commit/hcjike/halo-theme-dream2.0-plus.svg?style=flat-square"/></a>
 <a href="https://afdian.com/a/org-hcjike"><img alt="donate" src="https://img.shields.io/badge/$-donate-ff69b4.svg?style=flat-square"/></a>
 </p>
 
@@ -54,7 +54,7 @@
 **总结：认准官方渠道，保护个人财产。所有官方信息与链接仅通过项目文档页及【宏尘极客】博客发布，请勿轻信任何其他来源的信息。**
 
 ## 开发中功能
-- 开发中功能已发布为[预发行版](https://github.com/zsjy/halo-theme-dream2.0-plus/releases)，开发中的功能不保证留存到正式版，包括但不限于：主题配置位置、配置方式、页面样式等等。
+- 开发中功能已发布为[预发行版](https://github.com/hcjike/halo-theme-dream2.0-plus/releases)，开发中的功能不保证留存到正式版，包括但不限于：主题配置位置、配置方式、页面样式等等。
 
 ## 版本适配关系
 
@@ -66,7 +66,7 @@
 
 ## 安装 & 更新
 
-1. 进入主题 [Release](https://github.com/zsjy/halo-theme-dream2.0-plus/releases/latest) 界面，下载主题压缩包 `theme-dream2-plus-xxx.zip` 压缩包文件，`xxx` 为版本号；
+1. 进入主题 [Release](https://github.com/hcjike/halo-theme-dream2.0-plus/releases/latest) 界面，下载主题压缩包 `theme-dream2-plus-xxx.zip` 压缩包文件，`xxx` 为版本号；
 2. 进入博客后台管理 `主题->主题管理->安装主题`，选择下载的 `theme-dream2-plus-xxx.zip` 安装包进行上传；
 3. 等待安装完成；
 4. 更新方法同上。
@@ -95,4 +95,4 @@
 
 ## Star 历史
 
-[![Star History Chart](https://api.star-history.com/svg?repos=zsjy/halo-theme-dream2.0-plus&type=Date)](https://www.star-history.com/#zsjy/halo-theme-dream2.0-plus&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=hcjike/halo-theme-dream2.0-plus&type=Date)](https://www.star-history.com/#hcjike/halo-theme-dream2.0-plus&Date)
